@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // All should be able to access products collection
+    match /projectList/{allProducts=**} {
+        allow read;
+    }
+    // All other collection should only be accessed if user is authenticated.
+    match /{notProducts}/{allNotProducts=**} {
+      allow read, write: if notProducts != "publicProjectKeys"
+                  && request.auth != null;
+    }
+
+  }
+}
