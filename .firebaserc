@@ -3,12 +3,12 @@
     "verifytesttool": {
       "hosting": {
         "Goldenfile": [
-          "verifytesttool"
+          "projectdevelopmenttool"
         ]
       }
     }
   },
   "projects": {
-    "default": "verifytesttool"
+    "default": "projectdevelopmenttool"
   }
 }
