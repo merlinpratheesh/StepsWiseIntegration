@@ -11,6 +11,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment'
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
+
+
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInOptions: [
       {
@@ -34,6 +36,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AppComponent
   ],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

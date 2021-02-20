@@ -26,6 +26,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "dialog-polyfill": "^0.5.6",
     "firebase": "^7.0 || ^8.0",
     "firebaseui": "^4.7.3",
     "firebaseui-angular": "^5.1.1",
