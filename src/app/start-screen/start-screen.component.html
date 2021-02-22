@@ -1,0 +1,19 @@
+
+<mat-toolbar color="primary">
+    Birthday App
+    <span fxFlex="grow">
+
+    </span>
+    <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"
+    (signInFailure)="errorCallback($event)"
+    (uiShown)="uiShownCallback()"></firebase-ui>
+</mat-toolbar>
+
+<div Style="height:calc(100vh - 64px);" fxLayoutAlign="center center">
+    <button mat-raised-button color="warn" (click)="NavigateNext()"> MainScreen </button>
+</div>
+  
+
+
+
+

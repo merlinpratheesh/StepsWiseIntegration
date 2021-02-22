@@ -11,6 +11,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment'
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
+import { StartScreenComponent } from './start-screen/start-screen.component';
+import { MainScreenComponent } from './main-screen/main-screen.component';
+import { LoggedinStartComponent } from './loggedin-start/loggedin-start.component';
+import { OfflineScreenComponent } from './offline-screen/offline-screen.component';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -33,7 +37,11 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StartScreenComponent,
+    MainScreenComponent,
+    LoggedinStartComponent,
+    OfflineScreenComponent
   ],
   imports: [
 
