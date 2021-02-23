@@ -3,9 +3,12 @@
 <div *ngIf="AfterOnlineCheckAuth | async as OnlineReady; else waitforOnline">
 
   <router-outlet></router-outlet>
+
 </div>
 
 <ng-template #waitforOnline>
   <router-outlet></router-outlet>
+  
+  
 </ng-template>
 

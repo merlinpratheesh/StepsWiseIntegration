@@ -9,6 +9,8 @@ import firebase from 'firebase/app';
 import { UserdataService } from './service/userdata.service';
 import { map, switchMap, startWith, withLatestFrom } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,8 +45,30 @@ export class AppComponent implements AfterViewInit {
     return this.subjectonline;
   };
   AfterOnlineCheckAuth;
+  publicList: any;
+  localpublicList = [];
+  getPublicListSubscription: Subscription;
+  getPublicListBehaviourSub = new BehaviorSubject(undefined);
+  getPublicList = (publicProjects: AngularFirestoreDocument<any>) => {
+    if (this.getPublicListSubscription !== undefined) {
+      this.getPublicListSubscription.unsubscribe();
+    }
+    this.getPublicListSubscription = publicProjects.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getPublicListBehaviourSub.next(undefined);
+      } else {
 
-
+        if (val.public.length === 0) {
+          this.getPublicListBehaviourSub.next(null);
+        } else {
+          this.localpublicList = val.public;
+          console.log('61',val.public);
+          this.getPublicListBehaviourSub.next(val.public);
+        }
+      }
+    });
+    return this.getPublicListBehaviourSub;
+  };
 
   constructor(public afAuth: AngularFireAuth,    public developmentservice: UserdataService,
     private router: Router) {

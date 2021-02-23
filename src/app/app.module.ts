@@ -41,7 +41,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     StartScreenComponent,
     MainScreenComponent,
     LoggedinStartComponent,
-    OfflineScreenComponent
+    OfflineScreenComponent,
   ],
   imports: [
 
