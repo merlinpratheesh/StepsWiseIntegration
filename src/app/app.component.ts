@@ -3,7 +3,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import '@firebase/auth';
 import { auth as uiAuth } from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
-import {memberDetail} from './service/userdata.service';
+import { userProfile} from './service/userdata.service';
 import { BehaviorSubject, Subscription, Observable,of } from 'rxjs';
 import firebase from 'firebase/app';
 import { UserdataService } from './service/userdata.service';
@@ -16,7 +16,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-
+  myuserProfile: userProfile = {
+    userAuthenObj: null,//Receive User obj after login success
+  };
   myauth;
   loggedinstate:Observable<string>=new BehaviorSubject(undefined);
   subjectauth = new BehaviorSubject(undefined);
@@ -54,6 +56,9 @@ export class AppComponent implements AfterViewInit {
           return this.myauth.pipe(
             switchMap((afterauth:firebase.User) => {
               if (afterauth !== null && afterauth !== undefined) {
+                this.myuserProfile.userAuthenObj = afterauth;
+                console.log(afterauth);
+
                 this.router.navigate(['/loggedin']);
                 
               }else if(afterauth === null){

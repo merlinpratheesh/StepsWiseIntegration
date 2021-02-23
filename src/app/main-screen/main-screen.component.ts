@@ -13,6 +13,6 @@ export class MainScreenComponent implements OnInit {
   ngOnInit(): void {
   }
   NavigateBack(){
-    this.router.navigate(['']);
+    this.router.navigate(['/loggedin']);
   }
 }

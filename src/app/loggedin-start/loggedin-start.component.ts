@@ -1,9 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
-import { UserdataService,memberDetail,familDetails } from '../service/userdata.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+import { AfterViewInit } from '@angular/core';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService } from 'firebaseui-angular';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { MainSectionGroup, UserdataService, projectDetails, userProfile, usrinfoDetails } from '../service/userdata.service';
+import { Inject, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { startWith, take, first } from 'rxjs/operators';
+import { projectControls } from '../service/userdata.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { FormGroup } from '@angular/forms';
+import { doc, docData } from 'rxfire/firestore';
+import { combineLatest } from 'rxjs';
+import { withLatestFrom } from 'rxjs/operators';
+import { NgAnalyzedFile } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,268 +29,211 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./loggedin-start.component.scss']
 })
 export class LoggedinStartComponent implements OnInit {
-  myfamily:familDetails={
-    GFFather:undefined,
-    GFMother:undefined,
-    GMFather:undefined,
-    GMMother:undefined,
-    Father:undefined,
-    Mother:undefined,
-    members:undefined
+
+  myProjectDetails: projectDetails = {
+    projectName: '',//Heading in testcase list
+    description: '',//Sub-Heading in testcase list
+    photoUrl: '',//Description in testcase view
+    projectUid: '',//stackblitzLink in testcase edit/doubleclick
+    creationDate: '',
+    profileName: '',
+
   }
-  startPage:memberDetail={
-    name:'',
-    location:[''],
-    photoUrl:'',
-    birthday:firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-    Anniversary:firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-    linkId:''
+  myuserProfile: userProfile = {
+    userAuthenObj: null,//Receive User obj after login success
   };
-  sampleGFFather:memberDetail=this.startPage;
-  sampleGMFather:memberDetail=this.startPage;
-  sampleGFMother:memberDetail=this.startPage;
-  sampleGMMother:memberDetail=this.startPage;
-  sampleFather:memberDetail=this.startPage;
-  sampleMother:memberDetail=this.startPage;
 
+  dialogRef;
+  myprivate: any;
+  authDetails;
+  startPageUid: string;
+  constructor( public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService ,
+    private router: Router,
+    public fb: FormBuilder,
+     public dialog: MatDialog,
+      public afAuth: AngularFireAuth,
+    public developmentservice: UserdataService, 
+    private db: AngularFirestore) {
+    this.afAuth.authState.subscribe(myauth => {
+      if (myauth !== null && myauth !== undefined) {
 
-  startPageUid:string;
-  constructor(private db: AngularFirestore,  public developmentservice: UserdataService,public auth: AngularFireAuth,private router: Router) { 
-    this.auth.authState.subscribe(myauth=>{
-      if(myauth !== null){
-
-        //this.startPageUid=myauth.uid;      
-        //this.startPage.linkId= myauth.email;
-        //this.startPage.name= myauth.displayName;
-        //this.startPage.location=['India'];
-        //this.startPage.photoUrl= myauth.photoURL;
-        //this.startPage.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        //this.startPage.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-  
-        this.sampleGFFather.linkId= myauth.email;
-        this.sampleGFFather.name= 'Grand Father';
-        this.sampleGFFather.location= ['Location'];
-        this.sampleGFFather.linkId= myauth.email;
-        this.sampleGFFather.photoUrl='https://material.angular.io/assets/img/examples/shiba1.jpg';
-        this.sampleGFFather.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.sampleGFFather.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-  
-        this.sampleGMFather.linkId= myauth.email;
-        this.sampleGMFather.name= 'Grand Father';
-        this.sampleGMFather.location= ['Location'];
-        this.sampleGMFather.linkId= myauth.email;
-        this.sampleGMFather.photoUrl='https://material.angular.io/assets/img/examples/shiba1.jpg';
-        this.sampleGMFather.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.sampleGMFather.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-  
-        this.sampleGFMother.linkId= myauth.email;
-        this.sampleGFMother.name= 'Grand Mother';
-        this.sampleGFMother.location= ['Location'];
-        this.sampleGFMother.linkId= myauth.email;
-        this.sampleGFMother.photoUrl='https://material.angular.io/assets/img/examples/shiba1.jpg';
-        this.sampleGFMother.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.sampleGFMother.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-  
-        this.sampleGMMother.linkId= myauth.email;
-        this.sampleGMMother.name= 'Grand Mother';
-        this.sampleGMMother.location= ['Location'];
-        this.sampleGMMother.linkId= myauth.email;
-        this.sampleGMMother.photoUrl='https://material.angular.io/assets/img/examples/shiba1.jpg';
-        this.sampleGMMother.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.sampleGMMother.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-  
-        this.sampleMother.linkId= myauth.email;
-        this.sampleMother.name= 'Mother';
-        this.sampleMother.location= ['Location'];
-        this.sampleMother.linkId= myauth.email;
-        this.sampleMother.photoUrl='https://material.angular.io/assets/img/examples/shiba1.jpg';
-        this.sampleMother.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.sampleMother.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        console.log( this.sampleFather);
-
-        this.sampleFather.linkId= myauth.email;
-        this.sampleFather.name= 'Father';
-        this.sampleFather.location= ['Location'];
-        this.sampleFather.linkId= myauth.email;
-        this.sampleFather.photoUrl='https://material.angular.io/assets/img/examples/shiba1.jpg';
-        this.sampleFather.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.sampleFather.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        console.log( this.sampleFather);
-
-        this.startPage.photoUrl= myauth.photoURL;
-        this.startPage.linkId= myauth.email;
-        this.startPage.name= myauth.displayName;
-        this.startPage.Anniversary=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.startPage.birthday=firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815'));
-        this.startPage.location=['India'];
- 
-  
-        this.myfamily.Father=this.sampleFather;
-        this.myfamily.Mother=this.sampleMother;
-        this.myfamily.GFFather=this.sampleGFFather;
-        this.myfamily.GFMother=this.sampleGFMother;
-        this.myfamily.GMFather=this.sampleGMFather;
-        this.myfamily.GMMother=this.sampleGMMother;
-        this.myfamily.members=[this.startPage]; 
- 
+        this.authDetails = myauth;
       }
-    });
+      console.log(this.authDetails);
+    })
+
   }
 
-  NavigateNext(){
+  logout() {
+    this.afAuth.signOut();
+  }
+
+  NavigateNextTestCases () {
     this.router.navigate(['/main']);
   }
-  InitDBNext(){
-   
-    this.db.collection('members').doc(this.startPageUid).set( this.myfamily);
+  NavigateNextLogOutScreen () {
+    this.router.navigate(['/start']);
+  }
+  InitDBNext() {
+
   }
   ngOnInit(): void {
   }
 
-  updatefirestoreNM(){
-    const data = {
-      stringExample: 'Hello, World!',
-      booleanExample: true,
-      numberExample: 3.14159265,
-      dateExample: firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-      arrayExample: ['hello0', 'hello'],
-      nullExample: null,
-      objectExample: {
-        ObjarrayExample: [5, true, 'hello'],
-        b: true
-      }
-    };
+  addNewOpenDialog(): void {
+
+
+  }
+  newArray = [];
+  mydata;
+  updatedProject: any[] = [];
+
+  newTaskforUser() {
+
+    this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: {   NewUid: this.authDetails } });
+console.log(this.authDetails.uid );
+    const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+
+      const mydialog = values;
+
+      this.developmentservice.createnewproject(mydialog, this.authDetails.uid);
+      return (null);
+    })).subscribe((mydata: any) => {
+      //console.log('105', mydata);
+      //this.developmentservice.createnewproject(mydata,this.profileinfoUid.uid);
+    });
+    /*const mysub = combineLatest(this.publicList, this.privateList, this.dialogRef.afterClosed()).pipe(take(1), map((values: any) => {
+      const [myprivate, mypublic, mydialog] = values;
+      this. updatedPublicProject= myprivate;
+            this. updatedPublicProject.push({
+             projectName:mydialog.projectName,
+             description:mydialog.description,
+             photoUrl:mydialog.photoUrl,
+             projectUid:mydialog.projectUid,
+             profileName:mydialog.profileName,
+             creationDate:mydialog.creationDate
+            });
+            this. updatedPrivateProject= mypublic;
+            this. updatedPrivateProject.push({
+             projectName:mydialog.projectName,
+             description:mydialog.description,
+             photoUrl:mydialog.photoUrl,
+             projectUid:mydialog.projectUid,
+             profileName:mydialog.profileName,
+             creationDate:mydialog.creationDate
+            });
+            this.developmentservice.createnewproject(this.updatedPublicProject,this.updatedPrivateProject,this.profileinfoUid.uid);
+      /*
+            const updatedPublic={
+              projectName:mydialog.projectName,
+              description:mydialog.description,
+              photoUrl:mydialog.photoUrl,
+              projectUid:mydialog.projectUid,
+              profileName:mydialog.profileName,
+              creationDate:mydialog.creationDate
+             }
+             console.log(updatedPublic);
+      
+      return (null);
+    })).subscribe((mydata: any) => {
+      //console.log('105', mydata);
+
+      
+      //this.developmentservice.createnewproject(mydata,this.profileinfoUid.uid);
+
+  
+    });*/
+
+    console.log('121', this.mydata);
+
+
+  }
+
+
+
+
+
+}
+@Component({
+  selector: 'AddNewProjectDialog',
+  template: `
+  <h2 class="py-4" style="color: black; width:500px;" >EDIT PROJECT DETAILS</h2>
+    <form  fxLayout="column" [formGroup]="names">
+      <mat-form-field>
+        <input matInput placeholder="Task Name" formControlName="projectName" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Task Description"
+          formControlName="description"
+        ></textarea>
+      </mat-form-field>
+
+      <div class="form-group row">
+        <div class="col-sm-4 offset-sm-2">
+          <button type="submit" class="btn btn-primary mr-2" (click)="save()">Save</button>
+          <button type="reset" class="btn btn-outline-primary" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+
+
     
-    const res = this.db.collection('testme').doc('one-id').set(data);
-  }
+  `
+})
+export class AddNewProjectDialog {
 
-  updatefirestoreMT(){
-    const data = {
-      stringExample: 'Merge',
-      objectExample: {
-        b: true
-      }
-    };
-    
-    const res = this.db.collection('testme').doc('one-id').set(data, {merge:true});
-  }
-  updatefirestoreMF(){
-    const data = {
-      stringExample: 'Merge ME False'
-    };
-    
-    const res = this.db.collection('testme').doc('one-id').set(data, {merge:false});
-  }
+  names: FormGroup;
+  createProjectFields: any;
 
-  MapfirestoreNM(){
-    const publicdata = {
-      stringExample: 'Hello, World!',
-      booleanExample: true,
-      numberExample: 3.14159265,
-      dateExample: firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-      arrayExample: [5, true, 'hello'],
-      nullExample: null,
-      objectExample: {
-        a: 5,
-        b: true
-      }
-    };
-    
-    const res = this.db.collection('testme').doc('one-id').set({publicdata});
-  }
+  constructor(public developmentservice: UserdataService, private db: AngularFirestore,
+    public dialogRef: MatDialogRef<AddNewProjectDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(this.data);
 
-  MapfirestoreMT(){
-    const publicdata = {
-      stringExample: 'Merge ME'
-    };
-    
-    const res = this.db.collection('testme').doc('one-id').set({publicdata}, {merge:true});
-  }
-  MapfirestoreMF(){
-    const data = {
-      stringExample: 'NoMerge',
-      objectExample: {
-        b: false
-      }
-    };
-    
-    const res = this.db.collection('testme').doc('one-id').set({data}, {merge:false});
-  }
-  SArrayfirestoreNM(){
-   
-    const res = this.db.collection('testme').doc('one-id').update(
-      {arrayExample:firebase.firestore.FieldValue.arrayUnion({key: 'hello-Union'})
-      });
-  }
-
-  SArrayfirestoreMT(){
-    const res = this.db.collection('testme').doc('one-id').update(
-      {arrayExample:firebase.firestore.FieldValue.arrayRemove({key: 'hello-Union'})
-      });
-  }
+    console.log(this.data.NewUid);
 
 
-  ArrayfirestoreNM(){
-    const data = {mydata: [{
-      stringExample: 'Hello, World!',
-      booleanExample: true,
-      numberExample: 3.14159265,
-      dateExample: firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-      arrayExample: [5, true, 'hello'],
-      nullExample: null,
-      objectExample: {
-        a: 5,
-        b: true
-      }
-    },
-    {
-      stringExample: 'Hello, World!',
-      booleanExample: true,
-      numberExample: 3.14159265,
-      dateExample: firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-      arrayExample: [5, true, 'hello'],
-      nullExample: null,
-      objectExample: {
-        a: 5,
-        b: true
-      }
-    }
-  ]};
-    
-    const res = this.db.collection('testme').doc('one-id').set(data);
+
+    this.names = new FormGroup({
+
+      projectName: new FormControl(),
+      description: new FormControl(),
+      creationDate: new FormControl(firebase.firestore.Timestamp.fromDate(new Date())),
+      profileName: new FormControl(this.data.NewUid.displayName),
+      photoUrl: new FormControl(this.data.NewUid.photoURL),
+      projectUid: new FormControl(this.data.NewUid.uid),
+
+    });
+
+
   }
 
-  ArrayfirestoreMT(){
-    const res = this.db.collection('testme').doc('one-id').update({
-      mydata:firebase.firestore.FieldValue.arrayUnion({
-        stringExample: 'MergeMeeee',
-        booleanExample: true,
-        numberExample: 3.14159265,
-        dateExample: firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-        arrayExample: [5, true, 'hello'],
-        nullExample: null,
-        objectExample: {
-          a: 5,
-          b: true
-        }
-      })
-    })
+  save() {
+
+    console.log(this.names.value);
+
+
+    this.dialogRef.close(this.names.value);
+
+
+
+
+
   }
 
-  ArrayfirestoreMF(){
-    const res = this.db.collection('testme').doc('one-id').update({
-      mydata:firebase.firestore.FieldValue.arrayRemove({
-        stringExample: 'MergeMeeee',
-        booleanExample: true,
-        numberExample: 3.14159265,
-        dateExample: firebase.firestore.Timestamp.fromDate(new Date('December 10, 1815')),
-        arrayExample: [5, true, 'hello'],
-        nullExample: null,
-        objectExample: {
-          a: 5,
-          b: true
-        }
-      })
-    })
+  closeDialog() {
+  }
+
+  cancel() {
+    this.names = null;
+    this.dialogRef.close();
+
+  }
+  openLink(event: MouseEvent): void {
+    this.dialogRef.close();
+    event.preventDefault();
   }
 }
+  

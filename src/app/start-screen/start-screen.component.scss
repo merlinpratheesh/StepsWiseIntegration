@@ -1,0 +1,163 @@
+
+  .person {
+    position: relative;
+    background: #F2F3F5;
+    width: 17rem;
+    margin: 2rem auto;
+    transition: all 0.3s linear;
+    border-radius: 0.3rem;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+  }
+  .person img {
+    border-radius: 50%;
+    border: 0.1rem solid teal;
+    flex: 1 0 50%;
+    width: 88px;
+    height: 88px;
+  }
+  
+  .person h4 {
+    text-transform: capitalize;
+    margin: 0.5rem 0;
+    letter-spacing: 0.15rem;
+    color: teal;
+  }
+  .person:hover {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+  }
+  .SignInbutton{
+    font-family: inherit;
+    position:relative;
+        display: inline-block;
+        border: 0 !important;
+        outline: 0;
+        padding: 10px 20px 12px !important;
+        line-height: 1.4;
+        color: white !important;
+        border-radius: 4px !important;
+        font-size: 1rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-decoration: none !important;
+        font-weight: normal;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        
+    }
+    .scroll-viewport {
+      margin:10px;
+      top:0px;
+      height:500px;
+      width: 300px;
+    }
+
+    .wrapper {
+      background-color: #F2F3F5;
+      width: 100%;
+      min-height: 100%;
+      margin-left: 0px;
+  
+      border-radius: 8px;
+      position: relative;
+      padding: 10px 20px 12px !important;
+  
+  
+    }
+    
+    .head {
+      border-bottom: 2px solid #ee964b;
+      padding: 10px,10px;
+    }
+    
+    h1 {
+      margin: 10px;
+      text-align: center;
+      color: #f4d35e;
+    }
+    
+    .head input {
+      margin: 8px;
+      color: #ee964b;
+      padding: 8px;
+      border-radius: 8px;
+      width: 50%;
+    }
+    
+    .add-task {
+      border-radius: 5px;
+      border: #00020a;
+
+      width: 100%;
+      padding: 8px;
+      color: #0d3b66;
+      background-color: #18e92a;
+    }
+    
+    .person {
+        position: relative;
+        background: #F2F3F5;
+        width: 17rem;
+        margin: 2rem auto;
+        transition: all 0.3s linear;
+        border-radius: 0.3rem;
+        text-align: center;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      
+      }
+      .person img {
+        border-radius: 50%;
+        border: 0.1rem solid teal;
+        flex: 1 0 50%;
+        width: 88px;
+        height: 88px;
+      }
+      
+      .person h4 {
+        text-transform: capitalize;
+        margin: 0.5rem 0;
+        letter-spacing: 0.15rem;
+        color: teal;
+      }
+      .person:hover {
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+      }
+      
+      .SignInbutton{
+        font-family: inherit;
+            display: inline-block;
+            position:relative;
+            border: 0 !important;
+            outline: 0;
+            padding: 10px 20px 12px !important;
+            line-height: 1.4;
+            color: white !important;
+            border-radius: 4px !important;
+            font-size: 1rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-decoration: none !important;
+            font-weight: normal;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .SignInbutton:hover {
+            background-color: #FF5722;
+            transition: background-color 0.5s ease-out;
+          }
+          .scroll-viewport {
+            position:relative;
+            margin:10px;
+            top:2px;
+            height:525px;
+            width: 280px;
+          }
+      
+          

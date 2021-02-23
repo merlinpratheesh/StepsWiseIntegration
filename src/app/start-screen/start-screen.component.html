@@ -1,19 +1,78 @@
+<mat-grid-list cols="10" rowHeight="10vh">
+    <mat-grid-tile colspan="2" rowspan='1' [style.background]="'#68afee'">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+            <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item color="warn" (click)="NavigateNext()"> Main Screen </button>
+                <button mat-menu-item color="warn" (click)="NavigateNextTestCases()">TestCases Screen</button>
+            </mat-menu>
+        </button>
+        <span fxFlex="grow"></span>
 
-<mat-toolbar color="primary">
-    Birthday App
-    <span fxFlex="grow">
+        <h1 style="color: #e91010;">
+            StepsWise
+        </h1>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="4" rowspan='1' [style.background]="'#68afee'">
 
-    </span>
-    <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)"
-    (signInFailure)="errorCallback($event)"
-    (uiShown)="uiShownCallback()"></firebase-ui>
-</mat-toolbar>
+        <div fxlayout="row" class="wrapper">
 
-<div Style="height:calc(100vh - 64px);" fxLayoutAlign="center center">
-    <button mat-raised-button color="warn" (click)="NavigateNext()"> MainScreen </button>
-</div>
-  
+            <div class="head" *ngIf=" this.authDetails ; else disablecreateproject">
+                <input id="task-input" type="text" placeholder="Enter a new Task">
+                <button class="add-task" (click)="newTaskforUser()">Add</button>
+            </div>
+        </div>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="4" rowspan='1' [style.background]="'#68afee'">
+
+        <mat-toolbar style="padding: 0px; background: #68afee;">
+
+
+            <h1 style="color: #e91010;">
+                StepsWise Tasking Tool
+            </h1>
+            <span fxFlex="grow"></span>
+            <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)" (signInFailure)="errorCallback($event)"
+                (uiShown)="uiShownCallback()"></firebase-ui>
+            <fa-icon (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-in-alt']">
+            </fa-icon>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" rowspan='9' [style.background]="'#F2F3F5'">
+
+
+        <ng-template #noprofile>
+            No Profile
+        </ng-template>
+
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="4" rowspan='9' style="background: #F2F3F5; display: fixed;">
+
+    </mat-grid-tile>
 
 
 
+    <mat-grid-tile colspan="4" rowspan="9" [style.background]="'#F2F3F5'">
 
+
+    </mat-grid-tile>
+    <mat-grid-tile colspan="6" rowspan="9" [style.background]="'#F2F3F5'">
+
+
+
+    </mat-grid-tile>
+
+
+</mat-grid-list>
+
+<ng-template #disablecreateproject>
+    <div class="add-task" fxLayoutAlign="center center" style="height:100vh;">
+        Please Login For Create New Task
+    </div>
+</ng-template>

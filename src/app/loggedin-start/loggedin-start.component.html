@@ -1,40 +1,68 @@
-<!--div fxLayoutAlign="center center" fxFlex="grow" style="height: 100vh;">
-  Simple Fields
-  <div fxLayout="column"  fxFlexAlign="center" fxFlex="15vw" fxLayoutGap="10%"  style="border-style: double; border-color: aqua;">
-    <button mat-raised-button color="primary" (click)="updatefirestoreNM()">SetDB-withoutMerge</button>
-    <button  mat-raised-button color="accent" (click)="updatefirestoreMT()">SetDB-Merge</button>
-    <button  mat-raised-button color="accent" (click)="updatefirestoreMF()">SetDB-NoMerge</button>
-  </div>
-  Map Field
-  <div fxLayout="column"  fxFlexAlign="center" fxFlex="15vw" fxLayoutGap="10%"  style="border-style: double; border-color: aqua;">
-    <button mat-raised-button color="primary" (click)="MapfirestoreNM()">Map-withoutMerge</button>
-    <button  mat-raised-button color="accent" (click)="MapfirestoreMT()">Map-Merge</button>
-    <button  mat-raised-button color="accent" (click)="MapfirestoreMF()">Map-NoMerge</button>
-  </div>
-  Array-Field
-  <div fxLayout="column"  fxFlexAlign="center" fxFlex="15vw" fxLayoutGap="10%"  style="border-style: double; border-color: aqua;">
-    <button mat-raised-button color="primary" (click)="SArrayfirestoreNM()">S-Array-Union</button>
-    <button  mat-raised-button color="accent" (click)="SArrayfirestoreMT()">S-Array-Remove</button>
-
-  </div>
-
-  Array-Map Field
-  <div fxLayout="column"  fxFlexAlign="center" fxFlex="15vw" fxLayoutGap="10%"  style="border-style: double; border-color: aqua;">
-    <button mat-raised-button color="primary" (click)="ArrayfirestoreNM()">Array-withoutMerge</button>
-    <button  mat-raised-button color="accent" (click)="ArrayfirestoreMT()">Array-Union</button>
-    <button  mat-raised-button color="accent" (click)="ArrayfirestoreMF()">Array-Remove</button>
-  </div>
-</div-->
-<mat-toolbar color="primary">
-    Birthday App
-    <span fxFlex="grow">
-
-    </span>
-    <button mat-raised-button color="warn" (click)="developmentservice.logout()"> Log Out </button>
-</mat-toolbar>
 
 
-<div Style="height:calc(100vh - 64px);" fxLayoutAlign="center center">
-    <button mat-raised-button color="warn" (click)="InitDBNext()"> InitDB </button>
-    <button mat-raised-button color="warn" (click)="NavigateNext()"> MainScreen </button>
-</div>
+<mat-grid-list cols="10" rowHeight="10vh">
+  <mat-grid-tile colspan="2" rowspan='1' [style.background]="'#F2F3F5'">
+      <h1 style="color: #e91010;" [style.background]="'#F2F3F5'">
+          StepsWise
+      </h1>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="4" rowspan='1' [style.background]="'#F2F3F5'">
+
+      <div fxlayout="row" class="wrapper">
+
+          <div class="head" >
+              <input id="task-input" type="text" placeholder="Enter a new Task">
+              <button class="add-task" (click)="newTaskforUser()">Add</button>
+          </div>
+      </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="4" rowspan='1' [style.background]="'#F2F3F5'">
+
+      <mat-toolbar style="padding: 0px; background: #F2F3F5;">
+
+
+          <h1 style="color: #e91010;" [style.background]="'#F2F3F5'">
+              StepsWise Tasking Tool
+          </h1>
+          <span fxFlex="grow"></span>
+
+          <fa-icon (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">
+          </fa-icon>
+      </mat-toolbar>
+      <mat-divider></mat-divider>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2" rowspan='9' [style.background]="'#F2F3F5'">
+
+      <div Style="height:calc(100vh - 64px);" fxLayoutAlign="center center">
+          <button mat-raised-button color="warn" (click)="NavigateNextTestCases()"> TestCases Screen</button>
+          <button mat-raised-button color="warn" (click)="NavigateNextLogOutScreen()"> LogOut Screen </button>
+
+      </div>
+
+
+
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="4" rowspan='9' style="background: #F2F3F5; display: fixed;">
+    
+
+
+  </mat-grid-tile>
+
+
+
+  <mat-grid-tile colspan="4" rowspan="9" [style.background]="'#F2F3F5'">
+
+
+  </mat-grid-tile>
+  <mat-grid-tile colspan="6" rowspan="9" [style.background]="'#F2F3F5'">
+
+
+
+  </mat-grid-tile>
+
+
+</mat-grid-list>
+

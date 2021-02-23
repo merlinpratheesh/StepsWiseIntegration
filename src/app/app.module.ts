@@ -13,7 +13,7 @@ import { environment } from '../environments/environment'
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { LoggedinStartComponent } from './loggedin-start/loggedin-start.component';
+import { LoggedinStartComponent,AddNewProjectDialog } from './loggedin-start/loggedin-start.component';
 import { OfflineScreenComponent } from './offline-screen/offline-screen.component';
 
 
@@ -27,7 +27,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         // This can be obtained from the Credentials page of the Google APIs
         // console. Use the same OAuth client ID used for the Google provider
         // configured with GCIP or Firebase Auth.
-        clientId: '155833140934-om6lcebvnosmo8sgkkogpojvs74g0la5.apps.googleusercontent.com'
+        clientId: '325755404242-i8ufs5g8moq28o4oh38nv6qf3cbbt1gd.apps.googleusercontent.com'
       }],
 
     credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO
@@ -37,7 +37,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,AddNewProjectDialog,
     StartScreenComponent,
     MainScreenComponent,
     LoggedinStartComponent,
@@ -56,7 +56,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     ,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
-  providers: [],
+  providers: [AddNewProjectDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
