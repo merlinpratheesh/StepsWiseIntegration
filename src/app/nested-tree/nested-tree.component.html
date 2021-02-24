@@ -4,7 +4,13 @@
   <div fxLayout="column" fxLayoutGap="5%"  style="width: 100%; height: 75vh;overflow-y:auto;" >
     <mat-card *ngIf="SectionsReady !== undefined" style="height: 500px; width:500px">
     <mat-card-header style="padding:5px; border:solid; border-color:black; background-color:#F2F3F5;">
-      <span style="margin-top:2%; padding: 8px;">{{latestProject}} </span>  <mat-chip color="primary" selected style=" cursor: pointer;margin-left:5%;">View Tasks</mat-chip>
+      <span style="margin-top:1%; padding: 8px;"><h2>{{latestProject}}</h2> </span>  
+      <mat-chip style="margin-right:5px;">
+        <div style="color:primary; text-align: center;margin: 50px;" selected style="
+      margin-top:1% ;cursor: pointer; padding: 10px;">
+      View Tasks
+        </div>
+    </mat-chip>
     </mat-card-header>
     
       <mat-tree
