@@ -15,6 +15,10 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { LoggedinStartComponent,AddNewProjectDialog } from './loggedin-start/loggedin-start.component';
 import { OfflineScreenComponent } from './offline-screen/offline-screen.component';
+import { NestedTreeComponent,BottomSheetChangeOrder } from './nested-tree/nested-tree.component';
+import { AddNodeComponent,NewNodeDialog } from './nested-tree/add-node/add-node.component';
+import { DeleteNodeComponent, } from './nested-tree/delete-node/delete-node.component';
+import { EditNodeComponent,EditNodeDialog } from './nested-tree/edit-node/edit-node.component';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -42,7 +46,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MainScreenComponent,
     LoggedinStartComponent,
     OfflineScreenComponent,
-  ],
+    AddNewProjectDialog,EditNodeComponent,EditNodeDialog,NestedTreeComponent,
+    BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent  ],
   imports: [
 
     BrowserModule,

@@ -1,0 +1,96 @@
+mat-tree {
+  margin-left: 20px;
+  top:0px
+}
+.mat-tree-node {
+  padding: 0;
+  background-color: white;
+  border: solid;
+  margin: 0px;
+  position: relative;
+}
+li.example-tree-container { ul:last-child{
+  border-left:0;
+}
+}
+ul, li { 
+  list-style: none; 
+  margin: 0; 
+  padding: 0;  
+  
+}
+
+li.example-tree-container {
+  border-bottom: 0;  
+}
+
+li.example-tree-container:last-child ul{
+  border-bottom: 0;
+}
+
+li { 
+  padding-left: 40px;
+  border: 20px solid black;
+  border-width: 0 0 2px 2px; 
+  top: -25px;
+  padding-bottom: 1.5%;
+  
+}
+
+li:active{
+  border:0;
+}
+div { 
+  margin: 0;
+  top: 24px; 
+}
+
+ul {
+  border-top: 2px solid rgb(1, 15, 15);
+  margin-left: -40px;
+  padding-left: 60px;
+  padding-bottom: 0%;
+}
+
+.mat-icon-button {
+  z-index: 0;
+}
+
+  $color : rgb(190,230,180);
+  $color-dark : darken($color, 55%);
+  $color-light : lighten($color, 5%);
+
+mat-tree{
+  background:rgb(242, 243, 245);
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  mat-card {
+    background:#F2F3F5;
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+.SignInbutton{
+  font-family: inherit;
+      display: inline-block;
+      position:relative;
+
+      border: 0 !important;
+      outline: 0;
+      padding: 10px 20px 12px !important;
+      line-height: 1.4;
+      background: rgb(242, 243, 245);
+      color: white !important;
+      border-radius: 4px !important;
+      font-size: 1rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-decoration: none !important;
+      font-weight: normal;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+      cursor: pointer;
+  }

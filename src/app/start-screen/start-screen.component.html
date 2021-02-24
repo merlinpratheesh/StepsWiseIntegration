@@ -59,21 +59,25 @@
                 [disabled]="profileinfoUid?.uid === null">Edit</button>
         
             </div>
-            
+             <br>
+             <br>
+             <br> 
+             <br>
+             <br>
         
                 <mat-card  fxFlex="18vw" style="  background: #F2F3F5; " >
         
                     <mat-card-header>
                         <mat-card-title>StepsWise</mat-card-title>
-                        <mat-card-subtitle>Convert your work into tasks
+                        <mat-card-subtitle> Start Tasking
                         </mat-card-subtitle>
                     </mat-card-header>
-                    <img mat-card-image [src]='' alt="Photo of Task">
         
                     <mat-card-content>
-                        <p>
-        Start Tasking
-                        </p>
+                        <h2> 
+                            Convert your work into tasks
+
+                        </h2>
                     </mat-card-content>
                 </mat-card>
         
@@ -181,6 +185,10 @@
 
     <mat-grid-tile colspan="4" rowspan="9" [style.background]="'#F2F3F5'">
 
+        <app-nested-tree class="mattree" fxLayout="column" [Sections]="keyRef"
+        [latestProject]="userselectedProject">
+
+    </app-nested-tree>
 
 
     </mat-grid-tile>

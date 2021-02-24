@@ -136,7 +136,9 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   optionsTasksSub: Subscription;
   firstProject: any;
   profileRef: any;
-  keyRef: any;
+  userselectedProject ;
+  keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
+
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -165,7 +167,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       console.log(this.firstProject);
       if(this.firstProject!=null)
       {
-
+        this.userselectedProject=this.firstProject.firstProjectRef.projectName;
         this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
         console.log(this.profileRef);
 
@@ -213,9 +215,19 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
   profileKeyRef(some){
 
+    this.userselectedProject=some.projectName;
+
     console.log('216',some); 
+    this.getProfilesSubscription.unsubscribe();
+
     this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
+    this.getSectionsSubscription?.unsubscribe();
+
+    this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
+
     console.log('218',this.profileRef);
+    console.log('218',this.keyRef);
+
    }
 
 
