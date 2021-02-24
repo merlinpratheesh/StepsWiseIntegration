@@ -417,7 +417,7 @@ export class LoggedinStartComponent implements OnInit {
 @Component({
   selector: 'AddNewProjectDialog',
   template: `
-  <h2 class="py-4" style="color: black; width:500px;" >EDIT PROJECT DETAILS</h2>
+  <h2 class="py-4" style="color: black; width:500px;" >ADD PROJECT DETAILS</h2>
     <form  fxLayout="column" [formGroup]="names">
       <mat-form-field>
         <input matInput placeholder="Task Name" formControlName="projectName" />

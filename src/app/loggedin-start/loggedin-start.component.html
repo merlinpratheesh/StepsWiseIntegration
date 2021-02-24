@@ -47,7 +47,7 @@
             fxLayoutAlign="space-between center">
 
 
-            <div fxFlex="18vw"class="person">
+            <div fxFlex="18vw" fxFlex="60vh"  style ="margin-top: 80px; "class="person">
                 <img
                     [ngStyle]="{'background-image': 'url(' + profiledetails?.photoUrl+ ')', 'background-size': 'cover'  }">
                 <pre class="case1 " appShowMore>
@@ -57,17 +57,9 @@
             </pre>
             <button style ="margin-right:5px"mat-raised-button color="primary" (click)="openBottomSheet()"
             [disabled]="authDetails?.uid === null">Edit</button>
-
-
-
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
 
-            <mat-card fxFlex="18vw" style="  background: #F2F3F5; ">
+            <mat-card fxFlex="18vw" fxFlex="40vh" style="  background: #F2F3F5;">
 
                 <mat-card-header>
                     <mat-card-title>StepsWise</mat-card-title>
