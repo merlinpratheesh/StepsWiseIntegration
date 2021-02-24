@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { MainSectionGroup, UserdataService, projectDetails, userProfile, usrinfoDetails } from '../service/userdata.service';
 import { Inject, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { startWith, take, first } from 'rxjs/operators';
 import { projectControls } from '../service/userdata.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,9 +22,15 @@ import { Router } from '@angular/router';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 
-
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-loggedin-start',
@@ -92,6 +98,33 @@ export class LoggedinStartComponent implements OnInit {
     });
     return this.getPublicListBehaviourSub;
   };
+  privateList: any;
+  localprivateList = [];
+  getprivateListSubscription: Subscription;
+  getprivateListBehaviourSub = new BehaviorSubject(null);
+  getPrivateList = (privateProjects: AngularFirestoreDocument<any>) => {
+    if (this.getprivateListSubscription !== undefined) {
+      this.getprivateListSubscription.unsubscribe();
+    }
+
+    this.getprivateListSubscription = privateProjects.valueChanges().subscribe((val: any) => {
+      console.log('61',val);
+
+      if (val === undefined) {
+        this.getprivateListBehaviourSub.next(undefined);
+      } else {
+
+        if (val.private.length === 0) {
+          this.getprivateListBehaviourSub.next(null);
+        } else {
+          this.localprivateList = val.private;
+          console.log('61',val.private);
+          this.getprivateListBehaviourSub.next(val.private);
+        }
+      }
+    });
+    return this.getprivateListBehaviourSub;
+  };
   getProfilesSubscription: Subscription;
   getProfilesBehaviourSub = new BehaviorSubject(null);
   getProfiles = (profileDetails: AngularFirestoreDocument<usrinfoDetails>) => {
@@ -109,6 +142,7 @@ export class LoggedinStartComponent implements OnInit {
     );
     return this.getProfilesBehaviourSub;
   };
+  matcher = new MyErrorStateMatcher();
 
 Sections = of(undefined);
 getSectionsSubscription: Subscription;
@@ -203,6 +237,41 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       
               }
             );
+            /*---*/
+            this.optionsTasksSub = docData(this.db.firestore.doc('projectList/'+this.authDetails.uid)).subscribe((readrec: any) => {
+              this.optionsTasks = [];
+              this.optionsTasksBk = readrec.private;
+              console.log(this.optionsTasksBk);
+              console.log(this.optionsTasksBk[0]);
+              
+              readrec.private.forEach(element => {
+                this.optionsTasks.push(element.projectName);
+              });
+              this.optionsTasksNamesBk= this.optionsTasks;
+              console.log(this.optionsTasks);
+            });
+          
+              this.filteredTasksOptions = this.emailFormControl.valueChanges.pipe(
+                startWith(''),
+                map((myvalue: string) => {
+                  console.log('96',myvalue);
+                  if (myvalue === '' || myvalue === null) {
+                    console.log(this.authDetails.uid);
+          
+                    this.privateList = this.getPrivateList(this.db.doc('projectList/'+this.authDetails.uid));
+          
+                    this.optionsTasks= this.optionsTasksNamesBk;
+                  } else {          
+                    this.privateList = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+                    this.optionsTasks = this._filter(myvalue);
+                    //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
+                  }
+                }
+                ))    .subscribe(
+                  some=>{
+          
+                  }
+                );
   
         }
         else{

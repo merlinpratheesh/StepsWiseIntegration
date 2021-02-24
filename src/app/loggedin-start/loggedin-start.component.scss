@@ -49,12 +49,6 @@
         cursor: pointer;
         
     }
-    .scroll-viewport {
-      margin:10px;
-      top:0px;
-      height:500px;
-      width: 300px;
-    }
 
 
     
@@ -73,7 +67,7 @@
       width: 20%;
       padding: 8px;
       color: #0d3b66;
-      background-color: #f4d35e;
+      background-color: #18e92a;
     }
     
     
@@ -127,12 +121,7 @@
         cursor: pointer;
         
     }
-    .scroll-viewport {
-      margin:10px;
-      top:0px;
-      height:500px;
-      width: 300px;
-    }
+
 
     .wrapper {
       background-color: #F2F3F5;
@@ -222,14 +211,7 @@
             background-color: #FF5722;
             transition: background-color 0.5s ease-out;
           }
-          .scroll-viewport {
-            position:relative;
-            margin:10px;
-            top:2px;
-            height:525px;
-            width: 280px;
-          }
-      
+
           
   .example-headers-align .mat-expansion-panel-header-title,
   .example-headers-align .mat-expansion-panel-header-description {
@@ -340,12 +322,6 @@
           background-color: #FF5722;
           transition: background-color 0.5s ease-out;
         }
-        .scroll-viewportprofile {
-          position:relative;
-          margin:10px;
-          top:2px;
-          height:525px;
-          width: 280px;
-        }
+
     
         

@@ -16,13 +16,14 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="4" rowspan='1' [style.background]="'#68afee'">
 
-        <div fxlayout="row" class="wrapper">
+        <div fxlayout="cloumn" class="wrapper">
 
             <div class="head" *ngIf=" this.authDetails ; else disablecreateproject">
                 <input id="task-input" type="text" placeholder="Enter a new Task">
                 <button class="add-task" (click)="newTaskforUser()">Add</button>
             </div>
         </div>
+
 
     </mat-grid-tile>
 
@@ -198,7 +199,7 @@
 </mat-grid-list>
 
 <ng-template #disablecreateproject>
-    <div class="add-task" fxLayoutAlign="center center" style="height:100vh;">
+    <div class="loginforadd-task" fxLayoutAlign="center center" style="height:100vh;">
         Please Login For Create New Task
     </div>
 </ng-template>
