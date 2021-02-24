@@ -19,6 +19,7 @@ import { NestedTreeComponent,BottomSheetChangeOrder } from './nested-tree/nested
 import { AddNodeComponent,NewNodeDialog } from './nested-tree/add-node/add-node.component';
 import { DeleteNodeComponent, } from './nested-tree/delete-node/delete-node.component';
 import { EditNodeComponent,EditNodeDialog } from './nested-tree/edit-node/edit-node.component';
+import { ShowmoreDirective } from './showmore.directive';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -47,7 +48,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     LoggedinStartComponent,
     OfflineScreenComponent,BottomSheetOverviewExampleSheet,
     AddNewProjectDialog,EditNodeComponent,EditNodeDialog,NestedTreeComponent,
-    BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent  ],
+    BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent, ShowmoreDirective  ],
   imports: [
 
     BrowserModule,

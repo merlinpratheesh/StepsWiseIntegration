@@ -35,6 +35,7 @@
             <h1 style="color: #e91010;" [style.background]="'#F2F3F5'">
                 StepsWise Tasking Tool
             </h1>
+
             <span fxFlex="grow"></span>
 
             <fa-icon (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">Logout
@@ -45,25 +46,31 @@
     <mat-grid-tile colspan="2" rowspan='9' [style.background]="'#F2F3F5'">
         <div *ngIf="profileRef | async as profiledetails ; else noprofile" fxLayout="column"
             fxLayoutAlign="space-between center">
+           
+            
 
+            <div fxFlex="18vw" fxFlex="50vh" style="margin-top: 80px; " class="person">
 
-            <div fxFlex="18vw" fxFlex="60vh"  style ="margin-top: 80px; "class="person">
                 <img
                     [ngStyle]="{'background-image': 'url(' + profiledetails?.photoUrl+ ')', 'background-size': 'cover'  }">
-                <pre class="case1 " appShowMore>
+
                 <h4>{{profiledetails?.profileName}}</h4>
                 <h4>{{profiledetails?.email}}</h4>
                 <h4>{{profiledetails?.gender}}</h4>
-            </pre>
-            <button style ="margin-right:5px"mat-raised-button color="primary" (click)="openBottomSheet()"
-            [disabled]="authDetails?.uid === null">Edit</button>
+                <button style="margin-right:5px" mat-raised-button color="primary" (click)="openBottomSheet()"
+                    [disabled]="authDetails?.uid === null">Edit</button>
+
             </div>
 
-            <mat-card fxFlex="18vw" fxFlex="40vh" style="  background: #F2F3F5;">
+
+            <mat-card fxFlex="18vw" fxFlex="50vh" style="  background: #F2F3F5;">
 
                 <mat-card-header>
                     <mat-card-title>StepsWise</mat-card-title>
                     <mat-card-subtitle> Start Tasking
+                        <pre class="case1 " appShowmore>
+                            Instructions:Demo User can Create Projects for One Month free. 
+                        </pre>
                     </mat-card-subtitle>
                 </mat-card-header>
 
@@ -72,6 +79,7 @@
                         Convert your work into tasks
 
                     </h2>
+
                 </mat-card-content>
             </mat-card>
 
@@ -241,7 +249,7 @@
                     </div>
 
                     <ng-template #waitingload>
-                        
+
                         <mat-spinner>
                         </mat-spinner>
                         No Private Projects. Create new One..
@@ -254,11 +262,11 @@
 
 
 
-    <mat-grid-tile colspan="4" rowspan="9" [style.background]="'#F2F3F5'">
-
-        <app-nested-tree class="mattree" fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
-        </app-nested-tree>
+    <mat-grid-tile  colspan="4" rowspan="9" [style.background]="'#F2F3F5'">
+            <app-nested-tree class="mattree" fxLayout="column" [Sections]="keyRef"
+                [latestProject]="userselectedProject">
+            </app-nested-tree>
+ 
     </mat-grid-tile>
-
 
 </mat-grid-list>
