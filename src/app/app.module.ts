@@ -13,7 +13,7 @@ import { environment } from '../environments/environment'
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { LoggedinStartComponent,AddNewProjectDialog } from './loggedin-start/loggedin-start.component';
+import { LoggedinStartComponent,BottomSheetOverviewExampleSheet,AddNewProjectDialog } from './loggedin-start/loggedin-start.component';
 import { OfflineScreenComponent } from './offline-screen/offline-screen.component';
 import { NestedTreeComponent,BottomSheetChangeOrder } from './nested-tree/nested-tree.component';
 import { AddNodeComponent,NewNodeDialog } from './nested-tree/add-node/add-node.component';
@@ -45,7 +45,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     StartScreenComponent,
     MainScreenComponent,
     LoggedinStartComponent,
-    OfflineScreenComponent,
+    OfflineScreenComponent,BottomSheetOverviewExampleSheet,
     AddNewProjectDialog,EditNodeComponent,EditNodeDialog,NestedTreeComponent,
     BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent  ],
   imports: [
@@ -61,7 +61,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     ,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
-  providers: [AddNewProjectDialog],
+  providers: [AddNewProjectDialog,BottomSheetOverviewExampleSheet],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

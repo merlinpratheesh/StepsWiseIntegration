@@ -4,7 +4,7 @@ mat-tree {
 }
 .mat-tree-node {
   padding: 0;
-  background-color: white;
+  background-color: #F2F3F5;
   border: solid;
   margin: 0px;
   position: relative;
@@ -21,7 +21,7 @@ ul, li {
 }
 
 li.example-tree-container {
-  border-bottom: 0;  
+  border-bottom: 1;  
 }
 
 li.example-tree-container:last-child ul{

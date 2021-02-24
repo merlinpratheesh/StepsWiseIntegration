@@ -284,5 +284,17 @@
           height:525px;
           width: 280px;
         }
-    
-        
+        .case1 {
+          width: 200px;
+          display: inline-block;
+          border: 3px solid rgb(104, 175, 238);
+          border-radius: 10px;
+          padding: 1rem;
+          font-family: Arial;
+          font-size: 1rem;
+          color: #666;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+            

@@ -152,7 +152,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
     this.afAuth.authState.subscribe(myauth => {
       if (myauth !== null && myauth !== undefined) {
-
         this.authDetails = myauth;
 
       }

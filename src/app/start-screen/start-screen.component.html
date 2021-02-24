@@ -20,7 +20,7 @@
 
             <div class="head" *ngIf=" this.authDetails ; else disablecreateproject">
                 <input id="task-input" type="text" placeholder="Enter a new Task">
-                <button class="add-task" (click)="newTaskforUser()">Add</button>
+                <button class="add-task" >Add</button>
             </div>
         </div>
 
@@ -49,16 +49,19 @@
         <div *ngIf="profileRef | async as profiledetails ; else noprofile" fxLayout="column" fxLayoutAlign="space-between center">
 
 
-            <div class="person">
-        
-                <img [ngStyle]="{'background-image': 'url(' + profiledetails?.photoUrl+ ')', 'background-size': 'cover'  }">
+            <div fxFlex="18vw"class="person">
+                <img
+                    [ngStyle]="{'background-image': 'url(' + profiledetails?.photoUrl+ ')', 'background-size': 'cover'  }">
+                <pre class="case1 " appShowMore>
                 <h4>{{profiledetails?.profileName}}</h4>
                 <h4>{{profiledetails?.email}}</h4>
                 <h4>{{profiledetails?.gender}}</h4>
-           
-                <button mat-raised-button color="primary" (click)="openBottomSheet(profiledetails)"
-                [disabled]="profileinfoUid?.uid === null">Edit</button>
-        
+            </pre>
+            <button style ="margin-right:5px"mat-raised-button color="primary" (click)="openBottomSheet()"
+            [disabled]="authDetails?.uid === null">Edit</button>
+
+
+
             </div>
              <br>
              <br>
@@ -167,7 +170,6 @@
                 <ng-template matTabContent>
                     <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
                     Please Login For Add Private Projects
-                    {{this.authDetails | json}}
                 </cdk-virtual-scroll-viewport>
                 </ng-template>
             </mat-tab>

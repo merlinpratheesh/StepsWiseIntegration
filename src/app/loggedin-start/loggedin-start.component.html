@@ -47,16 +47,18 @@
             fxLayoutAlign="space-between center">
 
 
-            <div class="person">
-
+            <div fxFlex="18vw"class="person">
                 <img
                     [ngStyle]="{'background-image': 'url(' + profiledetails?.photoUrl+ ')', 'background-size': 'cover'  }">
+                <pre class="case1 " appShowMore>
                 <h4>{{profiledetails?.profileName}}</h4>
                 <h4>{{profiledetails?.email}}</h4>
                 <h4>{{profiledetails?.gender}}</h4>
+            </pre>
+            <button style ="margin-right:5px"mat-raised-button color="primary" (click)="openBottomSheet()"
+            [disabled]="authDetails?.uid === null">Edit</button>
 
-                <button mat-raised-button color="primary" (click)="openBottomSheet(profiledetails)"
-                    [disabled]="profileinfoUid?.uid === null">Edit</button>
+
 
             </div>
             <br>
@@ -167,7 +169,7 @@
                     </div>
                     <ng-template #waitingload>
                         <mat-spinner>
-            
+
                         </mat-spinner>
                     </ng-template>
                 </ng-template>
@@ -247,9 +249,10 @@
                     </div>
 
                     <ng-template #waitingload>
+                        
                         <mat-spinner>
-
                         </mat-spinner>
+                        No Private Projects. Create new One..
                     </ng-template>
                 </ng-template>
             </mat-tab>

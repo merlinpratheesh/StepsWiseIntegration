@@ -79,16 +79,17 @@ export class UserdataService {
 
   }
 
-  async updateProfile (value: any, uidtoupdate: string) : Promise<void>{
+  async updateProfile (value: any, uid: string) : Promise<void>{
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
-        this.db.doc('profile/' + `${uidtoupdate}`).update(value),
+        this.db.collection('profile').doc(uid).set(value, {merge:true})
+
       ]);
       return promise;
     });
   }
   docExists(uid: string):any {
-    return this.db.doc(`profile/` + `${uid}`).valueChanges().pipe(first()).toPromise();
+    return this.db.doc(`profile/` + uid).valueChanges().pipe(first()).toPromise();
   }
   async findOrCreate(uid: string) :Promise<usrinfoDetails> {
     const doc:usrinfoDetails = await this.docExists(uid);
@@ -99,15 +100,46 @@ export class UserdataService {
       return undefined;
     }
   }
+
+  privateProjectExists(uid: string):any {
+    return this.db.doc(`projectList/` + uid).valueChanges().pipe(first()).toPromise();
+  }
+  async privateProjectfindOrCreate(uid: string) :Promise<projectDetails> {
+    const project:projectDetails = await this.privateProjectExists(uid);
+    if (project) {
+      console.log('110',uid);
+      console.log('returned', project);
+      return project;
+    } else {
+      return undefined;
+    }
+  }
   
 
 
-  async createnewproject( updatedProject:any,uid:string): Promise<void> {
+  async createnewprojectExistingId( updatedProject:any,uid:string): Promise<void> {
     console.log(updatedProject);
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
 
       this.db.collection('projectList/').doc(uid).update(
+        {private:firebase.firestore.FieldValue.arrayUnion(updatedProject),
+        }),
+      
+      this.db.collection('projectList/').doc('publicProject').update(
+          {public:firebase.firestore.FieldValue.arrayUnion(updatedProject),
+
+        })]);
+        
+      return promise;
+    });
+  }
+  async createnewproject( updatedProject:any,uid:string): Promise<void> {
+    console.log(updatedProject);
+    await this.db.firestore.runTransaction(() => {
+      const promise = Promise.all([
+
+      this.db.collection('projectList/').doc(uid).set(
         {private:firebase.firestore.FieldValue.arrayUnion(updatedProject),
         }),
       
