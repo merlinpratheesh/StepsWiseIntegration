@@ -58,6 +58,7 @@ export class LoggedinStartComponent implements OnInit {
     membershipType: '',
     projectLocation: '',
     photoUrl: '',
+    numberOfProjects:0,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
   }
   myuserProfile: userProfile = {
@@ -212,6 +213,7 @@ export class LoggedinStartComponent implements OnInit {
               email: myauth.email,
               gender: 'pleaseEnter',
               areaOfinterest: 'pleaseEnter',
+              numberOfProjects: '0',
               skills: 'pleaseEnter',
               location: 'pleaseEnter',
               photoUrl: myauth.photoURL
@@ -393,6 +395,9 @@ export class LoggedinStartComponent implements OnInit {
         if (success === undefined) {
           const Newmydialog = values;
           this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
+
+
+
           return (null);
 
 
@@ -401,6 +406,7 @@ export class LoggedinStartComponent implements OnInit {
 
           const mydialog = values;
           this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+
           return (null);
 
 

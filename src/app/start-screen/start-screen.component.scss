@@ -19,9 +19,7 @@
     letter-spacing: 0.15rem;
     color: teal;
   }
-  .person:hover {
-    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
-  }
+
   .SignInbutton{
     font-family: inherit;
     position:relative;
@@ -46,11 +44,11 @@
       margin:10px;
       top:0px;
       height:500px;
-      width: 300px;
+      width: 150px;
     }
 
     .wrapper {
-      background-color: #F2F3F5;
+      background-color: rgb(104, 175, 238);
       width: 100%;
       min-height: 100%;
       margin-left: 0px;
@@ -91,10 +89,7 @@
         .loginforadd-task {
       border-radius: 5px;
       border: #00020a;
-
-      width: 100%;
-      padding: 8px;
-      color: #0d3b66;
+      text-align: center;
       background-color: #18e92a;
     }
     
@@ -290,4 +285,142 @@
           overflow: hidden;
           text-overflow: ellipsis;
         }
-            
+        div#main-card {
+          margin-top: 0px;
+          max-width: 280px;
+        }
+        
+        .cover-photo {
+          background: rgb(104, 175, 238);
+          width: 280px;
+          height: 100px;
+        }
+        .email{
+          font-size: 16px;
+          font-family: Comic Sans MS;
+          padding: 15px 0;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        
+        }
+        
+        .photo {
+          background: #f9f9f9;
+          width: 88px;
+          height: 88px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+        }
+        img {
+          position: relative;
+          top: -50px;
+          max-width: 100%;
+          max-height: 100%;
+          border-radius: 50%;
+          box-shadow: -1px 1px 11px 6px rgba(189, 172, 172, 0.33);
+        }
+        .content {
+          background: #f9f9f9;
+          width: 280px;
+          height: 100px;
+          position: relative;
+          top: -25px;
+        }
+        
+        .contact {
+          background: white;
+          width: 260px;
+          height: 50px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
+        
+        h2.name,
+        h3,
+        a {
+          margin: 0;
+          text-align: center;
+        }
+        
+        h2.name {
+          padding-bottom: 20px;
+        }
+        
+        h3.fullstack {
+          padding-bottom: 10px;
+        }
+        
+        a {
+          color: #0ab581;
+          text-decoration: none;
+        }
+        
+        a:hover {
+          color: black;
+        }
+        
+        ul {
+          padding: 0;
+        }
+        
+        .fa {
+          font-size: 22px;
+          padding: 10px;
+          text-decoration: none;
+          color: #0ab581;
+        }
+        
+        .fa:hover {
+          color: #000;
+        }
+        
+
+        @-webkit-keyframes pulse {
+          0% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+          50% {
+            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+          }
+          100% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+        }
+        @keyframes pulse {
+          0% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+          50% {
+            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+          }
+          100% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+        }
+
+
+        

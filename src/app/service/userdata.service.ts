@@ -35,6 +35,7 @@ export interface usrinfoDetails {
   email?: string,
   gender?: string,
   areaOfinterest?: string,
+  numberOfProjects?:number,
   skills?: string,
   location?: string,
   membershipEnd?:firebase. firestore. Timestamp;
@@ -129,7 +130,12 @@ export class UserdataService {
       this.db.collection('projectList/').doc('publicProject').update(
           {public:firebase.firestore.FieldValue.arrayUnion(updatedProject),
 
-        })]);
+        }),
+        this.db.collection('profile/').doc(uid).update(
+          {numberOfProjects:firebase.firestore.FieldValue.increment(1),
+          
+        })
+      ]);
         
       return promise;
     });
@@ -142,6 +148,11 @@ export class UserdataService {
       this.db.collection('projectList/').doc(uid).set(
         {private:firebase.firestore.FieldValue.arrayUnion(updatedProject),
         }),
+
+        this.db.collection('profile/').doc(uid).update(
+          {numberOfProjects:firebase.firestore.FieldValue.increment(1),
+          
+        }),
       
       this.db.collection('projectList/').doc('publicProject').update(
           {public:firebase.firestore.FieldValue.arrayUnion(updatedProject),
@@ -151,6 +162,8 @@ export class UserdataService {
       return promise;
     });
   }
+
+  
 
   async createDefKeys(projectname: string, MainSection: any): Promise<void> {
     await this.db.firestore.runTransaction(() => {
