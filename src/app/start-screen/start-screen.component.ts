@@ -137,7 +137,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   firstProject: any;
   profileRef: any;
   userselectedProject ;
-  keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
+  keyRef ;
 
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,

@@ -233,13 +233,13 @@
         } 
 .case1 {
   width: 200px;
-
   border: 3px solid rgb(104, 175, 238);
   border-radius: 10px;
   padding: 1rem;
   font-family: Arial;
   font-size: 1rem;
   color: #666;
+  background-color:white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -247,13 +247,12 @@
 
 
 div#main-card {
-  margin: 5px;
-  max-width: 280px;
+  max-width: 260px;
 }
 
 .cover-photo {
   background: rgb(104, 175, 238);;
-  width: 280px;
+  width: 270px;
   height: 100px;
 }
 .email{
@@ -273,7 +272,8 @@ div#main-card {
 }
 
 .photo {
-  background: #f9f9f9;
+  background: #f1f1f1;
+  margin: 5px;
   width: 88px;
   height: 88px;
   display: -webkit-box;
@@ -292,7 +292,7 @@ img {
   box-shadow: -1px 1px 11px 6px rgba(189, 172, 172, 0.33);
 }
 .content {
-  background: #f9f9f9;
+  background: white;
   width: 280px;
   height: 100px;
   position: relative;
@@ -321,12 +321,11 @@ a {
   text-align: center;
 }
 
-h2.name {
-  padding-bottom: 20px;
-}
 
-h3.fullstack {
-  padding-bottom: 10px;
+h3.card__text {
+  margin-bottom: 0.3em;
+  font-size: 1.4em;
+  color: #6f6f6f;
 }
 
 a {
@@ -383,4 +382,28 @@ ul {
   }
 }
 
-        
+.card__info {
+  margin: 1em 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+.card__info li {
+  display: inline-block;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.card__info__stats {
+  color: var(--main-accent-color);
+  font-weight: bold;
+  font-size: 1.2em;
+  display: block;
+}
+
+.card__info__stats + span {
+  color: #969798;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: bold;
+}

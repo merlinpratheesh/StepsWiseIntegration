@@ -49,10 +49,8 @@
 
     .wrapper {
       background-color: rgb(104, 175, 238);
-      width: 100%;
-      min-height: 100%;
-      margin-left: 0px;
-  
+      min-height: 40%;
+      margin-left: 2px;
       border-radius: 8px;
       position: relative;
       padding: 10px 20px 12px !important;
@@ -274,25 +272,24 @@
         }
         .case1 {
           width: 200px;
-          display: inline-block;
           border: 3px solid rgb(104, 175, 238);
           border-radius: 10px;
           padding: 1rem;
           font-family: Arial;
           font-size: 1rem;
           color: #666;
+          background-color:white;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
         div#main-card {
-          margin-top: 0px;
-          max-width: 280px;
+          max-width: 260px;
         }
         
         .cover-photo {
           background: rgb(104, 175, 238);
-          width: 280px;
+          width: 270px;
           height: 100px;
         }
         .email{
@@ -312,7 +309,8 @@
         }
         
         .photo {
-          background: #f9f9f9;
+          background: #f1f1f1;
+          margin: 5px;
           width: 88px;
           height: 88px;
           display: -webkit-box;
@@ -331,16 +329,16 @@
           box-shadow: -1px 1px 11px 6px rgba(189, 172, 172, 0.33);
         }
         .content {
-          background: #f9f9f9;
+          background: white;
           width: 280px;
           height: 100px;
           position: relative;
-          top: -25px;
+          top: -35px;
         }
         
         .contact {
           background: white;
-          width: 260px;
+          width: 280px;
           height: 50px;
           display: -webkit-box;
           display: -ms-flexbox;
@@ -359,13 +357,10 @@
           margin: 0;
           text-align: center;
         }
-        
-        h2.name {
-          padding-bottom: 20px;
-        }
-        
-        h3.fullstack {
-          padding-bottom: 10px;
+        h3.card__text {
+          margin-bottom: 0.3em;
+          font-size: 1.4em;
+          color: #6f6f6f;
         }
         
         a {
@@ -392,7 +387,7 @@
           color: #000;
         }
         
-
+        
         @-webkit-keyframes pulse {
           0% {
             -webkit-transform: scale3d(1, 1, 1);
@@ -421,6 +416,115 @@
             transform: scale3d(1, 1, 1);
           }
         }
+        
+        .centered {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: black;
+        }
+        
+        .container {
+          position: relative;
+          text-align: center;
+          color: white;
+        }
+        .card__info {
+          margin: 1em 0;
+          list-style-type: none;
+          padding: 0;
+        }
+        
+        .card__info li {
+          display: inline-block;
+          text-align: center;
+          padding: 0.5em;
+        }
+        
+        .card__info__stats {
+          color: var(--main-accent-color);
+          font-weight: bold;
+          font-size: 1.2em;
+          display: block;
+        }
+        
+        .card__info__stats + span {
+          color: #969798;
+          text-transform: uppercase;
+          font-size: 0.8em;
+          font-weight: bold;
+        }
 
 
+        .profile-social-links {
+          display: inline-block;
+          padding: 15px 15px;
+          background: #ffffff;
+          text-align: center;
+          opacity: 0;
+          margin-top: 500px;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-animation: moveIn 1s 3.1s ease forwards;
+          animation: moveIn 1s 2.1s ease forwards;
+        }
+        .profile-social-links li {
+          list-style: none;
+          margin: 5px 0px 0px 0px;
+          padding: 30px;
+          float: left;
+          width: 10.3%;
+          text-align: center;
+        }
+        .profile-social-links li a {
+          display: inline-block;
+          width: 240px;
+          height: 20px;
+          padding: 6px;
+          position: relative;
+          overflow: hidden !important;
+          -webkit-border-radius: 50%;
+          border-radius: 50%;
+        }
+        .profile-social-links li a img {
+          position: relative;
+          z-index: 1;
+        }
+
+        .profile-social-links li a img,
+        .profile-social-links li a svg {
+          width: 30px;
+        }
+        @keyframes materia_portrait {
+          0% {
+            background: #e0e0e0;
+          }
+          50% {
+            border-radius: 4px;
+          }
+          100% {
+            height: 40px;
+            border-radius: 4px;
+            background-color: rgb(104, 175, 238);
+            width: 30%;
+            min-height: 40%;
+            margin-left: 2px;
+            margin-top: 50px;
+            border-radius: 8px;
+            position: relative;
+            padding: 10px 20px 12px !important;
+          }
+        }
+        
+        @keyframes moveIn {
+          0% {
+            margin-top: 50px;
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+            margin-top: 20px;
+          }
+        }
         

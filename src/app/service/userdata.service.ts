@@ -107,9 +107,10 @@ export class UserdataService {
   }
   async privateProjectfindOrCreate(uid: string) :Promise<projectDetails> {
     const project:projectDetails = await this.privateProjectExists(uid);
+    console.log('110 returned', project);
+
     if (project) {
       console.log('110',uid);
-      console.log('returned', project);
       return project;
     } else {
       return undefined;

@@ -179,7 +179,7 @@ export class LoggedinStartComponent implements OnInit {
   firstProject: any;
   profileRef: any;
   userselectedProject;
-  keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
+  keyRef ;
   dialogRef;
   startPageUid: string;
 
@@ -390,28 +390,29 @@ export class LoggedinStartComponent implements OnInit {
     const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
 
       console.log('390',values);
-      this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
-        console.log('391', success);
-        if (success === undefined) {
-          const Newmydialog = values;
-          this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
+      if(values !== undefined){
+        this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
+          console.log('391', success);
+          if (success === undefined) {
+            const Newmydialog = values;
+            this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
 
-
-
-          return (null);
-
-
-        } else {
-          //get data- display/update
-
-          const mydialog = values;
-          this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
-
-          return (null);
-
-
-        }
-      });
+            return (null);
+  
+  
+          } else {
+            //get data- display/update
+  
+            const mydialog = values;
+            this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+  
+            return (null);
+  
+  
+          }
+        });
+      }
+     
 
 
     })).subscribe((mydata: any) => {
@@ -470,32 +471,19 @@ export class AddNewProjectDialog {
       profileName: new FormControl(this.data.NewUid.displayName),
       photoUrl: new FormControl(this.data.NewUid.photoURL),
       projectUid: new FormControl(this.data.NewUid.uid),
-
     });
-
-
   }
-
   save() {
 
     console.log(this.names.value);
-
-
     this.dialogRef.close(this.names.value);
-
-
-
-
-
   }
 
-  closeDialog() {
-  }
-
-  cancel() {
-    this.names = null;
+  onNoClick(): void {
     this.dialogRef.close();
-
+  }
+  cancel() {
+    this.dialogRef.close();
   }
   openLink(event: MouseEvent): void {
     this.dialogRef.close();
@@ -507,7 +495,7 @@ export class AddNewProjectDialog {
   selector: 'bottom-sheet-overview-example-sheet',
   template: `
 
-    <h2 class="py-4">Edit Car</h2>
+    <h2 class="py-4">Edit Profile</h2>
     <form [formGroup]="names">
       <div class="form-group row">
         <label for="brand" class="col-sm-2 col-form-label">profileName</label>
