@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserdataService } from '../service/userdata.service';
+import { MainSectionGroup, UserdataService } from '../service/userdata.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { BehaviorSubject, Subscription } from 'rxjs';
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.component.html',
@@ -8,11 +10,13 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class MainScreenComponent implements OnInit {
 
-  constructor(public developmentservice: UserdataService,private router: Router) { }
+  constructor(public developmentservice: UserdataService,private router: Router,    private db: AngularFirestore,
+    ) { }
 
   ngOnInit(): void {
   }
-  NavigateBack(){
-    this.router.navigate(['/loggedin']);
+  NavigateMain(){
+    this.router.navigate(['/starttest']);
+
   }
 }

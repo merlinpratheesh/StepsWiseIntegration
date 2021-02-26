@@ -194,8 +194,7 @@
                                     <mat-divider></mat-divider>
 
                                     <app-nested-tree class="mattree" fxLayout="column" [Sections]="keyRef"
-                                        [latestProject]="userselectedProject">
-
+                                        [latestProject]="userselectedProject " (click)="profileKeyRef(details)">
                                     </app-nested-tree>
                                    
                                 </mat-expansion-panel>

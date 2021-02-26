@@ -142,7 +142,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   firstProject: any;
   profileRef: any;
   userselectedProject ;
-  keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
+  keyRef ;
   DATA: projectDetails[];
 
 
@@ -241,6 +241,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     console.log('218',this.keyRef);
 
    }
+
 
 
 

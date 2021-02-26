@@ -143,7 +143,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   firstProject: any;
   profileRef: any;
   userselectedProject ;
-  keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
+  keyRef ;
   DATA: projectDetails[];
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
@@ -247,7 +247,16 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     
 
    }
+   NavigateTC(){
+    this.router.navigate(['/main']);
+  }
 
+  mainsubkey(some){
+
+
+    console.log('248',some); 
+
+   }
 
    ngOnInit() {
 
