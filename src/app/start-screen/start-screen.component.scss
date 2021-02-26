@@ -26,6 +26,7 @@
         display: inline-block;
         border: 0 !important;
         outline: 0;
+        margin-top: 15px;
         padding: 10px 20px 12px !important;
         line-height: 1.4;
         color: white !important;
@@ -41,10 +42,11 @@
         
     }
     .scroll-viewport {
-      margin:10px;
+
+      margin:0px;
       top:0px;
-      height:500px;
-      width: 150px;
+      height:525px;
+      width:530px;
     }
 
     .wrapper {
@@ -145,14 +147,7 @@
             background-color: #FF5722;
             transition: background-color 0.5s ease-out;
           }
-          .scroll-viewport {
-            position:relative;
-            margin:10px;
-            top:2px;
-            height:525px;
-            width: 280px;
-          }
-      
+ 
           
   .example-headers-align .mat-expansion-panel-header-title,
   .example-headers-align .mat-expansion-panel-header-description {
@@ -202,12 +197,6 @@
     }
 
 
-    .scroll-viewport {
-      margin:10px;
-      top:0px;
-      height:520px;
-      width: 530px;
-    }
 
     .person {
       position: relative;
@@ -472,12 +461,12 @@
           list-style: none;
           margin: 5px 0px 0px 0px;
           float: left;
-          width: 30.3%;
+          width: 20.3%;
           text-align: center;
         }
         .profile-social-links li a {
           display: inline-block;
-          width: 50px;
+          width: 70px;
           height: 20px;
           padding: 10px;
           position: relative;
@@ -492,7 +481,7 @@
 
         .profile-social-links li a img,
         .profile-social-links li a svg {
-          width: 25px;
+          width: 20px;
         }
         @keyframes materia_portrait {
           0% {
@@ -525,4 +514,12 @@
             margin-top: 20px;
           }
         }
-        
+.search{
+        border: 1px solid grey;
+        border-radius: 5px;
+        height: 40px;
+        width: 85%;
+        padding: 2px 23px 2px 30px;
+        outline: 0;
+        background-color: white;
+}
