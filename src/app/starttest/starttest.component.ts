@@ -1,3 +1,4 @@
+
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -24,16 +25,16 @@ import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
-  selector: 'app-start-screen',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-
-  templateUrl: './start-screen.component.html',
-  styleUrls: ['./start-screen.component.scss']
+  selector: 'app-starttest',
+  templateUrl: './starttest.component.html',
+  styleUrls: ['./starttest.component.scss']
 })
-export class StartScreenComponent implements OnInit {
+export class StarttestComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<projectDetails>;
+
+
 
   myusrinfoDetails: usrinfoDetails = {
     projectName: '',
@@ -145,7 +146,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
   DATA: projectDetails[];
 
-
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
     public fb: FormBuilder,
@@ -155,7 +155,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     private db: AngularFirestore,
     private _bottomSheet: MatBottomSheet,
     private changeDetectorRef: ChangeDetectorRef
-
   ) {
     this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
     this.afAuth.authState.subscribe(myauth => {
@@ -173,8 +172,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       this.changeDetectorRef.detectChanges();
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
-
-      console.log(this.optionsTasksBk[0]);
+      console.log(this.obs);
       this.firstProject={ firstProjectRef: this.optionsTasksBk[0] };
       console.log(this.firstProject);
       if(this.firstProject!=null)
@@ -194,12 +192,16 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       this.optionsTasksNamesBk = this.optionsTasks;
       console.log(this.optionsTasks);
     });
+    console.log(this.optionsTasks);
+
+
     this.filteredTasksOptions = this.emailFormControl.valueChanges.pipe(
       startWith(''),
       map((myvalue: string) => {
         console.log('96', myvalue);
         if (myvalue === '' || myvalue === null) {
-          this.obs = this.obs;
+          this.obs = this.getPublicList(this.db.doc('projectList/publicProject'));
+
           this.optionsTasks = this.optionsTasksNamesBk;
         } else {
           this.obs = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
@@ -212,9 +214,12 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
         }
       );
+
     }})
 
   }
+
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
@@ -239,12 +244,13 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
     console.log('218',this.profileRef);
     console.log('218',this.keyRef);
+    
 
    }
 
 
+   ngOnInit() {
 
-  ngOnInit(): void {
   }
   ngOnDestroy() {
     if (this.dataSource) { 

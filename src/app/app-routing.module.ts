@@ -4,11 +4,14 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { LoggedinStartComponent } from './loggedin-start/loggedin-start.component';
 import { OfflineScreenComponent } from './offline-screen/offline-screen.component';
+import { StarttestComponent } from './starttest/starttest.component';
 const routes: Routes = [
   { path: 'start', component: StartScreenComponent },
   { path: 'main', component: MainScreenComponent },
   { path: 'loggedin', component: LoggedinStartComponent },
   { path: 'offline', component: OfflineScreenComponent },
+  { path: 'starttest', component: StarttestComponent },
+
   { path: '',   redirectTo: '/start', pathMatch: 'full' }
 
 

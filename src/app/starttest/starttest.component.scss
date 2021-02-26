@@ -1,0 +1,526 @@
+
+  .person {
+    transition: all 0.3s linear;
+    border-radius: 0.3rem;
+
+
+  }
+  .person img {
+    border-radius: 50%;
+    border: 0.1rem solid teal;
+    flex: 1 0 50%;
+    width: 88px;
+    height: 88px;
+  }
+  
+  .person h4 {
+    text-transform: capitalize;
+    margin: 0.5rem 0;
+    letter-spacing: 0.15rem;
+    color: teal;
+  }
+
+  .SignInbutton{
+    font-family: inherit;
+    position:relative;
+        display: inline-block;
+        border: 0 !important;
+        outline: 0;
+        margin-top: 15px;
+        padding: 10px 20px 12px !important;
+        line-height: 1.4;
+        color: white !important;
+        border-radius: 4px !important;
+        font-size: 1rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-decoration: none !important;
+        font-weight: normal;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        
+    }
+    .scroll-viewport {
+
+      margin:0px;
+      top:0px;
+      height:1750px;
+      width:700px;
+
+    }
+
+    .wrapper {
+      background-color: rgb(104, 175, 238);
+      min-height: 40%;
+      margin-left: 2px;
+      border-radius: 8px;
+      position: relative;
+      padding: 10px 20px 12px !important;
+  
+  
+    }
+    
+    .head {
+      border-bottom: 2px solid #ee964b;
+      padding: 10px,10px;
+    }
+    
+    h1 {
+      margin: 10px;
+      text-align: center;
+      color: #f4d35e;
+    }
+    
+    .head input {
+      margin: 8px;
+      color: #ee964b;
+      padding: 8px;
+      border-radius: 8px;
+      width: 50%;
+    }
+    
+    .add-task {
+      border-radius: 5px;
+      width: 20%;
+      padding: 8px;
+      color: #0d3b66;
+      background-color: #18e92a;
+    }
+        .loginforadd-task {
+      border-radius: 5px;
+      border: #00020a;
+      text-align: center;
+      background-color: #18e92a;
+    }
+    
+    .person {
+        position: relative;
+        background: #F2F3F5;
+        width: 17rem;
+        margin: 2rem auto;
+        transition: all 0.3s linear;
+        border-radius: 0.3rem;
+        text-align: center;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      
+      }
+      .person img {
+        border-radius: 50%;
+        border: 0.1rem solid teal;
+        flex: 1 0 50%;
+        width: 88px;
+        height: 88px;
+      }
+      
+      .person h4 {
+        text-transform: capitalize;
+        margin: 0.5rem 0;
+        letter-spacing: 0.15rem;
+        color: teal;
+      }
+      .person:hover {
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+      }
+      
+      .SignInbutton{
+        font-family: inherit;
+            display: inline-block;
+            position:relative;
+            border: 0 !important;
+            outline: 0;
+            padding: 10px 20px 12px !important;
+            line-height: 1.4;
+            color: white !important;
+            border-radius: 4px !important;
+            font-size: 1rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-decoration: none !important;
+            font-weight: normal;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .SignInbutton:hover {
+            background-color: #FF5722;
+            transition: background-color 0.5s ease-out;
+          }
+ 
+          
+  .example-headers-align .mat-expansion-panel-header-title,
+  .example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: initial;
+  }
+  
+  .example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+   .SignInbutton{
+    font-family: inherit;
+        display: inline-block;
+        border: 0 !important;
+        outline: 0;
+        padding: 10px 20px 12px !important;
+        line-height: 1.4;
+        color: white !important;
+        border-radius: 4px !important;
+        font-size: 1rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-decoration: none !important;
+        font-weight: normal;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+    .SignInbutton:hover {
+        background-color: #FF5722;
+        transition: background-color 0.5s ease-out;
+      }
+    .mat-form-field {
+      border: #00020a;
+      width:80vh;
+      line-height: 1.4;
+      font-size: 20px;
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      -webkit-border-radius: 4px;
+      border-radius: 4px;
+    }
+
+
+
+    .person {
+      position: relative;
+      background: #F2F3F5;
+      width: 17rem;
+      margin: 2rem auto;
+      transition: all 0.3s linear;
+      border-radius: 0.3rem;
+      text-align: center;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    
+    }
+    .person img {
+      border-radius: 50%;
+      border: 0.1rem solid teal;
+      flex: 1 0 50%;
+      width: 88px;
+      height: 88px;
+    }
+    
+    .person h4 {
+      text-transform: capitalize;
+      margin: 0.5rem 0;
+      letter-spacing: 0.15rem;
+      color: teal;
+    }
+    .person:hover {
+      box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .SignInbutton{
+      font-family: inherit;
+          display: inline-block;
+          position:relative;
+          border: 0 !important;
+          outline: 0;
+          padding: 10px 20px 12px !important;
+          line-height: 1.4;
+          color: white !important;
+          border-radius: 4px !important;
+          font-size: 1rem;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          text-decoration: none !important;
+          font-weight: normal;
+          -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+          cursor: pointer;
+      }
+      .SignInbutton:hover {
+          background-color: #FF5722;
+          transition: background-color 0.5s ease-out;
+        }
+        .scroll-viewportprofile {
+          position:relative;
+          margin:10px;
+          top:2px;
+          height:525px;
+          width: 280px;
+        }
+        .case1 {
+          width: 200px;
+          border: 3px solid rgb(104, 175, 238);
+          border-radius: 10px;
+          padding: 1rem;
+          font-family: Arial;
+          font-size: 1rem;
+          color: #666;
+          background-color:white;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        div#main-card {
+          max-width: 260px;
+        }
+        
+        .cover-photo {
+          background: rgb(104, 175, 238);
+          width: 270px;
+          height: 100px;
+        }
+        .email{
+          font-size: 16px;
+          font-family: Comic Sans MS;
+          padding: 15px 0;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        
+        }
+        
+        .photo {
+          background: #f1f1f1;
+          margin: 5px;
+          width: 88px;
+          height: 88px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+        }
+        img {
+          position: relative;
+          top: -50px;
+          max-width: 100%;
+          max-height: 100%;
+          border-radius: 50%;
+          box-shadow: -1px 1px 11px 6px rgba(189, 172, 172, 0.33);
+        }
+        .content {
+          background: white;
+          width: 280px;
+          height: 100px;
+          position: relative;
+          top: -35px;
+        }
+        
+        .contact {
+          background: white;
+          width: 280px;
+          height: 50px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+        }
+        
+        h2.name,
+        h3,
+        a {
+          margin: 0;
+          text-align: center;
+        }
+        h3.card__text {
+          margin-bottom: 0.3em;
+          font-size: 1.4em;
+          color: #6f6f6f;
+        }
+        
+        a {
+          color: #0ab581;
+          text-decoration: none;
+        }
+        
+        a:hover {
+          color: black;
+        }
+        
+        ul {
+          padding: 0;
+        }
+        
+        .fa {
+          font-size: 22px;
+          padding: 10px;
+          text-decoration: none;
+          color: #0ab581;
+        }
+        
+        .fa:hover {
+          color: #000;
+        }
+        
+        
+        @-webkit-keyframes pulse {
+          0% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+          50% {
+            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+          }
+          100% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+        }
+        @keyframes pulse {
+          0% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+          50% {
+            -webkit-transform: scale3d(1.05, 1.05, 1.05);
+            transform: scale3d(1.05, 1.05, 1.05);
+          }
+          100% {
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+          }
+        }
+        
+        .centered {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: black;
+        }
+        
+        .container {
+          position: relative;
+          text-align: center;
+          color: white;
+        }
+        .card__info {
+          margin: 1em 0;
+          list-style-type: none;
+          padding: 0;
+        }
+        
+        .card__info li {
+          display: inline-block;
+          text-align: center;
+          padding: 0.5em;
+        }
+        
+        .card__info__stats {
+          color: var(--main-accent-color);
+          font-weight: bold;
+          font-size: 1.2em;
+          display: block;
+        }
+        
+        .card__info__stats + span {
+          color: #969798;
+          text-transform: uppercase;
+          font-size: 0.8em;
+          font-weight: bold;
+        }
+
+
+        .profile-social-links {
+          display: inline-block;
+          background: #ffffff;
+          text-align: center;
+          opacity: 0;
+          margin-right: 0px;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-animation: moveIn 1s 3.1s ease forwards;
+          animation: moveIn 1s 2.1s ease forwards;
+        }
+        .profile-social-links li {
+          list-style: none;
+          margin: 5px 0px 0px 0px;
+          float: left;
+          width: 20.3%;
+          text-align: center;
+        }
+        .profile-social-links li a {
+          display: inline-block;
+          width: 70px;
+          height: 20px;
+          padding: 10px;
+          position: relative;
+          overflow: hidden !important;
+          -webkit-border-radius: 50%;
+          border-radius: 50%;
+        }
+        .profile-social-links li a img {
+          position: relative;
+          z-index: 1;
+        }
+
+        .profile-social-links li a img,
+        .profile-social-links li a svg {
+          width: 20px;
+        }
+        @keyframes materia_portrait {
+          0% {
+            background: #e0e0e0;
+          }
+          50% {
+            border-radius: 4px;
+          }
+          100% {
+            height: 40px;
+            border-radius: 4px;
+            background-color: rgb(104, 175, 238);
+            width: 150px;
+            min-height: 40%;
+            margin-left: 2px;
+            margin-top: 50px;
+            border-radius: 8px;
+            position: relative;
+            padding: 20px 20px 12px !important;
+          }
+        }
+        
+        @keyframes moveIn {
+          0% {
+            margin-top: 50px;
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+            margin-top: 20px;
+          }
+        }
+.search{
+        border: 1px solid grey;
+        border-radius: 5px;
+        height: 40px;
+        width: 85%;
+        padding: 2px 23px 2px 30px;
+        outline: 0;
+        background-color: white;
+}
