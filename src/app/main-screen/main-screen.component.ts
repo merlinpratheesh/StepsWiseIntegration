@@ -9,10 +9,31 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
   styleUrls: ['./main-screen.component.scss']
 })
 export class MainScreenComponent implements OnInit {
-  @Input() Sections: Observable<any>;
-
-  constructor(public developmentservice: UserdataService,private router: Router,    private db: AngularFirestore,
-    ) { }
+  mystartdata;
+  subjectstartdata = new BehaviorSubject(undefined);
+  getObservablestartdataSub: Subscription = new Subscription;
+  getObservablestartdata = (localstartdata: AngularFirestoreDocument<any>) => {
+    this.getObservablestartdataSub?.unsubscribe();
+    this.getObservablestartdataSub = localstartdata.valueChanges().subscribe((valOnline: any) => {
+      this.subjectstartdata.next(valOnline);
+    });
+    return this.subjectstartdata;
+  };
+  constructor(public developmentservice: UserdataService,private router: Router,    
+    private db: AngularFirestore,
+    
+    ) {
+      const navigation = this.router.getCurrentNavigation();
+      const state = navigation.extras.state as {
+        testCaseRef: string;
+      };
+      
+        if(state !== undefined){
+          this.mystartdata = this.getObservablestartdata(this.db.doc('projectKey/'+ `${state.testCaseRef}`));
+          console.log(this.mystartdata);
+        }
+    
+     }
 
   ngOnInit(): void {
   }

@@ -263,19 +263,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
    NavigateTC(){
     this.router.navigate(['/main']);
   }
-
-  mainsubkey(some){
-
-      this.router.navigate(['/main']);
-    
-    console.log('264',some); 
-    this.testCaseRef=some;
-    console.log('264',this.testCaseRef); 
-
-
-   }
-   
-
    ngOnInit() {
 
   }

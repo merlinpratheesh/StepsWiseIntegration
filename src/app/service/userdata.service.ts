@@ -10,7 +10,12 @@ import { FormGroup } from '@angular/forms';
 export interface userProfile {
   userAuthenObj: firebase.User
 }
-
+export interface TestcaseInfo{
+  heading: string;//Heading in testcase list
+  subHeading:string;//Sub-Heading in testcase list
+  description: string;//Description in testcase view
+  linktoTest: string;//stackblitzLink in testcase edit/doubleclick
+}
 
 export interface projectDetails {
   projectName: string;//Heading in testcase list

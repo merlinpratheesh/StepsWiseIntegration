@@ -5,12 +5,7 @@
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">
     <mat-card-header style="padding:5px; border:solid; border-color:black; background-color:#F2F3F5;">
       <span style="margin-left:0%;margin-right:5%;"><h2>{{latestProject}}</h2> </span>  
-      <mat-chip style="margin-right:5px; background-color:#18e92a">
-        <button  style="color:primary; text-align: center;margin: 0px;" selected style="
-      margin-top:1% ;cursor: pointer; padding: 5px; ">
-      View Tasks
-      </button>
-    </mat-chip>
+
     </mat-card-header>
     
       <mat-tree
@@ -49,7 +44,13 @@
             ></app-add-node>
             <mat-chip-list style="margin-right:30px;">
 
-              <button color="primary" selected *ngIf="(node.Description === 'Child' && node.Children.length === 0)">View Tasks</button>
+              <mat-chip style="margin-right:5px; background-color:#18e92a">
+                <button selected *ngIf="(node.Description === 'Child' && node.Children.length === 0)"(click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;" selected style="
+              margin-top:1% ;cursor: pointer; padding: 5px; ">
+              View Tasks
+              </button>
+            </mat-chip>
+
 
             </mat-chip-list>
             </div>

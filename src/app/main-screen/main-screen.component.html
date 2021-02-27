@@ -1,14 +1,43 @@
 <mat-grid-list cols="10" rowHeight="10vh">
   <mat-grid-tile colspan="2" rowspan='10' style="  margin-top: 0px; background:#F2F3F5 ">
-{{Sections |async | json}}
+    <div *ngIf="(this.mystartdata  | async) as mySections;">
+      hi
+      {{mySections | json}}
+
+      <div *ngFor="let group of mySections" [label]="group.name" [disabled]="group.disabled">
+       {{[value]}} 
+        <div *ngFor="let subsec of group.section" [value]="{value: subsec.viewvalue, groupValue: group.name}">
+          {{subsec.viewvalue}}
+        </div>
+      </div>
+
+    </div>
+
   </mat-grid-tile>
-
-
-
   <mat-grid-tile colspan="6" rowspan='10' style="background: rgb(104, 175, 238);height: 50vh;">
 
+    <div *ngIf="(this.mystartdata | async) as mySections; else nokeysinSection">
+      Keys:
+      <pre>
+        {{mySections | json}}
+      </pre>
+
+      <mat-form-field appearance="fill">
+        <mat-select>
+          <mat-optgroup *ngFor="let group of mySections" [label]="group.name" [disabled]="group.disabled">
+            <mat-option *ngFor="let subsec of group.section"
+              [value]="{value: subsec.viewvalue, groupValue: group.name}">
+              {{subsec.viewvalue}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
 
+    <ng-template #nokeysinSection>
+      No KEYS found!
+    </ng-template>
   </mat-grid-tile>
   <mat-grid-tile colspan="2" rowspan='10' style="background: #F2F3F5;height: 50vh;">
 

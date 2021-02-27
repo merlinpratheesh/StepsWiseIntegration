@@ -192,8 +192,7 @@
 {{userselectedProject}}
                                 <app-nested-tree class="mattree"
                                     *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
-                                    fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject"
-                                    (click)="mainsubkey(keyRef)">
+                                    fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                 </app-nested-tree>
 
 
