@@ -45,9 +45,8 @@
 
       margin:0px;
       top:0px;
-      height:1750px;
-      width:700px;
-
+      height:525px;
+      width:530px;
     }
 
     .wrapper {
@@ -157,7 +156,7 @@
   
   .example-headers-align .mat-expansion-panel-header-description {
     justify-content: space-between;
-    align-items: initial;
+    align-items: center;
   }
   
   .example-headers-align .mat-form-field + .mat-form-field {

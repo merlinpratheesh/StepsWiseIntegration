@@ -1,5 +1,5 @@
 <mat-grid-list cols="10" rowHeight="10vh">
-    <mat-grid-tile colspan="2" rowspan='18' style="  margin-top: -270px; background:#F2F3F5 ">
+    <mat-grid-tile colspan="2" rowspan='10' style="  margin-top: 0px; background:#F2F3F5; position: fixed; ">
         <div *ngIf="profileRef | async as profiledetails ; else noprofile" fxLayout="column"
             fxLayoutAlign="space-between center">
 
@@ -127,15 +127,14 @@
 
 
 
-    <mat-grid-tile colspan="8" rowspan='17' style="background: rgb(104, 175, 238);height: 50vh;">
+    <mat-grid-tile colspan="8" rowspan='18' style="background: rgb(104, 175, 238) ; position: relative; ">
 
-        <mat-tab-group style="background: rgb(104, 175, 238);margin-top: 90vh;">
-            <mat-tab class="header" style="color:#216fdb;margin-top: 100vh;">
+        <mat-tab-group  fxLayout="column"  style="background: rgb(104, 175, 238); width:70%">
+            <mat-tab style="color:#216fdb; margin-top: 0px;">
                 <ng-template mat-tab-label>Public</ng-template>
                 <ng-template matTabContent>
 
                     <div fxLayout="column" *ngIf="(obs| async) as projectDetails; else waitingload ">
-                        <cdk-virtual-scroll-viewport itemSize="5" class="scroll-viewport">
                             <mat-accordion style="position:relative;">
                                 <div style="margin-bottom: 3%">
                                     <form>
@@ -165,13 +164,14 @@
                                         </mat-form-field>
                                     </form>
                                 </div>
+                                <mat-paginator  [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                                 <mat-expansion-panel fxLayout="column wrap" fxLayoutGap="30px"
                                     style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
                                     *ngFor="let details of projectDetails">
                                     <mat-expansion-panel-header
                                         style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; ">
                                         <mat-panel-title fxLayoutGap="30px" fxFlex="grow"
-                                            (click)="profileKeyRef(details)">
+                                            >
 
                                             {{details.projectName}}
                                             {{details.description}}
@@ -181,42 +181,45 @@
                                         </mat-panel-title>
                                         <mat-panel-description>
                                             <div fxFlexAlign="center" fxLayout="center center">
-                                                <div fxLayout="column" style=" border-style:unset !important;">
+                                                <div fxLayout="column" style=" border-style:unset !important;" >
                                                     <span mat-card-avatar
                                                         [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
-                                                </div>
+                                        <button  (click)="profileKeyRef(details)">Open</button>
+                                                    </div>
                                             </div>
 
                                         </mat-panel-description>
                                     </mat-expansion-panel-header>
                                   
 
-                                    <app-nested-tree class="mattree" fxLayout="column" [Sections]="keyRef"
-                                        [latestProject]="userselectedProject"  (click)="mainsubkey(keyRef)">
+                                    <app-nested-tree class="mattree" *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject " fxLayout="column" [Sections]="keyRef"
+                                        [latestProject]="userselectedProject" >
+
                                     </app-nested-tree>
+                                   
                                 </mat-expansion-panel>
                             </mat-accordion>
-                        </cdk-virtual-scroll-viewport>
 
                     </div>
+
                     <ng-template #waitingload>
                         <mat-spinner>
 
                         </mat-spinner>
                     </ng-template>
+                    
                 </ng-template>
+               
             </mat-tab>
-            <mat-tab class="header" style="color:#216fdb" *ngIf="this.authDetails!==null">
+            <mat-tab class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
                 <ng-template mat-tab-label>Private</ng-template>
                 <ng-template matTabContent>
-                    <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
                         Please Login For Add Private Projects
-                    </cdk-virtual-scroll-viewport>
                 </ng-template>
             </mat-tab>
 
         </mat-tab-group>
- <mat-paginator style="margin-top: 100px;" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
 
 
     </mat-grid-tile>

@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService } from 'firebaseui-angular';
@@ -19,8 +19,6 @@ import { withLatestFrom } from 'rxjs/operators';
 import { NgAnalyzedFile } from '@angular/compiler';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -31,9 +29,6 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./start-screen.component.scss']
 })
 export class StartScreenComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  obs: Observable<any>;
-  dataSource: MatTableDataSource<projectDetails>;
 
   myusrinfoDetails: usrinfoDetails = {
     projectName: '',
@@ -142,8 +137,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   firstProject: any;
   profileRef: any;
   userselectedProject ;
-  keyRef ;
-  DATA: projectDetails[];
+  keyRef = this.getSections((this.db.doc('projectKey/' + 'DefaultProject')));
 
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
@@ -154,8 +148,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     public developmentservice: UserdataService,
     private db: AngularFirestore,
     private _bottomSheet: MatBottomSheet,
-    private changeDetectorRef: ChangeDetectorRef
-
   ) {
     this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
     this.afAuth.authState.subscribe(myauth => {
@@ -168,12 +160,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
       this.optionsTasks = [];
       this.optionsTasksBk = readrec.public;
-      this.DATA=readrec.public;
-      this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
-      this.changeDetectorRef.detectChanges();
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-
+      console.log(this.optionsTasksBk);
       console.log(this.optionsTasksBk[0]);
       this.firstProject={ firstProjectRef: this.optionsTasksBk[0] };
       console.log(this.firstProject);
@@ -199,10 +186,10 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       map((myvalue: string) => {
         console.log('96', myvalue);
         if (myvalue === '' || myvalue === null) {
-          this.obs = this.obs;
+          this.publicList = this.getPublicList(this.db.doc('projectList/publicProject'));
           this.optionsTasks = this.optionsTasksNamesBk;
         } else {
-          this.obs = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+          this.publicList = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
           this.optionsTasks = this._filter(myvalue);
           //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
         }
@@ -244,13 +231,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
 
 
-
   ngOnInit(): void {
-  }
-  ngOnDestroy() {
-    if (this.dataSource) { 
-      this.dataSource.disconnect(); 
-    }
   }
   logout() {
     this.afAuth.signOut();

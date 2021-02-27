@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'offline', component: OfflineScreenComponent },
   { path: 'starttest', component: StarttestComponent },
 
-  { path: '',   redirectTo: '/starttest', pathMatch: 'full' }
+  { path: '',   redirectTo: '/start', pathMatch: 'full' }
 
 
 ];

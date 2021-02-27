@@ -1,6 +1,6 @@
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService } from 'firebaseui-angular';
@@ -26,6 +26,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-starttest',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './starttest.component.html',
   styleUrls: ['./starttest.component.scss']
 })
@@ -167,17 +168,13 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
       this.optionsTasks = [];
       this.optionsTasksBk = readrec.public;
-      this.DATA=readrec.public;
-      this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
-      this.changeDetectorRef.detectChanges();
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
+
       console.log(this.obs);
       this.firstProject={ firstProjectRef: this.optionsTasksBk[0] };
       console.log(this.firstProject);
       if(this.firstProject!=null)
       {
-        this.userselectedProject=this.firstProject.firstProjectRef.projectName;
+        //this.userselectedProject=this.firstProject.firstProjectRef.projectName;
         this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
         console.log(this.profileRef);
 
@@ -185,7 +182,11 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
         console.log(this.keyRef);
 
       }
-
+      this.DATA=readrec.public;
+      this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
+      this.dataSource.paginator = this.paginator;
+      this.obs = this.dataSource.connect();
+      this.changeDetectorRef.detectChanges();
       readrec.public.forEach(element => {
         this.optionsTasks.push(element.projectName);
       });
@@ -199,14 +200,19 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       startWith(''),
       map((myvalue: string) => {
         console.log('96', myvalue);
+        this.userselectedProject= undefined;
         if (myvalue === '' || myvalue === null) {
-          this.obs = this.getPublicList(this.db.doc('projectList/publicProject'));
-
           this.optionsTasks = this.optionsTasksNamesBk;
-        } else {
+          this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
+          this.dataSource.paginator = this.paginator;
+          this.obs = this.dataSource.connect();
+          this.changeDetectorRef.detectChanges();
+        } else {    
+          //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
           this.obs = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
           this.optionsTasks = this._filter(myvalue);
           //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
+          this.changeDetectorRef.detectChanges();
         }
       }
       )).subscribe(
@@ -218,8 +224,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     }})
 
   }
-
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
