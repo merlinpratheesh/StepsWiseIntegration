@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Inject, Input, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subscription, Observable, of } from 'rxjs';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
@@ -7,7 +7,7 @@ import { map, filter } from 'rxjs/operators';
 import { UserdataService, MainSectionGroup } from '../service/userdata.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
-
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import { Injectable} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
@@ -59,7 +59,7 @@ export interface DialogData {
   templateUrl: './nested-tree.component.html',
   styleUrls: ['./nested-tree.component.scss']
 })
-export class NestedTreeComponent implements OnInit, AfterViewInit {
+export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   @Input() Sections: Observable<any>;
   @Input() latestProject: string;
   nestedTreeControl: NestedTreeControl<TreeData>;
@@ -74,7 +74,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   _dataChange = new BehaviorSubject<TreeData[]>([]);
   private _getChildren = (node: TreeData) => observableOf(node.Children);
   hasNestedChild = (_: number, nodeData: TreeData) => nodeData.Children.length > 0;
-
+  sectionsub: Subscription;
   constructor(private _bottomSheet: MatBottomSheet,
     public developmentservice: UserdataService) {
     this.nestedTreeControl = new NestedTreeControl<TreeData>(this._getChildren);
@@ -184,7 +184,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     }
   }
   initialize() {
-    this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
+    this.sectionsub =this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
       console.log(data);
       this.nestedDataSource.data=        [{
         Id: 1,
@@ -265,6 +265,9 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   openBottomSheet(){
     //console.log(this.AlltheKeys);
     this._bottomSheet.open(BottomSheetChangeOrder, {data: {mydata: this.AlltheKeys , projectname: this.latestProject}});
+  }
+  ngOnDestroy() {
+    this.sectionsub.unsubscribe();
   }
 }
 @Component({
@@ -602,5 +605,7 @@ export class BottomSheetChangeOrder implements AfterViewInit {
         this.treeControl.expand(node);
       });
   }
+  
+
 
 }

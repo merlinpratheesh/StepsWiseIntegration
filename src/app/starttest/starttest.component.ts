@@ -30,7 +30,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './starttest.component.html',
   styleUrls: ['./starttest.component.scss']
 })
-export class StarttestComponent implements OnInit {
+export class StarttestComponent implements OnInit,OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<projectDetails>;
@@ -143,6 +143,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   optionsTasksSub: Subscription;
   firstProject: any;
   profileRef: any;
+  testCaseRef:any;
   userselectedProject ;
   keyRef ;
   DATA: projectDetails[];
@@ -165,7 +166,9 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       }
       else{
 
-    this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
+    this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).pipe(first(), map((someval:any)=>{
+      return someval;
+    })).subscribe((readrec: any) => {
       this.optionsTasks = [];
       this.optionsTasksBk = readrec.public;
 
@@ -175,6 +178,8 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       if(this.firstProject!=null)
       {
         //this.userselectedProject=this.firstProject.firstProjectRef.projectName;
+
+        console.log(this.userselectedProject);
         this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
         console.log(this.profileRef);
 
@@ -238,7 +243,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
     this.userselectedProject=some.projectName;
 
-    console.log('216',some); 
+    console.log('242',this.userselectedProject); 
     this.getProfilesSubscription.unsubscribe();
 
     this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
@@ -251,21 +256,34 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     
 
    }
+   Expansionclose(){
+    this.getSectionsSubscription?.unsubscribe();
+   }
+
    NavigateTC(){
     this.router.navigate(['/main']);
   }
 
   mainsubkey(some){
 
+      this.router.navigate(['/main']);
+    
+    console.log('264',some); 
+    this.testCaseRef=some;
+    console.log('264',this.testCaseRef); 
 
-    console.log('248',some); 
 
    }
+   
 
    ngOnInit() {
 
   }
   ngOnDestroy() {
+    this.getSectionsSubscription.unsubscribe();
+    this.getProfilesSubscription.unsubscribe();
+
+
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
     }
