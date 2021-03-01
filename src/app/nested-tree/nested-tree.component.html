@@ -4,7 +4,7 @@
   <div fxLayout="column" fxLayoutGap="5%"  style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;" >
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">
     <mat-card-header style="padding:5px; border:solid; border-color:black; background-color:#F2F3F5;">
-      <span style="margin-left:0%;margin-right:5%;"><h2>{{latestProject}}</h2> </span>  
+      <span style="margin-left:0%;margin-right:5%;"><h2>{{latestProject}}</h2> </span>  <mat-chip color="primary" (click)="NavigateTestcase()"  selected style=" cursor: pointer;margin-left:5%;">View Tasks</mat-chip>
 
     </mat-card-header>
     
@@ -50,8 +50,6 @@
               View Tasks
               </button>
             </mat-chip>
-
-
             </mat-chip-list>
             </div>
           </li>

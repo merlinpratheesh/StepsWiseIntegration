@@ -63,6 +63,13 @@ export class LoggedinStartComponent implements OnInit {
   }
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
+    myusrinfoFromDb: null,
+    keysReadFromDb: undefined,
+    mainsubsectionKeys: undefined,
+    subSectionKeys: undefined,
+    savedMainSectionKey: undefined,
+    savesubSectionKeys: undefined,
+    savedisabledval: undefined
   };
   emailFormControl = new FormControl('', [
     Validators.required,

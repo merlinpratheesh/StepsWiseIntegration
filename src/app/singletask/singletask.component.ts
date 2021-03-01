@@ -1,5 +1,7 @@
-import { Component,ChangeDetectionStrategy,OnInit, Input, Output, EventEmitter, ElementRef, Renderer2, AfterViewChecked } from '@angular/core';
+
+import { Component,ChangeDetectionStrategy,Input, Output, EventEmitter, ElementRef, Renderer2 } from '@angular/core';
 import { TestcaseInfo } from '../service/userdata.service';
+
 
 @Component({
   selector: 'app-singletask',
@@ -7,22 +9,14 @@ import { TestcaseInfo } from '../service/userdata.service';
   templateUrl: './singletask.component.html',
   styleUrls: ['./singletask.component.scss']
 })
-export class SingletaskComponent implements OnInit, AfterViewChecked {
+export class SingletaskComponent  {
   @Input() task: TestcaseInfo;
- //@Input() lasteditedHeading: string;
-//@Input() lasteditedSubHeading: string;
   @Output() toshow = new EventEmitter<TestcaseInfo>();
   constructor(
     private el: ElementRef,
     private renderer: Renderer2) {
     }
-ngAfterViewChecked(): void{
-/*if( this.lasteditedHeading !== undefined && this.lasteditedHeading === this.task.heading && this.lasteditedSubHeading === this.task.subHeading ){
-    this.changeselected(this.task);
- }*/
-}
-  ngOnInit(): void {
-  }
+
   public open(): void {
     const url = `${this.task.linktoTest}`;
     const w = screen.width * 0.9;

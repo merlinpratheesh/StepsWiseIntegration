@@ -62,6 +62,13 @@ export class StarttestComponent implements OnInit,OnDestroy {
   }
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
+    myusrinfoFromDb: null,
+    keysReadFromDb: undefined,
+    mainsubsectionKeys: undefined,
+    subSectionKeys: undefined,
+    savedMainSectionKey: undefined,
+    savesubSectionKeys: undefined,
+    savedisabledval: undefined
   };
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -144,6 +151,8 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   firstProject: any;
   profileRef: any;
   testCaseRef:any;
+  sectionRef: string[] = [];
+
   userselectedProject ;
   keyRef ;
   DATA: projectDetails[];
