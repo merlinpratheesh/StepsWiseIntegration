@@ -154,6 +154,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       if (myauth !== null && myauth !== undefined) {
         this.authDetails = myauth;
 
+
       }
       else{
 

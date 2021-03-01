@@ -1,47 +1,51 @@
 <mat-grid-list cols="10" rowHeight="10vh">
   <mat-grid-tile colspan="2" rowspan='10' style="  margin-top: 0px; background:#F2F3F5 ">
-    <div *ngIf="(this.mystartdata  | async) as mySections;">
-      hi
-      {{mySections | json}}
+    <div *ngIf="(mystartdata  | async) as mySections;">
+      <div *ngFor="let group of mySections.MainSection ">
+        <h1>{{group.name}}</h1>
 
-      <div *ngFor="let group of mySections" [label]="group.name" [disabled]="group.disabled">
-       {{[value]}} 
-        <div *ngFor="let subsec of group.section" [value]="{value: subsec.viewvalue, groupValue: group.name}">
-          {{subsec.viewvalue}}
-        </div>
+        <mat-selection-list #shoes [multiple]="false">
+          <mat-list-option *ngFor="let view of group.section" [value]="view">
+            {{view.viewvalue}}
+          </mat-list-option>
+        </mat-selection-list>
       </div>
-
     </div>
+
+
 
   </mat-grid-tile>
   <mat-grid-tile colspan="6" rowspan='10' style="background: rgb(104, 175, 238);height: 50vh;">
-
-    <div *ngIf="(this.mystartdata | async) as mySections; else nokeysinSection">
-      Keys:
-      <pre>
-        {{mySections | json}}
-      </pre>
-
-      <mat-form-field appearance="fill">
-        <mat-select>
-          <mat-optgroup *ngFor="let group of mySections" [label]="group.name" [disabled]="group.disabled">
-            <mat-option *ngFor="let subsec of group.section"
-              [value]="{value: subsec.viewvalue, groupValue: group.name}">
-              {{subsec.viewvalue}}
-            </mat-option>
-          </mat-optgroup>
-        </mat-select>
-      </mat-form-field>
+    <div fxLayout="row" *ngIf="(this.allTestCase) as AllTcs ; else noTcs">
+      <h2>Services and Directives</h2>
+      <mat-card class="list" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+        <app-singletask ngStyle.lt-sm="width:60vw;" fxLayoutAlign.lt-sm="space-between center"
+          fxLayoutAlign="space-between center" fxLayoutGap="10px" *ngFor="let task of AllTcs" [task]="task"
+          (toshow)="refreshList($event)"></app-singletask>
+        <!--[lasteditedHeading]="lasteditedHeading" [lasteditedSubHeading]="lasteditedSubHeading"-->
+      </mat-card>
     </div>
 
-
-    <ng-template #nokeysinSection>
-      No KEYS found!
+    <ng-template #noTcs>
+      <h2>Services and Directives</h2>
+      <mat-card class="list" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+        <p class="empty-label">
+          Empty list</p>
+      </mat-card>
     </ng-template>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="2" rowspan='10' style="background: #F2F3F5;height: 50vh;">
 
+  </mat-grid-tile>
+  <mat-grid-tile fxLayout="row" colspan="2" rowspan='10' style="background: #F2F3F5;height: 100vh;">
     <button mat-raised-button color="warn" (click)="NavigateMain()"> Main</button>
+
+
+    <ng-template #notestcase>
+      <mat-spinner>
+
+      </mat-spinner>
+    </ng-template>
+
+
 
   </mat-grid-tile>
 

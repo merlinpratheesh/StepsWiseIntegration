@@ -38,6 +38,8 @@ ngAfterViewChecked(): void{
     const part = this.el.nativeElement.querySelector('.item');
     this.renderer.setStyle(part, 'background-color', 'lightblue');
     this.toshow.emit(mytask);
+    console.log(mytask);
+    console.log(part);
   }
 
 }

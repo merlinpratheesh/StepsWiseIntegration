@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, merge, Observable, of } from 'rxjs';
+import { fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { collectionData, doc } from 'rxfire/firestore';
 import { first, map } from 'rxjs/operators';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export interface userProfile {
   userAuthenObj: firebase.User
@@ -16,7 +16,52 @@ export interface TestcaseInfo{
   description: string;//Description in testcase view
   linktoTest: string;//stackblitzLink in testcase edit/doubleclick
 }
+export interface userProfile { 
+  userAuthenObj: firebase.User,//Receive User obj after login success
 
+ }
+ export interface TestcaseInfo{
+  heading: string;//Heading in testcase list
+  subHeading:string;//Sub-Heading in testcase list
+  description: string;//Description in testcase view
+  linktoTest: string;//stackblitzLink in testcase edit/doubleclick
+}
+export interface projectSub{
+  NewTaskControlSub:Subscription;
+  ownPublicprojectControlSub:Subscription;
+  editMainsectionGroupSub:Subscription;
+  editSubsectionGroupSub:Subscription;
+  loadFirstPageTcSub:Subscription;
+  loadfirstPageKeysSub:Subscription;
+  openeditSub:Subscription;
+  visibilityMainsectionGroupSub:Subscription;
+}
+export interface projectControls{
+  subsectionkeysControl: FormControl;//1-Keys come from db and user sub-sec selection will load a doc from demo or public proj
+  testcaseInfoControl: FormControl; //Displays the selected Testcase details
+  createTestcaseControl: FormControl;//User enters a test case name
+  publicprojectControl: FormControl;//1-User selects a public project    
+  ownPublicprojectControl: FormControl;//1-User selects own public project
+  firstMainSecControl: FormControl
+  editMainsectionGroup: FormGroup;// user selects a Main section key
+  visibilityMainsectionGroup:FormGroup,
+  editSubsectionGroup: FormGroup;  // user selects a Sub section key
+
+}
+export interface projectVariables
+{
+    initialMainSection?:string;
+    testcaseslength?:number;
+    publicProjectHint?:string;
+    publicProjectHome:Observable<string[]>;
+    privateTaskMainEdit:Observable<string[]>;
+    privateTaskSubEdit:Observable<string[]>;
+    viewSelectedTestcase?:TestcaseInfo;
+    testcaseInfodata?: Observable<TestcaseInfo[]>;
+    modifiedKeysDb?:TestcaseInfo[];
+    editProjectkeysSaved:MainSectionGroup[];
+    lastSavedVisibility:boolean;
+}
 export interface projectDetails {
   projectName: string;//Heading in testcase list
   description: string;//Sub-Heading in testcase list
