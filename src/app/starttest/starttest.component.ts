@@ -189,10 +189,10 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
         //this.userselectedProject=this.firstProject.firstProjectRef.projectName;
 
         console.log(this.userselectedProject);
-        this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
+        //this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
         console.log(this.profileRef);
 
-        this.keyRef = this.getSections((this.db.doc('projectKey/' + this.firstProject.firstProjectRef.projectName)));
+       // this.keyRef = this.getSections((this.db.doc('projectKey/' + this.firstProject.firstProjectRef.projectName)));
         console.log(this.keyRef);
 
       }
@@ -253,7 +253,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     this.userselectedProject=some.projectName;
 
     console.log('242',this.userselectedProject); 
-    this.getProfilesSubscription.unsubscribe();
 
     this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
     this.getSectionsSubscription?.unsubscribe();

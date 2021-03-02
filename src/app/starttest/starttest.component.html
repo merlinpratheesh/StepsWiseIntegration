@@ -44,13 +44,13 @@
             <button mat-raised-button color="primary" (click)="openBottomSheet()"
                 [disabled]="authDetails?.uid === null">Edit</button>
             <br>
-            <mat-card style="  background: #F2F3F5;">
+            <mat-card style=" margin-top: 0px; background: #F2F3F5; border: black;">
                 <mat-card-header>
                     <mat-card-title>StepsWise</mat-card-title>
                     <mat-card-subtitle> Start Tasking
                         <pre class="case1 " appShowmore>
-                            Instructions:Demo User can Create Projects for One Month free. 
-                        </pre>
+                        Instructions:Demo User can Create Projects for One Month free. 
+                    </pre>
                     </mat-card-subtitle>
                 </mat-card-header>
 
@@ -60,68 +60,111 @@
                     </h2>
                 </mat-card-content>
             </mat-card>
+
         </div>
         <ng-template #noprofile>
-            <mat-spinner>
+            <div fxLayout="column">
+                <div class="card">
+                    <div class="img-div"
+                        style="background-image: url(https://images3.alphacoders.com/113/1131150.png);">
+                    </div>
 
-            </mat-spinner>
+                    <div class="content-div">
+                        <div class="title-div">
+                            <h2 class="title">STEPS WISE</h2>
+                        </div>
+                        <div class="desc-div">
+                            <p class="desc-text">
+                                Taskwise helps you create, manage and share tasks and deliverables with your co-workers
+                                and employees, keeping your business focused on what matters most.
+                            </p>
+                        </div>
+                        <div class="watch-more-div">
+                            <button class="watch-more">Task now</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="imageHeader">
+                    <img
+                        src="https://st4.depositphotos.com/13324256/22740/i/600/depositphotos_227404530-stock-photo-cropped-view-woman-writing-word.jpg">StepsWise
+                </div>
+
+                <div class="case1 " appShowmore>
+                        Click Tasks for see More
+                </div>
+
+            </div>
+
         </ng-template>
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan='1' [style.background]="'rgb(104, 175, 238'">
-        <div fxLayout fxLayoutGap="150px">
-            <div class="SignInbutton" fxFlexAlign="center">
-                <h2>StepsWise</h2>
-            </div>
 
 
-            <span>
-                <ul class="profile-social-links">
 
-                    <li>
-                        <a href="www.google.com/">
-                            <svg viewBox="0 0 24 24">
-                                <path fill="#000000"
-                                    d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z" />
-                            </svg>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="https://www.facebook.com/v1ctory">
-                            <svg viewBox="0 0 24 24">
-                                <path fill="#3b5998"
-                                    d="M17,2V2H17V6H15C14.31,6 14,6.81 14,7.5V10H14L17,10V14H14V22H10V14H7V10H10V6A4,4 0 0,1 14,2H17Z" />
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://themeforest.net/user/Victory-Design">
-                            <svg viewBox="0 0 24 24">
-                                <path fill="#82B541"
-                                    d="M18.258,3.266c-0.693,0.405-1.46,0.698-2.277,0.857c-0.653-0.686-1.586-1.115-2.618-1.115c-1.98,0-3.586,1.581-3.586,3.53c0,0.276,0.031,0.545,0.092,0.805C6.888,7.195,4.245,5.79,2.476,3.654C2.167,4.176,1.99,4.781,1.99,5.429c0,1.224,0.633,2.305,1.596,2.938C2.999,8.349,2.445,8.19,1.961,7.925C1.96,7.94,1.96,7.954,1.96,7.97c0,1.71,1.237,3.138,2.877,3.462c-0.301,0.08-0.617,0.123-0.945,0.123c-0.23,0-0.456-0.021-0.674-0.062c0.456,1.402,1.781,2.422,3.35,2.451c-1.228,0.947-2.773,1.512-4.454,1.512c-0.291,0-0.575-0.016-0.855-0.049c1.588,1,3.473,1.586,5.498,1.586c6.598,0,10.205-5.379,10.205-10.045c0-0.153-0.003-0.305-0.01-0.456c0.7-0.499,1.308-1.12,1.789-1.827c-0.644,0.28-1.334,0.469-2.06,0.555C17.422,4.782,17.99,4.091,18.258,3.266" />
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://themeforest.net/user/Victory-Design">
-                            <fa-icon (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-in-alt']">
-                            </fa-icon>
-                        </a>
-                    </li>
-
-                </ul>
-
-
-            </span>
-
-            <div fxFlexAlign="center">
-
-                <firebase-ui>
-                    fxLayout="column" (signInSuccessWithAuthResult)="successCallback($event)"
-                    (signInFailure)="errorCallback($event)" (uiShown)="uiShownCallback()"></firebase-ui>
-            </div>
+        <div class="header">
+            <img src="https://freeiconshop.com/wp-content/uploads/edd/task-done-flat.png">StepsWise
         </div>
 
+
+        <h1> StepsWise</h1>
+
+
+        <span fxFlexAlign="center">
+            <ul class="profile-social-links" >
+
+                <li>
+                    <a  #tooltip="matTooltip" matTooltip="Create New Task"
+                    >
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.facebook.com/v1ctory"#tooltip="matTooltip" matTooltip="Share to a friend">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><circle cx="12" cy="10" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="http://gmail.com" #tooltip="matTooltip" matTooltip="Mail us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                </li>
+               
+
+              
+               
+
+
+            </ul>
+
+
+        </span>
+
+        <div style="width:400px;" fxFlexAlign="center">
+
+            <firebase-ui>
+                fxLayout="column" (signInSuccessWithAuthResult)="successCallback($event)"
+                (signInFailure)="errorCallback($event)" (uiShown)="uiShownCallback()"></firebase-ui>
+        </div>
 
     </mat-grid-tile>
 
@@ -129,7 +172,7 @@
 
     <mat-grid-tile colspan="8" rowspan='18' style="background: rgb(104, 175, 238) ; position: relative; ">
 
-        <mat-tab-group fxLayout="column" style="background: rgb(104, 175, 238); margin-top: -350px; width:70%">
+        <mat-tab-group fxLayout="column" style="background: rgb(104, 175, 238); width:75%; height:100%;">
             <mat-tab style="color:#216fdb; margin-top: 0px;">
                 <ng-template mat-tab-label>Public</ng-template>
                 <ng-template matTabContent>
@@ -170,7 +213,7 @@
                                 *ngFor="let details of projectDetails" (closed)="Expansionclose()">
                                 <mat-expansion-panel-header
                                     style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; ">
-                                    <mat-panel-title fxLayoutGap="30px" fxFlex="grow" (click)="profileKeyRef(details)" >
+                                    <mat-panel-title fxLayoutGap="30px" fxFlex="grow" (click)="profileKeyRef(details)">
 
                                         {{details.projectName}}
                                         {{details.description}}
@@ -189,7 +232,7 @@
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
 
-{{userselectedProject}}
+                                {{userselectedProject}}
                                 <app-nested-tree class="mattree"
                                     *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
                                     fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">

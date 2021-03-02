@@ -262,6 +262,7 @@
         }
         .case1 {
           width: 200px;
+          margin-left: 50px;
           border: 3px solid rgb(104, 175, 238);
           border-radius: 10px;
           padding: 1rem;
@@ -315,8 +316,7 @@
           top: -50px;
           max-width: 100%;
           max-height: 100%;
-          border-radius: 50%;
-          box-shadow: -1px 1px 11px 6px rgba(189, 172, 172, 0.33);
+ 
         }
         .content {
           background: white;
@@ -449,10 +449,9 @@
 
         .profile-social-links {
           display: inline-block;
-          background: #ffffff;
-          text-align: center;
+          background: rgb(104, 175, 238); 
           opacity: 0;
-          margin-right: 0px;
+          margin-left: 30px;
           -webkit-box-sizing: border-box;
           box-sizing: border-box;
           -webkit-animation: moveIn 1s 3.1s ease forwards;
@@ -460,16 +459,20 @@
         }
         .profile-social-links li {
           list-style: none;
-          margin: 5px 0px 0px 0px;
+          margin-left: 20px;
+
           float: left;
-          width: 20.3%;
+          width: 10.3%;
           text-align: center;
         }
         .profile-social-links li a {
           display: inline-block;
-          width: 70px;
+          width: 40px;
           height: 20px;
-          padding: 10px;
+          padding: 40px;
+          text-align: center;
+
+          margin-right: 0px;
           position: relative;
           overflow: hidden !important;
           -webkit-border-radius: 50%;
@@ -482,7 +485,7 @@
 
         .profile-social-links li a img,
         .profile-social-links li a svg {
-          width: 20px;
+          width: 30px;
         }
         @keyframes materia_portrait {
           0% {
@@ -492,35 +495,146 @@
             border-radius: 4px;
           }
           100% {
-            height: 40px;
-            border-radius: 4px;
+            height: 10px;
             background-color: rgb(104, 175, 238);
-            width: 150px;
+            width: 200px;
             min-height: 40%;
-            margin-left: 2px;
-            margin-top: 50px;
-            border-radius: 8px;
+            margin-top: 20px;
+         
+
             position: relative;
-            padding: 20px 20px 12px !important;
           }
         }
         
         @keyframes moveIn {
           0% {
-            margin-top: 50px;
+            margin-top: 20px;
             opacity: 0;
           }
           100% {
             opacity: 1;
             margin-top: 20px;
+            margin-left: 200px;
+
           }
         }
 .search{
         border: 1px solid grey;
         border-radius: 5px;
         height: 40px;
-        width: 100%;
-        padding: 2px 2px 2px 3px;
+        width: 99%;
+        padding: 2px 2px 2px 2px;
         outline: 0;
         background-color: white;
 }
+
+
+.header {
+  font-size: 20px;
+  height: 50px;
+  width: 50px;
+  color: rgba(0,0,0,.65);
+  font-weight: lighter;
+  padding-top: 100px;
+  margin-left: 10px;
+}
+
+
+
+
+.imageHeader{
+  margin-left: 50px;
+  margin-top: 50px;
+
+  font-size: 20px;
+  height: 150px;
+  width: 295px;
+  color: rgba(0,0,0,0);
+  font-weight: lighter;
+}
+
+/*
+font-family: 'IBM Plex Sans', sans-serif;
+font-family: 'IBM Plex Sans Condensed', sans-serif;
+*/
+
+.card{
+  height: 260px;
+  width: 290px;
+  display: grid;
+  margin-top:0px;
+  margin-left: 35PX;
+  grid-template-columns: .2fr 1fr;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  overflow: hidden;
+}
+
+.img-div{
+  background-size: cover;
+  background-position: center;
+}
+
+.content-div{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  background-color: whitesmoke;
+  border-bottom: 2px solid gold;
+  padding-left: 10px;
+}
+.title{
+  font-family: 'Poppins', sans-serif;
+}
+
+.desc-div{
+  width: 90%;
+}
+.desc-text{
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-weight: bold;
+  font-size: .9rem;
+  color: #494949;
+}
+
+.watch-more{
+  position: relative;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid black;
+  cursor: pointer;
+  overflow: hidden;
+  transition: .4s;
+  z-index: 2;
+}
+.watch-more:hover{
+  transition: .1s;
+  border-bottom: 2px solid gold;
+}
+.watch-more:focus{
+  border-bottom: 2px solid gold;
+}
+
+.watch-more::before{
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: gold;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translatex(-100px);
+  transition: .4s;
+  z-index: -1;
+}
+.watch-more:hover::before{
+  transform: translatex(-60px);
+}
+.watch-more:focus::before{
+  transform: translatex(0px);
+  outline: none;
+}
+
+
