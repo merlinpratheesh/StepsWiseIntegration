@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -23,6 +23,8 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-shee
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -38,6 +40,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./loggedin-start.component.scss']
 })
 export class LoggedinStartComponent implements OnInit {
+  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  obs: Observable<any>;
+  dataSource: MatTableDataSource<projectDetails>;
 
   myProjectDetails: projectDetails = {
     projectName: '',//Heading in testcase list
@@ -58,7 +64,7 @@ export class LoggedinStartComponent implements OnInit {
     membershipType: '',
     projectLocation: '',
     photoUrl: '',
-    numberOfProjects:0,
+    numberOfProjects: 0,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
   }
   myuserProfile: userProfile = {
@@ -186,7 +192,8 @@ export class LoggedinStartComponent implements OnInit {
   firstProject: any;
   profileRef: any;
   userselectedProject;
-  keyRef ;
+  keyRef;
+  DATA: projectDetails[];
   dialogRef;
   startPageUid: string;
 
@@ -198,11 +205,14 @@ export class LoggedinStartComponent implements OnInit {
     public developmentservice: UserdataService,
     private db: AngularFirestore,
 
+    private changeDetectorRef: ChangeDetectorRef,
     private _bottomSheet: MatBottomSheet,) {
     this.afAuth.authState.subscribe(myauth => {
       if (myauth !== null && myauth !== undefined) {
 
         this.authDetails = myauth;
+        console.log('', this.authDetails.uid);
+
         this.developmentservice.findOrCreate(myauth.uid).then((success: usrinfoDetails) => {
           console.log('163', success);
           if (success === undefined) {
@@ -238,47 +248,6 @@ export class LoggedinStartComponent implements OnInit {
         });
 
 
-        this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
-          this.optionsTasks = [];
-          this.optionsTasksBk = readrec.public;
-          console.log(this.optionsTasksBk);
-          console.log(this.optionsTasksBk[0]);
-          this.firstProject = { firstProjectRef: this.optionsTasksBk[0] };
-          console.log(this.firstProject);
-          if (this.firstProject != null) {
-            this.userselectedProject = this.firstProject.firstProjectRef.projectName;
-            this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
-            console.log(this.profileRef);
-
-            this.keyRef = this.getSections((this.db.doc('projectKey/' + this.firstProject.firstProjectRef.projectName)));
-            console.log(this.keyRef);
-
-          }
-
-          readrec.public.forEach(element => {
-            this.optionsTasks.push(element.projectName);
-          });
-          this.optionsTasksNamesBk = this.optionsTasks;
-          console.log(this.optionsTasks);
-        });
-        this.filteredTasksOptions = this.emailFormControl.valueChanges.pipe(
-          startWith(''),
-          map((myvalue: string) => {
-            console.log('96', myvalue);
-            if (myvalue === '' || myvalue === null) {
-              this.publicList = this.getPublicList(this.db.doc('projectList/publicProject'));
-              this.optionsTasks = this.optionsTasksNamesBk;
-            } else {
-              this.publicList = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
-              this.optionsTasks = this._filter(myvalue);
-              //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
-            }
-          }
-          )).subscribe(
-            some => {
-
-            }
-          );
         /*---*/
         this.optionsTasksSub = docData(this.db.firestore.doc('projectList/' + this.authDetails.uid)).subscribe((readrec: any) => {
           this.optionsTasks = [];
@@ -327,105 +296,168 @@ export class LoggedinStartComponent implements OnInit {
       }
     })
 
-  }
 
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
-  }
-
-  firstDefaultProject(some) {
-
-    console.log('158', some.this.optionsTasks[0]);
-  }
-
-  profileKeyRef(some) {
-
-    this.userselectedProject = some.projectName;
-
-    console.log('216', some);
-    this.getProfilesSubscription.unsubscribe();
-
-    this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
-    this.getSectionsSubscription?.unsubscribe();
-
-    this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
-
-    console.log('218', this.profileRef);
-    console.log('218', this.keyRef);
-
-  }
-
-  openBottomSheet(): void {
-
-    this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef, NewUid: this.authDetails.uid } });
-  }
-  logout() {
-    this.afAuth.signOut();
-  }
-
-  NavigateNextTestCases() {
-    this.router.navigate(['/main']);
-  }
-  NavigateNextLogOutScreen() {
-    this.router.navigate(['/start']);
-  }
-  NavigateNext() {
-    this.router.navigate(['/loggedin']);
-  }
-
-  InitDBNext() {
-
-  }
-  ngOnInit(): void {
-  }
-
-  addNewOpenDialog(): void {
 
 
-  }
-  newArray = [];
-  mydata;
-  updatedProject: any[] = [];
+    this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).pipe(first(), map((someval: any) => {
+      return someval;
+    })).subscribe((readrec: any) => {
+      this.optionsTasks = [];
+      this.optionsTasksBk = readrec.public;
 
-  newTaskforUser() {
+      console.log(this.obs);
+      this.firstProject = { firstProjectRef: this.optionsTasksBk[0] };
+      console.log(this.firstProject);
+      if (this.firstProject != null) {
+        //this.userselectedProject=this.firstProject.firstProjectRef.projectName;
 
+        console.log(this.userselectedProject);
+        //this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
+        console.log(this.profileRef);
 
-    this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: { NewUid: this.authDetails } });
-    console.log(this.authDetails.uid);
-    const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+        // this.keyRef = this.getSections((this.db.doc('projectKey/' + this.firstProject.firstProjectRef.projectName)));
+        console.log(this.keyRef);
 
-      console.log('390',values);
-      if(values !== undefined){
-        this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
-          console.log('391', success);
-          if (success === undefined) {
-            const Newmydialog = values;
-            this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
-
-            return (null);
-  
-  
-          } else {
-            //get data- display/update
-  
-            const mydialog = values;
-            this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
-  
-            return (null);
-  
-  
-          }
-        });
       }
-     
-
-
-    })).subscribe((mydata: any) => {
+      this.DATA = readrec.public;
+      this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
+      this.dataSource.paginator = this.paginator;
+      this.obs = this.dataSource.connect();
+      this.changeDetectorRef.detectChanges();
+      readrec.public.forEach(element => {
+        this.optionsTasks.push(element.projectName);
+      });
+      this.optionsTasksNamesBk = this.optionsTasks;
+      console.log(this.optionsTasks);
     });
-    console.log('121', this.mydata);
+    console.log(this.optionsTasks);
+
+
+    this.filteredTasksOptions = this.emailFormControl.valueChanges.pipe(
+      startWith(''),
+      map((myvalue: string) => {
+        console.log('96', myvalue);
+        this.userselectedProject = undefined;
+        if (myvalue === '' || myvalue === null) {
+          this.optionsTasks = this.optionsTasksNamesBk;
+          this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
+          this.dataSource.paginator = this.paginator;
+          this.obs = this.dataSource.connect();
+          this.changeDetectorRef.detectChanges();
+        } else {
+          //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
+          this.obs = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+          this.optionsTasks = this._filter(myvalue);
+          //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
+          this.changeDetectorRef.detectChanges();
+        }
+      }
+      )).subscribe(
+        some => {
+
+        }
+      );
+
   }
+
+
+
+private _filter(value: string): string[] {
+  const filterValue = value.toLowerCase();
+  return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+}
+firstDefaultProject(some) {
+
+  console.log('158', some.this.optionsTasks[0]);
+}
+
+profileKeyRef(some) {
+
+  this.userselectedProject = some.projectName;
+
+  console.log('216', some);
+  this.getProfilesSubscription.unsubscribe();
+
+  this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
+  this.getSectionsSubscription?.unsubscribe();
+
+  this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
+
+  console.log('218', this.profileRef);
+  console.log('218', this.keyRef);
+
+}
+
+openBottomSheet(): void {
+
+  this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef, NewUid: this.authDetails.uid } });
+}
+logout() {
+  this.afAuth.signOut();
+}
+
+NavigateNextTestCases() {
+  this.router.navigate(['/main']);
+}
+NavigateNextLogOutScreen() {
+  this.router.navigate(['/start']);
+}
+NavigateNext() {
+  this.router.navigate(['/loggedin']);
+}
+
+InitDBNext() {
+
+}
+ngOnInit(): void {
+}
+
+addNewOpenDialog(): void {
+
+
+}
+newArray = [];
+mydata;
+updatedProject: any[] = [];
+
+newTaskforUser() {
+
+
+  this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: { NewUid: this.authDetails } });
+  console.log(this.authDetails.uid);
+  const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+
+    console.log('390', values);
+    if (values !== undefined) {
+      this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
+        console.log('391', success);
+        if (success === undefined) {
+          const Newmydialog = values;
+          this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
+
+          return (null);
+
+
+        } else {
+          //get data- display/update
+
+          const mydialog = values;
+          this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+
+          return (null);
+
+
+        }
+      });
+    }
+
+
+
+  })).subscribe((mydata: any) => {
+  });
+  console.log('121', this.mydata);
+}
 }
 
 @Component({

@@ -67,61 +67,88 @@
             </mat-spinner>
         </ng-template>
     </mat-grid-tile>
-    <mat-grid-tile colspan="4" rowspan='1' [style.background]="'rgb(104, 175, 238);'">
+    <mat-grid-tile colspan="8" rowspan='1' [style.background]="'rgb(104, 175, 238);'">
 
-        <div fxlayout="cloumn" class="wrapper">
 
-            <div class="head">
-                <input id="task-input" type="text" placeholder="Enter a new Task">
-                <button class="add-task" (click)="newTaskforUser()">Add</button>
-            </div>
-        </div>
+
+        <span fxFlexAlign="center">
+            <ul class="profile-social-links" >
+
+                <li>
+                    <a (click)="newTaskforUser()" #tooltip="matTooltip" matTooltip="Create New Task"
+                    >
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.facebook.com/v1ctory"#tooltip="matTooltip" matTooltip="Share to a friend">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><circle cx="12" cy="10" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="http://gmail.com" #tooltip="matTooltip" matTooltip="Mail us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                </li>
+                <li class="SignInbutton">
+<a>
+                    <fa-icon  (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">Logout
+                    </fa-icon>
+                </a>
+                </li>
+
+            </ul>
+
+
+        </span>
+
 
     </mat-grid-tile>
 
-    <mat-grid-tile colspan="4" rowspan='1' [style.background]="'rgb(104, 175, 238)'">
-
-        <mat-toolbar style="margin: 0px; background: #68afee;">
-            <span fxFlex="grow"></span>
 
 
-            <h1 style="color: #3d3d3e; margin: 0px;" >
-                StepsWise Tasking Tool
-            </h1>
-            <h1 class="SignInbutton" >
-About us            </h1>
 
-<div class="SignInbutton">
+    <mat-grid-tile colspan="8" rowspan='18' style="background: rgb(104, 175, 238) ; position: relative; ">
 
-            <fa-icon  (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">Logout
-            </fa-icon>
-        </div>
-        </mat-toolbar>
-        <mat-divider></mat-divider>
-    </mat-grid-tile>
-
-
-    <mat-grid-tile colspan="4" rowspan='9' style="background: #F2F3F5; display: fixed;">
-        <mat-tab-group>
-            <mat-tab class="header" style="color:#216fdb;">
-                <ng-template  style="color: #3d3d3e;"mat-tab-label>Public</ng-template>
+        <mat-tab-group fxLayout="column" style="background: rgb(104, 175, 238); width:75%; height:100%;">
+            <mat-tab style="color:#216fdb; margin-top: 0px;">
+                <ng-template mat-tab-label>Public</ng-template>
                 <ng-template matTabContent>
-                    <div fxLayout="column" fxLayoutGap="5%"
-                        *ngIf="(publicList | async) as projectDetails; else waitingload ">
-                        <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
 
-                            <div style="background-color:white">
+                    <div fxLayout="column" *ngIf="(obs| async) as projectDetails; else waitingload ">
+                        <mat-accordion style="position:relative;">
+                            <div style="margin-bottom: 3%">
                                 <form>
                                     <mat-form-field>
-                                        <input type="text" matInput [formControl]="emailFormControl"
-                                            [errorStateMatcher]="matcher" placeholder="Enter Task Name"
+
+                                        <input class="search" type="text" placeholder="Enter Task Name" matInput
+                                            [formControl]="emailFormControl" [errorStateMatcher]="matcher"
                                             [matAutocomplete]="auto">
                                         <button mat-button *ngIf="emailFormControl.value !== ''" matSuffix
                                             mat-icon-button aria-label="Clear" (click)="emailFormControl.reset()">
                                             <mat-icon>close</mat-icon>
                                         </button>
                                         <mat-hint>Search for Public Tasks!</mat-hint>
-                                        <mat-label>Search</mat-label>
+
                                         <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
                                             <mat-option *ngFor="let option of optionsTasks" [value]="option">
                                                 {{option}}
@@ -137,148 +164,64 @@ About us            </h1>
                                     </mat-form-field>
                                 </form>
                             </div>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                            <mat-expansion-panel fxLayout="column wrap" fxLayoutGap="30px"
+                                style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
+                                *ngFor="let details of projectDetails" (closed)="Expansionclose()">
+                                <mat-expansion-panel-header
+                                    style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; ">
+                                    <mat-panel-title fxLayoutGap="30px" fxFlex="grow" (click)="profileKeyRef(details)">
 
+                                        {{details.projectName}}
+                                        {{details.description}}
+                                        By: {{details.profileName}}
+                                        Created : {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
-                            <mat-accordion style="position:relative;">
-
-                                <mat-expansion-panel fxLayout="row"
-                                    style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
-                                    *ngFor="let details of projectDetails">
-                                    <mat-expansion-panel-header
-                                        style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; ">
-                                        <mat-panel-title fxFlex="grow" (click)="profileKeyRef(details)">
-
-                                            {{details.projectName}}
-
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            <div fxFlexAlign="center" fxLayout="center center">
-                                                <div fxLayout="column" style=" border-style:unset !important;">
-                                                    <span mat-card-avatar
-                                                        [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
-                                                </div>
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        <div fxFlexAlign="center" fxLayout="center center">
+                                            <div fxLayout="column" style=" border-style:unset !important;">
+                                                <span mat-card-avatar
+                                                    [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
                                             </div>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                    <mat-icon>account_circle</mat-icon>
-                                    Created : {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
-                                    <mat-divider></mat-divider>
+                                        </div>
 
-                                    By: {{details.profileName}}
-                                    <mat-divider></mat-divider>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
 
-                                    {{details.description}}
+                                {{userselectedProject}}
+                                <app-nested-tree class="mattree"
+                                    *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
+                                    fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
+                                </app-nested-tree>
 
-                                </mat-expansion-panel>
-                            </mat-accordion>
-                        </cdk-virtual-scroll-viewport>
+
+
+                            </mat-expansion-panel>
+                        </mat-accordion>
 
                     </div>
+
                     <ng-template #waitingload>
                         <mat-spinner>
 
                         </mat-spinner>
                     </ng-template>
+
                 </ng-template>
+
             </mat-tab>
-            <mat-tab class="header" style="color:#216fdb" *ngIf="this.authDetails!==null">
-                <ng-template  mat-tab-label>Private </ng-template>
+            <mat-tab class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
+                <ng-template mat-tab-label>Private</ng-template>
                 <ng-template matTabContent>
-
-                    <div fxLayout="column" fxLayoutGap="5%"
-                        *ngIf="(privateList | async) as projectDetails; else waitingload ">
-                        <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">
-
-                            <div style="background-color:white">
-                                <form>
-                                    <mat-form-field>
-
-                                        <input type="text" matInput [formControl]="emailFormControl"
-                                            [errorStateMatcher]="matcher" placeholder="Enter Task Name"
-                                            [matAutocomplete]="auto">
-                                        <button mat-button *ngIf="emailFormControl.value !== ''" matSuffix
-                                            mat-icon-button aria-label="Clear" (click)="emailFormControl.reset()">
-                                            <mat-icon>close</mat-icon>
-                                        </button>
-                                        <mat-hint>Search for Private Tasks!</mat-hint>
-                                        <mat-label>Search</mat-label>
-                                        <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
-                                            <mat-option *ngFor="let option of optionsTasks" [value]="option">
-                                                {{option}}
-                                            </mat-option>
-                                        </mat-autocomplete>
-                                        <mat-error
-                                            *ngIf="emailFormControl.hasError('text') && !emailFormControl.hasError('required')">
-                                            Please enter a valid Task Name
-                                        </mat-error>
-                                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                                            Task Name is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </form>
-                            </div>
-
-
-                            <mat-accordion style="position:relative;">
-
-                                <mat-expansion-panel fxLayout="row"
-                                    style=" padding: 20px 10px;     background: #F2F3F5;        min-width:50%;"
-                                    *ngFor="let details of projectDetails">
-                                    <mat-expansion-panel-header
-                                        style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; ">
-                                        <mat-panel-title fxFlex="grow" (click)="profileKeyRef(details)">
-
-                                            {{details.projectName}}
-
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            <div fxFlexAlign="center" fxLayout="center center">
-                                                <div fxLayout="column" style=" border-style:unset !important;">
-                                                    <span mat-card-avatar
-                                                        [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
-                                                </div>
-                                            </div>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                    <mat-icon>account_circle</mat-icon>
-                                    Created : {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
-                                    <mat-divider></mat-divider>
-
-                                    By: {{details.profileName}}
-                                    <mat-divider></mat-divider>
-
-                                    {{details.description}}
-
-                                </mat-expansion-panel>
-                            </mat-accordion>
-                        </cdk-virtual-scroll-viewport>
-
-                    </div>
-
-                    <ng-template #waitingload>
-
-                        <mat-spinner>
-                        </mat-spinner>
-                        No Private Projects. Create new One..
-                    </ng-template>
+                    Please Login For Add Private Projects
                 </ng-template>
             </mat-tab>
+
         </mat-tab-group>
 
-    </mat-grid-tile>
 
 
-
-    <mat-grid-tile colspan="4" rowspan="9" [style.background]="'#F2F3F5'">
-        <app-nested-tree class="mattree" fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
-        </app-nested-tree>
-
-
-        <div class="container">
-            <img width="100%" height="200" style="text-align: center; background-image:url('https://images.pexels.com/photos/442420/books-shelves-architecture-wood-442420.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');background-repeat: no-repeat;background-size: cover;background-color: rgba(255,255,255,0.6);
-                background-blend-mode: lighten;">
-             </div>
-            
     </mat-grid-tile>
 
 </mat-grid-list>

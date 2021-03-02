@@ -64,8 +64,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
  
   navigationExtras: NavigationExtras = {
     state: {
-      testCaseRef: '',
-      sectionRef:''
+      selectedProject: '',
+      mainSubSectionRef:''
     }
   };
   @Input() Sections: Observable<any>;
@@ -207,12 +207,12 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
         Children: []
       }];
       this.Project = this.latestProject;
-      this.navigationExtras.state.testCaseRef=this.latestProject;
-      this.navigationExtras.state.sectionRef=data;
+      this.navigationExtras.state.selectedProject=this.latestProject;
+      this.navigationExtras.state.mainSubSectionRef=data;
 
 
       console.log(this.latestProject);
-      console.log(this.navigationExtras.state.sectionRef);
+      console.log(this.navigationExtras.state.mainSubSectionRef);
 
 
       

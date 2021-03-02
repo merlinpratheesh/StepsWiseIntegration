@@ -150,8 +150,8 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   optionsTasksSub: Subscription;
   firstProject: any;
   profileRef: any;
-  testCaseRef:any;
-  sectionRef: string[] = [];
+  selectedProject:any;
+  mainSubSectionRef: string[] = [];
 
   userselectedProject ;
   keyRef ;
@@ -275,8 +275,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
   }
   ngOnDestroy() {
-    this.getSectionsSubscription.unsubscribe();
-    this.getProfilesSubscription.unsubscribe();
 
 
     if (this.dataSource) { 

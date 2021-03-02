@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MainSectionGroup, projectControls, projectFlags, projectVariables, TestcaseInfo, UserdataService, userProfile } from '../service/userdata.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { map, startWith, withLatestFrom } from 'rxjs/operators';
 
 
 @Component({
@@ -129,19 +130,46 @@ export class MainScreenComponent implements OnInit {
     ) {
       const navigation = this.router.getCurrentNavigation();
       const state = navigation.extras.state as {
-        testCaseRef: string;
-        sectionRef: MainSectionGroup[];
+        selectedProject: string;
+        mainSubSectionRef: MainSectionGroup[];
         
       };
 
         if(state !== undefined){
-          this.Sections=this.getSections(this.db.doc('/projectKey/'+`${state.testCaseRef}`));
-          this.SectionTc= this.getTestcases(this.db.doc(`${state.testCaseRef}`+'/DefaultProject/items/Merlinpratheesh'));
+          this.Sections=this.getSections(this.db.doc('/projectKey/'+`${state.selectedProject}`));
+          this.SectionTc= this.getTestcases(this.db.doc(`${state.selectedProject}`+'/DefaultProject/items/Merlinpratheesh'));
           console.log(this.Sections);
-          console.log(this.SectionTc);
+          const keysselection = this.myprojectControls.subsectionkeysControl.valueChanges
+          .pipe(startWith({ value: '', groupValue: '' }),
+            map((selection: any) => {
+              console.log('184',this.myprojectControls.subsectionkeysControl.valueChanges);
+              if (!selection || selection.groupValue === '') {
+                
+                this.myprojectVariables.initialMainSection = 'SubSection';
+                this.SectionTc = of(undefined);
+              } else {
+                this.myprojectVariables.initialMainSection = selection.groupValue;
+                //console.log('168',this.myuserProfile.myusrinfoFromDb.projectName);
+                if (this.myuserProfile.myusrinfoFromDb.projectName === 'Demo') {
+                  //this.getTestcasesSubscription?.unsubscribe();
+                  this.SectionTc = this.getTestcases(this.db.doc('projectList/' + this.myuserProfile.userAuthenObj.uid));
+                } else {
+                  //this.getTestcasesSubscription?.unsubscribe();
+                  this.SectionTc = this.getTestcases(this.db.doc('/' + this.myuserProfile.myusrinfoFromDb.projectName + '/' + selection.groupValue + '/items/' + selection.value));
+                  console.log(this.SectionTc);
+
+                }
+              }
+            })
+          );
+         
+         withLatestFrom(keysselection),
+         map((values: any) => {
+           const [publickey, keys] = values;
+         })}
         }
-    
-     }
+
+
 
 
   ngOnInit(): void {
