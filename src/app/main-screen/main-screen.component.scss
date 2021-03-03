@@ -12,4 +12,75 @@ mat-card{
     margin: 10px;
     padding: 10px;
   }
- 
+  .example-card {
+    background-color: cyan;
+   }
+   
+   .example-header-image {
+     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+     background-size: cover;
+   }
+  
+   .custom-icon {
+     cursor: pointer;
+   } 
+   
+   .custom-form-field-icon {
+     position: absolute;
+     right: 0;
+     top: 0;
+   }
+  
+   .drawer {
+     position: fixed;
+     height: 100vh;
+     min-width: 25%;
+     border-right: 1px solid #ccc;
+   }
+   .drawer.header {
+     position: absolute;
+     right: 0;
+     justify-content: space-between;
+   }
+   .drawer.contents {
+     padding: 160px;
+     
+   }
+  
+   .container-wrapper {
+     max-width: auto;
+     margin: 10px;
+     padding: 10px;
+   }
+  
+   .example-margin {
+     margin: 10px 10px;
+   }
+   .card{
+    height: 260px;
+    width: 290px;
+    display: grid;
+    margin-top:0px;
+    margin-left: 20px;
+    grid-template-columns: .2fr 1fr;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .img-div{
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .content-div{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    background-color: whitesmoke;
+    border-bottom: 2px solid gold;
+    padding-left: 10px;
+  }
+  .title{
+    font-family: 'Poppins', sans-serif;
+  }

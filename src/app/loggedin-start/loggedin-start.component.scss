@@ -228,7 +228,7 @@
           cursor: pointer;
       }
       .SignInbutton:hover {
-          background-color: #FF5722;
+          background-color: #a1d1f1;
           transition: background-color 0.5s ease-out;
         } 
 .case1 {
@@ -477,4 +477,13 @@ ul {
     margin-left: 0px;
 
   }
+}
+.search{
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 40px;
+  width: 99%;
+  padding: 2px 2px 2px 2px;
+  outline: 0;
+  background-color: white;
 }

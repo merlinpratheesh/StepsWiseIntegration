@@ -40,7 +40,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./loggedin-start.component.scss']
 })
 export class LoggedinStartComponent implements OnInit {
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<projectDetails>;
@@ -206,13 +206,14 @@ export class LoggedinStartComponent implements OnInit {
     private db: AngularFirestore,
 
     private changeDetectorRef: ChangeDetectorRef,
-    private _bottomSheet: MatBottomSheet,) {
+    private _bottomSheet: MatBottomSheet) {
     this.afAuth.authState.subscribe(myauth => {
       if (myauth !== null && myauth !== undefined) {
 
         this.authDetails = myauth;
         console.log('', this.authDetails.uid);
 
+      
         this.developmentservice.findOrCreate(myauth.uid).then((success: usrinfoDetails) => {
           console.log('163', success);
           if (success === undefined) {
@@ -291,15 +292,7 @@ export class LoggedinStartComponent implements OnInit {
           );
 
       }
-      else {
-
-      }
     })
-
-
-
-
-
     this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).pipe(first(), map((someval: any) => {
       return someval;
     })).subscribe((readrec: any) => {
@@ -363,101 +356,101 @@ export class LoggedinStartComponent implements OnInit {
 
 
 
-private _filter(value: string): string[] {
-  const filterValue = value.toLowerCase();
-  return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
-}
-firstDefaultProject(some) {
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+  firstDefaultProject(some) {
 
-  console.log('158', some.this.optionsTasks[0]);
-}
+    console.log('158', some.this.optionsTasks[0]);
+  }
 
-profileKeyRef(some) {
+  profileKeyRef(some) {
 
-  this.userselectedProject = some.projectName;
+    this.userselectedProject = some.projectName;
 
-  console.log('216', some);
-  this.getProfilesSubscription.unsubscribe();
+    console.log('216', some);
+    this.getProfilesSubscription.unsubscribe();
 
-  this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
-  this.getSectionsSubscription?.unsubscribe();
+    this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
+    this.getSectionsSubscription?.unsubscribe();
 
-  this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
+    this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
 
-  console.log('218', this.profileRef);
-  console.log('218', this.keyRef);
+    console.log('218', this.profileRef);
+    console.log('218', this.keyRef);
 
-}
+  }
 
-openBottomSheet(): void {
+  openBottomSheet(): void {
 
-  this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef, NewUid: this.authDetails.uid } });
-}
-logout() {
-  this.afAuth.signOut();
-}
+    this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef, NewUid: this.authDetails.uid } });
+  }
+  logout() {
+    this.afAuth.signOut();
+  }
 
-NavigateNextTestCases() {
-  this.router.navigate(['/start']);
-}
-NavigateNextLogOutScreen() {
-  this.router.navigate(['/start']);
-}
-NavigateNext() {
-  this.router.navigate(['/loggedin']);
-}
+  NavigateNextTestCases() {
+    this.router.navigate(['/start']);
+  }
+  NavigateNextLogOutScreen() {
+    this.router.navigate(['/start']);
+  }
+  NavigateNext() {
+    this.router.navigate(['/loggedin']);
+  }
 
-InitDBNext() {
+  InitDBNext() {
 
-}
-ngOnInit(): void {
-}
+  }
+  ngOnInit(): void {
+  }
 
-addNewOpenDialog(): void {
-
-
-}
-newArray = [];
-mydata;
-updatedProject: any[] = [];
-
-newTaskforUser() {
+  addNewOpenDialog(): void {
 
 
-  this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: { NewUid: this.authDetails } });
-  console.log(this.authDetails.uid);
-  const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+  }
+  newArray = [];
+  mydata;
+  updatedProject: any[] = [];
 
-    console.log('390', values);
-    if (values !== undefined) {
-      this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
-        console.log('391', success);
-        if (success === undefined) {
-          const Newmydialog = values;
-          this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
-
-          return (null);
+  newTaskforUser() {
 
 
-        } else {
-          //get data- display/update
+    this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: { NewUid: this.authDetails } });
+    console.log(this.authDetails.uid);
+    const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
 
-          const mydialog = values;
-          this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+      console.log('390', values);
+      if (values !== undefined) {
+        this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
+          console.log('391', success);
+          if (success === undefined) {
+            const Newmydialog = values;
+            this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
 
-          return (null);
+            return (null);
 
 
-        }
-      });
-    }
+          } else {
+            //get data- display/update
+
+            const mydialog = values;
+            this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+
+            return (null);
+
+
+          }
+        });
+      }
 
 
 
-  })).subscribe((mydata: any) => {
-  });
-  console.log('121', this.mydata);
-}
+    })).subscribe((mydata: any) => {
+    });
+    console.log('121', this.mydata);
+  }
 }
 
 @Component({

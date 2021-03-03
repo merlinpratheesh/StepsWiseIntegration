@@ -220,7 +220,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
           this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
           this.dataSource.paginator = this.paginator;
           this.obs = this.dataSource.connect();
-          this.changeDetectorRef.detectChanges();
         } else {    
           //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
           this.obs = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
@@ -242,7 +241,9 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     const filterValue = value.toLowerCase();
     return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
+  ngOnInit() {
 
+  }
   firstDefaultProject(some) {
 
     console.log('158', some.this.optionsTasks[0]);
@@ -271,9 +272,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
    NavigateTC(){
     this.router.navigate(['/main']);
   }
-   ngOnInit() {
 
-  }
   ngOnDestroy() {
 
 

@@ -261,8 +261,21 @@
           width: 280px;
         }
         .case1 {
-          width: 200px;
-          margin-left: 50px;
+      
+          width: 220px;
+          border: 3px solid rgb(104, 175, 238);
+          border-radius: 10px;
+          padding: 1rem;
+          font-family: Arial;
+          font-size: 1rem;
+          color: #666;
+          background-color:white;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .case2 {
+          width: 220px;
           border: 3px solid rgb(104, 175, 238);
           border-radius: 10px;
           padding: 1rem;
@@ -533,7 +546,7 @@
   font-size: 20px;
   height: 50px;
   width: 50px;
-  color: rgba(0,0,0,.65);
+  color: rgba(175, 50, 50, 0.65);
   font-weight: lighter;
   padding-top: 100px;
   margin-left: 10px;
@@ -543,12 +556,11 @@
 
 
 .imageHeader{
-  margin-left: 50px;
-  margin-top: 50px;
-
+  position: fixed;
+  margin-left: 5%;
   font-size: 20px;
-  height: 150px;
-  width: 295px;
+  height: 180px;
+  width: 330px;
   color: rgba(0,0,0,0);
   font-weight: lighter;
 }
@@ -563,11 +575,10 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
   width: 290px;
   display: grid;
   margin-top:0px;
-  margin-left: 35PX;
+  margin-left: 20px;
   grid-template-columns: .2fr 1fr;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-
   overflow: hidden;
 }
 
