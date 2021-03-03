@@ -398,7 +398,7 @@ logout() {
 }
 
 NavigateNextTestCases() {
-  this.router.navigate(['/main']);
+  this.router.navigate(['/start']);
 }
 NavigateNextLogOutScreen() {
   this.router.navigate(['/start']);

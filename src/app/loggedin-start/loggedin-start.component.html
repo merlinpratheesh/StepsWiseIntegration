@@ -6,7 +6,7 @@
             <div style="height:40%;" class="person">
                 <div id="main-card">
                     <div class="cover-photo">
-                        
+
                     </div>
                     <div class="photo">
                         <img src="{{profiledetails?.photoUrl}}" alt="">
@@ -20,31 +20,31 @@
 
 
                     </div>
-                    
+
                 </div>
-                
+
             </div>
             <div class="">
-            <h2>{{profiledetails?.membershipType}}</h2>
+                <h2>{{profiledetails?.membershipType}}</h2>
             </div>
             <ul class="card__info">
                 <li>
-                  <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
-                  <span>posts</span>
+                    <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
+                    <span>posts</span>
                 </li>
                 <li>
-                  <span class="card__info__stats">47</span>
-                  <span>followers</span>
+                    <span class="card__info__stats">47</span>
+                    <span>followers</span>
                 </li>
                 <li>
-                  <span class="card__info__stats">20</span>
-                  <span>following</span>
+                    <span class="card__info__stats">20</span>
+                    <span>following</span>
                 </li>
-              </ul>
-            <button  mat-raised-button color="primary" (click)="openBottomSheet()"
-            [disabled]="authDetails?.uid === null">Edit</button>
+            </ul>
+            <button mat-raised-button color="primary" (click)="openBottomSheet()"
+                [disabled]="authDetails?.uid === null">Edit</button>
             <br>
-            <mat-card  style="  background: #F2F3F5;">
+            <mat-card style="  background: #F2F3F5;">
                 <mat-card-header>
                     <mat-card-title>StepsWise</mat-card-title>
                     <mat-card-subtitle> Start Tasking
@@ -67,53 +67,84 @@
             </mat-spinner>
         </ng-template>
     </mat-grid-tile>
-    <mat-grid-tile colspan="8" rowspan='1' [style.background]="'rgb(104, 175, 238);'">
+    <mat-grid-tile colspan="8" rowspan='1'  style="background: rgb(104, 175, 238) ; " [style.background]="'rgb(104, 175, 238);'">
 
 
 
         <span fxFlexAlign="center">
-            <ul class="profile-social-links" >
+            <ul class="profile-social-links">
 
                 <li>
-                    <a (click)="newTaskforUser()" #tooltip="matTooltip" matTooltip="Create New Task"
-                    >
-                        
-                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                    <a (click)="newTaskforUser()" #tooltip="matTooltip" matTooltip="Create New Task">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                            <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                        </svg>
                     </a>
                 </li>
 
                 <li>
-                    <a href="https://www.facebook.com/v1ctory"#tooltip="matTooltip" matTooltip="Share to a friend">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                    <a href="https://www.facebook.com/v1ctory" #tooltip="matTooltip" matTooltip="Share to a friend">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><circle cx="12" cy="10" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
+                            <circle cx="12" cy="10" r="3" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
 
                     </a>
                 </li>
                 <li>
                     <a href="http://gmail.com" #tooltip="matTooltip" matTooltip="Mail us">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
                     </a>
                 </li>
                 <li>
                     <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                            </path>
+                        </svg>
                     </a>
                 </li>
                 <li>
                     <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
                     </a>
                 </li>
-                <li class="SignInbutton">
-<a>
-                    <fa-icon  (click)="logout()" class="fas faSignOutAlt fa-lg" [icon]="['fas', 'sign-out-alt']">Logout
-                    </fa-icon>
-                </a>
+                <li class="SignInbutton" (click)="logout()" #tooltip="matTooltip" matTooltip="Logout">
+                    <a><svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                            <line x1="12" y1="2" x2="12" y2="12"></line>
+                        </svg>
+
+                    </a>
                 </li>
 
             </ul>
@@ -211,11 +242,86 @@
                 </ng-template>
 
             </mat-tab>
-            <mat-tab class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
+            <mat-tab style="color:#216fdb; margin-top: 0px;">
                 <ng-template mat-tab-label>Private</ng-template>
                 <ng-template matTabContent>
-                    Please Login For Add Private Projects
+
+                    <div fxLayout="column" *ngIf="(privateList| async) as projectDetails; else waitingload ">
+                        <mat-accordion style="position:relative;">
+                            <div style="margin-bottom: 3%">
+                                <form>
+                                    <mat-form-field>
+
+                                        <input class="search" type="text" placeholder="Enter Task Name" matInput
+                                            [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                                            [matAutocomplete]="auto">
+                                        <button mat-button *ngIf="emailFormControl.value !== ''" matSuffix
+                                            mat-icon-button aria-label="Clear" (click)="emailFormControl.reset()">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                        <mat-hint>Search for Private Tasks!</mat-hint>
+
+                                        <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
+                                            <mat-option *ngFor="let option of optionsTasks" [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                        <mat-error
+                                            *ngIf="emailFormControl.hasError('text') && !emailFormControl.hasError('required')">
+                                            Please enter a valid Task Name
+                                        </mat-error>
+                                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                                            Task Name is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </form>
+                            </div>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                            <mat-expansion-panel fxLayout="column wrap" fxLayoutGap="30px"
+                                style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
+                                *ngFor="let details of projectDetails" (closed)="Expansionclose()">
+                                <mat-expansion-panel-header
+                                    style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; ">
+                                    <mat-panel-title fxLayoutGap="30px" fxFlex="grow" (click)="profileKeyRef(details)">
+
+                                        {{details.projectName}}
+                                        {{details.description}}
+                                        By: {{details.profileName}}
+                                        Created : {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
+
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        <div fxFlexAlign="center" fxLayout="center center">
+                                            <div fxLayout="column" style=" border-style:unset !important;">
+                                                <span mat-card-avatar
+                                                    [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
+                                            </div>
+                                        </div>
+
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+
+                                {{userselectedProject}}
+                                <app-nested-tree class="mattree"
+                                    *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
+                                    fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
+                                </app-nested-tree>
+
+
+
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                    </div>
+
+                    <ng-template #waitingload>
+                        <mat-spinner>
+
+                        </mat-spinner>
+                    </ng-template>
+
                 </ng-template>
+
             </mat-tab>
 
         </mat-tab-group>

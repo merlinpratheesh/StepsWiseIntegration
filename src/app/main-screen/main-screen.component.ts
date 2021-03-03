@@ -175,7 +175,7 @@ export class MainScreenComponent implements OnInit {
   ngOnInit(): void {
   }
   NavigateMain(){
-    this.router.navigate(['/starttest']);
+    this.router.navigate(['/loggedin']);
   }
   refreshList(item: TestcaseInfo) {//When user Selects testitem by doubleclick
     this.myprojectFlags.showEditTcButton = true;
