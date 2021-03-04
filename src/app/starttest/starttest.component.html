@@ -121,8 +121,9 @@
 
             <span>
                 <ul class="profile-social-links">
+                    
 
-                    <li>
+                    <li >
                         <a #tooltip="matTooltip" matTooltip="Create New Task">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24"
@@ -213,9 +214,9 @@
 
 
 
-    <mat-grid-tile colspan="8" rowspan='9' style="background: rgb(104, 175, 238) ;">
+    <mat-grid-tile colspan="8" rowspan='9' style="background: #F2F3F5 ;">
 
-        <mat-tab-group style="background: rgb(104, 175, 238); height: 100%; " fxFlex="grow">
+        <mat-tab-group style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow">
             <mat-tab style="color:#216fdb; ">
                 <ng-template mat-tab-label>Public</ng-template>
                 <ng-template matTabContent>
@@ -223,21 +224,22 @@
                     <div *ngIf="(obs| async) as projectDetails; else waitingload ">
                         <mat-accordion fxLayout="column">
 
-                            <mat-paginator [length]="100" style="width:100%;" [pageSize]="3"
-                                [pageSizeOptions]="[3,6,8,12]"></mat-paginator>
-                            <mat-expansion-panel fxLayoutGap="20px"
-                                style=" padding: 20px 10px; background: white"
-                                *ngFor="let details of projectDetails" (closed)="Expansionclose()">
+                            <mat-paginator [length]="100" style="width:100%;" [pageSize]="5"
+                                [pageSizeOptions]="[5,10,15,20]"></mat-paginator>
+                            <mat-expansion-panel fxLayoutGap="20px" (click)="profileKeyRef(details)"
+                                style=" padding: 20px 10px; background: white" *ngFor="let details of projectDetails"
+                                (closed)="Expansionclose()">
                                 <mat-expansion-panel-header
-                                    style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:100%; ">
-                                    <mat-panel-title fxLayoutGap="30px" fxFlex="grow" (click)="profileKeyRef(details)">
+                                    style="   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);width:80%; ">
+                                    <mat-panel-title fxLayoutGap="30px" fxFlex="grow">
+                                        <div mat-line>{{details.projectName}}</div>
 
-                                        {{details.projectName}}
 
-                                        Created : {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
                                     </mat-panel-title>
-                                    <mat-panel-description>
+                                    <mat-panel-description fxFlex="grow">
+                                        {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
+
                                         <div fxFlexAlign="center" fxLayout="center center">
                                             <div fxLayout="column" style=" border-style:unset !important;">
                                                 <span mat-card-avatar
@@ -249,7 +251,9 @@
                                 </mat-expansion-panel-header>
 
                                 {{details.description}}
-                                By: {{details.profileName}}
+                                <mat-icon mat-list-avatar style="width:auto">person</mat-icon>
+
+                                {{details.profileName}}
                                 <app-nested-tree class="mattree"
                                     *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
                                     fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
@@ -282,33 +286,44 @@
 
         </mat-tab-group>
 
-        <div style="background: rgb(104, 175, 238); height: 100%; " fxFlex="grow" >
-            <form>
-                <mat-form-field>
-    
-                    <input class="search" type="text" placeholder="Enter Task Name" matInput
-                        [formControl]="emailFormControl" 
-                        [matAutocomplete]="auto">
-                    <button mat-button *ngIf="emailFormControl.value !== ''" matSuffix
-                        mat-icon-button aria-label="Clear" (click)="emailFormControl.reset()">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                    <mat-hint>Search for Public Tasks!</mat-hint>
-    
-                    <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
-                        <mat-option *ngFor="let option of optionsTasks" [value]="option">
-                            {{option}}
-                        </mat-option>
-                    </mat-autocomplete>
-                    <mat-error
-                        *ngIf="emailFormControl.hasError('text') && !emailFormControl.hasError('required')">
-                        Please enter a valid Task Name
-                    </mat-error>
-                    <mat-error *ngIf="emailFormControl.hasError('required')">
-                        Task Name is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-            </form>
+
+        <div  style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow" style="overflow-x:hidden; " fxFlexFill cdkScrollable>
+            <div style=" width:535px; height: 58px;"  class="main-header mat-elevation-z4" [class.hidden]="toggleSearch">
+                <mat-toolbar-row style="padding: 0 5px;">
+                    <button mat-icon-button>
+              <mat-icon>menu</mat-icon>
+               </button>
+                    <div style="padding:8px 0 0 10px; flex:1;">
+                        <div class="mat-title" style="margin-bottom:2px;">Search</div>
+                        <div class="mat-subheading-2" style="line-height:.6rem;">Leader of the Free World</div>
+                    </div>
+        
+                    <button mat-icon-button  (click)="openSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+                </mat-toolbar-row>
+            </div>
+        
+            <div  class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+                <mat-toolbar-row style="padding: 0 5px;">
+                    <button class="search-icon" mat-icon-button disabled>
+                <mat-icon>search</mat-icon>
+              </button>
+              <input type="text" placeholder="Search Task Name" matInput [formControl]="emailFormControl"
+              [matAutocomplete]="auto">
+                    <button mat-button mat-icon-button (click)="searchClose()">
+                <mat-icon>close</mat-icon>
+              </button>
+              <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
+                <mat-option *ngFor="let option of optionsTasks" [value]="option">
+                    
+                    <div mat-line>{{option}}</div>
+
+                </mat-option>
+            </mat-autocomplete>
+                </mat-toolbar-row>
+            </div>
+        
         </div>
     </mat-grid-tile>
 

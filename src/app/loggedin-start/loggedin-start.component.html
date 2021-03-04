@@ -199,10 +199,10 @@
                              [pageSizeOptions]="[3,6,9,12]"></mat-paginator>
                             <mat-expansion-panel fxLayout="column wrap" fxLayoutGap="30px"
                                 style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
-                                *ngFor="let details of projectDetails" (closed)="Expansionclose()">
+                                *ngFor="let details of projectDetails" >
                                 <mat-expansion-panel-header
                                     style="box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3); min-width:50%; ">
-                                    <mat-panel-title fxLayoutGap="30px" fxFlex="grow" (click)="profileKeyRef(details)">
+                                    <mat-panel-title fxLayoutGap="20px" fxFlex="grow" (click)="profileKeyRef(details)">
 
                                         {{details.projectName}}
                                         {{details.description}}
@@ -210,7 +210,7 @@
                                         Created : {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
                                     </mat-panel-title>
-                                    <mat-panel-description>
+                                    <mat-panel-description  >
                                         <div fxFlexAlign="center" fxLayout="center center">
                                             <div fxLayout="column" style=" border-style:unset !important;">
                                                 <span mat-card-avatar

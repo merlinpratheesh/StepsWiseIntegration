@@ -462,7 +462,7 @@
 
         .profile-social-links {
           display: inline-block;
-          background: rgb(104, 175, 238); 
+          background:primary;
           opacity: 0;
           margin-left: 30px;
           -webkit-box-sizing: border-box;
@@ -536,7 +536,7 @@
         border-radius: 5px;
         height: 51px;
         margin-top: 22px;
-        width: 45%;
+        width: 65%;
         padding: 2px 2px 2px 2px;
         outline: 0;
         background-color: white;
@@ -650,3 +650,33 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
 
 
+header{
+  position: fixed;
+  top: 65px;
+   z-index: 11;
+   margin-left: 2px;
+  transition: all 250ms ease-in-out;
+}
+.main-header{
+  @extend header;
+  &.hidden{
+    opacity: 0;
+  }
+}
+.search-block{
+  width: 0%;
+  right: 0;
+  @extend header;
+  background: #fff;
+  &.active{
+    width: 40%;
+    height: 58px;
+  }
+  .search-control{
+    flex: 1;
+    font-size: 1rem;
+    border: 0;
+    outline: none;
+    padding-left: 10px;
+  }
+}

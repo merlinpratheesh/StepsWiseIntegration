@@ -1,6 +1,6 @@
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService } from 'firebaseui-angular';
@@ -163,6 +163,9 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   keyRef ;
   DATA: projectDetails[];
   matcher = new MyErrorStateMatcher();
+  toggleSearch: boolean = false;
+
+  @ViewChild('searchbar') searchbar: ElementRef;
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -254,6 +257,16 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+  
+  openSearch() {
+    this.toggleSearch = true;
+    this.searchbar.nativeElement.focus();
+  }
+
+  searchClose() {
+    this.toggleSearch = false;
+    this.emailFormControl.reset()
   }
   ngOnInit() {
 
