@@ -9,7 +9,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { MainSectionGroup, UserdataService, projectDetails, userProfile, usrinfoDetails } from '../service/userdata.service';
 import firebase from 'firebase/app';
 import { Inject, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { startWith, take, first } from 'rxjs/operators';
 import { projectControls } from '../service/userdata.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,7 +22,13 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-shee
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { ErrorStateMatcher } from '@angular/material/core';
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-starttest',
@@ -156,6 +162,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   userselectedProject ;
   keyRef ;
   DATA: projectDetails[];
+  matcher = new MyErrorStateMatcher();
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -180,8 +187,12 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     })).subscribe((readrec: any) => {
       this.optionsTasks = [];
       this.optionsTasksBk = readrec.public;
-
+      this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
+      this.dataSource.paginator = this.paginator;
+      this.obs = this.dataSource.connect();
       console.log(this.obs);
+
+      this.changeDetectorRef.detectChanges();
       this.firstProject={ firstProjectRef: this.optionsTasksBk[0] };
       console.log(this.firstProject);
       if(this.firstProject!=null)
@@ -189,7 +200,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
         //this.userselectedProject=this.firstProject.firstProjectRef.projectName;
 
         console.log(this.userselectedProject);
-        //this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
+        this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
         console.log(this.profileRef);
 
        // this.keyRef = this.getSections((this.db.doc('projectKey/' + this.firstProject.firstProjectRef.projectName)));
@@ -200,6 +211,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
       this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
       this.dataSource.paginator = this.paginator;
       this.obs = this.dataSource.connect();
+      console.log(this.obs);
       this.changeDetectorRef.detectChanges();
       readrec.public.forEach(element => {
         this.optionsTasks.push(element.projectName);
@@ -217,9 +229,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
         this.userselectedProject= undefined;
         if (myvalue === '' || myvalue === null) {
           this.optionsTasks = this.optionsTasksNamesBk;
-          this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
-          this.dataSource.paginator = this.paginator;
-          this.obs = this.dataSource.connect();
+
         } else {    
           //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
           this.obs = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));

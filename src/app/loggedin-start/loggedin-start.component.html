@@ -195,7 +195,8 @@
                                     </mat-form-field>
                                 </form>
                             </div>
-                            <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+                            <mat-paginator   
+                             [pageSizeOptions]="[3,6,9,12]"></mat-paginator>
                             <mat-expansion-panel fxLayout="column wrap" fxLayoutGap="30px"
                                 style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
                                 *ngFor="let details of projectDetails" (closed)="Expansionclose()">
@@ -276,7 +277,7 @@
                                     </mat-form-field>
                                 </form>
                             </div>
-                            <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]"></mat-paginator>
+                            <mat-paginator  [pageSizeOptions]="[3,6,9,12]"></mat-paginator>
                             <mat-expansion-panel fxLayout="column wrap" fxLayoutGap="30px"
                                 style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
                                 *ngFor="let details of projectDetails" (closed)="Expansionclose()">
