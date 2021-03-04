@@ -282,33 +282,34 @@
 
         </mat-tab-group>
 
-        <form style="background: rgb(104, 175, 238); height: 100%; width: 40%; ">
-            <mat-form-field>
-
-                <input class="search" type="text" placeholder="Enter Task Name" matInput
-                    [formControl]="emailFormControl"
-                    [matAutocomplete]="auto">
-                <button mat-button *ngIf="emailFormControl.value !== ''" matSuffix
-                    mat-icon-button aria-label="Clear" (click)="emailFormControl.reset()">
-                    <mat-icon>close</mat-icon>
-                </button>
-                <mat-hint>Search for Public Tasks!</mat-hint>
-
-                <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
-                    <mat-option *ngFor="let option of optionsTasks" [value]="option">
-                        {{option}}
-                    </mat-option>
-                </mat-autocomplete>
-                <mat-error
-                    *ngIf="emailFormControl.hasError('text') && !emailFormControl.hasError('required')">
-                    Please enter a valid Task Name
-                </mat-error>
-                <mat-error *ngIf="emailFormControl.hasError('required')">
-                    Task Name is <strong>required</strong>
-                </mat-error>
-            </mat-form-field>
-        </form>
-
+        <div style="background: rgb(104, 175, 238); height: 100%; " fxFlex="grow" >
+            <form>
+                <mat-form-field>
+    
+                    <input class="search" type="text" placeholder="Enter Task Name" matInput
+                        [formControl]="emailFormControl" 
+                        [matAutocomplete]="auto">
+                    <button mat-button *ngIf="emailFormControl.value !== ''" matSuffix
+                        mat-icon-button aria-label="Clear" (click)="emailFormControl.reset()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-hint>Search for Public Tasks!</mat-hint>
+    
+                    <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
+                        <mat-option *ngFor="let option of optionsTasks" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error
+                        *ngIf="emailFormControl.hasError('text') && !emailFormControl.hasError('required')">
+                        Please enter a valid Task Name
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        Task Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </form>
+        </div>
     </mat-grid-tile>
 
 

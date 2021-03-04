@@ -200,7 +200,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
         //this.userselectedProject=this.firstProject.firstProjectRef.projectName;
 
         console.log(this.userselectedProject);
-        this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
+        //this.profileRef = this.getProfiles((this.db.doc('profile/' + this.firstProject.firstProjectRef.projectUid)));
         console.log(this.profileRef);
 
        // this.keyRef = this.getSections((this.db.doc('projectKey/' + this.firstProject.firstProjectRef.projectName)));
@@ -228,6 +228,10 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
         console.log('96', myvalue);
         this.userselectedProject= undefined;
         if (myvalue === '' || myvalue === null) {
+          this.optionsTasks = this.optionsTasksNamesBk;
+          this.dataSource= new MatTableDataSource<projectDetails>(this.DATA);
+          this.dataSource.paginator = this.paginator;
+          this.obs = this.dataSource.connect();
           this.optionsTasks = this.optionsTasksNamesBk;
 
         } else {    
