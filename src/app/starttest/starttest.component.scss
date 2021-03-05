@@ -473,24 +473,31 @@
         .profile-social-links li {
           list-style: none;
           margin-left: 20px;
-
           float: left;
+
           width: 10.3%;
           text-align: center;
         }
         .profile-social-links li a {
           display: inline-block;
-          width: 40px;
+          width: 20px;
           height: 20px;
-          padding: 40px;
+          padding: 15px;
+          margin-top: 30px;
           text-align: center;
-
+          background-color:rgb(242, 243, 245);
           margin-right: 0px;
           position: relative;
           overflow: hidden !important;
           -webkit-border-radius: 50%;
           border-radius: 50%;
         }
+
+        .profile-social-links li a:hover {
+          background-color: #FF5722;
+          transition: background-color 0.5s ease-out;
+        }
+
         .profile-social-links li a img {
           position: relative;
           z-index: 1;
@@ -498,7 +505,8 @@
 
         .profile-social-links li a img,
         .profile-social-links li a svg {
-          width: 30px;
+          width: 20px;
+          margin-top: -15px;
         }
         @keyframes materia_portrait {
           0% {
