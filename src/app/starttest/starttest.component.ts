@@ -166,6 +166,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   toggleSearch: boolean = false;
 
   @ViewChild('searchbar') searchbar: ElementRef;
+  options: FormGroup;
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -175,8 +176,13 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     public developmentservice: UserdataService,
     private db: AngularFirestore,
     private _bottomSheet: MatBottomSheet,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
+    this.options = fb.group({
+      bottom: 0,
+      fixed: false,
+      top: 0
+    });
     this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
     this.afAuth.authState.subscribe(myauth => {
       if (myauth !== null && myauth !== undefined) {
@@ -259,6 +265,10 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   
+  sidenavtoggle(){
+    
+
+  }
   openSearch() {
     this.toggleSearch = true;
     this.searchbar.nativeElement.focus();
