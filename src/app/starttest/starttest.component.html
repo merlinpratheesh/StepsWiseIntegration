@@ -150,18 +150,6 @@
                     </li>
 
                     <li>
-                        <a href="http://google.com" #tooltip="matTooltip" matTooltip="Visit us">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24"
-                                fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
-                                <circle cx="12" cy="10" r="3" />
-                                <circle cx="12" cy="12" r="10" />
-                            </svg>
-
-                        </a>
-                    </li>
-                    <li>
                         <a href="http://gmail.com" #tooltip="matTooltip" matTooltip="Mail us">
                             <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24"
                                 fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
@@ -193,6 +181,32 @@
                         </a>
                     </li>
 
+                    <li [matMenuTriggerFor]="menu">
+                        <a  #tooltip="matTooltip" matTooltip="Visit us">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24"
+                                fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
+                                <circle cx="12" cy="10" r="3" />
+                                <circle cx="12" cy="12" r="10" />
+                            </svg>
+
+                        </a>
+                    </li>
+                    <mat-menu #menu="matMenu" overlapTrigger="false">
+                        <button mat-menu-item>
+                          <mat-icon>account_circle</mat-icon>
+                          <span>My Account</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>settings</mat-icon>
+                          <span>Settings</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>money</mat-icon>
+                          <span>Billing</span>
+                        </button>
+                      </mat-menu>
 
 
 

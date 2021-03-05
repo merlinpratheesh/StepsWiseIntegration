@@ -4,6 +4,12 @@
       <mat-icon style="margin-right:20px;" *ngIf="!drawer.opened" (click)="drawer.toggle()">
         menu
       </mat-icon>
+      <button mat-raised-button color="warn" (click)="NavigateStart()">
+        <mat-icon class="mr-1">home</mat-icon>
+        Home
+      </button>
+      <span fxFlex="grow"></span>
+
       <h1>
         StepsWise Tracking Tool
       </h1>
@@ -85,7 +91,6 @@
       </div>
     </div>
 
-    <button mat-raised-button color="warn" (click)="NavigateStart()">TasksScreen</button>
 
   </mat-sidenav-content>
   <mat-sidenav #drawer class="drawer" mode="side" opened="false" (opened)="draweropen()" fxFlex.lt-sm="100vw">
