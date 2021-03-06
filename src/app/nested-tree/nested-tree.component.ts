@@ -256,10 +256,15 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   ngAfterViewInit() {
     this.initialize();
   }
-  NavigateTestcase(){
+  NavigateTestcase(some){
+    console.log(some);
     this.router.navigate(['/main'], this.navigationExtras);
   }
 
+  SelectedMainSection(some){
+    console.log(some);
+
+  }
   findFatherNode(id: number, data: TreeData[]) {
     for (let i = 0; i < data.length; i += 1) {
       const currentFather = data[i];

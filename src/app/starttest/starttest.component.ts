@@ -40,6 +40,7 @@ export class StarttestComponent implements OnInit,OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<projectDetails>;
+  customCollapsedHeight: string = '30px';
 
 
 

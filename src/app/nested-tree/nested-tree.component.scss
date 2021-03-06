@@ -4,7 +4,7 @@ mat-tree {
 }
 .mat-tree-node {
   padding: 0;
-  background-color: #F2F3F5;
+  background-color: white;
   border: solid;
   margin: 0px;
   position: relative;
@@ -21,7 +21,7 @@ ul, li {
 }
 
 li.example-tree-container {
-  border-bottom: 1;  
+  border-bottom:0;  
 }
 
 li.example-tree-container:last-child ul{
@@ -61,14 +61,14 @@ ul {
   $color-light : lighten($color, 5%);
 
 mat-tree{
-  background:rgb(242, 243, 245);
+  background:white;
     font-family: 'Open Sans', Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   mat-card {
-    background:#F2F3F5;
+    background:white;
     font-family: 'Open Sans', Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

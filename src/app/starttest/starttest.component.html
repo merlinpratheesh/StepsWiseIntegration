@@ -46,22 +46,6 @@
                     <button mat-raised-button color="primary" (click)="openBottomSheet()"
                         [disabled]="authDetails?.uid === null">Edit</button>
                     <br>
-                    <mat-card style=" margin-top: 0px; background: #F2F3F5; border: black;">
-                        <mat-card-header>
-                            <mat-card-title>StepsWise</mat-card-title>
-                            <mat-card-subtitle> Start Tasking
-                                <pre class="case2 " appShowmore>
-                        Instructions:Demo User can Create Projects for One Month free. 
-                    </pre>
-                            </mat-card-subtitle>
-                        </mat-card-header>
-
-                        <mat-card-content style=" margin-left: 20px;">
-                            <h2>
-                                Convert your work into tasks
-                            </h2>
-                        </mat-card-content>
-                    </mat-card>
 
                 </div>
                 <ng-template #noprofile>
@@ -118,9 +102,9 @@
     <mat-sidenav-content [formGroup]="options">
         <mat-grid-list cols="10" rowHeight="10vh">
             <mat-grid-tile colspan="10" rowspan='1' [style.background]="'rgb(104, 175, 238'">
-                <button mat-button (click)="sidenav.toggle()">Toggle</button>
 
                 <mat-toolbar color="primary">
+
                     <img src="https://freeiconshop.com/wp-content/uploads/edd/task-done-flat.png" class="header">
 
 
@@ -248,38 +232,45 @@
                         <ng-template matTabContent>
 
                             <div *ngIf="(obs| async) as projectDetails; else waitingload ">
-                                <mat-accordion fxLayout="column" (click)="sidenav.toggle(false)">
+                                <mat-accordion fxLayout="column" >
 
                                     <mat-paginator [length]="100" style="width:100%;" [pageSize]="5"
                                         [pageSizeOptions]="[5,10,15,20]"></mat-paginator>
-                                    <mat-expansion-panel fxLayoutGap="20px"  (click)="profileKeyRef(details)"
-                                        style=" padding: 20px 10px; background: white"
+                                    <mat-expansion-panel fxLayoutGap="10px"  
+                                        style=" padding: 20px 10px; background: #f0f0f0"
                                         *ngFor="let details of projectDetails" (closed)="Expansionclose()">
-                                        <mat-expansion-panel-header
-                                            style="   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);width:80%; ">
-                                            <mat-panel-title fxLayoutGap="30px" fxFlex="grow" >
-                                                <div mat-line>{{details.projectName}}</div>
-
-
-
-                                            </mat-panel-title>
-                                            <mat-panel-description fxFlex="grow">
-                                                {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
-
-                                                <div fxFlexAlign="center" fxLayout="center center">
-                                                    <div fxLayout="column" style=" border-style:unset !important;">
+                                        <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight" (click)="sidenav.toggle(false)" (click)="profileKeyRef(details)"
+                                            style="width:88%; ">
+                                            <mat-panel-title  fxLayout="row"  fxFlexAlign="center" style=" border-style:initial !important;" fxLayout="center center" fxLayoutGap="30px" fxFlex="grow" >
+                                               
+                                                    <div fxLayout="row" >
                                                         <span mat-card-avatar
                                                             [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
-                                                    </div>
+                                                    
                                                 </div>
+                                              {{details.projectName}}
+                                              {{details.description}}
+
+
+
+                                            </mat-panel-title >
+                                            <mat-panel-description fxFlex="grow">
+
+                                                {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
+
+                                              
 
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
 
-                                        {{details.description}}
-                                        <mat-icon mat-list-avatar style="width:auto">person</mat-icon>
-                                        <button  
-                                        mat-raised-button color="accent" (click)="sidenav.toggle(true)">
+                                        
+                                            <button class="_27F2N" (click)="sidenav.toggle(false)">
+                                           
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                            <path fill="currentColor" d="M19.1 17.2l-5.3-5.3 5.3-5.3-1.8-1.8-5.3 5.4-5.3-5.3-1.8 1.7 5.3 5.3-5.3 5.3L6.7 19l5.3-5.3 5.3 5.3 1.8-1.8z">
+                                            </path></svg></button>
+                                        <button   (click)="sidenav.toggle()"
+                                        mat-raised-button color="accent">
                                         <mat-icon mat-list-avatar style="width:auto">person</mat-icon>
 
                                         {{details.profileName}} </button>See Profile

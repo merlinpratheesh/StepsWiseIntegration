@@ -1,105 +1,82 @@
-
-
-<div  *ngIf="(Sections | async) as SectionsReady; else SectionsnotReady">
-  <div fxLayout="column" fxLayoutGap="5%"  style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;" >
+<div *ngIf="(Sections | async) as SectionsReady; else SectionsnotReady">
+  <div fxLayout="column" fxLayoutGap="5%"
+    style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;">
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">
-    <mat-card-header style="padding:5px; border:solid; border-color:black; background-color:#F2F3F5;">
-      <span style="margin-left:0%;margin-right:5%;"><h3>{{latestProject}}</h3> </span>  
-      <mat-chip-list style="margin-right:30px;">
+      <mat-card-header style="padding:5px; border:solid; border-color:black; background-color:#F2F3F5;">
+        <span style="margin-left:0%;margin-right:5%;">
+          <h3>{{latestProject}}</h3>
+        </span>
+        <mat-chip-list style="margin-right:30px;">
 
-        <mat-chip style="margin-right:5px; background-color:#18e92a">
-          <button (click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;" selected style="
+          <mat-chip style="margin-right:5px; background-color:#18e92a">
+            <button (click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;" selected style="
         cursor: pointer; padding: 5px; ">
-        View Tasks
-        </button>
-      </mat-chip>
-      </mat-chip-list>
+              View Tasks
+            </button>
+          </mat-chip>
+        </mat-chip-list>
 
-    </mat-card-header>
-    
-      <mat-tree
-        [dataSource]="nestedDataSource"
-        [treeControl]="nestedTreeControl">
+      </mat-card-header>
+
+      <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
 
         <!-- Without Children -->
-        <mat-nested-tree-node *matTreeNodeDef="let node" >
-          <li>
-            <div class="mat-tree-node" >
-              <button mat-icon-button *ngIf="(node.Description === 'Child' && node.Children.length === 0)">
-    
-          <mat-icon class="mat-icon-rtl-mirror">
-              star
-            </mat-icon>
-            </button>
-            <span style="margin-left:5%;margin-right:5%;">
-              {{node.Name}}
-            </span>
-            <app-delete-node              
-              (deletedNode)="deleteNode($event)"
-              [currentNode]="node"
-            ></app-delete-node>
-            <app-edit-node
-              (edittedNode)="editNode($event)"
-              [masterdata]="nestedDataSource.data"
-              [currentNode]="node"
-            ></app-edit-node>
-            <app-add-node
-            [masterdata]="nestedDataSource.data"
-               [isTop]="false"
-              [latestaddProject]="Project"
-              [currentNode]="node"
-              [AlltheKeys]="AlltheKeys"
-              *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"
-            ></app-add-node>
-            <mat-chip-list style="margin-right:30px;">
+        <mat-nested-tree-node *matTreeNodeDef="let node">
 
-              <mat-chip style="margin-right:5px; background-color:#18e92a">
-                <button selected *ngIf="(node.Description === 'Child' && node.Children.length === 0)"(click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;" selected style="
-              margin-top:1% ;cursor: pointer; padding: 5px; ">
-              View Tasks
-              </button>
-            </mat-chip>
-            </mat-chip-list>
-            </div>
-          </li>
-        </mat-nested-tree-node>
-      
-        <!-- With Children -->
-        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
-          <li class="example-tree-container">
+            <li>
             <div class="mat-tree-node">
-              <button
-                mat-icon-button
-                matTreeNodeToggle
-                [attr.aria-label]="'toggle ' + node.Name"
-              >
-                <mat-icon class="mat-icon-rtl-mirror">
-                  {{nestedTreeControl.isExpanded(node) ? 'indeterminate_check_box' : 'add_box'}}
+              <button mat-icon-button *ngIf="(node.Description === 'Child' && node.Children.length === 0)" >
+
+                <mat-icon class="mat-icon-rtl-mirror" (click)="SelectedMainSection(node.Name)">
+                  star
                 </mat-icon>
               </button>
               <span style="margin-left:5%;margin-right:5%;">
                 {{node.Name}}
               </span>
-              <app-delete-node              
-                (deletedNode)="deleteNode($event)"
-                [currentNode]="node"
-              ></app-delete-node>
-              <app-edit-node
-                (edittedNode)="editNode($event)"
-                [masterdata]="nestedDataSource.data"
-                [currentNode]="node"
-              ></app-edit-node>
-              <app-add-node
-              [masterdata]="nestedDataSource.data"
-                [isTop]="false"
-                [latestaddProject]="Project"
-                [currentNode]="node"
-                [AlltheKeys]="AlltheKeys"
-              ></app-add-node>
+              <app-delete-node (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
+              <app-edit-node (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
+              </app-edit-node>
+              <app-add-node [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+                [currentNode]="node" [AlltheKeys]="AlltheKeys"
+                *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"></app-add-node>
+              <mat-chip-list style="margin-right:30px;">
+
+                <mat-chip style="margin-right:5px; background-color:#18e92a">
+                  <button selected *ngIf="(node.Description === 'Child' && node.Children.length === 0)"
+                    (click)="NavigateTestcase(node.Name)" style="color:primary; text-align: center;margin: 0px;"
+                    selected style="
+              margin-top:1% ;cursor: pointer; padding: 5px; ">
+                    View Tasks
+                  </button>
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </li>
+        </mat-nested-tree-node>
+
+        <!-- With Children -->
+        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+          <li class="example-tree-container">
+            <div class="mat-tree-node">
+              <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.Name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{nestedTreeControl.isExpanded(node) ? 'indeterminate_check_box' : 'add_box'}}
+                </mat-icon>
+
+              </button>
+              <span style="margin-left:5%;margin-right:5%;">
+                {{node.Name}}
+              </span>
+              <app-delete-node (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
+              <app-edit-node (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
+              </app-edit-node>
+              <app-add-node [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+                [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
             </div>
             <ul>
-              <div *ngIf="nestedTreeControl.isExpanded(node)">    
-                <ng-container matTreeNodeOutlet></ng-container>    
+              <div *ngIf="nestedTreeControl.isExpanded(node)">
+                <ng-container matTreeNodeOutlet></ng-container>
               </div>
               <div *ngIf="!nestedTreeControl.isExpanded(node)" style="border:none;">
               </div>
@@ -107,24 +84,19 @@
           </li>
         </mat-nested-tree-node>
       </mat-tree>
-      <app-add-node
-      [masterdata]="nestedDataSource.data"
-      [isTop]="true"
-      [latestaddProject]="Project"
-      [currentNode]="node"
-      [AlltheKeys]="AlltheKeys"
-      ></app-add-node>
+      <app-add-node [masterdata]="nestedDataSource.data" [isTop]="true" [latestaddProject]="Project"
+        [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
 
       <button mat-raised-button color="warn" (click)="openBottomSheet()" style="margin:5%;">
 
         Change Order<mat-icon style="margin-left:5%;">
-        add_box
+          add_box
         </mat-icon>
-        </button>
+      </button>
 
 
-        
-        
+
+
     </mat-card>
   </div>
 </div>
