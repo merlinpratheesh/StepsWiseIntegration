@@ -704,16 +704,10 @@ header{
   width: 280px;
 }
 
-.example-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
 
-.example-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.mat-ink-bar{
+  background-color:#00ADEE;
 }
+.mat-tab-label-active{
+   color: #00ADEE !important;
+} 

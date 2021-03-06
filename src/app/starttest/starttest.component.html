@@ -227,7 +227,7 @@
             <mat-grid-tile colspan="5" rowspan='9' style="background: #F2F3F5 ;">
 
                 <mat-tab-group style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow">
-                    <mat-tab style="color:#216fdb; ">
+                    <mat-tab label="Tab 1" style="color:#216fdb; ">
                         <ng-template mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
 
@@ -297,7 +297,7 @@
 
 
                     </mat-tab>
-                    <mat-tab class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
+                    <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
                         <ng-template mat-tab-label>Private</ng-template>
                         <ng-template matTabContent>
                             Please Login For Add Private Projects

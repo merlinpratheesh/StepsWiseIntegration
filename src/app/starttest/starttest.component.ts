@@ -1,6 +1,6 @@
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService } from 'firebaseui-angular';
@@ -34,7 +34,9 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   selector: 'app-starttest',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './starttest.component.html',
-  styleUrls: ['./starttest.component.scss']
+  styleUrls: ['./starttest.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class StarttestComponent implements OnInit,OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
