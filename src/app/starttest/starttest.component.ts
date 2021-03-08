@@ -35,14 +35,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './starttest.component.html',
   styleUrls: ['./starttest.component.scss'],
-  encapsulation: ViewEncapsulation.None
 
 })
 export class StarttestComponent implements OnInit,OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<projectDetails>;
-  customCollapsedHeight: string = '30px';
+  customCollapsedHeight: string = '50px';
 
 
 

@@ -335,7 +335,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   .example-list {
     width: 500px;
     max-width: 100%;
-    border: solid 10px green;
+    border: solid 2px black;
     min-height: 60px;
     display: block;
     background: white;
@@ -353,7 +353,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
     justify-content: space-around;
     box-sizing: border-box;
     cursor: move;
-    background: lightblue;
+    background:rgb(240, 240, 240);
     font-size: 20px;
   }
   

@@ -1,24 +1,5 @@
 
-  .person {
-    transition: all 0.3s linear;
-    border-radius: 0.3rem;
 
-
-  }
-  .person img {
-    border-radius: 50%;
-    border: 0.1rem solid teal;
-    flex: 1 0 50%;
-    width: 88px;
-    height: 88px;
-  }
-  
-  .person h4 {
-    text-transform: capitalize;
-    margin: 0.5rem 0;
-    letter-spacing: 0.15rem;
-    color: teal;
-  }
 
   .SignInbutton{
     font-family: inherit;
@@ -98,6 +79,7 @@
         position: relative;
         background: #F2F3F5;
         width: 17rem;
+        height: 20rem;
         margin: 2rem auto;
         transition: all 0.3s linear;
         border-radius: 0.3rem;
@@ -121,9 +103,7 @@
         letter-spacing: 0.15rem;
         color: teal;
       }
-      .person:hover {
-        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
-      }
+
       
       .SignInbutton{
         font-family: inherit;
@@ -199,36 +179,7 @@
 
 
 
-    .person {
-      position: relative;
-      background: #F2F3F5;
-      width: 17rem;
-      margin: 2rem auto;
-      transition: all 0.3s linear;
-      border-radius: 0.3rem;
-      text-align: center;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    
-    }
-    .person img {
-      border-radius: 50%;
-      border: 0.1rem solid teal;
-      flex: 1 0 50%;
-      width: 88px;
-      height: 88px;
-    }
-    
-    .person h4 {
-      text-transform: capitalize;
-      margin: 0.5rem 0;
-      letter-spacing: 0.15rem;
-      color: teal;
-    }
-    .person:hover {
-      box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
-    }
+ 
     
     .SignInbutton{
       font-family: inherit;
@@ -333,7 +284,7 @@
         }
         .content {
           background: white;
-          width: 280px;
+          width: auto;
           height: 100px;
           position: relative;
           top: -35px;
@@ -372,7 +323,7 @@
         }
         
         a:hover {
-          color: black;
+          color: rgb(197, 13, 13);
         }
         
         ul {
@@ -387,7 +338,7 @@
         }
         
         .fa:hover {
-          color: #000;
+          color: rgb(38, 241, 82);
         }
         
         
@@ -460,85 +411,6 @@
         }
 
 
-        .profile-social-links {
-          display: inline-block;
-          background:primary;
-          opacity: 0;
-          margin-left: 30px;
-          -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-          -webkit-animation: moveIn 1s 3.1s ease forwards;
-          animation: moveIn 1s 2.1s ease forwards;
-        }
-        .profile-social-links li {
-          list-style: none;
-          margin-left: 20px;
-          float: left;
-
-          width: 10.3%;
-          text-align: center;
-        }
-        .profile-social-links li a {
-          display: inline-block;
-          width: 20px;
-          height: 20px;
-          padding: 15px;
-          margin-top: 30px;
-          text-align: center;
-          background-color:rgb(242, 243, 245);
-          margin-right: 0px;
-          position: relative;
-          overflow: hidden !important;
-          -webkit-border-radius: 50%;
-          border-radius: 50%;
-        }
-
-        .profile-social-links li a:hover {
-          background-color: #FF5722;
-          transition: background-color 0.5s ease-out;
-        }
-
-        .profile-social-links li a img {
-          position: relative;
-          z-index: 1;
-        }
-
-        .profile-social-links li a img,
-        .profile-social-links li a svg {
-          width: 20px;
-          margin-top: -15px;
-        }
-        @keyframes materia_portrait {
-          0% {
-            background: #e0e0e0;
-          }
-          50% {
-            border-radius: 4px;
-          }
-          100% {
-            height: 10px;
-            background-color: rgb(104, 175, 238);
-            width: 100px;
-            min-height: 40%;
-            margin-top: 20px;
-         
-
-            position: relative;
-          }
-        }
-        
-        @keyframes moveIn {
-          0% {
-            margin-top: 20px;
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-            margin-top: 10px;
-            margin-left: 200px;
-
-          }
-        }
 .search{
         border: 1px solid rgb(235, 15, 15);
         border-radius: 5px;
@@ -567,7 +439,7 @@
 .imageHeader{
   position: relative;
   margin-left: 0%;
-  margin-top: 15px;
+  margin-top: 35px;
   font-size: 20px;
   height: 150px;
   width: 300px;
@@ -663,7 +535,7 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
 
 header{
   position: fixed;
-  top: 65px;
+  top: 60px;
    z-index: 11;
    margin-left: 2px;
   transition: all 250ms ease-in-out;
@@ -708,12 +580,25 @@ header{
 }
 
 
-.mat-ink-bar{
-  background-color:#00ADEE;
-}
-.mat-tab-label-active{
-   color: #00ADEE !important;
-} 
-.example-menu-row {
-  margin-bottom: 140px;
-}
+
+
+  .container {
+		width: 100px;
+    margin-right: 5px;
+	}
+		.block {
+      text-align: left;
+      margin-top: 300px;
+margin-left: -50%;
+			background: white;
+      border:solid 3px black;			border-radius: 5px;
+
+			}
+				.menu-box .titular {
+					background: #11a8ab;
+				}
+
+
+  .menu-box-menu li{
+    position: relative;	
+  }
