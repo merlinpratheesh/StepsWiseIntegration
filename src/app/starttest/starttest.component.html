@@ -1,101 +1,101 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
-       
-                <div *ngIf="profileRef | async as profiledetails ; else noprofile" fxLayout="column"
-                    fxLayoutAlign="space-between center">
 
-                    <div style="height:40%;" class="person">
-                        <div id="main-card">
-                            <div class="cover-photo">
+        <div *ngIf="profileRef | async as profiledetails ; else noprofile" fxLayout="column"
+           fxLayoutAlign="space-between center">
 
-                            </div>
-                            <div class="photo">
-                                <img src="{{profiledetails?.photoUrl}}" alt="">
-                            </div>
-                            <div class="content">
-                                <h2 class="name">{{profiledetails?.profileName}}</h2>
-                                <h3 class="card__text">{{profiledetails?.areaOfinterest}}<br>
-                                    {{profiledetails?.location}}</h3>
-                                <h3 class="email">
-                                    <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
-                                </h3>
-
-
-                            </div>
-
-                        </div>
+            <div style="height:40%;" class="person">
+                <div id="main-card">
+                    <div class="cover-photo">
 
                     </div>
-                    <div class="">
-                        <h2>{{profiledetails?.membershipType}}</h2>
+                    <div class="photo">
+                        <img src="{{profiledetails?.photoUrl}}" alt="">
                     </div>
-                    <ul class="card__info">
-                        <li>
-                            <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
-                            <span>posts</span>
-                        </li>
-                        <li>
-                            <span class="card__info__stats">47</span>
-                            <span>followers</span>
-                        </li>
-                        <li>
-                            <span class="card__info__stats">20</span>
-                            <span>following</span>
-                        </li>
-                    </ul>
-                    <button mat-raised-button color="primary" (click)="openBottomSheet()"
-                        [disabled]="authDetails?.uid === null">Edit</button>
-                    <br>
+                    <div class="content">
+                        <h2 class="name">{{profiledetails?.profileName}}</h2>
+                        <h3 class="card__text">{{profiledetails?.areaOfinterest}}<br>
+                            {{profiledetails?.location}}</h3>
+                        <h3 class="email">
+                            <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
+                        </h3>
+
+
+                    </div>
 
                 </div>
-                <ng-template #noprofile>
-                    <div fxLayout="column" fxFlexAlign="start" fxLayoutGap="5%" fxLayoutAlign="space-between center">
-                        <div class="card">
-                            <div class="img-div"
-                                style="background-image: url(https://images3.alphacoders.com/113/1131150.png);">
-                            </div>
 
-                            <div class="content-div">
-                                <div class="title-div">
-                                    <h2 class="title">STEPS WISE</h2>
-                                </div>
-                                <div class="desc-div">
-                                    <p class="desc-text">
-                                        Taskwise helps you create, manage and share tasks and deliverables with your
-                                        co-workers
-                                        and employees, keeping your business focused on what matters most.
-                                    </p>
-                                </div>
-                                <div class="watch-more-div">
-                                    <button class="watch-more" #tooltip="matTooltip"
-                                        matTooltip=" Please Login for Create New Task">Task now</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="case1 " appShowmore fxFlex="nogrow" fxFlexOffset="5%">
-                            Select the public Tasks to view the Steps. <br>
-                            Login to view/edit the private Tasks and keys.
-                            Create New Tasks. Share Tasks to the community.
-
-                        </div>
-                        <div>
-                            <h2 style=" margin-left: 10px;">
-                                Convert your work into tasks
-                            </h2>
-                        </div>
-
-
-                        <div fxFlexOffset="5px">
-                            <img class="imageHeader" 
-                                src="https://st4.depositphotos.com/13324256/22740/i/600/depositphotos_227404530-stock-photo-cropped-view-woman-writing-word.jpg">
-                        </div>
-
-
+            </div>
+            <div class="">
+                <h2>{{profiledetails?.membershipType}}</h2>
+            </div>
+            <ul class="card__info">
+                <li>
+                    <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
+                    <span>posts</span>
+                </li>
+                <li>
+                    <span class="card__info__stats">47</span>
+                    <span>followers</span>
+                </li>
+                <li>
+                    <span class="card__info__stats">20</span>
+                    <span>following</span>
+                </li>
+            </ul>
+            <button mat-raised-button color="primary" (click)="openBottomSheet()"
+                [disabled]="authDetails?.uid === null">Edit</button>
+            <br>
+        
+        </div>
+        <ng-template style="background-color:darkorange;" #noprofile>
+            <div fxLayout="column" fxFlexAlign="start" fxLayoutGap="5%" fxLayoutAlign="space-between center">
+                <div class="card">
+                    <div class="img-div"
+                        style="background-image: url(https://images3.alphacoders.com/113/1131150.png);">
                     </div>
 
-                </ng-template>
+                    <div class="content-div">
+                        <div class="title-div">
+                            <h2 class="title">STEPS WISE</h2>
+                        </div>
+                        <div class="desc-div">
+                            <p class="desc-text">
+                                Taskwise helps you create, manage and share tasks and deliverables with your
+                                co-workers
+                                and employees, keeping your business focused on what matters most.
+                            </p>
+                        </div>
+                        <div class="watch-more-div">
+                            <button class="watch-more" #tooltip="matTooltip"
+                                matTooltip=" Please Login for Create New Task">Task now</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="case1 " appShowmore fxFlex="nogrow" fxFlexOffset="5%">
+                    Select the public Tasks to view the Steps. <br>
+                    Login to view/edit the private Tasks and keys.
+                    Create New Tasks. Share Tasks to the community.
+
+                </div>
+                <div>
+                    <h2 style=" margin-left: 10px;">
+                        Convert your work into tasks
+                    </h2>
+                </div>
+
+
+                <div fxFlexOffset="5px">
+                    <img class="imageHeader"
+                        src="https://st4.depositphotos.com/13324256/22740/i/600/depositphotos_227404530-stock-photo-cropped-view-woman-writing-word.jpg">
+                </div>
+
+
+            </div>
+
+        </ng-template>
 
     </mat-sidenav>
 
@@ -218,62 +218,61 @@
                         (signInFailure)="errorCallback($event)" (uiShown)="uiShownCallback()"></firebase-ui>
                 </mat-toolbar>
 
-
-
             </mat-grid-tile>
 
 
 
             <mat-grid-tile colspan="5" rowspan='9' style="background: #F2F3F5 ;">
 
-                <mat-tab-group style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow">
-                    <mat-tab label="Tab 1" style="color:#216fdb; ">
-                        <ng-template mat-tab-label>Public</ng-template>
+                <mat-tab-group (click)="sidenav.toggle()"   style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow">
+                    <mat-tab   label="Tab 1" style="color:#216fdb; ">
+                        <ng-template  mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
 
                             <div *ngIf="(obs| async) as projectDetails; else waitingload ">
-                                <mat-accordion fxLayout="column" >
+                                <mat-accordion fxLayout="column">
 
                                     <mat-paginator [length]="100" style="width:100%;" [pageSize]="5"
                                         [pageSizeOptions]="[5,10,15,20]"></mat-paginator>
-                                    <mat-expansion-panel fxLayoutGap="10px"  
+                                    <mat-expansion-panel (click)="sidenav.toggle(true)" fxLayoutGap="10px"
                                         style=" padding: 20px 10px; background: #f0f0f0"
                                         *ngFor="let details of projectDetails" (closed)="Expansionclose()">
-                                        <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight" (click)="sidenav.toggle(false)" (click)="profileKeyRef(details)"
-                                            style="width:88%; ">
-                                            <mat-panel-title  fxLayout="row"  fxFlexAlign="center" style=" border-style:initial !important;" fxLayout="center center" fxLayoutGap="30px" fxFlex="grow" >
-                                               
-                                                    <div fxLayout="row" >
-                                                        <span mat-card-avatar
-                                                            [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
-                                                    
+                                        <mat-expansion-panel-header  [collapsedHeight]="customCollapsedHeight"
+                                            (click)="profileKeyRef(details)" style="width:88%; ">
+                                            <mat-panel-title fxLayout="row" fxFlexAlign="center"
+                                                style=" border-style:initial !important;" fxLayout="center center"
+                                                fxLayoutGap="30px" fxFlex="grow">
+
+                                                <div fxLayout="row">
+                                                    <span mat-card-avatar 
+                                                        [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
+
                                                 </div>
-                                              {{details.projectName}}
-                                              {{details.description}}
+
+                                                <button mat-raised-button color="accent">
+                                                    <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+
+                                                    {{details.projectName}}
+                                                </button>
 
 
 
-                                            </mat-panel-title >
+                                            </mat-panel-title>
                                             <mat-panel-description fxFlex="grow">
 
                                                 {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
 
-                                              
+
+
 
                                             </mat-panel-description>
+
                                         </mat-expansion-panel-header>
 
-                                        
-                                            <button class="_27F2N" (click)="sidenav.toggle(false)">
-                                           
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                            <path fill="currentColor" d="M19.1 17.2l-5.3-5.3 5.3-5.3-1.8-1.8-5.3 5.4-5.3-5.3-1.8 1.7 5.3 5.3-5.3 5.3L6.7 19l5.3-5.3 5.3 5.3 1.8-1.8z">
-                                            </path></svg></button>
-                                        <button   (click)="sidenav.toggle()"
-                                        mat-raised-button color="accent">
-                                        <mat-icon mat-list-avatar style="width:auto">person</mat-icon>
+                                        {{details.description}}
+                                      
 
-                                        {{details.profileName}} </button>See Profile
+
                                         <app-nested-tree class="mattree"
                                             *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
@@ -297,7 +296,7 @@
 
 
                     </mat-tab>
-                    <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
+                    <mat-tab   label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
                         <ng-template mat-tab-label>Private</ng-template>
                         <ng-template matTabContent>
                             Please Login For Add Private Projects
@@ -350,6 +349,71 @@
                 </div>
             </mat-grid-tile>
             <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;">
+
+
+                <div class="example-menu-row">
+
+                    <button  [matMenuTriggerFor]="menu1"  color="primary" ng-init>
+                        <mat-icon mat-list-avatar style="width:auto">person</mat-icon>
+
+                        {{userProfileView}}
+                    </button>
+
+                    <h5 class="uxg-h5">User Profile</h5>
+
+  <mat-menu  #menu1="matMenu" class="uxg-user-profile">
+    <div *ngIf="profileRef | async as profiledetails ; else noprofile" fxLayout="column"
+    fxLayoutAlign="space-between center">
+
+    <div style="height:40%;" class="person">
+        <div id="main-card">
+            <div class="cover-photo">
+
+            </div>
+            <div class="photo">
+                <img src="{{profiledetails?.photoUrl}}" alt="">
+            </div>
+            <div class="content">
+                <h2 class="name">{{profiledetails?.profileName}}</h2>
+                <h3 class="card__text">{{profiledetails?.areaOfinterest}}<br>
+                    {{profiledetails?.location}}</h3>
+                <h3 class="email">
+                    <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
+                </h3>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="">
+        <h2>{{profiledetails?.membershipType}}</h2>
+    </div>
+    <ul class="card__info">
+        <li>
+            <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
+            <span>posts</span>
+        </li>
+        <li>
+            <span class="card__info__stats">47</span>
+            <span>followers</span>
+        </li>
+        <li>
+            <span class="card__info__stats">20</span>
+            <span>following</span>
+        </li>
+    </ul>
+
+
+</div>
+    <mat-divider></mat-divider>
+      <button mat-flat-button color="primary" dense>
+              <mat-icon>exit_to_app</mat-icon>
+close          </button>
+  </mat-menu>
+</div>
+
 
             </mat-grid-tile>
 

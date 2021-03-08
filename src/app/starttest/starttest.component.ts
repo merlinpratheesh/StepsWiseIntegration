@@ -167,7 +167,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   DATA: projectDetails[];
   matcher = new MyErrorStateMatcher();
   toggleSearch: boolean = false;
-
+  userProfileView;
   @ViewChild('searchbar') searchbar: ElementRef;
   options: FormGroup;
 
@@ -293,6 +293,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
     this.userselectedProject=some.projectName;
 
+    this.userProfileView=some.profileName;
     console.log('242',this.userselectedProject); 
 
     this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
@@ -304,7 +305,9 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     console.log('218',this.keyRef);
     
 
+  
    }
+
    Expansionclose(){
     this.getSectionsSubscription?.unsubscribe();
    }

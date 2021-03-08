@@ -566,13 +566,15 @@
 
 .imageHeader{
   position: relative;
-  margin-left: 2%;
+  margin-left: 0%;
   margin-top: 15px;
   font-size: 20px;
   height: 150px;
-  width: 330px;
+  width: 300px;
   color: rgba(0,0,0,0);
   font-weight: lighter;
+  border-radius: 20px;
+
 }
 
 /*
@@ -582,12 +584,12 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
 
 .card{
   height: 260px;
-  width: 290px;
+  width: 270px;
   display: grid;
-  margin-top:0px;
-  margin-left: 20px;
+  margin-top:4px;
+  margin-left: 1px;
   grid-template-columns: .2fr 1fr;
-  border-top-right-radius: 20px;
+  border-radius: 20px;
   border-bottom-right-radius: 20px;
   overflow: hidden;
 }
@@ -702,6 +704,7 @@ header{
   align-items: center;
   justify-content: center;
   width: 280px;
+  background-color:darkturquoise;
 }
 
 
@@ -711,3 +714,6 @@ header{
 .mat-tab-label-active{
    color: #00ADEE !important;
 } 
+.example-menu-row {
+  margin-bottom: 140px;
+}
