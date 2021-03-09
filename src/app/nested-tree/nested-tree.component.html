@@ -9,7 +9,7 @@
         <mat-chip-list style="margin-right:30px;">
 
           <mat-chip style="margin-right:5px; background-color:#18e92a">
-            <button (click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;" selected style="
+            <button  class="button" (click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;" selected style="
         cursor: pointer; padding: 5px; ">
               View Tasks
             </button>
@@ -43,7 +43,7 @@
               <mat-chip-list style="margin-right:30px;">
 
                 <mat-chip style="margin-right:5px; background-color:#18e92a">
-                  <button selected *ngIf="(node.Description === 'Child' && node.Children.length === 0)"
+                  <button class="button" selected *ngIf="(node.Description === 'Child' && node.Children.length === 0)"
                     (click)="NavigateTestcase(node.Name)" style="color:primary; text-align: center;margin: 0px;"
                     selected style="
               margin-top:1% ;cursor: pointer; padding: 5px; ">

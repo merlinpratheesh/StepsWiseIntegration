@@ -1,4 +1,5 @@
 <mat-sidenav-container class="example-container">
+
     <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
@@ -63,6 +64,8 @@
 
             <mat-grid-tile colspan="5" rowspan='9' style="background: #F2F3F5 ;">
 
+
+
                 <mat-tab-group (click)="sidenav.toggle()" style="  color:tomato ;background: #F2F3F5; height: 100%; "
                     fxFlex="grow">
                     <mat-tab label="Tab 1" style="color:#216fdb; ">
@@ -88,7 +91,7 @@
 
                                                 </div>
 
-                                                <button mat-raised-button color="accent">
+                                                <button class="activebutton">
                                                     <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
 
                                                     {{details.projectName}}
@@ -187,49 +190,54 @@
 
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   "  fxLayout="column" fxLayoutAlign="space-evenly end">
-                    <div   fxLayout="column" fxLayoutAlign="end start" class="menu-box block">
-                        <h2 class="titular">MENU BOX</h2>
-                        <ul fxLayout="column" fxLayoutAlign="end start" class="menu-box-menu">
-                            <li>
-                             
-                                 <button mat-raised-button color="accent" [matMenuTriggerFor]="menu1" >
-                                                    <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
-profile
-                                                </button>
-                            </li>
-                            <li>
-                                <button mat-raised-button color="accent" >
-                                    <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
-                                    Change Order
-                                </button>
-                               
-                            </li>
+            <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   " fxLayout="column"
+                fxLayoutAlign="space-evenly end">
 
-                            <li>
-                                <button mat-raised-button color="accent"  >
-                                    <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
-                                    Add MainSecton
 
-                                </button>
-                              
-                            </li>
-                            <li>
-                                <button mat-raised-button color="accent"  >
-                                    <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
-                                    Add SubSecton
-                                </button>
-                              
-                            </li>
 
-                        </ul>
+
+                <div fxLayout="column" fxLayoutAlign="end start" class="menu-box block">
+                    <h2 class="titular">MENU BOX</h2>
+                    <ul fxLayout="column" fxLayoutAlign="end start" class="menu-box-menu">
+                        <li >
+
+                            <button class="button" [matMenuTriggerFor]="menu1">
+                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+                                profile
+                            </button>
+                        </li>
+                        <li>
+                            <button class="button">
+                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+                                Change Order
+                            </button>
+
+                        </li>
+
+                        <li>
+                            <button class="button">
+                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+                                Add MainSecton
+
+                            </button>
+
+                        </li>
+                        <li>
+                            <button class="button">
+                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+                                Add SubSecton
+                            </button>
+
+                        </li>
+
+                    </ul>
                 </div>
 
-                <mat-menu  style="margin-left: 250px;"  #menu1="matMenu"   xPosition="after">
-                    <div *ngIf="profileRef | async as profiledetails ; else noSelectedProject " >
+                <mat-menu [overlapTrigger]="false"  #menu1="matMenu" xPosition="after">
+                    <div  *ngIf="profileRef | async as profiledetails ; else noSelectedProject ">
 
-                        <div  style="height:40%; float:inline-start; " class="person">
-                            <div id="main-card">
+                        <div  style="height:40%;  float:inline-start; " class="person">
+                            <div id="main-card" >
                                 <div class="cover-photo">
 
                                 </div>
@@ -279,6 +287,7 @@ profile
                     </ng-template>
 
                 </mat-menu>
+
 
             </mat-grid-tile>
 

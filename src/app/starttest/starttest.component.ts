@@ -1,6 +1,6 @@
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ComponentFactoryResolver, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult, FirebaseuiAngularLibraryService } from 'firebaseui-angular';
@@ -169,6 +169,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   userProfileView;
   @ViewChild('searchbar') searchbar: ElementRef;
   options: FormGroup;
+  activeSelector: string;
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -179,6 +180,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     private db: AngularFirestore,
     private _bottomSheet: MatBottomSheet,
     private changeDetectorRef: ChangeDetectorRef,
+    private resolver: ComponentFactoryResolver
   ) {
     this.options = fb.group({
       bottom: 0,
@@ -306,6 +308,10 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
   
    }
+   
+   onActivated(component) {
+    this.activeSelector =    this.resolver.resolveComponentFactory(component.constructor).selector;    
+  }
 
    Expansionclose(){
     this.getSectionsSubscription?.unsubscribe();
