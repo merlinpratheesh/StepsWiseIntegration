@@ -145,7 +145,7 @@
   }
 
    .SignInbutton{
-    font-family: inherit;
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
         display: inline-block;
         border: 0 !important;
         outline: 0;
@@ -182,7 +182,7 @@
  
     
     .SignInbutton{
-      font-family: inherit;
+      font-family: 'IBM Plex Sans Condensed', sans-serif;
           display: inline-block;
           position:relative;
           border: 0 !important;
@@ -214,11 +214,11 @@
         .case1 {
       
           width: 220px;
+          font-size: 15px;
           border: 3px solid rgb(104, 175, 238);
           border-radius: 10px;
           padding: 1rem;
-          font-family: Arial;
-          font-size: 1rem;
+          font-family: 'IBM Plex Sans Condensed', sans-serif;
           color: #666;
           background-color:white;
           white-space: nowrap;
@@ -230,7 +230,7 @@
           border: 3px solid rgb(104, 175, 238);
           border-radius: 10px;
           padding: 1rem;
-          font-family: Arial;
+          font-family: 'IBM Plex Sans Condensed', sans-serif;
           font-size: 1rem;
           color: #666;
           background-color:white;
@@ -480,7 +480,8 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
   padding-left: 10px;
 }
 .title{
-  font-family: 'Poppins', sans-serif;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-size: 15px;
 }
 
 .desc-div{
@@ -577,31 +578,36 @@ header{
   align-items: center;
   justify-content: center;
   width: 280px;
-  background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+  background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+
 }
 
 
 
 
   .container {
-		width: 100px;
+		width: 10px;
     margin-right: 5px;
+    
 	}
 		.block {
       text-align: left;
-      margin-top: 300px;
-margin-left: -50%;
+      margin-top: 0px;
 			background: white;
-      border:solid 3px black;			border-radius: 5px;
+     		border-radius: 5px;
+         border: 3px solid #dcdcdc;
 
 			}
 				.menu-box .titular {
 					background: #11a8ab;
+          font-size: 15px;
+
 				}
 
 
   .menu-box-menu li{
     position: relative;	
+    margin-left: 20px;
   }
 
   .button {
@@ -609,13 +615,13 @@ margin-left: -50%;
     background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
     border-radius: 6px;
     border: 1px solid #dcdcdc;
-    display: inline-block;
+    display: flex;
     cursor: pointer;
     color: #666666;
-    font-family: Arial, sans-serif;
+    font-family:'IBM Plex Sans Condensed', sans-serif;
     font-size: 15px;
     font-weight: bold;
-    padding: 6px 24px;
+    padding: 6px 20px;
     text-decoration: none;
     text-shadow: 0 1px 0 #ffffff;
     outline: 0;
@@ -628,7 +634,7 @@ margin-left: -50%;
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
-    font-family: Arial, sans-serif;
+    font-family: Arial, 'IBM Plex Sans Condensed', sans-serif;
     font-size: 15px;
     font-weight: bold;
     padding: 6px 24px;

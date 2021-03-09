@@ -36,7 +36,7 @@
 
             </div>
             <div>
-                <h2 style=" margin-left: 10px;">
+                <h2 style=" margin-left: 10px;font-size: 15px;">
                     Convert your work into tasks
                 </h2>
             </div>
@@ -53,8 +53,8 @@
     </mat-sidenav>
 
     <mat-sidenav-content [formGroup]="options">
-        <mat-grid-list cols="10" rowHeight="10vh">
-            <mat-grid-tile colspan="10" rowspan='1' style="background:  #673ab7 ;">
+        <mat-grid-list cols="10" rowHeight="10vh" style="background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);">
+            <mat-grid-tile colspan="10" rowspan='1'  style="background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);">
 
                 <app-toolbar></app-toolbar>
 
@@ -81,7 +81,7 @@
                                         style=" background: #f0f0f0" *ngFor="let details of projectDetails"
                                         (closed)="Expansionclose()">
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
-                                            (click)="profileKeyRef(details)" style="width:100%; ">
+                                            (click)="profileKeyRef(details)" style="width:90%; ">
                                             <mat-panel-title fxLayout="row" fxFlexAlign="center"
                                                 style=" border-style:initial !important;" fxLayoutGap="30px">
 
@@ -128,6 +128,7 @@
 
                             </div>
 
+
                             <ng-template #waitingload>
                                 <mat-spinner>
 
@@ -158,8 +159,8 @@
                                 <mat-icon>menu</mat-icon>
                             </button>
                             <div [class.active]="toggleSearch" style="padding:8px 0 0 10px; flex:1;">
-                                <div class="mat-title" style="margin-bottom:2px;">Search</div>
-                                <div class="mat-subheading-2" style="line-height:.6rem;">Leader of the Free World</div>
+                                <div class="mat-title" style="margin-bottom:2px; font-size: 15px;">Search</div>
+                                <div class="mat-subheading-2" style="line-height:.6rem;font-size: 15px;">Leader of the Free World</div>
                             </div>
 
                             <button mat-icon-button (click)="openSearch()">
@@ -190,25 +191,18 @@
 
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   " fxLayout="column"
-                fxLayoutAlign="space-evenly end">
+            <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   " fxLayout="column" fxLayout="column" fxLayoutAlign="space-evenly end">
+                <div fxLayout="column" class="menu-box block">
+                    <h2 class="titular" >MENU BOX</h2>
+                    <ul  fxLayoutGap="5%"  fxLayoutAlign="start" fxLayout="column" class="menu-box-menu">
+                        <li>
 
-
-
-
-                <div fxLayout="column" fxLayoutAlign="end start" class="menu-box block">
-                    <h2 class="titular">MENU BOX</h2>
-                    <ul fxLayout="column" fxLayoutAlign="end start" class="menu-box-menu">
-                        <li >
-
-                            <button class="button" [matMenuTriggerFor]="menu1">
-                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+                            <button class="button" (click)="ShowButton()">
                                 profile
                             </button>
                         </li>
                         <li>
-                            <button class="button">
-                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+                            <button class="button" >
                                 Change Order
                             </button>
 
@@ -216,7 +210,6 @@
 
                         <li>
                             <button class="button">
-                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
                                 Add MainSecton
 
                             </button>
@@ -224,7 +217,6 @@
                         </li>
                         <li>
                             <button class="button">
-                                <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
                                 Add SubSecton
                             </button>
 
@@ -233,11 +225,12 @@
                     </ul>
                 </div>
 
-                <mat-menu [overlapTrigger]="false"  #menu1="matMenu" xPosition="after">
-                    <div  *ngIf="profileRef | async as profiledetails ; else noSelectedProject ">
+                <div *ngIf="showSelected" xPosition="after">
+                    <div *ngIf="profileRef | async as profiledetails ; else noSelectedProject "
+                        fxLayoutAlign="space-between center" fxLayout="column">
 
-                        <div  style="height:40%;  float:inline-start; " class="person">
-                            <div id="main-card" >
+                        <div style="height:40%;  float:inline-start;  " class="person">
+                            <div id="main-card">
                                 <div class="cover-photo">
 
                                 </div>
@@ -277,7 +270,7 @@
                         </ul>
 
                         <mat-divider></mat-divider>
-                        <button mat-flat-button color="primary" dense>
+                        <button (click)="HideButton()" mat-flat-button color="primary" dense>
                             <mat-icon>exit_to_app</mat-icon>
                             close
                         </button>
@@ -286,7 +279,7 @@
                         <h2>Please Select Project </h2>
                     </ng-template>
 
-                </mat-menu>
+                </div>
 
 
             </mat-grid-tile>

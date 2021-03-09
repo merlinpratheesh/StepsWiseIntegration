@@ -170,6 +170,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   @ViewChild('searchbar') searchbar: ElementRef;
   options: FormGroup;
   activeSelector: string;
+  showSelected: boolean;
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -182,6 +183,8 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     private changeDetectorRef: ChangeDetectorRef,
     private resolver: ComponentFactoryResolver
   ) {
+    this.showSelected = false;
+
     this.options = fb.group({
       bottom: 0,
       fixed: false,
@@ -321,6 +324,12 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     this.router.navigate(['/main']);
   }
 
+  ShowButton() {
+    this.showSelected = true;
+ }
+ HideButton() {
+  this.showSelected = false;
+}
   ngOnDestroy() {
 
 
