@@ -114,7 +114,7 @@
                                         </mat-expansion-panel-header>
 
                                         {{details.description}}
-
+                                        
 
 
                                         <app-nested-tree class="mattree"
@@ -123,9 +123,13 @@
                                         </app-nested-tree>
 
 
-
+                                        <p>
+                                            <a (click)="increment()" class="btn btn-counter" >
+                                                  {{counter}}
+                                          <span>&#x2764;</span>Like it</a>
+                                          </p>
                                     </mat-expansion-panel>
-
+                                    
                                 </mat-accordion>
 
                             </div>
@@ -158,17 +162,14 @@
                     <div style=" width:500px; height: 66px; margin-top: 5px;"  fxFlex="grow" 
                         (click)="openSearch()">
                         <mat-toolbar-row style="padding: 0 5px;">
-                            <button mat-icon-button>
-                                <mat-icon>menu</mat-icon>
-                            </button>
-                            <div [class.active]="toggleSearch" style="padding:8px 0 0 10px; width:500px; height: 66px; margin-top: 5px;">
-                                <div class="mat-title" style="margin-bottom:2px; font-size: 15px;">Search</div>
-                                <div class="mat-subheading-2" style="line-height:.6rem;font-size: 15px;">Leader of the Free World</div>
-                            </div>
-
-                            <button mat-icon-button (click)="openSearch()">
+                            <button (click)="openSearch()" mat-icon-button>
                                 <mat-icon>search</mat-icon>
                             </button>
+                            <div [class.active]="toggleSearch" style="padding:8px 0 0 10px; width:500px; height: 66px; margin-top: 5px;">
+                                <div class="mat-title" style="text-align: left; font-size: 20px; margin-top: 6px;">Search</div>
+                            </div>
+
+                           
                         </mat-toolbar-row>
                     </div>
 
@@ -254,7 +255,7 @@
 
                 </div>
 
-                <div  class="menu-box block" style=" margin-top:26px; margin-left:-25px; padding:1%;position:fixed;" fxFlexAlign="start" fxFlexOffset="9vw">
+                <div  class="menu-box block" style=" margin-top:2px; padding:1%;position:fixed;" fxFlexAlign="start" fxFlexOffset="9vw">
                     <ul style="list-style: none;" fxLayoutGap="5%"   fxLayout="column" >
                         <li>
 
