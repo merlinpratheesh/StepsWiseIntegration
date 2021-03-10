@@ -137,7 +137,10 @@ export class MainScreenComponent  {
   isClose: boolean;
   valueSelected: string[];
   authDetails: any;
-
+  mainSection:MainSectionGroup;
+  subSection:MainSectionGroup;
+  state: any;
+  userSelectedProject:any;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore,    public afAuth: AngularFireAuth
@@ -159,28 +162,23 @@ export class MainScreenComponent  {
     };
 
 
-    if (state !== undefined) {
-      this.myuserProfile.myusrinfoFromDb.projectName = `${state.selectedProject}`;
-      this.Sections = this.getSections(this.db.doc('/projectKey/' + `${state.selectedProject}`));
-      this.SectionTc= this.getTestcases(this.db.doc(`${state.selectedProject}`+'/DefaultProject/items/Merlinpratheesh'));
 
-      console.log(state.mainSubSectionRef[0].name);
-
+    if (state.selectedProject !== undefined) {
+      this.userSelectedProject=state.selectedProject;
+console.log(this.userSelectedProject);
+      //this.myuserProfile.myusrinfoFromDb.projectName = `${state.selectedProject}`;
+      this.Sections = this.getSections(this.db.doc('/projectKey/' + this.userSelectedProject));
       console.log(this.SectionTc);
     }
   }
-
-
- loadTc(some) {
+  mainSubSelection(some){
     console.log(some);
-    this.isClose = false;
-    if(some) {
-      this.isClose = true;
-      console.log('dropdown is closed');
-      this.valueSelected = this.myprojectControls.subsectionkeysControl.value && this.myprojectControls.subsectionkeysControl.value.toString();
-      console.log(this.valueSelected);
+    this.mainSection=some.groupValue;
+    this.subSection=some.value;
+    if (this.userSelectedProject !== undefined){
+      this.SectionTc= this.getTestcases(this.db.doc(this.userSelectedProject+some.groupValue +'/items/'+ some.value));
+      console.log(this.SectionTc);
     }
-    
   }
 
   draweropen() {

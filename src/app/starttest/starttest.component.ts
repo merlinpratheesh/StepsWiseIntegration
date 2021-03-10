@@ -187,8 +187,8 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
     this.options = fb.group({
       bottom: 0,
-      fixed: false,
-      top: 0
+      fixed: true,
+      top: 60
     });
     this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
     this.afAuth.authState.subscribe(myauth => {

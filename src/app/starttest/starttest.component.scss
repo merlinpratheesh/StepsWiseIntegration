@@ -429,7 +429,7 @@
   width: 50px;
   color: rgba(175, 50, 50, 0.65);
   font-weight: lighter;
-  padding-top: 100px;
+  margin-top: 50px;
   margin-left: 10px;
 }
 
@@ -455,10 +455,10 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
 */
 
 .card{
-  height: 260px;
-  width: 270px;
+  height: 250px;
+  width: 290px;
   display: grid;
-  margin-top:4px;
+  margin-top:5px;
   margin-left:5px;
   grid-template-columns: .2fr 1fr;
   border-radius: 20px;
@@ -481,22 +481,25 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
 .title{
   font-family: 'IBM Plex Sans Condensed', sans-serif;
-  font-size: 15px;
+  font-size: 12px;
+  margin-top:0px;
 }
 
 .desc-div{
-  width: 90%;
+  width: 95%;
 }
 .desc-text{
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   font-weight: bold;
   font-size: .9rem;
+  margin-top:-25px;
   color: #494949;
 }
 
 .watch-more{
   position: relative;
   padding: 5px;
+  margin-top: -10px;
   background-color: transparent;
   border: none;
   border-bottom: 2px solid black;
@@ -550,11 +553,13 @@ header{
 .search-block{
   width: 0%;
   right: 0;
+
   @extend header;
   background: #fff;
   &.active{
-    width: 40%;
-    height: 58px;
+    margin-top: 5px;
+    width: 39%;
+    height: 65px;
   }
   .search-control{
     flex: 1;
@@ -567,8 +572,7 @@ header{
 
 .example-container {
   position: absolute;
-
-
+  top: 65px;
   left: 0;
   right: 0;
 }
@@ -577,11 +581,17 @@ header{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 280px;
-  background: #ffffff linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-
+  width: 300px;
+  margin-top: 4px;
+  background: rgba(255, 0, 0, 0.5);
 }
 
+.example-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
 
 
 

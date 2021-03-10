@@ -1,10 +1,12 @@
 <mat-sidenav-container class="example-container">
 
-    <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+    <mat-sidenav  #sidenav mode="side" opened class="example-sidenav"
+    [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
+    [fixedBottomGap]="options.value.bottom">
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
 
-            <div fxLayout="column" fxFlexAlign="start" fxLayoutGap="5%" fxLayoutAlign="space-between center">
+            <div  fxLayout="column" fxFlexAlign="start" fxLayoutGap="5%" fxLayoutAlign="space-between center">
                 <div class="card">
                     <div class="img-div"
                         style="background-image: url(https://images3.alphacoders.com/113/1131150.png);">
@@ -53,12 +55,11 @@
     </mat-sidenav>
 
     <mat-sidenav-content [formGroup]="options">
+        <app-toolbar class="example-header"></app-toolbar>
+
+
         <mat-grid-list cols="10" rowHeight="10vh" style="background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);">
-            <mat-grid-tile colspan="10" rowspan='1'  style="background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);">
 
-                <app-toolbar></app-toolbar>
-
-            </mat-grid-tile>
 
 
 
@@ -66,7 +67,7 @@
 
 
 
-                <mat-tab-group (click)="sidenav.toggle()" style="  color:tomato ;background: #F2F3F5; height: 100%; "
+                <mat-tab-group  style="  color:tomato ;background: #F2F3F5; height: 100%; "
                     fxFlex="grow">
                     <mat-tab label="Tab 1" style="color:#216fdb; ">
                         <ng-template mat-tab-label>Public</ng-template>
@@ -76,8 +77,9 @@
                                 <mat-accordion fxLayout="column">
 
                                     <mat-paginator [length]="100" style="width:100%;" [pageSize]="5"
-                                        [pageSizeOptions]="[5,10,15,20]"></mat-paginator>
-                                    <mat-expansion-panel (click)="sidenav.toggle(true)" fxLayoutGap="10px"
+                                        [pageSizeOptions]="[5,10,15,20]">
+                                    </mat-paginator>
+                                    <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
                                         style=" background: #f0f0f0" *ngFor="let details of projectDetails"
                                         (closed)="Expansionclose()">
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
@@ -145,20 +147,21 @@
                             Please Login For Add Private Projects
                         </ng-template>
                     </mat-tab>
+                 
 
                 </mat-tab-group>
 
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='1' style="background: #F2F3F5 ;">
+            <mat-grid-tile colspan="5" rowspan='1' >
                 <div style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow"
-                    style="overflow-x:hidden; " fxFlexFill cdkScrollable>
-                    <div style=" width:535px; height: 58px;" class="main-header mat-elevation-z4"
+                    fxFlexFill cdkScrollable>
+                    <div style=" width:500px; height: 66px; margin-top: 5px;"  fxFlex="grow" 
                         (click)="openSearch()">
                         <mat-toolbar-row style="padding: 0 5px;">
                             <button mat-icon-button>
                                 <mat-icon>menu</mat-icon>
                             </button>
-                            <div [class.active]="toggleSearch" style="padding:8px 0 0 10px; flex:1;">
+                            <div [class.active]="toggleSearch" style="padding:8px 0 0 10px; width:500px; height: 66px; margin-top: 5px;">
                                 <div class="mat-title" style="margin-bottom:2px; font-size: 15px;">Search</div>
                                 <div class="mat-subheading-2" style="line-height:.6rem;font-size: 15px;">Leader of the Free World</div>
                             </div>
@@ -169,9 +172,9 @@
                         </mat-toolbar-row>
                     </div>
 
-                    <div class="search-block mat-elevation-z4" [class.active]="toggleSearch">
-                        <mat-toolbar-row style="padding: 0 5px;">
-                            <button class="search-icon" mat-icon-button disabled>
+                    <div   class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+                        <mat-toolbar-row  >
+                            <button mat-button  mat-icon-button disabled>
                                 <mat-icon>search</mat-icon>
                             </button>
                             <input type="text" placeholder="Search Task Name" matInput [formControl]="emailFormControl"
@@ -191,41 +194,9 @@
 
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   " fxLayout="column" fxLayout="column" fxLayoutAlign="space-evenly end">
-                <div fxLayout="column" class="menu-box block">
-                    <h2 class="titular" >MENU BOX</h2>
-                    <ul  fxLayoutGap="5%"  fxLayoutAlign="start" fxLayout="column" class="menu-box-menu">
-                        <li>
+            <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   ">
 
-                            <button class="button" (click)="ShowButton()">
-                                profile
-                            </button>
-                        </li>
-                        <li>
-                            <button class="button" >
-                                Change Order
-                            </button>
-
-                        </li>
-
-                        <li>
-                            <button class="button">
-                                Add MainSecton
-
-                            </button>
-
-                        </li>
-                        <li>
-                            <button class="button">
-                                Add SubSecton
-                            </button>
-
-                        </li>
-
-                    </ul>
-                </div>
-
-                <div *ngIf="showSelected" xPosition="after">
+                <div *ngIf="showSelected" >
                     <div *ngIf="profileRef | async as profiledetails ; else noSelectedProject "
                         fxLayoutAlign="space-between center" fxLayout="column">
 
@@ -276,10 +247,25 @@
                         </button>
                     </div>
                     <ng-template #noSelectedProject>
-                        <h2>Please Select Project </h2>
+                        <div  fxLayout="column">
+                        <h2 style="position:unset; float:inline-end;">Please Select Project </h2>
+                        </div>
                     </ng-template>
 
                 </div>
+
+                <div  class="menu-box block" style=" margin-top:26px; margin-left:-25px; padding:1%;position:fixed;" fxFlexAlign="start" fxFlexOffset="9vw">
+                    <ul style="list-style: none;" fxLayoutGap="5%"   fxLayout="column" >
+                        <li>
+
+                            <button mat-raised-button color="primary" (click)="ShowButton()">
+                               View profile
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            
+
 
 
             </mat-grid-tile>
