@@ -161,12 +161,16 @@
                     fxFlexFill cdkScrollable>
                     <div style=" width:500px; height: 66px; margin-top: 5px;"  fxFlex="grow" 
                         (click)="openSearch()">
-                        <mat-toolbar-row style="padding: 0 5px;">
-                            <button (click)="openSearch()" mat-icon-button>
-                                <mat-icon>search</mat-icon>
-                            </button>
-                            <div [class.active]="toggleSearch" style="padding:8px 0 0 10px; width:500px; height: 66px; margin-top: 5px;">
-                                <div class="mat-title" style="text-align: left; font-size: 20px; margin-top: 6px;">Search</div>
+                        <mat-toolbar-row style="padding: 0 5px; ">
+                           
+                            <div [class.active]="toggleSearch" >
+                                <div  style="text-align: center; font-size: 20px; margin-top: 6px;">
+                                    <button (click)="openSearch()" mat-icon-button>
+                                        <mat-icon style="text-align: center;"  >search</mat-icon>
+                                    </button>
+                                    Search Tasks
+
+                                </div>
                             </div>
 
                            
@@ -197,8 +201,7 @@
             </mat-grid-tile>
             <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   ">
 
-                <div *ngIf="showSelected" >
-                    <div *ngIf="profileRef | async as profiledetails ; else noSelectedProject "
+                    <div style="background: white ;" *ngIf="profileRef | async as profiledetails ;  "
                         fxLayoutAlign="space-between center" fxLayout="column">
 
                         <div style="height:40%;  float:inline-start;  " class="person">
@@ -242,29 +245,12 @@
                         </ul>
 
                         <mat-divider></mat-divider>
-                        <button (click)="HideButton()" mat-flat-button color="primary" dense>
-                            <mat-icon>exit_to_app</mat-icon>
-                            close
-                        </button>
-                    </div>
-                    <ng-template #noSelectedProject>
-                        <div  fxLayout="column">
-                        <h2 style="position:unset; float:inline-end;">Please Select Project </h2>
-                        </div>
-                    </ng-template>
+                       
+                   
 
                 </div>
 
-                <div  class="menu-box block" style=" margin-top:2px; padding:1%;position:fixed;" fxFlexAlign="start" fxFlexOffset="9vw">
-                    <ul style="list-style: none;" fxLayoutGap="5%"   fxLayout="column" >
-                        <li>
-
-                            <button mat-raised-button color="primary" (click)="ShowButton()">
-                               View profile
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+  
             
 
 

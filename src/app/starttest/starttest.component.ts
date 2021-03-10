@@ -328,12 +328,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     this.router.navigate(['/main']);
   }
 
-  ShowButton() {
-    this.showSelected = true;
- }
- HideButton() {
-  this.showSelected = false;
-}
+
   ngOnDestroy() {
 
 

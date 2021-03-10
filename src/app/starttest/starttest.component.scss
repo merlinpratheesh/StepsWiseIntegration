@@ -77,12 +77,13 @@
     
     .person {
         position: relative;
-        background: #F2F3F5;
+        background:white;
         width: 17rem;
         height: 20rem;
         margin: 2rem auto;
         transition: all 0.3s linear;
         border-radius: 0.3rem;
+        
         text-align: center;
         box-sizing: border-box;
         margin: 0;
@@ -91,6 +92,8 @@
       }
       .person img {
         border-radius: 50%;
+        background:white;
+
         border: 0.1rem solid teal;
         flex: 1 0 50%;
         width: 88px;
@@ -264,7 +267,7 @@
         }
         
         .photo {
-          background: #f1f1f1;
+          background: white;
           margin: 5px;
           width: 88px;
           height: 88px;
@@ -386,6 +389,8 @@
         }
         .card__info {
           margin: 1em 0;
+          background: white;
+
           list-style-type: none;
           padding: 0;
         }
@@ -539,6 +544,8 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
 header{
   position: fixed;
   top: 60px;
+  text-align: center;
+
    z-index: 11;
    margin-left: 2px;
   transition: all 250ms ease-in-out;
@@ -555,13 +562,17 @@ header{
 
   @extend header;
   background: #fff;
+
+
   &.active{
-    margin-top: 5px;
     width: auto;
-    height: 65px;
+    height: 63px;
+    margin-top: 5px;
+
   }
   .search-control{
     flex: 1;
+
     font-size: 1rem;
     border: 0;
     outline: none;
