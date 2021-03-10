@@ -46,6 +46,7 @@ export class LoggedinStartComponent implements OnInit {
   dataSource: MatTableDataSource<projectDetails>;
 
   myProjectDetails: projectDetails = {
+    likes:0,
     projectName: '',//Heading in testcase list
     description: '',//Sub-Heading in testcase list
     photoUrl: '',//Description in testcase view

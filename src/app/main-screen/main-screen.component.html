@@ -1,18 +1,20 @@
-<mat-sidenav-container>
+<mat-sidenav-container fxFlex="100vw">
   <mat-sidenav-content fxLayout="column">
-    <mat-toolbar color="primary" fxFlex="grow">
+    <mat-toolbar color="primary">
       <mat-icon style="margin-right:20px;" *ngIf="!drawer.opened" (click)="drawer.toggle()">
         menu
       </mat-icon>
       <button mat-raised-button color="warn" (click)="NavigateStart()">
-        <mat-icon>home</mat-icon>
+        <mat-icon class="mr-1">home</mat-icon>
         Home
       </button>
+      <span fxFlex="grow"></span>
 
       <h1>
         StepsWise Tracking Tool
       </h1>
 
+      <span fxFlex="grow"></span>
 
       <div fxHide.lt-sm>
         Welcome
@@ -27,7 +29,7 @@
           <h4>{{myuserProfile.myusrinfoFromDb?.projectName}}</h4>
           <mat-form-field appearance="fill" *ngIf="(Sections | async) as SectionsReady;">
             <mat-label>{{myprojectVariables?.initialMainSection}}</mat-label>
-            <mat-select (ngModelChange)="mainSubSelection($event)" [formControl]="myprojectControls?.subsectionkeysControl">
+            <mat-select (openedChange)="loadTc(Sections)" [formControl]="myprojectControls?.subsectionkeysControl">
               <mat-optgroup *ngFor="let group of SectionsReady" [label]="group.name" [disabled]="group.disabled">
                 <mat-option *ngFor="let mysection of group.section"
                   [value]="{value: mysection.viewvalue, groupValue: group.name}">
@@ -37,8 +39,17 @@
             </mat-select>
           </mat-form-field>
 
-
-
+          <div>
+            value selected is : {{valueSelected | async | json}}
+          </div>
+      
+              <div *ngFor="let group of valueSelected" [label]="group.name" [disabled]="group.disabled">
+                <div *ngFor="let mysection of group.section"
+                  [value]="{value: mysection.viewvalue, groupValue: group.name}">
+                  {{mysection.viewvalue}}
+                </div>
+              </div>
+      
           <div fxLayout="column" fxFlex="60vw" fxFlex.lt-sm="80vw" Style="padding-bottom:50px;">
 
             <h1 *ngIf="myprojectVariables.viewSelectedTestcase === undefined ">Task Steps</h1>
@@ -86,35 +97,33 @@
     <mat-toolbar class="header" color="warn">
       <div>Task keys Management</div>
       <span fxFlex="grow"></span>
-
+      
       <mat-icon style="margin-right:20px;" class="close" (click)="drawerclose()">close</mat-icon>
     </mat-toolbar>
-    <div class="card">
-      <div class="img-div"
-      style="background-image: url(https://images3.alphacoders.com/113/1131150.png);">
+                    <div class="card" >
+                    <div class="img-div"
+                        style="background-image: url(https://i.pinimg.com/originals/49/1c/23/491c238e82aa928064682fae08bea29e.jpg);">
+                    </div>
 
-      </div>
+                    <div class="content-div">
+                        <div class="title-div">
+                            <h2 class="title">STEPS WISE</h2>
+                        </div>
+                        <div class="desc-div">
+                            <p class="desc-text">
+                              Please Login For Managing Your Tasks
+                              1.You can Create Main Section
+                                2.you can Create Sub Section
+                                  3.You can Create Test Cases under all SubSection
+                                  
 
-      <div class="content-div">
-        <div class="title-div">
-          <h2 class="title">STEPS WISE</h2>
-        </div>
-        <div class="desc-div">
-          <p class="desc-text">
-            Please Login For Managing Your Tasks
-            1.You can Create Main Section
-            2.you can Create Sub Section
-            3.You can Create Test Cases under all SubSection
-
-
-          </p>
-        </div>
-        <div class="watch-more-div">
-          <button class="watch-more" #tooltip="matTooltip" matTooltip=" Please Login for Create New Task">Task
-            now</button>
-        </div>
-      </div>
-    </div>
+                            </p>
+                        </div>
+                        <div class="watch-more-div">
+                            <button class="watch-more" #tooltip="matTooltip" matTooltip=" Please Login for Create New Task">Task now</button>
+                        </div>
+                    </div>
+                </div>
 
   </mat-sidenav>
 </mat-sidenav-container>

@@ -100,6 +100,7 @@ export interface projectDetails {
   projectUid: string;//stackblitzLink in testcase edit/doubleclick
   creationDate: string;
   profileName: string;
+  likes:number;
 }
 export interface SubSection {
   viewvalue: string;

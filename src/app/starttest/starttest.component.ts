@@ -60,6 +60,7 @@ export class StarttestComponent implements OnInit,OnDestroy {
   }
 
   myProjectDetails: projectDetails = {
+    likes:0,
     projectName: '',//Heading in testcase list
     description: '',//Sub-Heading in testcase list
     photoUrl: '',//Description in testcase view
@@ -171,8 +172,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
   options: FormGroup;
   activeSelector: string;
   showSelected: boolean;
-  counter = 0;
-
+likes:number;
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
     public fb: FormBuilder,
@@ -273,8 +273,11 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     const filterValue = value.toLowerCase();
     return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-  increment() {
-    this.counter++;
+  increment(likes) {
+    
+    likes++;
+    console.log(likes);
+    
   }
   sidenavtoggle(){
     

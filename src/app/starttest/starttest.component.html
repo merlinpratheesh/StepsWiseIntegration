@@ -116,6 +116,8 @@
                                         {{details.description}}
                                         
 
+                                        
+
 
                                         <app-nested-tree class="mattree"
                                             *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
@@ -124,8 +126,8 @@
 
 
                                         <p>
-                                            <a (click)="increment()" class="btn btn-counter" >
-                                                  {{counter}}
+                                            <a (click)="increment(details.likes)" class="btn btn-counter" >
+                                                {{details.likes}}
                                           <span>&#x2764;</span>Like it</a>
                                           </p>
                                     </mat-expansion-panel>
