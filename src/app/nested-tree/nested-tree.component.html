@@ -1,4 +1,10 @@
+
 <div *ngIf="(Sections | async) as SectionsReady; else SectionsnotReady">
+  <p>
+    <a (click)="likes(SectionsReady.likes)" class="btn btn-counter" >
+        {{SectionsReady.likes}}
+  <span>&#x2764;</span>Like it</a>
+  </p>
   <div fxLayout="column" fxLayoutGap="5%"
     style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;">
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">

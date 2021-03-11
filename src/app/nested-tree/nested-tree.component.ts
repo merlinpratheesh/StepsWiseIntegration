@@ -14,6 +14,7 @@ import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NavigationExtras } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 export class FileNode {
   id: string;
@@ -61,7 +62,7 @@ export interface DialogData {
 
 
 export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
- 
+
   navigationExtras: NavigationExtras = {
     state: {
       selectedProject: '',
@@ -87,6 +88,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   sectionsub: Subscription;
   constructor(private _bottomSheet: MatBottomSheet,
     public developmentservice: UserdataService,
+    private db: AngularFirestore,
     private router: Router) {
     this.nestedTreeControl = new NestedTreeControl<TreeData>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
@@ -197,8 +199,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   initialize() {
 
     this.sectionsub =this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
+      data=data.MainSection;
       console.log(data);
-
 
       this.nestedDataSource.data=        [{
         Id: 1,
@@ -238,8 +240,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
           this.addChildNode({currentNode:node, node: childnode});
         });
       });
-    })).subscribe(_ => {
-
+    })).subscribe(_=> {
       let elementPosition: number;
       const node: TreeData = {
         Id: 1,
@@ -284,6 +285,15 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
     }
     return false;
   }
+  likes(some) {
+    some++;
+    console.log(some);
+
+    const likes = {
+      likes: some
+    }; 
+    const res = this.db.collection('projectKey').doc(this.latestProject).set(likes, {merge:true});
+}
 
   
   addNode(node: TreeData) {

@@ -171,6 +171,20 @@ export class UserdataService {
       return promise;
     });
   }
+  async updateLikes (value: any) : Promise<void>{
+    console.log(value);
+    await this.db.firestore.runTransaction(() => {
+      const promise = Promise.all([
+
+        this.db.collection('projectList/').doc('publicProject').set(value, {merge:true})
+
+      ]);
+      return promise;
+    });
+  }
+
+
+
   docExists(uid: string):any {
     return this.db.doc(`profile/` + uid).valueChanges().pipe(first()).toPromise();
   }
