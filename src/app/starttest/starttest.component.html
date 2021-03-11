@@ -1,12 +1,11 @@
 <mat-sidenav-container class="example-container">
 
-    <mat-sidenav  #sidenav mode="side" opened class="example-sidenav"
-    [fixedInViewport]="options.value.fixed" [fixedTopGap]="options.value.top"
-    [fixedBottomGap]="options.value.bottom">
+    <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
+        [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
 
-            <div  fxLayout="column" fxFlexAlign="start" fxLayoutGap="5%" fxLayoutAlign="space-between center">
+            <div fxLayout="column" fxFlexAlign="start" fxLayoutGap="5%" fxLayoutAlign="space-between center">
                 <div class="card">
                     <div class="img-div"
                         style="background-image: url(https://images3.alphacoders.com/113/1131150.png);">
@@ -58,16 +57,15 @@
         <app-toolbar class="example-header"></app-toolbar>
 
 
-        <mat-grid-list cols="10" rowHeight="10vh" style="background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);">
+        <mat-grid-list cols="10" rowHeight="10vh">
 
 
 
 
-            <mat-grid-tile colspan="5" rowspan='9' style="background: #F2F3F5 ;">
+            <mat-grid-tile colspan="5" rowspan='9' style="background: white ;">
 
 
-                <mat-tab-group  style="  color:tomato ;background: #F2F3F5; height: 100%; "
-                    fxFlex="grow">
+                <mat-tab-group style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow">
                     <mat-tab label="Tab 1" style="color:#216fdb; ">
                         <ng-template mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
@@ -79,12 +77,11 @@
                                         [pageSizeOptions]="[5,10,15,20]">
                                     </mat-paginator>
                                     <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
-                                        style=" background: #f0f0f0" *ngFor="let details of projectDetails"
+                                        class="panel" *ngFor="let details of projectDetails"
                                         (closed)="Expansionclose()">
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
                                             (click)="profileKeyRef(details)" style="width:90%; ">
-                                            <mat-panel-title fxLayout="row" fxFlexAlign="center"
-                                                style=" border-style:initial !important;" fxLayoutGap="30px">
+                                            <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
 
                                                 <div fxLayout="row">
                                                     <span mat-card-avatar
@@ -93,7 +90,7 @@
                                                 </div>
 
                                                 <button class="activebutton">
-                                                    <mat-icon mat-list-avatar style="width:auto">dashboard</mat-icon>
+                                                    <mat-icon mat-list-avatar style="width:auto ;">dashboard</mat-icon>
 
                                                     {{details.projectName}}
                                                 </button>
@@ -113,9 +110,9 @@
                                         </mat-expansion-panel-header>
 
                                         {{details.description}}
-                                        
 
-                                        
+
+
 
 
                                         <app-nested-tree class="mattree"
@@ -125,7 +122,7 @@
 
 
                                     </mat-expansion-panel>
-                                    
+
                                 </mat-accordion>
 
                             </div>
@@ -147,35 +144,32 @@
                             Please Login For Add Private Projects
                         </ng-template>
                     </mat-tab>
-                 
+
 
                 </mat-tab-group>
 
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='1' >
-                <div style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow"
-                    fxFlexFill cdkScrollable>
-                    <div style=" width:500px; height: 66px; margin-top: 5px;"  fxFlex="grow" 
-                        (click)="openSearch()">
-                        <mat-toolbar-row style="padding: 0 5px; ">
-                           
-                            <div [class.active]="toggleSearch" >
-                                <div  style="text-align: center; font-size: 20px; margin-top: 6px;">
-                                    <button (click)="openSearch()" mat-icon-button>
-                                        <mat-icon style="text-align: center;"  >search</mat-icon>
-                                    </button>
-                                    Search Tasks
+            <mat-grid-tile colspan="5" rowspan='1'>
+                <mat-toolbar style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow" fxFlexFill
+                    cdkScrollable>
+                    <mat-toolbar-row (click)="openSearch()" style="padding: 0 5px; ">
 
-                                </div>
+                        <div [class.active]="toggleSearch">
+                            <div style="text-align: center; font-size: 20px; margin-top: 6px;">
+                                <button (click)="openSearch()" mat-icon-button>
+                                    <mat-icon style="text-align: center;">search</mat-icon>
+                                </button>
+                                Search Tasks
+
                             </div>
+                        </div>
 
-                           
-                        </mat-toolbar-row>
-                    </div>
 
-                    <div   class="search-block mat-elevation-z4" [class.active]="toggleSearch">
-                        <mat-toolbar-row  >
-                            <button mat-button  mat-icon-button disabled>
+                    </mat-toolbar-row>
+
+                    <mat-toolbar class="search-block mat-elevation-z4" [class.active]="toggleSearch">
+                        <mat-toolbar-row>
+                            <button mat-button mat-icon-button disabled>
                                 <mat-icon>search</mat-icon>
                             </button>
                             <input type="text" placeholder="Search Task Name" matInput [formControl]="emailFormControl"
@@ -191,74 +185,76 @@
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-toolbar-row>
-                    </div>
+                    </mat-toolbar>
 
-                </div>
+                </mat-toolbar>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='8' style="background: #F2F3F5 ;   ">
+            <mat-grid-tile colspan="5" rowspan='8' style="background: white ; ">
 
-                    <div style="background: white ;" *ngIf="profileRef | async as profiledetails ;  "
-                        fxLayoutAlign="space-between center" fxLayout="column">
+                <div style="background: rgb(242, 243, 245) ;     border: 3px solid #F2F3F5"
+                    *ngIf="profileRef | async as profiledetails ; else landingpage  "
+                    fxLayoutAlign="space-between center" fxLayout="column">
 
-                        <div style="height:40%;  float:inline-start;  " class="person">
-                            <div id="main-card">
-                                <div class="cover-photo">
+                    <div style="height:40%;  float:inline-start;  " class="person">
+                        <div id="main-card">
+                            <div class="cover-photo">
 
-                                </div>
-                                <div class="photo">
-                                    <img src="{{profiledetails?.photoUrl}}" alt="">
-                                </div>
-                                <div class="content">
-                                    <h4 class="name">{{profiledetails?.profileName}}</h4>
-                                    <h4 class="card__text">{{profiledetails?.areaOfinterest}}<br>
-                                        {{profiledetails?.location}}</h4>
-                                    <h6 class="email">
-                                        <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
-                                    </h6>
+                            </div>
+                            <div class="photo">
+                                <img src="{{profiledetails?.photoUrl}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h4 class="name">{{profiledetails?.profileName}}</h4>
+                                <h4 class="card__text">{{profiledetails?.areaOfinterest}}<br>
+                                    {{profiledetails?.location}}</h4>
+                                <h6 class="email">
+                                    <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
+                                </h6>
 
-
-                                </div>
 
                             </div>
 
                         </div>
-                        <div class="">
-                            <h2>{{profiledetails?.membershipType}}</h2>
-                        </div>
-                        <ul class="card__info">
-                            <li>
-                                <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
-                                <span>posts</span>
-                            </li>
-                            <li>
-                                <span class="card__info__stats">47</span>
-                                <span>followers</span>
-                            </li>
-                            <li>
-                                <span class="card__info__stats">20</span>
-                                <span>following</span>
-                            </li>
-                        </ul>
 
-                        <mat-divider></mat-divider>
-                       
-                   
+                    </div>
+                    <div class="">
+                        <h2>{{profiledetails?.membershipType}}</h2>
+                    </div>
+                    <ul class="card__info">
+                        <li>
+                            <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
+                            <span>posts</span>
+                        </li>
+                        <li>
+                            <span class="card__info__stats">47</span>
+                            <span>followers</span>
+                        </li>
+                        <li>
+                            <span class="card__info__stats">20</span>
+                            <span>following</span>
+                        </li>
+                    </ul>
+
+                    <mat-divider></mat-divider>
+
+
 
                 </div>
+                <ng-template #landingpage style="background: white ; ">
 
-  
-            
+                    <div class="outer">
 
+                        <div class="inner">
 
+                            <div class="prod-right">
+                                <img src="https://github.com/abhinanduN/codepen/blob/master/human-image.png?raw=true"
+                                    class="prod-human-img" alt="prod" />
+                            </div>
+                        </div>
+                    </div>
 
+                </ng-template>
             </mat-grid-tile>
-
-
-
-
-
-
-
         </mat-grid-list>
     </mat-sidenav-content>
 </mat-sidenav-container>
