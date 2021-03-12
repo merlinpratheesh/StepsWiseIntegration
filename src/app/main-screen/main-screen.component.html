@@ -27,10 +27,10 @@
       <div fxLayout="column">
         <div fxLayout="row wrap" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;" fxLayoutGap="10px">
           <h4>{{myuserProfile.myusrinfoFromDb?.projectName}}</h4>
-          <mat-form-field appearance="fill" *ngIf="(Sections | async) as SectionsReady;">
+          <mat-form-field appearance="fill" *ngIf="(mainSubSections ) as SectionsReady;">
             <mat-label>{{myprojectVariables?.initialMainSection}}</mat-label>
-            <mat-select (openedChange)="loadTc(Sections)" [formControl]="myprojectControls?.subsectionkeysControl">
-              <mat-optgroup *ngFor="let group of SectionsReady" [label]="group.name" [disabled]="group.disabled">
+            <mat-select  [formControl]="myprojectControls?.subsectionkeysControl">
+              <mat-optgroup  *ngFor="let group of SectionsReady" [label]="group.name" [disabled]="group.disabled">
                 <mat-option *ngFor="let mysection of group.section"
                   [value]="{value: mysection.viewvalue, groupValue: group.name}">
                   {{mysection.viewvalue}}
@@ -39,21 +39,16 @@
             </mat-select>
           </mat-form-field>
 
-          <div>
-            value selected is : {{valueSelected | async | json}}
-          </div>
-      
-              <div *ngFor="let group of valueSelected" [label]="group.name" [disabled]="group.disabled">
-                <div *ngFor="let mysection of group.section"
-                  [value]="{value: mysection.viewvalue, groupValue: group.name}">
-                  {{mysection.viewvalue}}
-                </div>
-              </div>
-      
-          <div fxLayout="column" fxFlex="60vw" fxFlex.lt-sm="80vw" Style="padding-bottom:50px;">
 
-            <h1 *ngIf="myprojectVariables.viewSelectedTestcase === undefined ">Task Steps</h1>
-            <h1 *ngIf="myprojectVariables.viewSelectedTestcase !== undefined">
+          <div *ngFor="let group of valueSelected" [label]="group.name" [disabled]="group.disabled">
+            <div *ngFor="let mysection of group.section" [value]="{value: mysection.viewvalue, groupValue: group.name}">
+              {{mysection.viewvalue}}
+            </div>
+          </div>
+
+          <div fxLayout="column" fxFlex="60vw" fxFlex.lt-sm="80vw" Style="padding-bottom:50px;">
+             <h1 *ngIf="myprojectVariables.viewSelectedTestcase === undefined ">Task Steps</h1>
+            <h1 *ngIf="myprojectVariables.viewSelectedTestcase !== null">
               {{myprojectVariables.viewSelectedTestcase?.heading}} </h1>
             <mat-form-field appearance="fill">
               <mat-label>{{myprojectVariables.viewSelectedTestcase?.subHeading}}</mat-label>
@@ -71,6 +66,7 @@
         <div fxLayout="column" *ngIf="(SectionTc | async) as SectionTcReady; else SectionTcnotReady">
           <h2>Services and Directives</h2>
           <div>
+            {{this.valueSelected |async |json}}
             <mat-card class="list" fxFlex="95vw" fxLayout="row wrap" fxLayout.lt-sm="column"
               fxLayoutAlign="space-around center">
               <app-singletask ngStyle.lt-sm="width:60vw;" fxLayoutAlign.lt-sm="space-between center"
@@ -97,33 +93,34 @@
     <mat-toolbar class="header" color="warn">
       <div>Task keys Management</div>
       <span fxFlex="grow"></span>
-      
+
       <mat-icon style="margin-right:20px;" class="close" (click)="drawerclose()">close</mat-icon>
     </mat-toolbar>
-                    <div class="card" >
-                    <div class="img-div"
-                        style="background-image: url(https://i.pinimg.com/originals/49/1c/23/491c238e82aa928064682fae08bea29e.jpg);">
-                    </div>
+    <div class="card">
+      <div class="img-div"
+        style="background-image: url(https://i.pinimg.com/originals/49/1c/23/491c238e82aa928064682fae08bea29e.jpg);">
+      </div>
 
-                    <div class="content-div">
-                        <div class="title-div">
-                            <h2 class="title">STEPS WISE</h2>
-                        </div>
-                        <div class="desc-div">
-                            <p class="desc-text">
-                              Please Login For Managing Your Tasks
-                              1.You can Create Main Section
-                                2.you can Create Sub Section
-                                  3.You can Create Test Cases under all SubSection
-                                  
+      <div class="content-div">
+        <div class="title-div">
+          <h2 class="title">STEPS WISE</h2>
+        </div>
+        <div class="desc-div">
+          <p class="desc-text">
+            Please Login For Managing Your Tasks
+            1.You can Create Main Section
+            2.you can Create Sub Section
+            3.You can Create Test Cases under all SubSection
 
-                            </p>
-                        </div>
-                        <div class="watch-more-div">
-                            <button class="watch-more" #tooltip="matTooltip" matTooltip=" Please Login for Create New Task">Task now</button>
-                        </div>
-                    </div>
-                </div>
+
+          </p>
+        </div>
+        <div class="watch-more-div">
+          <button class="watch-more" #tooltip="matTooltip" matTooltip=" Please Login for Create New Task">Task
+            now</button>
+        </div>
+      </div>
+    </div>
 
   </mat-sidenav>
 </mat-sidenav-container>

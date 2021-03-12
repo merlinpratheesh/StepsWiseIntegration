@@ -57,7 +57,7 @@
         <app-toolbar class="example-header"></app-toolbar>
 
 
-        <mat-grid-list cols="10" rowHeight="10vh">
+        <mat-grid-list cols="10" rowHeight="10vh" style="background: #216fdb">
 
 
 
@@ -149,10 +149,10 @@
                 </mat-tab-group>
 
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='1'>
-                <mat-toolbar style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow" fxFlexFill
+            <mat-grid-tile  colspan="5" rowspan='1'>
+                <div   style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill
                     cdkScrollable>
-                    <mat-toolbar-row (click)="openSearch()" style="padding: 0 5px; ">
+                    <div (click)="openSearch()" style="padding: 0 5px; ">
 
                         <div [class.active]="toggleSearch">
                             <div style="text-align: center; font-size: 20px; margin-top: 6px;">
@@ -165,10 +165,9 @@
                         </div>
 
 
-                    </mat-toolbar-row>
+                    </div>
 
-                    <mat-toolbar class="search-block mat-elevation-z4" [class.active]="toggleSearch">
-                        <mat-toolbar-row>
+                    <span fxLayout="row" fxLayoutAlign="space-between center" class="search-block mat-elevation-z4" [class.active]="toggleSearch">
                             <button mat-button mat-icon-button disabled>
                                 <mat-icon>search</mat-icon>
                             </button>
@@ -184,10 +183,9 @@
 
                                 </mat-option>
                             </mat-autocomplete>
-                        </mat-toolbar-row>
-                    </mat-toolbar>
+                        </span>
 
-                </mat-toolbar>
+                </div>
             </mat-grid-tile>
             <mat-grid-tile colspan="5" rowspan='8' style="background: white ; ">
 

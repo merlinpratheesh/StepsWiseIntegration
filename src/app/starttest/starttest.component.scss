@@ -480,6 +480,7 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
   display: grid;
   margin-top:5px;
   margin-left:5px;
+  background-color: white;
   grid-template-columns: .2fr 1fr;
   border-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -574,14 +575,14 @@ header{
 }
 .search-block{
   width: 0;
-  right: 0;
+  right: 0px;
 
   @extend header;
   background: #fff;
 
 
   &.active{
-    width:initial;
+    width:39%;
     height: 63px;
     margin-top: 5px;
 
@@ -608,7 +609,7 @@ header{
   justify-content: center;
   width: 300px;
   margin-top: 4px;
-  background: white;
+  background: rgb(242, 243, 245);
 }
 
 .example-header {

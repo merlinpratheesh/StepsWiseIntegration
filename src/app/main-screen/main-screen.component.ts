@@ -17,7 +17,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 
 
-export class MainScreenComponent  {
+
+export class MainScreenComponent {
+
+
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
     myusrinfoFromDb: {
@@ -137,51 +140,28 @@ export class MainScreenComponent  {
   isClose: boolean;
   valueSelected: string[];
   authDetails: any;
-
+  mainSubSections: any;
+  keysselection: any;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
-    private db: AngularFirestore,    public afAuth: AngularFireAuth
+    private db: AngularFirestore, public afAuth: AngularFireAuth
 
   ) {
-    this.afAuth.authState.subscribe(myauth => {
-      if (myauth !== null && myauth !== undefined) {
-
-        this.authDetails = myauth;
-        console.log('', this.authDetails.uid);
-      }
-      return myauth;
-    });
-
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {
       selectedProject: string;
       mainSubSectionRef: MainSectionGroup[];
     };
 
-
     if (state !== undefined) {
+      console.log(state.mainSubSectionRef);
+      this.mainSubSections = state.mainSubSectionRef;
       this.myuserProfile.myusrinfoFromDb.projectName = `${state.selectedProject}`;
-      this.Sections = this.getSections(this.db.doc('/projectKey/' + `${state.selectedProject}`));
-      this.SectionTc= this.getTestcases(this.db.doc(`${state.selectedProject}`+'/DefaultProject/items/Merlinpratheesh'));
-
-      console.log(state.mainSubSectionRef[0].name);
-
-      console.log(this.SectionTc);
     }
   }
 
 
- loadTc(some) {
-    console.log(some);
-    this.isClose = false;
-    if(some) {
-      this.isClose = true;
-      console.log('dropdown is closed');
-      this.valueSelected = this.myprojectControls.subsectionkeysControl.value && this.myprojectControls.subsectionkeysControl.value.toString();
-      console.log(this.valueSelected);
-    }
-    
-  }
+
 
   draweropen() {
   }
@@ -193,10 +173,10 @@ export class MainScreenComponent  {
   ngOnInit(): void {
   }
   NavigateStart() {
-    if(this.authDetails){
+    if (this.authDetails) {
       this.router.navigate(['/loggedin']);
 
-    }else{
+    } else {
       this.router.navigate(['/starttest']);
 
 
