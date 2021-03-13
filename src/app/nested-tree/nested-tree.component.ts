@@ -81,7 +81,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   Project = '';
   AlltheKeys: any[];
   AlltheKeysbk: any[];
-
   _dataChange = new BehaviorSubject<TreeData[]>([]);
   private _getChildren = (node: TreeData) => observableOf(node.Children);
   hasNestedChild = (_: number, nodeData: TreeData) => nodeData.Children.length > 0;
