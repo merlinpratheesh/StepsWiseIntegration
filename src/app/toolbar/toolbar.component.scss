@@ -190,3 +190,62 @@ div span:nth-child(4) {
 		bottom: 100%;
 	}
 }
+
+p {
+  font-family: Lato;
+}
+@import url(https://fonts.googleapis.com/css?family=Oswald:400);
+
+.navigation {
+  width:120px;
+  background-color:#bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+}
+
+img {
+  width: 30px;
+  padding: 5px;
+  border-radius: 50px;
+  float: left;
+  text-align:center;
+
+}
+
+.logout {
+  font-size: .8em;
+  font-family: 'Oswald', sans-serif;
+	position: relative;
+  right: 15px;
+  background-color: rgb(29, 176, 221);
+  overflow: hidden;
+  letter-spacing: 3px;
+  opacity: 0;
+  transition: opacity .45s;
+  -webkit-transition: opacity .35s;
+  
+}
+
+.button {
+	text-decoration: none;
+	float: right;
+  padding: 16px 7px 5px 5px;
+  margin:0px;
+  color: white;
+  width: 40px;
+  background-color:#bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);
+  transition: width .35s;
+  -webkit-transition: width .35s;
+  overflow: hidden
+}
+
+a:hover {
+  width: 120px;
+}
+
+a:hover .logout{
+  opacity: .9;
+}
+
+a {
+  text-decoration: none;
+}
+

@@ -49,7 +49,7 @@ export class ToolbarComponent implements OnInit {
       if (myauth !== null && myauth !== undefined) {
 
         this.authDetails = myauth;
-        console.log('', this.authDetails.uid);
+        console.log('', this.authDetails.photoURL);
       }
     });
     
@@ -96,8 +96,13 @@ export class ToolbarComponent implements OnInit {
       });
       console.log('121', this.mydata);
     }
+    logout() {
+      this.afAuth.signOut();
+    }
+  
 
     }
+    
   @Component({
     selector: 'AddNewProjectDialog',
     template: `
@@ -155,6 +160,7 @@ export class ToolbarComponent implements OnInit {
     console.log(this.names.value);
     this.dialogRef.close(this.names.value);
   }
+  
 
   onNoClick(): void {
     this.dialogRef.close();
