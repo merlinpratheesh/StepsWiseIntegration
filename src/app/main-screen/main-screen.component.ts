@@ -158,9 +158,6 @@ export class MainScreenComponent {
       console.log(state.mainSubSectionRef);
       this.mainSubSections = state.mainSubSectionRef;
       this.projectName=state.selectedProject ;
-
-      //this.SectionTc = this.getTestcases(this.db.doc(state.selectedProject + this.myuserProfile.myusrinfoFromDb.projectName + '/' + selection.groupValue + '/items/' + selection.value));
-
     }
     
   }

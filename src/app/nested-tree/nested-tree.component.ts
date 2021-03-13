@@ -15,6 +15,7 @@ import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { NavigationExtras } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 export class FileNode {
   id: string;
@@ -85,10 +86,17 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   private _getChildren = (node: TreeData) => observableOf(node.Children);
   hasNestedChild = (_: number, nodeData: TreeData) => nodeData.Children.length > 0;
   sectionsub: Subscription;
+  authDetails: any;
   constructor(private _bottomSheet: MatBottomSheet,
     public developmentservice: UserdataService,
     private db: AngularFirestore,
-    private router: Router) {
+    public afAuth: AngularFireAuth,
+    private router: Router)
+     {
+      this.afAuth.authState.subscribe(myauth => {
+        if (myauth !== null && myauth !== undefined) {
+          this.authDetails = myauth;
+      }});
     this.nestedTreeControl = new NestedTreeControl<TreeData>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
     this._dataChange.subscribe(
@@ -256,11 +264,16 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   ngAfterViewInit() {
     this.initialize();
   }
+
   NavigateTestcase(some){
     console.log(some);
+    if(this.authDetails==null){
     this.router.navigate(['/main'], this.navigationExtras);
-  }
+  }else{
+    this.router.navigate(['/main2'], this.navigationExtras);
 
+  }
+  }
   SelectedMainSection(some){
     console.log(some);
 

@@ -6,14 +6,14 @@ import { LoggedinStartComponent } from './loggedin-start/loggedin-start.componen
 import { OfflineScreenComponent } from './offline-screen/offline-screen.component';
 import { StarttestComponent } from './starttest/starttest.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChangeOrderComponent } from './change-order/change-order.component';
+import { MainScreen2Component } from './main-screen2/main-screen2.component';
 const routes: Routes = [
   { path: 'start', component: StartScreenComponent },
   { path: 'main', component: MainScreenComponent },
   { path: 'loggedin', component: LoggedinStartComponent },
   { path: 'offline', component: OfflineScreenComponent },
-  { path: 'starttest', component: StarttestComponent },  
-  { path: 'changeOrder', component: ChangeOrderComponent },
+  { path: 'starttest', component: StarttestComponent },
+  {path:'main2',component:MainScreen2Component}  ,
 
 
 

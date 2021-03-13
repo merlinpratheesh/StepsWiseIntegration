@@ -1,0 +1,27 @@
+    <mat-sidenav-container fxFlex="100vw">
+        <mat-sidenav-content fxLayout="column">
+            <mat-toolbar color="primary">
+                <mat-icon style="margin-right:20px;" *ngIf="!drawer.opened" (click)="drawer.toggle()">
+                    menu
+                </mat-icon>
+                <h1>
+                    StepsWise Tracking Tool
+                </h1>
+
+                <span fxFlex="grow"></span>
+
+                <div fxHide.lt-sm>
+                    Welcome 
+                </div>
+
+
+
+            </mat-toolbar>
+
+        </mat-sidenav-content>
+        <mat-sidenav #drawer class="drawer" mode="side" opened="false" (opened)="draweropen()" fxFlex.lt-sm="100vw">
+
+        </mat-sidenav>
+    </mat-sidenav-container>
+
+

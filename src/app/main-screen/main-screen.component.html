@@ -76,23 +76,34 @@
     <mat-toolbar class="header" color="warn">
       <div>Task keys Management</div>
       <span fxFlex="grow"></span>
+
       <mat-icon style="margin-right:20px;" class="close" (click)="drawerclose()">close</mat-icon>
     </mat-toolbar>
-    <mat-tab-group>
-      <mat-tab>
-        <ng-template mat-tab-label>Home</ng-template>
-        <ng-template matTabContent>
-          <app-publicproj [profileinfoUid]="myuserProfile?.userAuthenObj"
-            [profileinfoProjName]="myuserProfile.myusrinfoFromDb.projectName"
-            (toChangeCurrentProj)="saveCurrProject($event)"></app-publicproj>
-        </ng-template>
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>Edit</ng-template>
-        <ng-template matTabContent>
-          <app-privateproj [profileinfoUid]="myuserProfile?.userAuthenObj"></app-privateproj>
-        </ng-template>
-      </mat-tab>
-    </mat-tab-group>
+    <div class="card">
+      <div class="img-div"
+      style="background-image: url(https://images3.alphacoders.com/113/1131150.png);">
+
+      </div>
+
+      <div class="content-div">
+        <div class="title-div">
+          <h2 class="title">STEPS WISE</h2>
+        </div>
+        <div class="desc-div">
+          <p class="desc-text">
+            Please Login For Managing Your Tasks
+            1.You can Create Main Section
+            2.you can Create Sub Section
+            3.You can Create Test Cases under all SubSection
+
+
+          </p>
+        </div>
+        <div class="watch-more-div">
+          <button class="watch-more" #tooltip="matTooltip" matTooltip=" Please Login for Create New Task">Task
+            now</button>
+        </div>
+      </div>
+    </div>
   </mat-sidenav>
 </mat-sidenav-container>

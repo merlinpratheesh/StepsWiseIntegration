@@ -24,7 +24,7 @@ import { StarttestComponent } from './starttest/starttest.component';
 import { SingletaskComponent } from './singletask/singletask.component';
 import { AddNewProjectDialog, ToolbarComponent  } from './toolbar/toolbar.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChangeOrderComponent } from './change-order/change-order.component';
+import { MainScreen2Component } from './main-screen2/main-screen2.component';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -53,7 +53,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     LoggedinStartComponent,
     OfflineScreenComponent,BottomSheetOverviewExampleSheet,
     AddNewProjectDialog,EditNodeComponent,EditNodeDialog,NestedTreeComponent,
-    BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent, ShowmoreDirective, StarttestComponent, SingletaskComponent, ToolbarComponent, ProfileComponent, ChangeOrderComponent  ],
+    BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent, ShowmoreDirective, StarttestComponent, SingletaskComponent, ToolbarComponent, ProfileComponent, MainScreen2Component  ],
   imports: [
 
     BrowserModule,

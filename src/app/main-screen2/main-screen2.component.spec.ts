@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChangeOrderComponent } from './change-order.component';
+import { MainScreen2Component } from './main-screen2.component';
 
-describe('ChangeOrderComponent', () => {
-  let component: ChangeOrderComponent;
-  let fixture: ComponentFixture<ChangeOrderComponent>;
+describe('MainScreen2Component', () => {
+  let component: MainScreen2Component;
+  let fixture: ComponentFixture<MainScreen2Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChangeOrderComponent ]
+      declarations: [ MainScreen2Component ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangeOrderComponent);
+    fixture = TestBed.createComponent(MainScreen2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
