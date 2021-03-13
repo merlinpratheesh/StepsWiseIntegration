@@ -138,9 +138,10 @@ export class MainScreenComponent {
   };
   @ViewChild('drawer') public sidenav: MatSidenav;
   isClose: boolean;
-  valueSelected: string[];
+  valueSelected: any;
   authDetails: any;
   mainSubSections: any;
+  projectName:any;
   keysselection: any;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
@@ -156,11 +157,27 @@ export class MainScreenComponent {
     if (state !== undefined) {
       console.log(state.mainSubSectionRef);
       this.mainSubSections = state.mainSubSectionRef;
-      this.myuserProfile.myusrinfoFromDb.projectName = `${state.selectedProject}`;
+      this.projectName=state.selectedProject ;
+
+      //this.SectionTc = this.getTestcases(this.db.doc(state.selectedProject + this.myuserProfile.myusrinfoFromDb.projectName + '/' + selection.groupValue + '/items/' + selection.value));
+
     }
+    
   }
 
-
+  comboChange(event) {
+    console.log(event);
+    this.isClose = false;
+    if(!event) {
+      this.isClose = true;
+      console.log('dropdown is closed');
+      this.valueSelected = this.myprojectControls?.subsectionkeysControl.value ;
+      console.log(this.valueSelected);
+      this.SectionTc = this.getTestcases(this.db.doc(this.projectName+'/'+ this.valueSelected.groupValue + '/items/' + this.valueSelected.value));
+console.log(this.SectionTc );
+    }
+    
+  }
 
 
   draweropen() {
@@ -183,7 +200,6 @@ export class MainScreenComponent {
     }
   }
   refreshList(item: TestcaseInfo) {//When user Selects testitem by doubleclick
-    this.myprojectFlags.showEditTcButton = true;
     this.myprojectVariables.viewSelectedTestcase = item;//`${item.subHeading}`;
     this.myprojectControls.testcaseInfoControl.setValue(`${item.description}`)
   }
