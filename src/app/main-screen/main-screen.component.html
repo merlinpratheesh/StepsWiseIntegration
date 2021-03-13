@@ -25,7 +25,7 @@
           <h4>{{myuserProfile.myusrinfoFromDb?.projectName}}</h4>
           <mat-form-field appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
             <mat-label>{{myprojectVariables?.initialMainSection}}</mat-label>
-            <mat-select (openedChange)="comboChange($event)" [formControl]="myprojectControls?.subsectionkeysControl">
+            <mat-select (openedChange)="loadTc($event)" [formControl]="myprojectControls?.subsectionkeysControl">
               <mat-optgroup *ngFor="let group of SectionsReady" [label]="group.name" [disabled]="group.disabled">
                 <mat-option *ngFor="let mysection of group.section"
                   [value]="{value: mysection.viewvalue, groupValue: group.name}">

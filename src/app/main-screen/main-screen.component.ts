@@ -165,7 +165,7 @@ export class MainScreenComponent {
     
   }
 
-  comboChange(event) {
+  loadTc(event) {
     console.log(event);
     this.isClose = false;
     if(!event) {

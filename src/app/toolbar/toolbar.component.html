@@ -11,7 +11,7 @@
 
 
             <li>
-                <a href="#" #tooltip="matTooltip" matTooltip="Create New Task">
+                <a  #tooltip="matTooltip" matTooltip="Create New Task" (click)="newTaskforUser()">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24"
                         fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
@@ -108,7 +108,13 @@
 
     <span fxflex="grow"></span>
 
-
+    <div  (click)="newTaskforUser()"> 
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Create New Task
+    </div>
     <firebase-ui style="margin-left: 270px;">
         fxLayout="column" (signInSuccessWithAuthResult)="successCallback($event)"
         (signInFailure)="errorCallback($event)" (uiShown)="uiShownCallback()"></firebase-ui>

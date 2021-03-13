@@ -13,7 +13,7 @@ import { environment } from '../environments/environment'
 import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { LoggedinStartComponent,BottomSheetOverviewExampleSheet,AddNewProjectDialog } from './loggedin-start/loggedin-start.component';
+import { LoggedinStartComponent,BottomSheetOverviewExampleSheet} from './loggedin-start/loggedin-start.component';
 import { OfflineScreenComponent } from './offline-screen/offline-screen.component';
 import { NestedTreeComponent,BottomSheetChangeOrder } from './nested-tree/nested-tree.component';
 import { AddNodeComponent,NewNodeDialog } from './nested-tree/add-node/add-node.component';
@@ -22,7 +22,7 @@ import { EditNodeComponent,EditNodeDialog } from './nested-tree/edit-node/edit-n
 import { ShowmoreDirective } from './showmore.directive';
 import { StarttestComponent } from './starttest/starttest.component';
 import { SingletaskComponent } from './singletask/singletask.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { AddNewProjectDialog, ToolbarComponent  } from './toolbar/toolbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangeOrderComponent } from './change-order/change-order.component';
 
@@ -47,7 +47,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
 @NgModule({
   declarations: [
-    AppComponent,AddNewProjectDialog,
+    AppComponent,
     StartScreenComponent,
     MainScreenComponent,
     LoggedinStartComponent,
