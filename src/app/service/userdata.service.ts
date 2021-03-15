@@ -7,9 +7,7 @@ import { collectionData, doc } from 'rxfire/firestore';
 import { first, map } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 
-export interface userProfile {
-  userAuthenObj: firebase.User
-}
+
 export interface TestcaseInfo{
   heading: string;//Heading in testcase list
   subHeading:string;//Sub-Heading in testcase list

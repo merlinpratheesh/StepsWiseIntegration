@@ -297,15 +297,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
     }
     return false;
   }
-  likes(some) {
-    some++;
-    console.log(some);
 
-    const likes = {
-      likes: some
-    }; 
-    const res = this.db.collection('projectKey').doc(this.latestProject).set(likes, {merge:true});
-}
 
   
   addNode(node: TreeData) {
@@ -325,6 +317,18 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   }
   ngOnDestroy() {
     this.sectionsub.unsubscribe();
+  }
+  CreateDefaultKeys() {
+    const MainSection = [{
+      name: 'MainSection',
+      disabled: false,
+      section: [{
+        viewvalue: 'SubSection'
+      }]
+    }];
+    //delete the default testCase if any
+    this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false }).then(success => {
+    })
   }
 
 

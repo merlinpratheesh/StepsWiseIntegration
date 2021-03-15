@@ -1,10 +1,9 @@
-
 <div *ngIf="(Sections | async) as SectionsReady; else SectionsnotReady">
-  <p>
+  <!--  <p>
     <a (click)="likes(SectionsReady.likes)" class="btn btn-counter" >
         {{SectionsReady.likes}}
   <span>&#x2764;</span>Like it</a>
-  </p>
+  </p>-->
   <div fxLayout="column" fxLayoutGap="5%"
     style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;">
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">
@@ -15,7 +14,8 @@
         <mat-chip-list style="margin-right:30px;">
 
           <mat-chip style="margin-right:5px; background-color:#18e92a">
-            <button  class="button" (click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;" selected style="
+            <button class="button" (click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;"
+              selected style="
         cursor: pointer; padding: 5px; ">
               View Tasks
             </button>
@@ -29,9 +29,9 @@
         <!-- Without Children -->
         <mat-nested-tree-node *matTreeNodeDef="let node">
 
-            <li>
+          <li>
             <div class="mat-tree-node">
-              <button mat-icon-button *ngIf="(node.Description === 'Child' && node.Children.length === 0)" >
+              <button mat-icon-button *ngIf="(node.Description === 'Child' && node.Children.length === 0)">
 
                 <mat-icon class="mat-icon-rtl-mirror" (click)="SelectedMainSection(node.Name)">
                   star
@@ -107,4 +107,31 @@
   </div>
 </div>
 <ng-template #SectionsnotReady>
+
+  <div>hi</div>
+  <div *ngIf="(Sections | async) === null">
+    <div fxLayoutAlign="center center" style="height:100vh;">
+      <mat-spinner [diameter]="30" Style="margin-left:10px;"></mat-spinner>
+    </div>
+  </div>
+  <div *ngIf="(Sections | async) === undefined">
+    <mat-card class="list" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+      <mat-card-content class="empty-label">
+        Do You want to Add Default Keys?</mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="CreateDefaultKeys()">New
+          Account</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card class="list"  fxLayout="row wrap" fxLayout.lt-sm="column"
+      fxLayoutAlign="space-around center">
+      <mat-card-content class="empty-label">
+        Do You want to create Demo Account?</mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="CreateAccount()">New
+          Account</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
 </ng-template>

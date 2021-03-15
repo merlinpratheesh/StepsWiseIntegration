@@ -188,6 +188,7 @@ export class LoggedinStartComponent implements OnInit {
   filteredTasksOptions: Subscription;
   optionsTasks: string[] = [];
   optionsTasksNamesBk: string[] = [];
+
   optionsTasksBk: any[] = [];
   optionsTasksSub: Subscription;
   firstProject: any;
@@ -274,7 +275,7 @@ export class LoggedinStartComponent implements OnInit {
             readrec.private.forEach(element => {
               this.optionsTasks.push(element.projectName);
             });
-            this.optionsTasksNamesBk = this.optionsTasks;
+            this.optionsTasksNamesBk= this.optionsTasks;
             console.log(this.optionsTasks);
 
           }

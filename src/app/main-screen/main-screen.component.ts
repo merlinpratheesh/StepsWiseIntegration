@@ -187,14 +187,9 @@ console.log(this.SectionTc );
   ngOnInit(): void {
   }
   NavigateStart() {
-    if (this.authDetails) {
-      this.router.navigate(['/loggedin']);
 
-    } else {
       this.router.navigate(['/starttest']);
 
-
-    }
   }
   refreshList(item: TestcaseInfo) {//When user Selects testitem by doubleclick
     this.myprojectVariables.viewSelectedTestcase = item;//`${item.subHeading}`;
