@@ -49,7 +49,7 @@ export class ToolbarComponent implements OnInit {
       if (myauth !== null && myauth !== undefined) {
 
         this.authDetails = myauth;
-        console.log('', this.authDetails.photoURL);
+        //console.log('', this.authDetails.photoURL);
       }
     });
     

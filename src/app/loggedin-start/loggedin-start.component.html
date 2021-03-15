@@ -225,15 +225,15 @@
                             <button mat-button mat-icon-button disabled>
                                 <mat-icon>search</mat-icon>
                             </button>
-                            <input type="text" placeholder="Search Task Name" matInput [formControl]="emailFormControl"
-                                [matAutocomplete]="auto">
+                            <input type="text" placeholder="Search Task Name" matInput [formControl]="publicFormControl"
+                                [matAutocomplete]="auto1">
                             <button mat-button mat-icon-button (click)="searchClose()">
                                 <mat-icon>close</mat-icon>
                             </button>
-                            <mat-autocomplete #auto="matAutocomplete" color="#216fdb">
-                                <mat-option *ngFor="let option of optionsTasks" [value]="option">
+                            <mat-autocomplete #auto1="matAutocomplete" color="#216fdb">
+                                <mat-option *ngFor="let option1 of optionsTasksPublic" [value]="option1">
 
-                                    <div mat-line>{{option}}</div>
+                                    <div mat-line>{{option1}}</div>
 
                                 </mat-option>
                             </mat-autocomplete>

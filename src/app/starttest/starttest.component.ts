@@ -168,8 +168,7 @@ export class StarttestComponent implements OnInit, OnDestroy {
   matcher = new MyErrorStateMatcher();
   toggleSearch: boolean = false;
   userProfileView;
-  @ViewChild('searchbar') searchbar: ElementRef;
-  options: FormGroup;
+   options: FormGroup;
   activeSelector: string;
   showSelected: boolean;
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
@@ -204,6 +203,8 @@ export class StarttestComponent implements OnInit, OnDestroy {
         })).subscribe((readrec: any) => {
           this.optionsTasks = [];
           this.optionsTasksBk = readrec.public;
+          console.log(this.optionsTasksBk);
+
           this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
           this.dataSource.paginator = this.paginator;
           this.obs = this.dataSource.connect();
@@ -232,10 +233,12 @@ export class StarttestComponent implements OnInit, OnDestroy {
           readrec.public.forEach(element => {
             this.optionsTasks.push(element.projectName);
           });
+          console.log(this.optionsTasks);
           this.optionsTasksNamesBk = this.optionsTasks;
           console.log(this.optionsTasks);
+          console.log(this.optionsTasksNamesBk);
+
         });
-        console.log(this.optionsTasks);
 
 
         this.filteredTasksOptions = this.emailFormControl.valueChanges.pipe(
@@ -244,7 +247,6 @@ export class StarttestComponent implements OnInit, OnDestroy {
             console.log('96', myvalue);
             this.userselectedProject = undefined;
             if (myvalue === '' || myvalue === null) {
-              this.optionsTasks = this.optionsTasksNamesBk;
               this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
               this.dataSource.paginator = this.paginator;
               this.obs = this.dataSource.connect();
@@ -279,8 +281,7 @@ sidenavtoggle(){
 }
 openSearch() {
   this.toggleSearch = true;
-  this.searchbar.nativeElement.focus();
-}
+ }
 
 searchClose() {
   this.toggleSearch = false;

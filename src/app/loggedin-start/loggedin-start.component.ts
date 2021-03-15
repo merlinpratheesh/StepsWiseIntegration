@@ -78,7 +78,11 @@ export class LoggedinStartComponent implements OnInit {
     savesubSectionKeys: undefined,
     savedisabledval: undefined
   };
-  emailFormControl = new FormControl('', [
+  privateFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  publicFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
@@ -186,11 +190,14 @@ export class LoggedinStartComponent implements OnInit {
   authDetails;
   publicProjectList: any;
   filteredTasksOptions: Subscription;
-  optionsTasks: string[] = [];
-  optionsTasksNamesBk: string[] = [];
-
-  optionsTasksBk: any[] = [];
-  optionsTasksSub: Subscription;
+  optionsTasksSubPrivate: Subscription;
+  optionsTasksPrivate: string[] = [];
+  optionsTasksNamesBkPrivate: string[] = [];
+  optionsTasksBkPrivate: any[] = [];
+  optionsTasksPublic: string[] = [];
+  optionsTasksNamesBkPublic: string[] = [];
+  optionsTasksBkPublic: any[] = [];
+  optionsTasksSubPublic: Subscription;
   firstProject: any;
   profileRef: any;
   userselectedProject;
@@ -203,7 +210,6 @@ export class LoggedinStartComponent implements OnInit {
 
   toggleSearch: boolean = false;
   userProfileView;
-  @ViewChild('searchbar') searchbar: ElementRef;
   activeSelector: string;
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
@@ -262,26 +268,26 @@ export class LoggedinStartComponent implements OnInit {
             console.log(this.keyRef);
           }
         });
-        this.optionsTasksSub = docData(this.db.firestore.doc('projectList/' + this.authDetails.uid)).subscribe((readrec: any) => {
-          this.optionsTasks = [];
-          this.optionsTasksBk = readrec.private;
-          console.log('280', this.optionsTasksBk, readrec.private);
-          if (this.optionsTasksBk == undefined) {
+        this.optionsTasksSubPrivate = docData(this.db.firestore.doc('projectList/' + this.authDetails.uid)).subscribe((readrec: any) => {
+          this.optionsTasksPrivate = [];
+          this.optionsTasksBkPrivate = readrec.private;
+          console.log('280', this.optionsTasksBkPrivate, readrec.private);
+          if (this.optionsTasksBkPrivate == undefined) {
 
             console.log('no private projects')
 
           }
           else {
             readrec.private.forEach(element => {
-              this.optionsTasks.push(element.projectName);
+              this.optionsTasksPrivate.push(element.projectName);
             });
-            this.optionsTasksNamesBk= this.optionsTasks;
-            console.log(this.optionsTasks);
+            this.optionsTasksNamesBkPrivate = this.optionsTasksPrivate;
+            console.log(this.optionsTasksPrivate);
 
           }
         });
 
-        this.filteredTasksOptions = this.emailFormControl.valueChanges.pipe(
+        this.filteredTasksOptions = this.privateFormControl.valueChanges.pipe(
           startWith(''),
           map((myvalue: string) => {
             console.log('96', myvalue);
@@ -290,10 +296,10 @@ export class LoggedinStartComponent implements OnInit {
 
               this.privateList = this.getPrivateList(this.db.doc('projectList/' + this.authDetails.uid));
 
-              this.optionsTasks = this.optionsTasksNamesBk;
+              this.optionsTasksPrivate = this.optionsTasksNamesBkPrivate;
             } else {
-              this.privateList = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
-              this.optionsTasks = this._filter(myvalue);
+              this.privateList = of(this.optionsTasksBkPrivate.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+              this.optionsTasksPrivate = this._filterPrivate(myvalue);
               //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
             }
           }
@@ -302,66 +308,70 @@ export class LoggedinStartComponent implements OnInit {
 
             }
           );
+          this.optionsTasksSubPublic = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
+            this.optionsTasksPublic = [];
+            this.optionsTasksBkPublic = readrec.public;
+      
+            console.log(this.optionsTasksBkPublic);
+            this.firstProject = { firstProjectRef: this.optionsTasksBkPublic[0] };
+            console.log(this.firstProject);
+            if (this.firstProject != null) {
+            }
+            this.DATA = readrec.public;
+            this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
+            this.dataSource.paginator = this.paginator;
+            this.obs = this.dataSource.connect();
+            this.changeDetectorRef.detectChanges();
+            readrec.public.forEach(element => {
+              this.optionsTasksPublic.push(element.projectName);
+            });
+            this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
+            console.log(this.optionsTasksPublic);
+          });
+          console.log(this.optionsTasksPublic);
+      
+      
+          this.filteredTasksOptions = this.publicFormControl.valueChanges.pipe(
+            startWith(''),
+            map((myvalue: string) => {
+              console.log('96', myvalue);
+              this.userselectedProject = undefined;
+              if (myvalue === '' || myvalue === null) {
+                this.optionsTasksPublic = this.optionsTasksNamesBkPublic;
+                this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
+                this.dataSource.paginator = this.paginator;
+                this.obs = this.dataSource.connect();
+                this.changeDetectorRef.detectChanges();
+              } else {
+                //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
+                this.obs = of(this.optionsTasksBkPublic.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+                this.optionsTasksPublic = this._filterPublic(myvalue);
+                //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
+                this.changeDetectorRef.detectChanges();
+              }
+            }
+            )).subscribe(
+              some => {
+      
+              }
+            );
 
       }
     })
-    this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).pipe(first(), map((someval: any) => {
-      return someval;
-    })).subscribe((readrec: any) => {
-      this.optionsTasks = [];
-      this.optionsTasksBk = readrec.public;
-
-      console.log(this.obs);
-      this.firstProject = { firstProjectRef: this.optionsTasksBk[0] };
-      console.log(this.firstProject);
-      if (this.firstProject != null) {
-      }
-      this.DATA = readrec.public;
-      this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
-      this.dataSource.paginator = this.paginator;
-      this.obs = this.dataSource.connect();
-      this.changeDetectorRef.detectChanges();
-      readrec.public.forEach(element => {
-        this.optionsTasks.push(element.projectName);
-      });
-      this.optionsTasksNamesBk = this.optionsTasks;
-      console.log(this.optionsTasks);
-    });
-    console.log(this.optionsTasks);
 
 
-    this.filteredTasksOptions = this.emailFormControl.valueChanges.pipe(
-      startWith(''),
-      map((myvalue: string) => {
-        console.log('96', myvalue);
-        this.userselectedProject = undefined;
-        if (myvalue === '' || myvalue === null) {
-          this.optionsTasks = this.optionsTasksNamesBk;
-          this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
-          this.dataSource.paginator = this.paginator;
-          this.obs = this.dataSource.connect();
-          this.changeDetectorRef.detectChanges();
-        } else {
-          //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
-          this.obs = of(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
-          this.optionsTasks = this._filter(myvalue);
-          //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
-          this.changeDetectorRef.detectChanges();
-        }
-      }
-      )).subscribe(
-        some => {
-
-        }
-      );
 
   }
 
 
 
-  private _filter(value: string): string[] {
+  private _filterPrivate(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.optionsTasks.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    return this.optionsTasksPrivate.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+  private _filterPublic(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionsTasksPublic.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   sidenavtoggle() {
 
@@ -369,12 +379,11 @@ export class LoggedinStartComponent implements OnInit {
   }
   openSearch() {
     this.toggleSearch = true;
-    this.searchbar.nativeElement.focus();
   }
 
   searchClose() {
     this.toggleSearch = false;
-    this.emailFormControl.reset()
+    this.publicFormControl.reset()
   }
 
   firstDefaultProject(some) {
