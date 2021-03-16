@@ -204,6 +204,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     }
   }
   initialize() {
+    if(this.Sections!==undefined){
 
     this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
       console.log(data);
@@ -254,7 +255,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       this.refreshTreeData();
     });
   }
-
+  }
   ngAfterViewInit() {
     this.initialize();
   }

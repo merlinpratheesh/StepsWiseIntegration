@@ -402,9 +402,6 @@ export class LoggedinStartComponent implements OnInit {
     this.getSectionsSubscription?.unsubscribe();
 
     this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
-
-
-
     console.log('218', this.keyRef);
 
 
