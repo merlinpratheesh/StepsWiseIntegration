@@ -37,7 +37,7 @@
                             </mat-optgroup>
                         </mat-select>
                     </mat-form-field>
-                    <button mat-raised-button color="primary"
+                    <button mat-raised-button color="primary"  *ngIf="loggedInUid === userselectedProjectUid"
                     [disabled]="myprojectFlags?.firstTestcaseEdit === true " (click)="AddNew()">Add</button>
                 <form class="example-form" *ngIf="myprojectFlags?.firstTestcaseEdit === true" fxLayout="column"
                     fxLayoutGap="10px">
@@ -47,13 +47,13 @@
                             [formControl]="myprojectControls?.createTestcaseControl">
                         <mat-hint>Unique Name!</mat-hint>
                     </mat-form-field>
-                    <button mat-raised-button color="primary" (click)="saveTC()"
+                    <button mat-raised-button color="primary" *ngIf="loggedInUid === userselectedProjectUid" (click)="saveTC()"
                         [disabled]="!(myprojectControls?.createTestcaseControl.value)">Save</button>
-                    <button mat-raised-button color="warn" (click)="exitTC()">Cancel</button>
+                    <button mat-raised-button color="warn" *ngIf="loggedInUid === userselectedProjectUid" (click)="exitTC()">Cancel</button>
                 </form>
-                <button mat-raised-button color="accent"
+                <button mat-raised-button color="accent" *ngIf="loggedInUid === userselectedProjectUid"
                      (click)="openedit()">Edit</button>
-                <button mat-raised-button color="warn"
+                <button mat-raised-button color="warn" *ngIf="loggedInUid === userselectedProjectUid"
                    (click)="Delete()">Delete</button>
 
                 </div>

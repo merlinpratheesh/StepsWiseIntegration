@@ -146,6 +146,7 @@ export class MainScreen2Component {
   projectName: any;
   keysselection: any;
   loggedInUid:firebase.User;
+  userselectedProjectUid:firebase.User;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore, 
@@ -158,6 +159,7 @@ export class MainScreen2Component {
       selectedProject: string;
       mainSubSectionRef: MainSectionGroup[];
       uidDetails:firebase.User;
+      userselectedProjectUid:firebase.User;
     };
 
     if (state !== undefined) {
@@ -165,7 +167,11 @@ export class MainScreen2Component {
       this.mainSubSections = state.mainSubSectionRef;
       this.projectName = state.selectedProject;
       this.loggedInUid=state.uidDetails;
+      this.userselectedProjectUid=state.userselectedProjectUid;
       console.log(this.loggedInUid);
+      console.log(this.userselectedProjectUid);
+
+
     }
 
   }

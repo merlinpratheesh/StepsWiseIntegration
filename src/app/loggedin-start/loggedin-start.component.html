@@ -95,7 +95,8 @@
                                         </mat-expansion-panel-header>
 
                                         {{details.description}}
-                                        <app-nested-tree class="mattree"  [loggedInUid]="this.authDetails.uid"
+                                        {{userselectedProjectUid}}
+                                        <app-nested-tree class="mattree"  [loggedInUid]="this.authDetails.uid" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && keyRef !== undefined  && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>
@@ -155,9 +156,8 @@
                                         </mat-expansion-panel-header>
 
                                         {{details.description}}
-                                        {{this.authDetails.uid}}
 
-                                        <app-nested-tree class="mattree" [loggedInUid]="this.authDetails.uid"
+                                        <app-nested-tree class="mattree" [loggedInUid]="this.authDetails.uid" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>

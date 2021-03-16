@@ -75,6 +75,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   @Input() Sections: Observable<any>;
   @Input() latestProject: string;
   @Input() loggedInUid:firebase.User;
+  @Input() userselectedProjectUid:firebase.User;
 
 
 
@@ -214,7 +215,9 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       this.navigationExtras.state.selectedProject=this.latestProject;
       this.navigationExtras.state.mainSubSectionRef=data;
       this.navigationExtras.state.uidDetails=this.loggedInUid;
-      console.log(this.navigationExtras.state.uidDetails);
+      this.navigationExtras.state.userselectedProjectUid=this.userselectedProjectUid;
+
+      console.log(this.navigationExtras.state.userselectedProjectUid);
 
       console.log(this.latestProject);
       console.log(this.navigationExtras.state.mainSubSectionRef);

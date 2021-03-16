@@ -201,6 +201,7 @@ export class LoggedinStartComponent implements OnInit {
   firstProject: any;
   profileRef: any;
   userselectedProject;
+  userselectedProjectUid;
   keyRef;
   DATA: projectDetails[];
   dialogRef;
@@ -394,6 +395,8 @@ export class LoggedinStartComponent implements OnInit {
   profileKeyRef(some) {
 
     this.userselectedProject = some.projectName;
+    this.userselectedProjectUid = some.projectUid;
+
 
     this.userProfileView = some.profileName;
     console.log('242', this.userselectedProject);
