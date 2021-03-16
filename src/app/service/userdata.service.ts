@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, merge, Observable, of } from 'rxjs';
+import { fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -127,6 +127,9 @@ export interface projectControls {
   editProfileGroup?: FormGroup;
 }
 
+export interface projectSub{
+  openeditSub:Subscription;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -258,7 +261,21 @@ export class UserdataService {
     });
   }
 
-  
+  async createNewTestcase(locationForSave : string, newTestcase :TestcaseInfo)  : Promise<void>{
+    await this.db.firestore.doc(locationForSave).set({testcase: firebase.firestore.FieldValue.arrayUnion(newTestcase) },{merge: true}); 
+  }
+  async deleteTestcase(locationForDelete : string, deleteTestcase :TestcaseInfo): Promise<void>{
+    await this.db.firestore.doc(locationForDelete).update({testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase)}); 
+  }
+  async editTestcase(locationForedit : string, deleteTestcase :TestcaseInfo,updatedTestcase :TestcaseInfo ): Promise<void>{
+    await this.db.firestore.runTransaction(() => {
+      const promise = Promise.all([
+        this.db.firestore.doc(locationForedit).update({testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase)}),
+        this.db.firestore.doc(locationForedit).update({testcase: firebase.firestore.FieldValue.arrayUnion(updatedTestcase)})
+      ]);
+      return promise;
+    });
+  }
 
   async createDefKeys(projectname: string, MainSection: any): Promise<void> {
     await this.db.firestore.runTransaction(() => {

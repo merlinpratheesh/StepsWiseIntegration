@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input, AfterViewInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, Input, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, Subscription, Observable, of } from 'rxjs';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
@@ -7,15 +7,17 @@ import { map, filter } from 'rxjs/operators';
 import { UserdataService, MainSectionGroup } from '../service/userdata.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import { Injectable} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NavigationExtras } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
+
+
+
 
 export class FileNode {
   id: string;
@@ -33,7 +35,7 @@ export class FileFlatNode {
     private disabled:boolean,
     public level: number,
     public type: any,
-    public id: string,
+    public id: string
   ) {}
 }
 
@@ -59,11 +61,7 @@ export interface DialogData {
   templateUrl: './nested-tree.component.html',
   styleUrls: ['./nested-tree.component.scss']
 })
-
-
-
-export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
-
+export class NestedTreeComponent implements OnInit, AfterViewInit {
   navigationExtras: NavigationExtras = {
     state: {
       selectedProject: '',
@@ -72,8 +70,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   };
   @Input() Sections: Observable<any>;
   @Input() latestProject: string;
-
-  
   nestedTreeControl: NestedTreeControl<TreeData>;
   nestedDataSource: MatTreeNestedDataSource<TreeData>;
   AddedMainSec = false;
@@ -82,23 +78,25 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   Project = '';
   AlltheKeys: any[];
   AlltheKeysbk: any[];
+  authDetails: any;
+
   _dataChange = new BehaviorSubject<TreeData[]>([]);
   private _getChildren = (node: TreeData) => observableOf(node.Children);
   hasNestedChild = (_: number, nodeData: TreeData) => nodeData.Children.length > 0;
-  sectionsub: Subscription;
-  authDetails: any;
+
   constructor(private _bottomSheet: MatBottomSheet,
     public developmentservice: UserdataService,
-    private db: AngularFirestore,
     public afAuth: AngularFireAuth,
-    private router: Router)
-     {
+    private router: Router
+    ) {
       this.afAuth.authState.subscribe(myauth => {
         if (myauth !== null && myauth !== undefined) {
           this.authDetails = myauth;
       }});
+      
     this.nestedTreeControl = new NestedTreeControl<TreeData>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
+    
     this._dataChange.subscribe(
       data => (this.nestedDataSource.data = 
         [{
@@ -205,9 +203,14 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   }
   initialize() {
 
-    this.sectionsub =this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
-      data=data.MainSection;
+    this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
       console.log(data);
+
+      this.Project = this.latestProject;
+      this.navigationExtras.state.selectedProject=this.latestProject;
+      this.navigationExtras.state.mainSubSectionRef=data;
+      console.log(this.latestProject);
+      console.log(this.navigationExtras.state.mainSubSectionRef);
 
       this.nestedDataSource.data=        [{
         Id: 1,
@@ -216,17 +219,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
         Children: []
       }];
       this.Project = this.latestProject;
-      this.navigationExtras.state.selectedProject=this.latestProject;
-      this.navigationExtras.state.mainSubSectionRef=data;
-
-
-      console.log(this.latestProject);
-      console.log(this.navigationExtras.state.mainSubSectionRef);
-
-
-
-      
-
       this.AlltheKeys = data;
       this.AlltheKeysbk=data;
       data.forEach(element => {
@@ -247,7 +239,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
           this.addChildNode({currentNode:node, node: childnode});
         });
       });
-    })).subscribe(_=> {
+    })).subscribe(_ => {
       let elementPosition: number;
       const node: TreeData = {
         Id: 1,
@@ -263,20 +255,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
 
   ngAfterViewInit() {
     this.initialize();
-  }
-
-  NavigateTestcase(some){
-    console.log(some);
-    if(this.authDetails==null){
-    this.router.navigate(['/main'], this.navigationExtras);
-  }else{
-    this.router.navigate(['/main2'], this.navigationExtras);
-
-  }
-  }
-  SelectedMainSection(some){
-    console.log(some);
-
   }
   findFatherNode(id: number, data: TreeData[]) {
     for (let i = 0; i < data.length; i += 1) {
@@ -298,7 +276,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
     return false;
   }
 
-
   
   addNode(node: TreeData) {
     node.Id = this.findNodeMaxId(this.nestedDataSource.data) + 1;
@@ -315,24 +292,19 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
     //console.log(this.AlltheKeys);
     this._bottomSheet.open(BottomSheetChangeOrder, {data: {mydata: this.AlltheKeys , projectname: this.latestProject}});
   }
-  ngOnDestroy() {
-    this.sectionsub.unsubscribe();
+    NavigateTestcase(some){
+    console.log(some);
+    if(this.authDetails==null){
+    this.router.navigate(['/main'], this.navigationExtras);
+  }else{
+    this.router.navigate(['/main2'], this.navigationExtras);
+
   }
-  CreateDefaultKeys() {
-    const MainSection = [{
-      name: 'MainSection',
-      disabled: false,
-      section: [{
-        viewvalue: 'SubSection'
-      }]
-    }];
-    //delete the default testCase if any
-    this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false }).then(success => {
-    })
   }
+  SelectedMainSection(some){
+    console.log(some);
 
-
-
+  }
 }
 @Component({
   selector: 'bottom-sheet-changeorder',
@@ -361,7 +333,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
   .example-list {
     width: 500px;
     max-width: 100%;
-    border: solid 2px black;
+    border: solid 10px green;
     min-height: 60px;
     display: block;
     background: white;
@@ -379,7 +351,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit,OnDestroy {
     justify-content: space-around;
     box-sizing: border-box;
     cursor: move;
-    background:rgb(240, 240, 240);
+    background: lightblue;
     font-size: 20px;
   }
   
@@ -427,16 +399,13 @@ export class BottomSheetChangeOrder implements AfterViewInit {
   end=0;
   constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetChangeOrder>, 
     @Inject(MAT_BOTTOM_SHEET_DATA) public bottomdata: any,
-    public developmentservice: UserdataService,
-    private router: Router
-    ) {
+    public developmentservice: UserdataService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
     this.dataChange.subscribe(data => this.rebuildTreeForData(data));
     this.initialize();
-    
   }
 
   openLink(event: MouseEvent): void {
@@ -672,10 +641,5 @@ export class BottomSheetChangeOrder implements AfterViewInit {
         this.treeControl.expand(node);
       });
   }
-
-  ngOnInit(): void {
-  }
-  
-
 
 }

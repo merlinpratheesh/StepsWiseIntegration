@@ -178,7 +178,7 @@ export class LoggedinStartComponent implements OnInit {
           this.getSectionsBehaviourSub.next(null);
         } else {
           if (val.MainSection.length !== 0) {
-            this.getSectionsBehaviourSub.next(val);
+            this.getSectionsBehaviourSub.next(val.MainSection);
           }
         }
       }

@@ -158,6 +158,8 @@ export class MainScreenComponent {
       console.log(state.mainSubSectionRef);
       this.mainSubSections = state.mainSubSectionRef;
       this.projectName=state.selectedProject ;
+      console.log(this.projectName);
+
     }
     
   }

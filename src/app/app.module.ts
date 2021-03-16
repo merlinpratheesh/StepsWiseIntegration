@@ -24,7 +24,7 @@ import { StarttestComponent } from './starttest/starttest.component';
 import { SingletaskComponent } from './singletask/singletask.component';
 import { AddNewProjectDialog, ToolbarComponent  } from './toolbar/toolbar.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MainScreen2Component } from './main-screen2/main-screen2.component';
+import { MainScreen2Component,DialogEditTestcase } from './main-screen2/main-screen2.component';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -48,6 +48,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 @NgModule({
   declarations: [
     AppComponent,
+    DialogEditTestcase,
     StartScreenComponent,
     MainScreenComponent,
     LoggedinStartComponent,
@@ -67,6 +68,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     ,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
+  entryComponents:[DialogEditTestcase],
   providers: [AddNewProjectDialog,BottomSheetOverviewExampleSheet],
   bootstrap: [AppComponent]
 })

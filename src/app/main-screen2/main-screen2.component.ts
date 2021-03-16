@@ -1,12 +1,13 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MainSectionGroup, projectControls, projectFlags, projectVariables, TestcaseInfo, UserdataService, userProfile } from '../service/userdata.service';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { MainSectionGroup, projectControls, projectFlags, projectSub, projectVariables, TestcaseInfo, UserdataService, userProfile } from '../service/userdata.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, startWith, withLatestFrom } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -136,16 +137,21 @@ export class MainScreen2Component {
     });
     return this.getSectionsBehaviourSub;
   };
+  myprojectSub: projectSub ={
+    openeditSub:undefined
+  };
   @ViewChild('drawer') public sidenav: MatSidenav;
   isClose: boolean;
   valueSelected: any;
   authDetails: any;
   mainSubSections: any;
-  projectName:any;
+  projectName: any;
   keysselection: any;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
-    private db: AngularFirestore, public afAuth: AngularFireAuth
+    private db: AngularFirestore, 
+    public afAuth: AngularFireAuth,
+    public dialog: MatDialog
 
   ) {
     const navigation = this.router.getCurrentNavigation();
@@ -157,9 +163,10 @@ export class MainScreen2Component {
     if (state !== undefined) {
       console.log(state.mainSubSectionRef);
       this.mainSubSections = state.mainSubSectionRef;
-      this.projectName=state.selectedProject ;
+      this.projectName = state.selectedProject;
+      console.log(this.projectName);
     }
-    
+
   }
 
 
@@ -167,17 +174,89 @@ export class MainScreen2Component {
   loadTc(event) {
     console.log(event);
     this.isClose = false;
-    if(!event) {
+    if (!event) {
       this.isClose = true;
       console.log('dropdown is closed');
-      this.valueSelected = this.myprojectControls?.subsectionkeysControl.value ;
+      this.valueSelected = this.myprojectControls?.subsectionkeysControl.value;
       console.log(this.valueSelected);
-      this.SectionTc = this.getTestcases(this.db.doc(this.projectName+'/'+ this.valueSelected.groupValue + '/items/' + this.valueSelected.value));
-console.log(this.SectionTc );
+      this.SectionTc = this.getTestcases(this.db.doc(this.projectName + '/' + this.valueSelected.groupValue + '/items/' + this.valueSelected.value));
+      console.log(this.SectionTc);
     }
-    
+  }
+  AddNew() {
+    this.myprojectFlags.firstTestcaseEdit = true;
+  }
+  saveTC() {
+    let locationForSave = '';
+
+      const userselection = this.myprojectControls.subsectionkeysControl.value;
+      //console.log('userselection', userselection);
+      locationForSave = this.projectName  + '/' + userselection.groupValue + '/items/' + userselection.value;
+
+    const updateObject: TestcaseInfo = {
+      heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list
+      subHeading: 'Edit SubHeading',//Sub-Heading in testcase list
+      description: 'Edit here!',//Description in testcase view
+      linktoTest: 'https://www.google.com/'//stackblitzLink in testcase edit/doubleclick
+    };
+    this.developmentservice.createNewTestcase(locationForSave, updateObject).then(success => {
+      this.myprojectFlags.firstTestcaseEdit = false;
+      this.myprojectControls?.createTestcaseControl.reset();
+      this.myprojectFlags.showEditTcButton = false;
+    });
+
+  }
+  exitTC() {
+    this.myprojectFlags.firstTestcaseEdit = false;
   }
 
+  openedit() {
+    let locationForEdit = '';
+
+      const userselection = this.myprojectControls.subsectionkeysControl.value;
+      locationForEdit = this.projectName + '/' + userselection.groupValue + '/items/' + userselection.value;
+    
+    const dialogRef = this.dialog.open(DialogEditTestcase, {
+      width: '80vw',
+      data: this.myprojectVariables.viewSelectedTestcase,
+      disableClose: true
+    });
+    this.myprojectSub.openeditSub = dialogRef.afterClosed().subscribe(result => {
+      if (result !== null) {
+        this.myprojectFlags.showEditTcButton = false;
+        const updateObject: TestcaseInfo = { ...result };
+        this.developmentservice.editTestcase(locationForEdit, this.myprojectVariables.viewSelectedTestcase, updateObject);
+        this.myprojectVariables.viewSelectedTestcase = updateObject;
+        this.myprojectControls.testcaseInfoControl.setValue(`${updateObject.description}`)
+      }
+    });
+  }
+  Delete() {
+    let r = confirm("Confirm Tc Delete?");
+    if (r == true) {
+      let locationForDelete = '';
+      if (this.myuserProfile.myusrinfoFromDb.projectName === 'Demo') {
+        locationForDelete = '/projectList/' + this.myuserProfile.userAuthenObj.uid;
+      } else {
+        const userselection = this.myprojectControls.subsectionkeysControl.value;
+        locationForDelete = this.projectName  + '/' + userselection.groupValue + '/items/' + userselection.value;
+      }
+      this.developmentservice.deleteTestcase(locationForDelete, this.myprojectVariables.viewSelectedTestcase).then(success => {
+        const updateObject: TestcaseInfo = {
+          heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list
+          subHeading: 'Edit SubHeading',//Sub-Heading in testcase list
+          description: 'Edit here!',//Description in testcase view
+          linktoTest: 'https://www.google.com/'//stackblitzLink in testcase edit/doubleclick
+        };
+
+        this.myprojectVariables.viewSelectedTestcase = updateObject;
+        this.myprojectControls.testcaseInfoControl.setValue(`${updateObject.description}`);
+        this.myprojectFlags.showEditTcButton = false;
+      });
+    } else {
+      this.myprojectFlags.showEditTcButton = true;
+    }
+  }
 
   draweropen() {
   }
@@ -193,11 +272,65 @@ console.log(this.SectionTc );
 
   NavigateStart() {
     console.log(this.authDetails);
-      this.router.navigate(['/loggedin']);
+    this.router.navigate(['/loggedin']);
 
   }
   refreshList(item: TestcaseInfo) {//When user Selects testitem by doubleclick
     this.myprojectVariables.viewSelectedTestcase = item;//`${item.subHeading}`;
     this.myprojectControls.testcaseInfoControl.setValue(`${item.description}`)
+  }
+}
+
+
+@Component({
+  selector: 'dialog-edit-testcase',
+  template: `
+  <h1 mat-dialog-title>Edit TestCase</h1>
+  <div mat-dialog-content>
+  <form [formGroup]="userProfile" fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-form-field appearance="fill" floatLabel="Edit Sub-Heading" fxFlex="75vw">
+      <mat-label>Change Sub-Heading</mat-label>
+      <input matInput placeholder="Sub-Heading" formControlName = "subHeading">
+    </mat-form-field>
+    <mat-form-field appearance="fill" floatLabel="Edit Link" fxFlex="75vw">
+    <mat-label>Update in Stackblitz</mat-label>
+    <input matInput placeholder="Stackblitz github link" formControlName = "linktoTest">
+    </mat-form-field>
+    <mat-form-field appearance="fill" floatLabel="Edit Description" fxFlex="75vw">
+      <mat-label>Give More Information</mat-label>
+      <textarea 
+        matInput 
+        placeholder="Explain More here" 
+        formControlName = "description"
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="13"
+        cdkAutosizeMaxRows="70" 
+        ></textarea>
+    </mat-form-field>
+  </form>  
+</div>
+<div mat-dialog-actions>
+<button mat-button mat-raised-button color="primary" [mat-dialog-close]="userProfile.value"  [disabled]="userProfile.pristine">Update</button>
+  <button mat-button mat-raised-button color="warn" (click)="onNoClick()" cdkFocusInitial >Cancel</button>  
+</div> `
+})
+export class DialogEditTestcase implements OnInit {
+  userProfile: FormGroup;
+  constructor(
+    public dialogRef: MatDialogRef<DialogEditTestcase>,
+    @Inject(MAT_DIALOG_DATA) public data: TestcaseInfo,
+    private fb: FormBuilder) { }
+
+  onNoClick(): void {
+    this.dialogRef.close(null);
+  }
+
+  ngOnInit() {
+    this.userProfile = this.fb.group({
+      heading: [this.data.heading],
+      subHeading: [this.data.subHeading],
+      description: [this.data.description],
+      linktoTest: [this.data.linktoTest]
+    });
   }
 }
