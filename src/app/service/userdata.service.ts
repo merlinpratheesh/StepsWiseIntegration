@@ -8,9 +8,9 @@ import { first, map } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
-export interface TestcaseInfo{
+export interface TestcaseInfo {
   heading: string;//Heading in testcase list
-  subHeading:string;//Sub-Heading in testcase list
+  subHeading: string;//Sub-Heading in testcase list
   description: string;//Description in testcase view
   linktoTest: string;//stackblitzLink in testcase edit/doubleclick
 }
@@ -21,7 +21,7 @@ export interface userProfile {
   userAuthenObj: firebase.User,//Receive User obj after login success
   myusrinfoFromDb: myusrinfo,
   keysReadFromDb?: MainSectionGroup[];
-  selectedPublicProject?:string;
+  selectedPublicProject?: string;
   dupmainsubsectionKeys?: string[];
   mainsubsectionKeys?: Observable<string[]>;
   subSectionKeys?: string[];
@@ -40,10 +40,10 @@ export interface projectVariables {
   initialMainSection?: string;
   testcaseslength?: number;
   viewSelectedTestcase?: TestcaseInfo;
-  publicProjectHint?:string;
-  privateProjectHint?:string;
-  editProjectkeysSaved:MainSectionGroup[];
-  lastSavedVisibility:boolean;
+  publicProjectHint?: string;
+  privateProjectHint?: string;
+  editProjectkeysSaved: MainSectionGroup[];
+  lastSavedVisibility: boolean;
 }
 export interface TestcaseInfo {
   heading: string;//Heading in testcase list
@@ -64,25 +64,24 @@ export interface projectControls {
   editSubsectionGroup?: FormGroup;  // user selects a Sub section key
 
 }
-export interface projectFlags
-{    
-    newuserCheck?: boolean;//show add or New Testcase based on number of testcases in subsection
-    showPaymentpage?:boolean;//for expired user-remove it
-    firstTestcaseEdit?:boolean;
-    showEditTcButton?:boolean;
-    homeNewProject?:boolean;
-    homeDeleteProject?:boolean;
-    homeCurrentProject?:boolean;
-    editModifyProject?:boolean;
-    editAddMainsec?:boolean;
-    editDeleteMainsec?:boolean;
-    editVisibility?:boolean;//visibility button
-    editAddSubSec?:boolean;
-    editDeleteSubsec?:boolean;
-    editAddProject?:boolean;
-    editDeleteProject?:boolean;
-    editUpdateProject?:boolean;
-    
+export interface projectFlags {
+  newuserCheck?: boolean;//show add or New Testcase based on number of testcases in subsection
+  showPaymentpage?: boolean;//for expired user-remove it
+  firstTestcaseEdit?: boolean;
+  showEditTcButton?: boolean;
+  homeNewProject?: boolean;
+  homeDeleteProject?: boolean;
+  homeCurrentProject?: boolean;
+  editModifyProject?: boolean;
+  editAddMainsec?: boolean;
+  editDeleteMainsec?: boolean;
+  editVisibility?: boolean;//visibility button
+  editAddSubSec?: boolean;
+  editDeleteSubsec?: boolean;
+  editAddProject?: boolean;
+  editDeleteProject?: boolean;
+  editUpdateProject?: boolean;
+
 }
 
 export interface MainSectionGroup {
@@ -98,7 +97,7 @@ export interface projectDetails {
   projectUid: string;//stackblitzLink in testcase edit/doubleclick
   creationDate: string;
   profileName: string;
-  likes:number;
+  likes: number;
 }
 export interface SubSection {
   viewvalue: string;
@@ -110,15 +109,15 @@ export interface MainSectionGroup {
   section: SubSection[];
 }
 export interface usrinfoDetails {
-  projectName:string,
+  projectName: string,
   profileName: string,
   email?: string,
   gender?: string,
   areaOfinterest?: string,
-  numberOfProjects?:number,
+  numberOfProjects?: number,
   skills?: string,
   location?: string,
-  membershipEnd?:firebase. firestore. Timestamp;
+  membershipEnd?: firebase.firestore.Timestamp;
   membershipType?: string,
   projectLocation?: string,
   photoUrl: string,
@@ -127,8 +126,8 @@ export interface projectControls {
   editProfileGroup?: FormGroup;
 }
 
-export interface projectSub{
-  openeditSub:Subscription;
+export interface projectSub {
+  openeditSub: Subscription;
 }
 
 @Injectable({
@@ -148,7 +147,7 @@ export class UserdataService {
     ).pipe(map(() => navigator.onLine));
   }
 
-  async addPrivateList (value: any, uidtoupdate: string) : Promise<void>{
+  async addPrivateList(value: any, uidtoupdate: string): Promise<void> {
     console.log(value);
     /*await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
@@ -158,26 +157,26 @@ export class UserdataService {
     });*/
   }
 
-  async addPublicList (value: any) : Promise<void>{
+  async addPublicList(value: any): Promise<void> {
     console.log(value);
 
   }
 
-  async updateProfile (value: any, uid: string) : Promise<void>{
+  async updateProfile(value: any, uid: string): Promise<void> {
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
-        this.db.collection('profile').doc(uid).set(value, {merge:true})
+        this.db.collection('profile').doc(uid).set(value, { merge: true })
 
       ]);
       return promise;
     });
   }
-  async updateLikes (value: any) : Promise<void>{
+  async updateLikes(value: any): Promise<void> {
     console.log(value);
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
 
-        this.db.collection('projectList/').doc('publicProject').set(value, {merge:true})
+        this.db.collection('projectList/').doc('publicProject').set(value, { merge: true })
 
       ]);
       return promise;
@@ -186,11 +185,11 @@ export class UserdataService {
 
 
 
-  docExists(uid: string):any {
+  docExists(uid: string): any {
     return this.db.doc(`profile/` + uid).valueChanges().pipe(first()).toPromise();
   }
-  async findOrCreate(uid: string) :Promise<usrinfoDetails> {
-    const doc:usrinfoDetails = await this.docExists(uid);
+  async findOrCreate(uid: string): Promise<usrinfoDetails> {
+    const doc: usrinfoDetails = await this.docExists(uid);
     if (doc) {
       console.log('returned', doc);
       return doc;
@@ -199,84 +198,108 @@ export class UserdataService {
     }
   }
 
-  privateProjectExists(uid: string):any {
+  privateProjectExists(uid: string): any {
     return this.db.doc(`projectList/` + uid).valueChanges().pipe(first()).toPromise();
   }
-  async privateProjectfindOrCreate(uid: string) :Promise<projectDetails> {
-    const project:projectDetails = await this.privateProjectExists(uid);
+  async privateProjectfindOrCreate(uid: string): Promise<projectDetails> {
+    const project: projectDetails = await this.privateProjectExists(uid);
     console.log('110 returned', project);
 
     if (project) {
-      console.log('110',uid);
+      console.log('110', uid);
       return project;
     } else {
       return undefined;
     }
   }
-  
 
 
-  async createnewprojectExistingId( updatedProject:any,uid:string): Promise<void> {
+
+  async createnewprojectExistingId(updatedProject: any, uid: string): Promise<void> {
     console.log(updatedProject);
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
 
-      this.db.collection('projectList/').doc(uid).update(
-        {private:firebase.firestore.FieldValue.arrayUnion(updatedProject),
-        }),
-      
-      this.db.collection('projectList/').doc('publicProject').update(
-          {public:firebase.firestore.FieldValue.arrayUnion(updatedProject),
+        this.db.collection('projectList/').doc(uid).update(
+          {
+            private: firebase.firestore.FieldValue.arrayUnion(updatedProject),
+          }),
 
-        }),
+        this.db.collection('projectList/').doc('publicProject').update(
+          {
+            public: firebase.firestore.FieldValue.arrayUnion(updatedProject),
+
+          }),
         this.db.collection('profile/').doc(uid).update(
-          {numberOfProjects:firebase.firestore.FieldValue.increment(1),
-          
-        })
+          {
+            numberOfProjects: firebase.firestore.FieldValue.increment(1),
+
+          })
       ]);
-        
+
       return promise;
     });
   }
-  async createnewproject( updatedProject:any,uid:string): Promise<void> {
+  async createnewproject(updatedProject: any, uid: string): Promise<void> {
     console.log(updatedProject);
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
 
-      this.db.collection('projectList/').doc(uid).set(
-        {private:firebase.firestore.FieldValue.arrayUnion(updatedProject),
-        }),
+        this.db.collection('projectList/').doc(uid).set(
+          {
+            private: firebase.firestore.FieldValue.arrayUnion(updatedProject),
+          }),
 
         this.db.collection('profile/').doc(uid).update(
-          {numberOfProjects:firebase.firestore.FieldValue.increment(1),
-          
-        }),
-      
-      this.db.collection('projectList/').doc('publicProject').update(
-          {public:firebase.firestore.FieldValue.arrayUnion(updatedProject),
+          {
+            numberOfProjects: firebase.firestore.FieldValue.increment(1),
 
-        })]);
-        
+          }),
+
+        this.db.collection('projectList/').doc('publicProject').update(
+          {
+            public: firebase.firestore.FieldValue.arrayUnion(updatedProject),
+
+          })]);
+
       return promise;
     });
   }
 
-  async createNewTestcase(locationForSave : string, newTestcase :TestcaseInfo)  : Promise<void>{
-    await this.db.firestore.doc(locationForSave).set({testcase: firebase.firestore.FieldValue.arrayUnion(newTestcase) },{merge: true}); 
+  async createNewTestcase(loggedInUid, newTestcase: TestcaseInfo, projectName: string, userselection): Promise<void> {
+    await this.db.firestore.doc('/testcase/' + loggedInUid + '/ ' + projectName + '/' + userselection.groupValue + '/items/' + userselection.value).set({ testcase: firebase.firestore.FieldValue.arrayUnion(newTestcase) }, { merge: true });
+    await this.db.firestore.doc('/testcase/' + projectName + '/' + userselection.groupValue + '/' + userselection.value).set({ testcase: firebase.firestore.FieldValue.arrayUnion(newTestcase) }, { merge: true });
   }
-  async deleteTestcase(locationForDelete : string, deleteTestcase :TestcaseInfo): Promise<void>{
-    await this.db.firestore.doc(locationForDelete).update({testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase)}); 
+
+
+  async deleteTestcase(loggedInUid, projectName: string, userselection, deleteTestcase: TestcaseInfo): Promise<void> {
+    await this.db.firestore.doc('/testcase/' + loggedInUid + '/ ' + projectName + '/' + userselection.groupValue + '/items/' + userselection.value).update({ testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase) });
+    await this.db.firestore.doc('/testcase/' + projectName + '/' + userselection.groupValue + '/' + userselection.value).update({ testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase) });
+
   }
-  async editTestcase(locationForedit : string, deleteTestcase :TestcaseInfo,updatedTestcase :TestcaseInfo ): Promise<void>{
+  async editTestcase(loggedInUid, newTestcase: TestcaseInfo, projectName: string, userselection, deleteTestcase: TestcaseInfo, updatedTestcase: TestcaseInfo): Promise<void> {
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
-        this.db.firestore.doc(locationForedit).update({testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase)}),
-        this.db.firestore.doc(locationForedit).update({testcase: firebase.firestore.FieldValue.arrayUnion(updatedTestcase)})
+
+        this.db.firestore.doc('/testcase/' + loggedInUid + '/ ' + projectName + '/' + userselection.groupValue + '/items/' + userselection.value).update({ testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase) }),
+        this.db.firestore.doc('/testcase/' + loggedInUid + '/ ' + projectName + '/' + userselection.groupValue + '/items/' + userselection.value).update({ testcase: firebase.firestore.FieldValue.arrayUnion(updatedTestcase) }),
+        this.db.firestore.doc('/testcase/' + projectName + '/' + userselection.groupValue + '/' + userselection.value).update({ testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase) }),
+        this.db.firestore.doc('/testcase/' + projectName + '/' + userselection.groupValue + '/' + userselection.value).update({ testcase: firebase.firestore.FieldValue.arrayUnion(updatedTestcase) })
+
       ]);
       return promise;
     });
   }
 
+  async editTestcasePublic(locationForeditPublic: string, deleteTestcase: TestcaseInfo, updatedTestcase: TestcaseInfo): Promise<void> {
+    await this.db.firestore.runTransaction(() => {
+      const promise = Promise.all([
+        this.db.firestore.doc(locationForeditPublic).update({ testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase) }),
+        this.db.firestore.doc(locationForeditPublic).update({ testcase: firebase.firestore.FieldValue.arrayUnion(updatedTestcase) })
+      ]);
+      return promise;
+    });
+  }
   async createDefKeys(projectname: string, MainSection: any): Promise<void> {
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([

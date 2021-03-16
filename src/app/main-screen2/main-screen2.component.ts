@@ -192,10 +192,10 @@ export class MainScreen2Component {
   }
   saveTC() {
     let locationForSave = '';
+    let locationForSavepublic='';
 
       const userselection = this.myprojectControls.subsectionkeysControl.value;
       console.log('userselection', userselection);
-      locationForSave = '/testcase/' + this.loggedInUid +'/ '+ this.projectName  + '/' + userselection.groupValue + '/items/'  + userselection.value;
 
     const updateObject: TestcaseInfo = {
       heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list
@@ -203,11 +203,12 @@ export class MainScreen2Component {
       description: 'Edit here!',//Description in testcase view
       linktoTest: 'https://www.google.com/'//stackblitzLink in testcase edit/doubleclick
     };
-    this.developmentservice.createNewTestcase(locationForSave, updateObject).then(success => {
+    this.developmentservice.createNewTestcase(this.loggedInUid, updateObject,this.projectName,userselection).then(success => {
       this.myprojectFlags.firstTestcaseEdit = false;
       this.myprojectControls?.createTestcaseControl.reset();
       this.myprojectFlags.showEditTcButton = false;
     });
+
 
   }
   exitTC() {
@@ -216,11 +217,11 @@ export class MainScreen2Component {
 
   openedit() {
     let locationForEdit = '';
+    let locationForEditPublic='';
 
       const userselection = this.myprojectControls.subsectionkeysControl.value;
       console.log('userselection', userselection);
-      locationForEdit ='/testcase/' + this.loggedInUid +'/ '+ this.projectName  + '/' + userselection.groupValue + '/items/'  + userselection.value;
-
+    
     const dialogRef = this.dialog.open(DialogEditTestcase, {
       width: '80vw',
       data: this.myprojectVariables.viewSelectedTestcase,
@@ -230,7 +231,7 @@ export class MainScreen2Component {
       if (result !== null) {
         this.myprojectFlags.showEditTcButton = false;
         const updateObject: TestcaseInfo = { ...result };
-        this.developmentservice.editTestcase(locationForEdit, this.myprojectVariables.viewSelectedTestcase, updateObject);
+        this.developmentservice.editTestcase( this.loggedInUid, updateObject,this.projectName,userselection, this.myprojectVariables.viewSelectedTestcase, updateObject);
         this.myprojectVariables.viewSelectedTestcase = updateObject;
         this.myprojectControls.testcaseInfoControl.setValue(`${updateObject.description}`)
       }
@@ -244,7 +245,7 @@ export class MainScreen2Component {
         const userselection = this.myprojectControls.subsectionkeysControl.value;
         locationForDelete = this.projectName  + '/' + userselection.groupValue + '/items/' + userselection.value;
       
-      this.developmentservice.deleteTestcase(locationForDelete, this.myprojectVariables.viewSelectedTestcase).then(success => {
+      this.developmentservice.deleteTestcase(this.loggedInUid,this.projectName,userselection,this.myprojectVariables.viewSelectedTestcase).then(success => {
         const updateObject: TestcaseInfo = {
           heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list
           subHeading: 'Edit SubHeading',//Sub-Heading in testcase list
