@@ -169,8 +169,6 @@ export class MainScreen2Component {
 
   }
 
-
-
   loadTc(event) {
     console.log(event);
     this.isClose = false;

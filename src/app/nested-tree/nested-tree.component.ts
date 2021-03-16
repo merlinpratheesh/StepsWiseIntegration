@@ -15,6 +15,7 @@ import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 
@@ -87,7 +88,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   constructor(private _bottomSheet: MatBottomSheet,
     public developmentservice: UserdataService,
     public afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private db: AngularFirestore
     ) {
       this.afAuth.authState.subscribe(myauth => {
         if (myauth !== null && myauth !== undefined) {
@@ -304,6 +306,18 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   SelectedMainSection(some){
     console.log(some);
 
+  }
+  CreateDefaultKeys() {
+    const MainSection = [{
+      name: 'MainSection',
+      disabled: false,
+      section: [{
+        viewvalue: 'SubSection'
+      }]
+    }];
+    //delete the default testCase if any
+    this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false }).then(success => {
+    })
   }
 }
 @Component({
