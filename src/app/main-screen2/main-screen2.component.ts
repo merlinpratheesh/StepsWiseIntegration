@@ -135,8 +135,8 @@ export class MainScreen2Component {
     });
     return this.getSectionsBehaviourSub;
   };
-  myprojectSub: projectSub ={
-    openeditSub:undefined
+  myprojectSub: projectSub = {
+    openeditSub: undefined
   };
   @ViewChild('drawer') public sidenav: MatSidenav;
   isClose: boolean;
@@ -145,11 +145,11 @@ export class MainScreen2Component {
   mainSubSections: any;
   projectName: any;
   keysselection: any;
-  loggedInUid:firebase.User;
-  userselectedProjectUid:firebase.User;
+  loggedInUid: firebase.User;
+  userselectedProjectUid: firebase.User;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
-    private db: AngularFirestore, 
+    private db: AngularFirestore,
     public afAuth: AngularFireAuth,
     public dialog: MatDialog
 
@@ -158,44 +158,52 @@ export class MainScreen2Component {
     const state = navigation.extras.state as {
       selectedProject: string;
       mainSubSectionRef: MainSectionGroup[];
-      uidDetails:firebase.User;
-      userselectedProjectUid:firebase.User;
+      uidDetails: firebase.User;
+      userselectedProjectUid: firebase.User;
     };
 
     if (state !== undefined) {
       console.log(state.mainSubSectionRef);
       this.mainSubSections = state.mainSubSectionRef;
       this.projectName = state.selectedProject;
-      this.loggedInUid=state.uidDetails;
-      this.userselectedProjectUid=state.userselectedProjectUid;
+      this.loggedInUid = state.uidDetails;
+      this.userselectedProjectUid = state.userselectedProjectUid;
       console.log(this.loggedInUid);
       console.log(this.userselectedProjectUid);
 
 
     }
 
+
+
   }
   loadTc(event) {
     this.isClose = false;
+    console.log(event);
     if (!event) {
       this.isClose = true;
       console.log('dropdown is closed');
       this.valueSelected = this.myprojectControls?.subsectionkeysControl.value;
-      console.log(this.valueSelected);
-      this.SectionTc = this.getTestcases(this.db.doc('/testcase/' + this.projectName + '/' + this.valueSelected.groupValue+'/' + this.valueSelected.value));
-      console.log(this.SectionTc);
+      if (this.valueSelected !== null && this.valueSelected !== undefined) {
+        this.SectionTc = this.getTestcases(this.db.doc('/testcase/' + this.projectName + '/' + this.valueSelected.groupValue + '/' + this.valueSelected.value));
+        console.log(this.SectionTc);
+      }
+      else {
+        return of(false);
+      }
 
     }
   }
+
   AddNew() {
     this.myprojectFlags.firstTestcaseEdit = true;
   }
   saveTC() {
     let locationForSave = '';
-    let locationForSavepublic='';
+    let locationForSavepublic = '';
 
-      const userselection = this.myprojectControls.subsectionkeysControl.value;
-      console.log('userselection', userselection);
+    const userselection = this.myprojectControls.subsectionkeysControl.value;
+    console.log('userselection', userselection);
 
     const updateObject: TestcaseInfo = {
       heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list
@@ -203,7 +211,7 @@ export class MainScreen2Component {
       description: 'Edit here!',//Description in testcase view
       linktoTest: 'https://www.google.com/'//stackblitzLink in testcase edit/doubleclick
     };
-    this.developmentservice.createNewTestcase(this.loggedInUid, updateObject,this.projectName,userselection).then(success => {
+    this.developmentservice.createNewTestcase(this.loggedInUid, updateObject, this.projectName, userselection).then(success => {
       this.myprojectFlags.firstTestcaseEdit = false;
       this.myprojectControls?.createTestcaseControl.reset();
       this.myprojectFlags.showEditTcButton = false;
@@ -217,11 +225,11 @@ export class MainScreen2Component {
 
   openedit() {
     let locationForEdit = '';
-    let locationForEditPublic='';
+    let locationForEditPublic = '';
 
-      const userselection = this.myprojectControls.subsectionkeysControl.value;
-      console.log('userselection', userselection);
-    
+    const userselection = this.myprojectControls.subsectionkeysControl.value;
+    console.log('userselection', userselection);
+
     const dialogRef = this.dialog.open(DialogEditTestcase, {
       width: '80vw',
       data: this.myprojectVariables.viewSelectedTestcase,
@@ -231,7 +239,7 @@ export class MainScreen2Component {
       if (result !== null) {
         this.myprojectFlags.showEditTcButton = false;
         const updateObject: TestcaseInfo = { ...result };
-        this.developmentservice.editTestcase( this.loggedInUid, updateObject,this.projectName,userselection, this.myprojectVariables.viewSelectedTestcase, updateObject);
+        this.developmentservice.editTestcase(this.loggedInUid, updateObject, this.projectName, userselection, this.myprojectVariables.viewSelectedTestcase, updateObject);
         this.myprojectVariables.viewSelectedTestcase = updateObject;
         this.myprojectControls.testcaseInfoControl.setValue(`${updateObject.description}`)
       }
@@ -242,10 +250,10 @@ export class MainScreen2Component {
     if (r == true) {
       let locationForDelete = '';
 
-        const userselection = this.myprojectControls.subsectionkeysControl.value;
-        locationForDelete = this.projectName  + '/' + userselection.groupValue + '/items/' + userselection.value;
-      
-      this.developmentservice.deleteTestcase(this.loggedInUid,this.projectName,userselection,this.myprojectVariables.viewSelectedTestcase).then(success => {
+      const userselection = this.myprojectControls.subsectionkeysControl.value;
+      locationForDelete = this.projectName + '/' + userselection.groupValue + '/items/' + userselection.value;
+
+      this.developmentservice.deleteTestcase(this.loggedInUid, this.projectName, userselection, this.myprojectVariables.viewSelectedTestcase).then(success => {
         const updateObject: TestcaseInfo = {
           heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list
           subHeading: 'Edit SubHeading',//Sub-Heading in testcase list

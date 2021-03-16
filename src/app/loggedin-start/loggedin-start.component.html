@@ -126,8 +126,7 @@
                             <div *ngIf="(privateList| async) as projectDetails; else waitingload ">
                                 <mat-accordion fxLayout="column">
                                     <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
-                                        class="panel" *ngFor="let details of projectDetails"
-                                        (closed)="Expansionclose()">
+                                        class="panel" *ngFor="let details of projectDetails">
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
                                             (click)="profileKeyRef(details)" style="width:90%; ">
                                             <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
@@ -156,6 +155,8 @@
                                         </mat-expansion-panel-header>
 
                                         {{details.description}}
+
+                                        <button mat-raised-button (click)="DeleteProject()" > DeleteProject </button>
 
                                         <app-nested-tree class="mattree" [loggedInUid]="this.authDetails.uid" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "

@@ -23,9 +23,9 @@
             <div fxLayout="row wrap" fxLayoutAlign="space-around center">
                 <div fxLayout="column" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;"
                     fxLayoutGap="10px">
-                    <h4>{{myuserProfile.myusrinfoFromDb?.projectName}}</h4>
+                    <h4>{{projectName}}</h4>
                     <mat-form-field appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
-                        <mat-label>{{myprojectVariables?.initialMainSection}}</mat-label>
+                        <mat-label>Please Select Section Here</mat-label>
                         <mat-select (openedChange)="loadTc($event)"
                             [formControl]="myprojectControls?.subsectionkeysControl">
                             <mat-optgroup *ngFor="let group of SectionsReady" [label]="group.name"
@@ -47,9 +47,10 @@
                             [formControl]="myprojectControls?.createTestcaseControl">
                         <mat-hint>Unique Name!</mat-hint>
                     </mat-form-field>
-                    <button mat-raised-button color="primary" *ngIf="loggedInUid === userselectedProjectUid" (click)="saveTC()"
+                    <button mat-raised-button color="primary" *ngIf="loggedInUid === userselectedProjectUid"  [disabled]="myprojectFlags?.firstTestcaseEdit === true "(click)="saveTC()"
                         [disabled]="!(myprojectControls?.createTestcaseControl.value)">Save</button>
-                    <button mat-raised-button color="warn" *ngIf="loggedInUid === userselectedProjectUid" (click)="exitTC()">Cancel</button>
+                    <button mat-raised-button color="warn" *ngIf="loggedInUid === userselectedProjectUid" [disabled]="myprojectFlags?.firstTestcaseEdit === true "(click)="exitTC()"
+                    [disabled]="!(myprojectControls?.createTestcaseControl.value)">Cancel</button>
                 </form>
                 <button mat-raised-button color="accent" *ngIf="loggedInUid === userselectedProjectUid"
                      (click)="openedit()">Edit</button>

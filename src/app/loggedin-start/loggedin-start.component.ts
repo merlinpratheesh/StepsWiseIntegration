@@ -374,6 +374,12 @@ export class LoggedinStartComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.optionsTasksPublic.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
+  DeleteProject(){
+
+    //this.developmentservice.deleteproject(this.myuserProfile.userAuthenObj.uid, ProjectName, newItem).then(success => {
+
+    
+  }
   sidenavtoggle() {
 
 
