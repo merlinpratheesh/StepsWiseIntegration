@@ -8,6 +8,7 @@ import { map, startWith, withLatestFrom } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import firebase from 'firebase/app';
 
 
 
@@ -16,9 +17,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   templateUrl: './main-screen2.component.html',
   styleUrls: ['./main-screen2.component.scss']
 })
-
-
-
 export class MainScreen2Component {
 
 
@@ -147,6 +145,7 @@ export class MainScreen2Component {
   mainSubSections: any;
   projectName: any;
   keysselection: any;
+  loggedInUid:firebase.User;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore, 
@@ -158,27 +157,28 @@ export class MainScreen2Component {
     const state = navigation.extras.state as {
       selectedProject: string;
       mainSubSectionRef: MainSectionGroup[];
+      uidDetails:firebase.User;
     };
 
     if (state !== undefined) {
       console.log(state.mainSubSectionRef);
       this.mainSubSections = state.mainSubSectionRef;
       this.projectName = state.selectedProject;
-      console.log(this.projectName);
+      this.loggedInUid=state.uidDetails;
+      console.log(this.loggedInUid);
     }
 
   }
-
   loadTc(event) {
-    console.log(event);
     this.isClose = false;
     if (!event) {
       this.isClose = true;
       console.log('dropdown is closed');
       this.valueSelected = this.myprojectControls?.subsectionkeysControl.value;
       console.log(this.valueSelected);
-      this.SectionTc = this.getTestcases(this.db.doc(this.projectName + '/' + this.valueSelected.groupValue + '/items/' + this.valueSelected.value));
+      this.SectionTc = this.getTestcases(this.db.doc('/testcase/' + this.projectName + '/' + this.valueSelected.groupValue+'/' + this.valueSelected.value));
       console.log(this.SectionTc);
+
     }
   }
   AddNew() {
@@ -188,8 +188,8 @@ export class MainScreen2Component {
     let locationForSave = '';
 
       const userselection = this.myprojectControls.subsectionkeysControl.value;
-      //console.log('userselection', userselection);
-      locationForSave = this.projectName  + '/' + userselection.groupValue + '/items/' + userselection.value;
+      console.log('userselection', userselection);
+      locationForSave = '/testcase/' + this.loggedInUid +'/ '+ this.projectName  + '/' + userselection.groupValue + '/items/'  + userselection.value;
 
     const updateObject: TestcaseInfo = {
       heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list
@@ -212,8 +212,9 @@ export class MainScreen2Component {
     let locationForEdit = '';
 
       const userselection = this.myprojectControls.subsectionkeysControl.value;
-      locationForEdit = this.projectName + '/' + userselection.groupValue + '/items/' + userselection.value;
-    
+      console.log('userselection', userselection);
+      locationForEdit ='/testcase/' + this.loggedInUid +'/ '+ this.projectName  + '/' + userselection.groupValue + '/items/'  + userselection.value;
+
     const dialogRef = this.dialog.open(DialogEditTestcase, {
       width: '80vw',
       data: this.myprojectVariables.viewSelectedTestcase,
@@ -233,12 +234,10 @@ export class MainScreen2Component {
     let r = confirm("Confirm Tc Delete?");
     if (r == true) {
       let locationForDelete = '';
-      if (this.myuserProfile.myusrinfoFromDb.projectName === 'Demo') {
-        locationForDelete = '/projectList/' + this.myuserProfile.userAuthenObj.uid;
-      } else {
+
         const userselection = this.myprojectControls.subsectionkeysControl.value;
         locationForDelete = this.projectName  + '/' + userselection.groupValue + '/items/' + userselection.value;
-      }
+      
       this.developmentservice.deleteTestcase(locationForDelete, this.myprojectVariables.viewSelectedTestcase).then(success => {
         const updateObject: TestcaseInfo = {
           heading: this.myprojectControls.createTestcaseControl.value,//Heading in testcase list

@@ -16,6 +16,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import firebase from 'firebase/app';
 
 
 
@@ -66,11 +67,17 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   navigationExtras: NavigationExtras = {
     state: {
       selectedProject: '',
-      mainSubSectionRef:''
+      mainSubSectionRef:'',
+      uidDetails:''
+      
     }
   };
   @Input() Sections: Observable<any>;
   @Input() latestProject: string;
+  @Input() loggedInUid:firebase.User;
+
+
+
   nestedTreeControl: NestedTreeControl<TreeData>;
   nestedDataSource: MatTreeNestedDataSource<TreeData>;
   AddedMainSec = false;
@@ -79,7 +86,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   Project = '';
   AlltheKeys: any[];
   AlltheKeysbk: any[];
-  authDetails: any;
 
   _dataChange = new BehaviorSubject<TreeData[]>([]);
   private _getChildren = (node: TreeData) => observableOf(node.Children);
@@ -91,11 +97,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     private router: Router,
     private db: AngularFirestore
     ) {
-      this.afAuth.authState.subscribe(myauth => {
-        if (myauth !== null && myauth !== undefined) {
-          this.authDetails = myauth;
-      }});
-      
     this.nestedTreeControl = new NestedTreeControl<TreeData>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
     
@@ -212,6 +213,9 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       this.Project = this.latestProject;
       this.navigationExtras.state.selectedProject=this.latestProject;
       this.navigationExtras.state.mainSubSectionRef=data;
+      this.navigationExtras.state.uidDetails=this.loggedInUid;
+      console.log(this.navigationExtras.state.uidDetails);
+
       console.log(this.latestProject);
       console.log(this.navigationExtras.state.mainSubSectionRef);
 
@@ -297,7 +301,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   }
     NavigateTestcase(some){
     console.log(some);
-    if(this.authDetails==null){
+    console.log(this.loggedInUid);
+    if(this.loggedInUid==null){
     this.router.navigate(['/main'], this.navigationExtras);
   }else{
     this.router.navigate(['/main2'], this.navigationExtras);
@@ -320,6 +325,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false }).then(success => {
     })
   }
+  
+  
 }
 @Component({
   selector: 'bottom-sheet-changeorder',
