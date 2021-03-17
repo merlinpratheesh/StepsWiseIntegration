@@ -165,17 +165,21 @@ export class MainScreenComponent {
   }
 
   loadTc(event) {
-    console.log(event);
     this.isClose = false;
-    if(!event) {
+    console.log(event);
+    if (!event) {
       this.isClose = true;
       console.log('dropdown is closed');
-      this.valueSelected = this.myprojectControls?.subsectionkeysControl.value ;
-      console.log(this.valueSelected);
-      this.SectionTc = this.getTestcases(this.db.doc(this.projectName+'/'+ this.valueSelected.groupValue + '/items/' + this.valueSelected.value));
-console.log(this.SectionTc );
+      this.valueSelected = this.myprojectControls?.subsectionkeysControl.value;
+      if (this.valueSelected !== null && this.valueSelected !== undefined) {
+        this.SectionTc = this.getTestcases(this.db.doc('/testcase/' + this.projectName + '/' + this.valueSelected.groupValue + '/' + this.valueSelected.value));
+        console.log(this.SectionTc);
+      }
+      else {
+        return of(false);
+      }
+
     }
-    
   }
 
 
