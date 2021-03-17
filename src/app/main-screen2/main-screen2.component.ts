@@ -288,8 +288,10 @@ export class MainScreen2Component {
 
   }
   refreshList(item: TestcaseInfo) {//When user Selects testitem by doubleclick
+    this.myprojectFlags.showEditTcButton = true;
     this.myprojectVariables.viewSelectedTestcase = item;//`${item.subHeading}`;
     this.myprojectControls.testcaseInfoControl.setValue(`${item.description}`)
+
   }
 }
 

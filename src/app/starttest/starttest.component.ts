@@ -191,12 +191,6 @@ export class StarttestComponent implements OnInit, OnDestroy {
       top: 60
     });
     this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
-    this.afAuth.authState.subscribe(myauth => {
-      if (myauth !== null && myauth !== undefined) {
-        this.authDetails = myauth;
-
-      }
-      else {
 
         this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).pipe(first(), map((someval: any) => {
           return someval;
@@ -265,10 +259,6 @@ export class StarttestComponent implements OnInit, OnDestroy {
 
             }
           );
-
-      }
-    })
-
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
