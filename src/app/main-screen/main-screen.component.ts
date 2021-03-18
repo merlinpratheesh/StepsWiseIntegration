@@ -139,7 +139,6 @@ export class MainScreenComponent {
   @ViewChild('drawer') public sidenav: MatSidenav;
   isClose: boolean;
   valueSelected: any;
-  authDetails: any;
   mainSubSections: any;
   projectName:any;
   keysselection: any;

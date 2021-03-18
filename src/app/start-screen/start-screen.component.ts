@@ -135,7 +135,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
   dialogRef;
   myprivate: any;
-  authDetails;
   publicProjectList: any;
   filteredTasksOptions: Subscription;
   optionsTasks: string[] = [];
@@ -158,12 +157,7 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
     private _bottomSheet: MatBottomSheet,
   ) {
     this.firebaseuiAngularLibraryService.firebaseUiInstance.disableAutoSignIn();
-    this.afAuth.authState.subscribe(myauth => {
-      if (myauth !== null && myauth !== undefined) {
-        this.authDetails = myauth;
-
-      }
-      else{
+ 
 
     this.optionsTasksSub = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
       this.optionsTasks = [];
@@ -207,7 +201,6 @@ getSections = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>
 
         }
       );
-    }})
 
   }
   private _filter(value: string): string[] {

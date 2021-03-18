@@ -42,7 +42,7 @@
                 </li>
             </ul>
             <button mat-raised-button color="primary" (click)="openBottomSheet()"
-                [disabled]="authDetails?.uid === null">Edit</button>
+                >Edit</button>
             <br>
             <mat-card style="  background: #F2F3F5;">
                 <mat-card-header>
@@ -210,7 +210,7 @@
                     </ng-template>
                 </ng-template>
             </mat-tab>
-            <mat-tab class="header" style="color:#216fdb" *ngIf="this.authDetails!==null">
+            <mat-tab class="header" style="color:#216fdb">
                 <ng-template mat-tab-label>Private</ng-template>
                 <ng-template matTabContent>
                     <cdk-virtual-scroll-viewport itemSize="100" class="scroll-viewport">

@@ -270,7 +270,7 @@
                         </li>
                     </ul>
                     <button mat-raised-button color="primary" (click)="openBottomSheet()"
-                        [disabled]="authDetails?.uid === null">Edit</button>
+                        [disabled]=  "this.authDetails.uid !== userselectedProjectUid">Edit</button>
                     <br>
 
                     <mat-divider></mat-divider>

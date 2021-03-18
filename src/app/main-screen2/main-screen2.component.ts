@@ -141,7 +141,6 @@ export class MainScreen2Component {
   @ViewChild('drawer') public sidenav: MatSidenav;
   isClose: boolean;
   valueSelected: any;
-  authDetails: any;
   mainSubSections: any;
   projectName: any;
   keysselection: any;
@@ -278,12 +277,10 @@ export class MainScreen2Component {
 
 
   ngOnInit(): void {
-    console.log(this.authDetails);
 
   }
 
   NavigateStart() {
-    console.log(this.authDetails);
     this.router.navigate(['/loggedin']);
 
   }
