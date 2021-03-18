@@ -5,13 +5,20 @@
 
 
     <button mat-raised-button color="accent" fxFlexOffset="1%" fxFlex="100px">StepsWise</button>
+    
+    <div  class="newTask" (click)="newTaskforUser()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Create NewTask
+    </div>
+    <span fxFlex="grow"> </span>
+
+        <ul  fxLayout="rowrap" class="symbols">
 
 
-    <span>
-        <ul class="profile-social-links">
-
-
-            <li>
+          <!--  <li>
                 <a #tooltip="matTooltip" matTooltip="Create New Task" (click)="newTaskforUser()">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 24 24" fill="none"
@@ -21,7 +28,7 @@
                         <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
                     </svg>
                 </a>
-            </li>
+            </li> 
 
             <li>
                 <a href="https://web.whatsapp.com/" #tooltip="matTooltip" matTooltip="Share to a friend">
@@ -34,7 +41,7 @@
                         <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                     </svg>
                 </a>
-            </li>
+            </li> -->
 
             <li>
                 <a href="mailto:merlinpratheesh@gmail.com" #tooltip="matTooltip" matTooltip="Mail us">
@@ -97,28 +104,22 @@
 
 
         </ul>
-    </span>
+   
 
-    <span fxflex="grow"></span>
-    <div (click)="newTaskforUser()">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Create New Task
-    </div>
-
-    
-
-        <div  *ngIf="this.authDetails  !== null && this.authDetails  !== undefined" class="navigation">
-            <a class="button" >
+        <div fxLayout="row"  *ngIf="this.authDetails  !== null && this.authDetails  !== undefined" >
+            
+            <div  style="text-align: center; margin-top: 10px;"fxHide.lt-sm>
+              Welcome {{this.authDetails?.displayName}}!
+            </div>
+            <div class="navigation">
+                 <a class="button" >
                 <img
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkUBqv-bTk6iwdgHWXeivdRJ5reFlFqXKt5g&usqp=CAU">
 
                 <div class="logout" (click)="logout()">LOGOUT</div>
 
             </a>
-
+        </div>
         </div>
         <div *ngIf="this.authDetails  == null && this.authDetails  == undefined" >
             <firebase-ui >
