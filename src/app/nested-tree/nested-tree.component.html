@@ -46,7 +46,7 @@
               <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
                 [currentNode]="node" [AlltheKeys]="AlltheKeys"
                 *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"></app-add-node>
-              <mat-chip-list style="margin-right:30px;">
+             <!-- <mat-chip-list style="margin-right:30px;">
 
                 <mat-chip style="margin-right:5px; background-color:#18e92a">
                   <button class="button" selected *ngIf="(node.Description === 'Child' && node.Children.length === 0)"
@@ -56,7 +56,7 @@
                     View Tasks
                   </button>
                 </mat-chip>
-              </mat-chip-list>
+              </mat-chip-list>-->
             </div>
           </li>
         </mat-nested-tree-node>

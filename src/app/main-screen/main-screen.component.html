@@ -23,6 +23,7 @@
       <div fxLayout="row wrap" fxLayoutAlign="space-around center">
         <div fxLayout="column" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;" fxLayoutGap="10px">
           <h4>{{projectName}}</h4>
+        <h1>{{loggedInUid}}</h1>  
           <mat-form-field appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
             <mat-label>Please Select Section Here</mat-label>
             <mat-select (openedChange)="loadTc($event)" [formControl]="myprojectControls?.subsectionkeysControl">

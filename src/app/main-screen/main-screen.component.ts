@@ -7,6 +7,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { map, startWith, withLatestFrom } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+
 
 
 
@@ -142,6 +144,7 @@ export class MainScreenComponent {
   mainSubSections: any;
   projectName:any;
   keysselection: any;
+  loggedInUid: string;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore, public afAuth: AngularFireAuth
@@ -151,6 +154,8 @@ export class MainScreenComponent {
     const state = navigation.extras.state as {
       selectedProject: string;
       mainSubSectionRef: MainSectionGroup[];
+      uidDetails: string;
+
     };
 
     if (state !== undefined) {
@@ -192,9 +197,7 @@ export class MainScreenComponent {
   ngOnInit(): void {
   }
   NavigateStart() {
-
       this.router.navigate(['/starttest']);
-
   }
   refreshList(item: TestcaseInfo) {//When user Selects testitem by doubleclick
     console.log(item);

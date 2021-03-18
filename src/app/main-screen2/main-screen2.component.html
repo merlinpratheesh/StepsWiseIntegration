@@ -55,7 +55,7 @@
                     <button mat-raised-button color="accent" *ngIf="loggedInUid === userselectedProjectUid"
                     [fxShow]=" myprojectFlags?.firstTestcaseEdit === false && myprojectControls?.subsectionkeysControl.valid && myprojectVariables.testcaseslength > 0"
                     [disabled]="myprojectFlags?.showEditTcButton !== true" (click)="openedit()">Edit</button>
-                    <button mat-raised-button color="warn" *ngIf="loggedInUid === userselectedProjectUid"
+                    <button mat-raised-button color="warn" *ngIf="loggedInUid === userselectedProjectUid "
                     [fxShow]=" myprojectFlags?.firstTestcaseEdit === false && myprojectControls?.subsectionkeysControl.valid && myprojectVariables.testcaseslength > 0"
                     [disabled]="myprojectFlags?.showEditTcButton !== true" (click)="Delete()">Delete</button>
 

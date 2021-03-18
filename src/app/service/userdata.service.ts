@@ -316,7 +316,7 @@ export class UserdataService {
         this.db.firestore.doc('projectList/' + uid).update({ ownerRecord: firebase.firestore.FieldValue.arrayRemove(oldprojectName) }),
         this.db.firestore.doc('projectList/' + 'publicProjects').update({ public: firebase.firestore.FieldValue.arrayRemove(oldprojectName) }),
         this.db.firestore.doc('myProfile/' + uid).set(newprojectinfo, { merge: true }),
-        this.db.firestore.doc('publicProjectKeys/' + oldprojectName).delete()
+        this.db.firestore.doc('projectKey/' + oldprojectName).delete()
       ]);
       return promise;
     });
