@@ -29,6 +29,7 @@ export class SingletaskComponent  {
   }
 
   changeselected(mytask){
+    console.log(mytask);
     const part = this.el.nativeElement.querySelector('.item');
     this.renderer.setStyle(part, 'background-color', 'lightblue');
     this.toshow.emit(mytask);
