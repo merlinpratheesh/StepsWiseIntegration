@@ -40,10 +40,10 @@
               <span style="margin-left:5%;margin-right:5%;">
                 {{node.Name}}
               </span>
-              <app-delete-node (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
-              <app-edit-node (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
+              <app-delete-node *ngIf="loggedInUid === userselectedProjectUid"  (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
+              <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
               </app-edit-node>
-              <app-add-node [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+              <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
                 [currentNode]="node" [AlltheKeys]="AlltheKeys"
                 *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"></app-add-node>
               <mat-chip-list style="margin-right:30px;">
@@ -74,11 +74,13 @@
               <span style="margin-left:5%;margin-right:5%;">
                 {{node.Name}}
               </span>
-              <app-delete-node (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
-              <app-edit-node (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
+              <app-add-node *ngIf="loggedInUid === userselectedProjectUid" [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+              [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
+              <app-edit-node *ngIf="loggedInUid === userselectedProjectUid" (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
               </app-edit-node>
-              <app-add-node [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
-                [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
+              <app-delete-node *ngIf="loggedInUid === userselectedProjectUid" (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
+              
+          
             </div>
             <ul>
               <div *ngIf="nestedTreeControl.isExpanded(node)">
@@ -90,10 +92,10 @@
           </li>
         </mat-nested-tree-node>
       </mat-tree>
-      <app-add-node [masterdata]="nestedDataSource.data" [isTop]="true" [latestaddProject]="Project"
+      <app-add-node  *ngIf="loggedInUid === userselectedProjectUid" [masterdata]="nestedDataSource.data" [isTop]="true" [latestaddProject]="Project"
         [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
 
-      <button mat-raised-button color="warn" (click)="openBottomSheet()" style="margin:5%;">
+      <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="openBottomSheet()" style="margin:5%;">
 
         Change Order<mat-icon style="margin-left:5%;">
           add_box
