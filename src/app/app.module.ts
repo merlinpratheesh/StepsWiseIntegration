@@ -22,7 +22,7 @@ import { EditNodeComponent,EditNodeDialog } from './nested-tree/edit-node/edit-n
 import { ShowmoreDirective } from './showmore.directive';
 import { StarttestComponent } from './starttest/starttest.component';
 import { SingletaskComponent } from './singletask/singletask.component';
-import { AddNewProjectDialog, ToolbarComponent  } from './toolbar/toolbar.component';
+import { AddNewProjectDialog, ToolbarComponent,ViewProfileDialog  } from './toolbar/toolbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainScreen2Component,DialogEditTestcase } from './main-screen2/main-screen2.component';
 
@@ -53,7 +53,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MainScreenComponent,
     LoggedinStartComponent,
     OfflineScreenComponent,BottomSheetOverviewExampleSheet,
-    AddNewProjectDialog,EditNodeComponent,EditNodeDialog,NestedTreeComponent,
+    AddNewProjectDialog,EditNodeComponent,EditNodeDialog,NestedTreeComponent,ViewProfileDialog,
     BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent, ShowmoreDirective, StarttestComponent, SingletaskComponent, ToolbarComponent, ProfileComponent, MainScreen2Component  ],
   imports: [
 
@@ -69,7 +69,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
   entryComponents:[DialogEditTestcase],
-  providers: [AddNewProjectDialog,BottomSheetOverviewExampleSheet],
+  providers: [AddNewProjectDialog,BottomSheetOverviewExampleSheet,ViewProfileDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -81,16 +81,7 @@
 
                 </a>
             </li>
-            <mat-menu #menu="matMenu" overlapTrigger="false">
-                <button mat-menu-item>
-                    <mat-icon>account_circle</mat-icon>
-                    <span>My Account</span>
-                </button>
-                <button mat-menu-item>
-                    <mat-icon>money</mat-icon>
-                    <span>Billing</span>
-                </button>
-            </mat-menu>
+
 
 
 
@@ -98,8 +89,23 @@
 
         </ul>
 
-        <div [matMenuTriggerFor]="menu" >MyProfile</div>
-   
+
+        <button [matMenuTriggerFor]="menu"mat-raised-button>MyProfile</button>
+
+        <mat-menu #menu="matMenu" overlapTrigger="false">
+            <button  (click)="viewProfile()" mat-menu-item>
+                <mat-icon>account_circle</mat-icon>
+                <span>ViewProfile</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>EditProfile</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>money</mat-icon>
+                <span>Billing</span>
+            </button>
+        </mat-menu>
 
         <div fxLayout="row"  *ngIf="this.authDetails  !== null && this.authDetails  !== undefined" >
             
