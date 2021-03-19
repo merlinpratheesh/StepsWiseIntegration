@@ -102,6 +102,13 @@
         </mat-icon>
       </button>
 
+      <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="DeleteProject()" style="margin:5%;">
+
+        DeleteProject<mat-icon style="margin-left:5%;">
+          add_box
+        </mat-icon>
+      </button>
+
 
 
 

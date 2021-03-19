@@ -90,7 +90,7 @@
         </ul>
 
 
-        <button   [matMenuTriggerFor]="menu"mat-raised-button>MyProfile</button>
+        <button  style="margin-left: 20px; width:200px ; text-align:justify;"  [matMenuTriggerFor]="menu"mat-raised-button>MyProfile</button>
 
         <mat-menu #menu="matMenu" overlapTrigger="false"  >
             <button  [fxShow]= "this.authDetails  !== null && this.authDetails  !== undefined"   (click)="viewProfile()" mat-menu-item>
@@ -110,7 +110,7 @@
         <div fxLayout="row"  *ngIf="this.authDetails  !== null && this.authDetails  !== undefined" >
             
             <div  style="text-align: center; margin-top: 10px; margin-left: 20px;"fxHide.lt-sm>
-               {{this.authDetails?.uid}}!
+             Welcome  {{this.authDetails?.displayName}}!
             </div>
             <div class="navigation">
                  <a class="button" >
