@@ -96,7 +96,7 @@
 
                                         {{details.description}}
                                         {{userselectedProjectUid}}
-                                        <app-nested-tree class="mattree"  [loggedInUid]="this.authDetails.displayName" [userselectedProjectUid]="userselectedProjectUid"
+                                        <app-nested-tree class="mattree"  [loggedInUid]="undefined" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && keyRef !== undefined  && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>
@@ -270,9 +270,7 @@
                             <span>following</span>
                         </li>
                     </ul>
-                    <button mat-raised-button color="primary" (click)="openBottomSheet()"
-                        >Edit</button>
-                    <br>
+                    
 
                     <mat-divider></mat-divider>
 

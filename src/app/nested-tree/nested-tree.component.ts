@@ -220,7 +220,9 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       console.log(this.navigationExtras.state.userselectedProjectUid);
 
       console.log(this.latestProject);
-      console.log(this.navigationExtras.state.mainSubSectionRef);
+      console.log(this.latestProject);
+
+      console.log(this.navigationExtras.state.uidDetails);
 
       this.nestedDataSource.data=        [{
         Id: 1,

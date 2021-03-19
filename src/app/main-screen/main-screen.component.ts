@@ -145,6 +145,7 @@ export class MainScreenComponent {
   projectName:any;
   keysselection: any;
   loggedInUid: string;
+  userselectedProjectUid: firebase.User;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore, public afAuth: AngularFireAuth
@@ -155,6 +156,7 @@ export class MainScreenComponent {
       selectedProject: string;
       mainSubSectionRef: MainSectionGroup[];
       uidDetails: string;
+      userselectedProjectUid: firebase.User;
 
     };
 
@@ -162,13 +164,20 @@ export class MainScreenComponent {
       console.log(state.mainSubSectionRef);
       this.mainSubSections = state.mainSubSectionRef;
       this.projectName=state.selectedProject ;
+      this.loggedInUid = state.uidDetails;
+      this.userselectedProjectUid = state.userselectedProjectUid;
       console.log(this.projectName);
+      console.log(this.loggedInUid);
+      console.log(this.userselectedProjectUid);
 
     }
     
   }
 
+
   loadTc(event) {
+    console.log(this.loggedInUid);
+
     this.isClose = false;
     console.log(event);
     if (!event) {

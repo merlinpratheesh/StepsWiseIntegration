@@ -171,6 +171,7 @@ export class StarttestComponent implements OnInit, OnDestroy {
    options: FormGroup;
   activeSelector: string;
   showSelected: boolean;
+  userselectedProjectUid: any;
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
     public fb: FormBuilder,
@@ -288,6 +289,7 @@ firstDefaultProject(some) {
 profileKeyRef(some){
 
   this.userselectedProject = some.projectName;
+  this.userselectedProjectUid = some.projectUid;
 
   this.userProfileView = some.profileName;
   console.log('242', this.userselectedProject);

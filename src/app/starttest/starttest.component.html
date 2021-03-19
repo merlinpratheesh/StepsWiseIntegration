@@ -115,7 +115,7 @@
 
 
 
-                                        <app-nested-tree class="mattree"
+                                        <app-nested-tree class="mattree" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>
@@ -141,8 +141,8 @@
                     <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
                         <ng-template mat-tab-label>Private</ng-template>
                         <ng-template matTabContent>
-                            <div fxLayout="column" *ngIf="(privateList| async) as projectDetails; else waitingload ">
-                                <mat-accordion style="position:relative;">
+                          <div fxLayout="column" *ngIf="(privateList| async) as projectDetails; else waitingload ">
+                              <!--   <mat-accordion style="position:relative;">
                                     <mat-paginator [pageSizeOptions]="[3,6,9,12]"></mat-paginator>
                                     <mat-expansion-panel fxLayout="column wrap" fxLayoutGap="30px"
                                         style=" padding: 20px 10px;min-width:50%; background: #F2F3F5"
@@ -178,9 +178,10 @@
 
 
                                     </mat-expansion-panel>
-                                </mat-accordion>
+                                </mat-accordion> --> 
 
                             </div>
+                            
 
                             <ng-template #waitingload>
                               LoginFor Add Projects
@@ -277,10 +278,7 @@
                             <span>following</span>
                         </li>
                     </ul>
-                    <button mat-raised-button color="primary" (click)="openBottomSheet()"
-                        [disabled]="authDetails?.uid === null">Edit</button>
-                    <br>
-
+                  
                     <mat-divider></mat-divider>
 
 
