@@ -385,10 +385,7 @@ export class LoggedinStartComponent implements OnInit {
 
   }
 
-  openBottomSheet(): void {
 
-    this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef, NewUid: this.authDetails.uid } });
-  }
   logout() {
     this.afAuth.signOut();
   }
@@ -421,100 +418,4 @@ export class LoggedinStartComponent implements OnInit {
 }
 
 
-@Component({
-  selector: 'bottom-sheet-overview-example-sheet',
-  template: `
-
-    <h2 class="py-4">Edit Profile</h2>
-    <form [formGroup]="names">
-      <div class="form-group row">
-        <label for="brand" class="col-sm-2 col-form-label">profileName</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="profileName">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">email</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="email">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">gender</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="gender">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">areaOfinterest</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="areaOfinterest">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">skills</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" formControlName="skills">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">location</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="location">
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-4 offset-sm-2">
-          <button type="submit" class="btn btn-primary mr-2" (click)="save()">Save</button>
-          <button type="reset" class="btn btn-outline-primary" (click)="cancel()">Cancel</button>
-        </div>
-      </div>
-    </form>
-  `
-})
-export class BottomSheetOverviewExampleSheet {
-
-  names: FormGroup;
-
-  constructor(public developmentservice: UserdataService, private db: AngularFirestore, private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
-    console.log(this.data);
-
-
-    console.log('118', this.data.mydata.value);
-
-
-
-
-    this.names = new FormGroup({
-
-      profileName: new FormControl(this.data.mydata.value.profileName),
-      email: new FormControl(this.data.mydata.value.email),
-      gender: new FormControl(this.data.mydata.value.gender),
-      areaOfinterest: new FormControl(this.data.mydata.value.areaOfinterest),
-      skills: new FormControl(this.data.mydata.value.skills),
-      location: new FormControl(this.data.mydata.value.location)
-
-    });
-  }
-
-
-  save() {
-    this.developmentservice.updateProfile(this.names.value, this.data.NewUid);
-
-    console.log(this.names.value);
-    console.log(this.data.NewUid);
-
-    this._bottomSheetRef.dismiss();
-  }
-
-  cancel() {
-    this._bottomSheetRef.dismiss();
-  }
-
-  openLink(event: MouseEvent): void {
-    this._bottomSheetRef.dismiss();
-    event.preventDefault();
-  }
-}
 

@@ -34,6 +34,23 @@ import { style } from '@angular/animations';
 
 export class ToolbarComponent implements OnInit {
 
+  getProfilesSubscription: Subscription;
+  getProfilesBehaviourSub = new BehaviorSubject(null);
+  getProfiles = (profileDetails: AngularFirestoreDocument<usrinfoDetails>) => {
+    if (this.getProfilesSubscription !== undefined) {
+      this.getProfilesSubscription.unsubscribe();
+    }
+    this.getProfilesSubscription = profileDetails.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getProfilesBehaviourSub.next(undefined);
+      } else {
+        this.getProfilesBehaviourSub.next(val);
+      }
+    }
+
+    );
+    return this.getProfilesBehaviourSub;
+  };
 
   authDetails;
   dialogRef;
@@ -76,14 +93,15 @@ export class ToolbarComponent implements OnInit {
               location: 'pleaseEnter',
               photoUrl: myauth.photoURL
             };
-            this.db.doc<any>('profile/' + myauth.uid).set(newItem);
+
+            this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
+            this.profileSuccessValues = this.profileRef;
+           
+          } else {
+            this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
             console.log(this.profileRef);
 
-            //set- display/update
-          } else {
-
-            console.log(success);
-            this.profileSuccessValues = success;
+            this.profileSuccessValues = this.profileRef;
           }
         });
 
@@ -128,8 +146,8 @@ export class ToolbarComponent implements OnInit {
   viewProfile() {
 
 
-    this.dialogRef = this.dialog.open(ViewProfileDialog, { data: { mydata: this.profileSuccessValues },       
-    height: '600px',
+    this.dialogRef = this.dialog.open(ViewProfileDialog, { data: { mydata: this.profileSuccessValues , NewUid: this.authDetails},      
+    height: '650px',
     width: '800px', });
 
     console.log('121', this.profileRef);
@@ -221,7 +239,7 @@ export class AddNewProjectDialog {
   template: `
 
 <div  style="background: white ; height:550px;     border: 3px solid #F2F3F5"
-  *ngIf="this.profileRef as profiledetails ;"
+  *ngIf="this.profileRef |async as profiledetails ;"
    fxLayout="column">
 
   <div style="height:40%;  float:inline-start;  " class="person">
@@ -269,8 +287,11 @@ export class AddNewProjectDialog {
   <br>
 
   <mat-divider></mat-divider>
+  <button mat-raised-button color="primary" (click)="openBottomSheet()"
+  >Edit</button>
   <button mat-raised-button color="primary" (click)="close()"
   >close</button>
+
   </div>
 
 
@@ -451,14 +472,23 @@ export class ViewProfileDialog {
 
 
   profileRef: any;
-  constructor(public developmentservice: UserdataService, private db: AngularFirestore,
-    public dialogRef: MatDialogRef<ViewProfileDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  userDetails: any;
+  constructor(public developmentservice: UserdataService, private db: AngularFirestore,private _bottomSheet: MatBottomSheet
+    , public dialogRef: MatDialogRef<ViewProfileDialog>, @Inject(MAT_DIALOG_DATA) public data: any) 
+    
+    {
     console.log(this.data);
 
     console.log(this.data.mydata);
     this.profileRef = this.data.mydata;
+    this.userDetails=this.data.NewUid;
     
 
+  }
+
+  openBottomSheet(): void {
+
+    this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef,NewUid: this.userDetails } });
   }
 
 
@@ -475,4 +505,103 @@ export class ViewProfileDialog {
   }
 }
 
+@Component({
+  selector: 'bottom-sheet-overview-example-sheet',
+  template: `
+  <h2 class="py-4">HI {{ this.userDetails.displayName }}</h2>
+    <h2 class="py-4">Edit Profile</h2>
+    <form [formGroup]="names">
+      <div class="form-group row">
+        <label for="brand" class="col-sm-2 col-form-label">profileName</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="profileName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="model" class="col-sm-2 col-form-label">email</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="email">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="model" class="col-sm-2 col-form-label">gender</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="gender">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="model" class="col-sm-2 col-form-label">areaOfinterest</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="areaOfinterest">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="model" class="col-sm-2 col-form-label">skills</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" formControlName="skills">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="model" class="col-sm-2 col-form-label">location</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="location">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-4 offset-sm-2">
+          <button type="submit" class="btn btn-primary mr-2" (click)="save()">Save</button>
+          <button type="reset" class="btn btn-outline-primary" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  `
+})
+export class BottomSheetOverviewExampleSheet {
+
+  names: FormGroup;
+  userDetails:any;
+  constructor(public developmentservice: UserdataService, private db: AngularFirestore, private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
+    console.log(this.data);
+
+    this.userDetails=data.NewUid;
+    console.log(this.userDetails);
+
+    console.log('118', this.data.mydata.value);
+
+
+
+
+    this.names = new FormGroup({
+
+      profileName: new FormControl(this.data.mydata.value.profileName),
+      email: new FormControl(this.data.mydata.value.email),
+      gender: new FormControl(this.data.mydata.value.gender),
+      areaOfinterest: new FormControl(this.data.mydata.value.areaOfinterest),
+      skills: new FormControl(this.data.mydata.value.skills),
+      location: new FormControl(this.data.mydata.value.location)
+
+    });
+  }
+
+
+  save() {
+    this.developmentservice.updateProfile(this.names.value, this.userDetails.uid);
+
+    console.log(this.names.value);
+    console.log(this.userDetails.uid);
+
+
+    this._bottomSheetRef.dismiss();
+  }
+
+  cancel() {
+    this._bottomSheetRef.dismiss();
+  }
+
+  openLink(event: MouseEvent): void {
+    this._bottomSheetRef.dismiss();
+    event.preventDefault();
+  }
+}
 
