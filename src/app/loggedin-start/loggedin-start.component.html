@@ -172,8 +172,9 @@
 
 
                             <ng-template #waitingload>
-                                <mat-spinner>
+                                No Private Projects
 
+                                <mat-spinner>
                                 </mat-spinner>
                             </ng-template>
 
@@ -270,7 +271,7 @@
                         </li>
                     </ul>
                     <button mat-raised-button color="primary" (click)="openBottomSheet()"
-                        [disabled]=  "this.authDetails.uid !== userselectedProjectUid">Edit</button>
+                        >Edit</button>
                     <br>
 
                     <mat-divider></mat-divider>

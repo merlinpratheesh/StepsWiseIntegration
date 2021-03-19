@@ -236,39 +236,7 @@ export class LoggedinStartComponent implements OnInit {
 
         this.authDetails = myauth;
         console.log('', this.authDetails.uid);
-        this.developmentservice.findOrCreate(myauth.uid).then((success: usrinfoDetails) => {
-          console.log('163', success);
-          if (success === undefined) {
-            const nextMonth: Date = new Date();
-            nextMonth.setMonth(nextMonth.getMonth() + 1);
 
-            const newItem = {
-
-              MembershipEnd: nextMonth.toDateString(),
-              MembershipType: 'Demo',
-              projectLocation: '/projectList/DemoProjectKey',
-              projectOwner: true,
-              projectName: 'Demo',
-              profileName: myauth.displayName,
-              email: myauth.email,
-              gender: 'pleaseEnter',
-              areaOfinterest: 'pleaseEnter',
-              numberOfProjects: '0',
-              skills: 'pleaseEnter',
-              location: 'pleaseEnter',
-              photoUrl: myauth.photoURL
-            };
-            this.db.doc<any>('profile/' + myauth.uid).set(newItem);
-            this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
-
-            //set- display/update
-          } else {
-            //get data- display/update
-
-            this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
-            console.log(this.keyRef);
-          }
-        });
         this.optionsTasksSubPrivate = docData(this.db.firestore.doc('projectList/' + this.authDetails.uid)).subscribe((readrec: any) => {
           this.optionsTasksPrivate = [];
           this.optionsTasksBkPrivate = readrec.private;

@@ -49,6 +49,39 @@ export class ToolbarComponent implements OnInit {
       if (myauth !== null && myauth !== undefined) {
 
         this.authDetails = myauth;
+
+
+        this.developmentservice.findOrCreate(myauth.uid).then((success: usrinfoDetails) => {
+          console.log('163', success);
+          if (success === undefined) {
+            const nextMonth: Date = new Date();
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+            const newItem = {
+
+              MembershipEnd: nextMonth.toDateString(),
+              MembershipType: 'Demo',
+              projectLocation: '/projectList/DemoProjectKey',
+              projectOwner: true,
+              projectName: 'Demo',
+              profileName: myauth.displayName,
+              email: myauth.email,
+              gender: 'pleaseEnter',
+              areaOfinterest: 'pleaseEnter',
+              numberOfProjects: '0',
+              skills: 'pleaseEnter',
+              location: 'pleaseEnter',
+              photoUrl: myauth.photoURL
+            };
+            this.db.doc<any>('profile/' + myauth.uid).set(newItem);
+           // this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
+
+            //set- display/update
+          } else {
+console.log(success);
+          }
+        });
+
         //console.log('', this.authDetails.photoURL);
       }
     });
