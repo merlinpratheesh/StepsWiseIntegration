@@ -4,7 +4,7 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { of as observableOf } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
-import { UserdataService, MainSectionGroup } from '../service/userdata.service';
+import { UserdataService, MainSectionGroup, projectDetails } from '../service/userdata.service';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
 import { NavigationExtras } from '@angular/router';
@@ -76,8 +76,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   @Input() latestProject: string;
   @Input() loggedInUid:firebase.User;
   @Input() userselectedProjectUid:firebase.User;
-
-
+  @Input() allProjectDetails:projectDetails;
 
   nestedTreeControl: NestedTreeControl<TreeData>;
   nestedDataSource: MatTreeNestedDataSource<TreeData>;
@@ -331,6 +330,21 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     })
   }
   
+  DeleteProject(){
+    
+    let r = confirm("Confirm Tc Delete?");
+    if (r == true) {
+      //let locationForDelete = '';
+
+      const userselection = this.allProjectDetails;
+      console.log(userselection);
+
+      //locationForDelete = this.projectName + '/' + userselection.groupValue + '/items/' + userselection.value;
+
+      this.developmentservice.deleteprojectNew(this.loggedInUid,userselection).then(success => {
+      });
+    }
+  }
   
 }
 @Component({

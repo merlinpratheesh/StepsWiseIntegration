@@ -82,11 +82,30 @@ export class LoggedinStartComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
-  publicFormControl = new FormControl('', [
+  publicSearchFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
+  myprojectControls: projectControls = {
+    subsectionkeysControl: new FormControl(null, Validators.required),
+    testcaseInfoControl: new FormControl(),
+    expansionPanelControl:new FormControl(),
+    createTestcaseControl: new FormControl(),
+    publicprojectControl: new FormControl(null, Validators.required),
+    ownPublicprojectControl: new FormControl(null, Validators.required),
+    firstMainSecControl: new FormControl(null, Validators.required),
+    editMainsectionGroup: this.fb.group({
+      editMainsectionControl: [{ value: '' }, Validators.required]
+    }),
+    visibilityMainsectionGroup: this.fb.group({
+      editVisibilityControl: [{ value: false, disabled: false }, Validators.required]
+    }),
+    editSubsectionGroup: this.fb.group({
+      editSubsectionControl: [{ value: '' }, Validators.required]
+
+    })
+  };
 
 
 
@@ -208,10 +227,11 @@ export class LoggedinStartComponent implements OnInit {
   startPageUid: string;
   options: FormGroup;
   showSelected: boolean;
-
+  allProjectDetails:projectDetails;
   toggleSearch: boolean = false;
   userProfileView;
   activeSelector: string;
+  valueSelected: any;
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -300,7 +320,7 @@ export class LoggedinStartComponent implements OnInit {
           console.log(this.optionsTasksPublic);
       
       
-          this.filteredTasksOptions = this.publicFormControl.valueChanges.pipe(
+          this.filteredTasksOptions = this.publicSearchFormControl.valueChanges.pipe(
             startWith(''),
             map((myvalue: string) => {
               console.log('96', myvalue);
@@ -342,12 +362,7 @@ export class LoggedinStartComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.optionsTasksPublic.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-  DeleteProject(){
 
-    //this.developmentservice.deleteproject(this.myuserProfile.userAuthenObj.uid, ProjectName, newItem).then(success => {
-
-    
-  }
   sidenavtoggle() {
 
 
@@ -358,7 +373,7 @@ export class LoggedinStartComponent implements OnInit {
 
   searchClose() {
     this.toggleSearch = false;
-    this.publicFormControl.reset()
+    this.publicSearchFormControl.reset()
   }
 
   firstDefaultProject(some) {
@@ -367,6 +382,8 @@ export class LoggedinStartComponent implements OnInit {
   }
 
   profileKeyRef(some) {
+    this.allProjectDetails=some;
+    console.log(this.allProjectDetails);
 
     this.userselectedProject = some.projectName;
     this.userselectedProjectUid = some.projectUid;
@@ -382,8 +399,10 @@ export class LoggedinStartComponent implements OnInit {
     console.log('218', this.keyRef);
 
 
-
   }
+
+
+  
 
 
   logout() {

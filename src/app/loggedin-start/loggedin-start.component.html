@@ -96,6 +96,7 @@
 
                                         {{details.description}}
                                         {{userselectedProjectUid}}
+
                                         <app-nested-tree class="mattree"  [loggedInUid]="undefined" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && keyRef !== undefined  && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
@@ -126,9 +127,9 @@
                             <div *ngIf="(privateList| async) as projectDetails; else waitingload ">
                                 <mat-accordion fxLayout="column">
                                     <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
-                                        class="panel" *ngFor="let details of projectDetails">
+                                        class="panel" *ngFor="let details of projectDetails" >
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
-                                            (click)="profileKeyRef(details)" style="width:90%; ">
+                                            (click)="profileKeyRef(details)"  style="width:90%; " >
                                             <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
 
                                                 <div fxLayout="row">
@@ -158,7 +159,7 @@
 
                                         <button mat-raised-button (click)="DeleteProject()" > DeleteProject </button>
 
-                                        <app-nested-tree class="mattree" [loggedInUid]="this.authDetails.uid" [userselectedProjectUid]="userselectedProjectUid"
+                                        <app-nested-tree class="mattree" [allProjectDetails]="this.allProjectDetails" [loggedInUid]="this.authDetails.uid" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>
@@ -209,7 +210,7 @@
                             <button mat-button mat-icon-button disabled>
                                 <mat-icon>search</mat-icon>
                             </button>
-                            <input type="text" placeholder="Search Task Name" matInput [formControl]="publicFormControl"
+                            <input type="text" placeholder="Search Task Name" matInput [formControl]="publicSearchFormControl"
                                 [matAutocomplete]="auto1">
                             <button mat-button mat-icon-button (click)="searchClose()">
                                 <mat-icon>close</mat-icon>

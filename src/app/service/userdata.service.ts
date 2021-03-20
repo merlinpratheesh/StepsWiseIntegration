@@ -58,7 +58,8 @@ export interface projectControls {
   createTestcaseControl?: FormControl;//User enters a test case name
   publicprojectControl?: FormControl;//1-User selects a public project    
   ownPublicprojectControl?: FormControl;//1-User selects own public project
-  firstMainSecControl?: FormControl
+  expansionPanelControl?:FormControl;
+  firstMainSecControl?: FormControl;
   editMainsectionGroup?: FormGroup;// user selects a Main section key
   visibilityMainsectionGroup?: FormGroup,
   editSubsectionGroup?: FormGroup;  // user selects a Sub section key
@@ -317,10 +318,21 @@ export class UserdataService {
         this.db.firestore.doc('projectList/' + 'publicProjects').update({ public: firebase.firestore.FieldValue.arrayRemove(oldprojectName) }),
         this.db.firestore.doc('myProfile/' + uid).set(newprojectinfo, { merge: true }),
         this.db.firestore.doc('projectKey/' + oldprojectName).delete()
+
       ]);
       return promise;
     });
   }
+  async deleteprojectNew(loggedInUid, userselection:projectDetails): Promise<void> {
+    await this.db.firestore.doc('/projectList/publicProject').update({ public: firebase.firestore.FieldValue.arrayRemove(userselection) });
+    await this.db.firestore.doc('/projectList/' + loggedInUid).update({ private: firebase.firestore.FieldValue.arrayRemove(userselection) });
+    await this.db.firestore.doc('projectKey/' + userselection.projectName).delete()
+    await this.db.firestore.doc('testcase/' + userselection.projectName).delete()
+    await this.db.firestore.doc('testcase/' + loggedInUid + '/' + userselection.projectName).delete()
+
+
+  }
+
   async deleteMainSection(ProjectName: string, MainSection: any): Promise<void> {
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
