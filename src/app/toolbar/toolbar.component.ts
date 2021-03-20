@@ -115,33 +115,7 @@ export class ToolbarComponent implements OnInit {
   }
   mydata;
 
-  newTaskforUser() {
 
-
-    this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: { NewUid: this.authDetails } });
-    console.log(this.authDetails.uid);
-    const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
-
-      console.log('390', values);
-      if (values !== undefined) {
-        this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
-          console.log('391', success);
-          if (success === undefined) {
-            const Newmydialog = values;
-            this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
-            return (null);
-          } else {
-            //get data- display/update
-            const mydialog = values;
-            this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
-            return (null);
-          }
-        });
-      }
-    })).subscribe((mydata: any) => {
-    });
-    console.log('121', this.mydata);
-  }
 
   viewProfile() {
 
@@ -163,76 +137,7 @@ export class ToolbarComponent implements OnInit {
 }
 
 
-@Component({
-  selector: 'AddNewProjectDialog',
-  template: `
-  <h2 class="py-4" style="color: black; width:500px;" >ADD PROJECT DETAILS</h2>
-    <form  fxLayout="column" [formGroup]="names">
-      <mat-form-field>
-        <input matInput placeholder="Task Name" formControlName="projectName" />
-      </mat-form-field>
 
-      <mat-form-field>
-        <textarea
-          matInput
-          placeholder="Task Description"
-          formControlName="description"
-        ></textarea>
-      </mat-form-field>
-
-      <div class="form-group row">
-        <div class="col-sm-4 offset-sm-2">
-          <button type="submit" class="btn btn-primary mr-2" (click)="save()">Save</button>
-          <button type="reset" class="btn btn-outline-primary" (click)="cancel()">Cancel</button>
-        </div>
-      </div>
-    </form>
-
-
-    
-  `
-})
-export class AddNewProjectDialog {
-
-  names: FormGroup;
-  createProjectFields: any;
-
-  constructor(public developmentservice: UserdataService, private db: AngularFirestore,
-    public dialogRef: MatDialogRef<AddNewProjectDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(this.data);
-
-    console.log(this.data.NewUid);
-
-
-
-    this.names = new FormGroup({
-
-      projectName: new FormControl(),
-      description: new FormControl(),
-      creationDate: new FormControl(firebase.firestore.Timestamp.fromDate(new Date())),
-      profileName: new FormControl(this.data.NewUid.displayName),
-      photoUrl: new FormControl(this.data.NewUid.photoURL),
-      projectUid: new FormControl(this.data.NewUid.uid),
-    });
-  }
-  save() {
-
-    console.log(this.names.value);
-    this.dialogRef.close(this.names.value);
-  }
-
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  cancel() {
-    this.dialogRef.close();
-  }
-  openLink(event: MouseEvent): void {
-    this.dialogRef.close();
-    event.preventDefault();
-  }
-}
 
 @Component({
   selector: 'ViewProfileDialog',

@@ -91,7 +91,7 @@ export class LoggedinStartComponent implements OnInit {
     subsectionkeysControl: new FormControl(null, Validators.required),
     createNewFormControl: new FormControl(),
     testcaseInfoControl: new FormControl(),
-    expansionPanelControl:new FormControl(),
+    expansionPanelControl: new FormControl(),
     createTestcaseControl: new FormControl(),
     publicprojectControl: new FormControl(null, Validators.required),
     ownPublicprojectControl: new FormControl(null, Validators.required),
@@ -228,7 +228,7 @@ export class LoggedinStartComponent implements OnInit {
   startPageUid: string;
   options: FormGroup;
   showSelected: boolean;
-  allProjectDetails:projectDetails;
+  allProjectDetails: projectDetails;
   toggleSearch: boolean = false;
   userProfileView;
   activeSelector: string;
@@ -299,58 +299,58 @@ export class LoggedinStartComponent implements OnInit {
 
             }
           );
-          this.optionsTasksSubPublic = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
-            this.optionsTasksPublic = [];
-            this.optionsTasksBkPublic = readrec.public;
-      
-            console.log(this.optionsTasksBkPublic);
-         
-            this.DATA = readrec.public;
-            this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
-            this.dataSource.paginator = this.paginator;
-            this.obs = this.dataSource.connect();
-            this.changeDetectorRef.detectChanges();
-            if (this.optionsTasksBkPublic == undefined) {
+        this.optionsTasksSubPublic = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
+          this.optionsTasksPublic = [];
+          this.optionsTasksBkPublic = readrec.public;
 
-              console.log('no private projects')
-  
-            } 
-            else{
-              readrec.public.forEach(element => {
-                this.optionsTasksPublic.push(element.projectName);
-              });
-              this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
-              console.log(this.optionsTasksPublic);
+          console.log(this.optionsTasksBkPublic);
+
+          this.DATA = readrec.public;
+          this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
+          this.dataSource.paginator = this.paginator;
+          this.obs = this.dataSource.connect();
+          this.changeDetectorRef.detectChanges();
+          if (this.optionsTasksBkPublic == undefined) {
+
+            console.log('no private projects')
+
+          }
+          else {
+            readrec.public.forEach(element => {
+              this.optionsTasksPublic.push(element.projectName);
+            });
+            this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
+            console.log(this.optionsTasksPublic);
+          }
+
+        });
+        console.log(this.optionsTasksPublic);
+
+
+        this.filteredTasksOptions = this.publicSearchFormControl.valueChanges.pipe(
+          startWith(''),
+          map((myvalue: string) => {
+            console.log('96', myvalue);
+            this.userselectedProject = undefined;
+            if (myvalue === '' || myvalue === null) {
+              this.optionsTasksPublic = this.optionsTasksNamesBkPublic;
+              this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
+              this.dataSource.paginator = this.paginator;
+              this.obs = this.dataSource.connect();
+              this.changeDetectorRef.detectChanges();
+            } else {
+              //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
+              this.obs = of(this.optionsTasksBkPublic.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+              this.optionsTasksPublic = this._filterPublic(myvalue);
+              //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
+              this.changeDetectorRef.detectChanges();
             }
-           
-          });
-          console.log(this.optionsTasksPublic);
-      
-      
-          this.filteredTasksOptions = this.publicSearchFormControl.valueChanges.pipe(
-            startWith(''),
-            map((myvalue: string) => {
-              console.log('96', myvalue);
-              this.userselectedProject = undefined;
-              if (myvalue === '' || myvalue === null) {
-                this.optionsTasksPublic = this.optionsTasksNamesBkPublic;
-                this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
-                this.dataSource.paginator = this.paginator;
-                this.obs = this.dataSource.connect();
-                this.changeDetectorRef.detectChanges();
-              } else {
-                //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
-                //this.obs = of(this.optionsTasksBkPublic.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
-                this.optionsTasksPublic = this._filterPublic(myvalue);
-                //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
-                this.changeDetectorRef.detectChanges();
-              }
+          }
+          )).subscribe(
+            some => {
+
             }
-            )).subscribe(
-              some => {
-      
-              }
-            );
+          );
 
       }
     })
@@ -389,7 +389,7 @@ export class LoggedinStartComponent implements OnInit {
   }
 
   profileKeyRef(some) {
-    this.allProjectDetails=some;
+    this.allProjectDetails = some;
     console.log(this.allProjectDetails);
 
     this.userselectedProject = some.projectName;
@@ -409,7 +409,7 @@ export class LoggedinStartComponent implements OnInit {
   }
 
 
-  
+
 
 
   logout() {
@@ -440,8 +440,171 @@ export class LoggedinStartComponent implements OnInit {
   mydata;
   updatedProject: any[] = [];
 
+  newTaskforUser() {
+
+    this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: { NewUid: this.authDetails } });
+    console.log(this.authDetails.uid);
+    const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+
+      console.log('390', values);
+      if (values !== undefined) {
+        this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
+          console.log('391', success);
+          if (success === undefined) {
+            const Newmydialog = values;
+            this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
+            return (null);
+          } else {
+            //get data- display/update
+            const mydialog = values;
+            this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+            return (null);
+          }
+        });
+      }
+    })).subscribe((mydata: any) => {
+    });
+    console.log('121', this.mydata);
+
+  }
 
 }
 
 
+@Component({
+  selector: 'AddNewProjectDialog',
+  template: `
+  <h2 class="py-4" style="color: black; width:500px;" >ADD PROJECT DETAILS</h2>
+    <form  fxLayout="column" [formGroup]="names">
+      <mat-form-field>
+      <input  type="text" placeholder="Enter Unique Name"  matInput [formControl]="createProjectControl"
+      [matAutocomplete]="auto2">
+   
+        <mat-autocomplete #auto2="matAutocomplete" color="#216fdb">
+        <mat-option *ngFor="let option1 of optionsTasksPublic" [value]="option1">
+
+            <div mat-line>{{option1}}</div>
+
+        </mat-option>
+    </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Task Description"
+          formControlName="description"
+        ></textarea>
+      </mat-form-field>
+
+      <div class="form-group row">
+        <div class="col-sm-4 offset-sm-2">
+          <button type="submit" class="btn btn-primary mr-2" (click)="save()">Save</button>
+          <button type="reset" class="btn btn-outline-primary" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+
+
+    
+  `
+})
+export class AddNewProjectDialog {
+
+  names: FormGroup;
+  createProjectFields: any;
+  createProjectControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  optionsTasksPublic: string[] = [];
+  optionsTasksNamesBkPublic: string[] = [];
+  optionsTasksBkPublic: any[] = [];
+  optionsTasksSubPublic: Subscription;
+  filteredTasksOptions: Subscription;
+
+  
+  constructor(public developmentservice: UserdataService, private db: AngularFirestore,
+    public dialogRef: MatDialogRef<AddNewProjectDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(this.data);
+
+    console.log(this.data.NewUid);
+    this.optionsTasksSubPublic = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
+      this.optionsTasksPublic = [];
+      this.optionsTasksBkPublic = readrec.public;
+
+      console.log(this.optionsTasksBkPublic);
+
+      if (this.optionsTasksBkPublic == undefined) {
+
+        console.log('no private projects')
+
+      }
+      else {
+        readrec.public.forEach(element => {
+          this.optionsTasksPublic.push(element.projectName);
+        });
+        this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
+        console.log(this.optionsTasksPublic);
+      }
+
+    });
+    console.log(this.optionsTasksPublic);
+
+
+    this.filteredTasksOptions = this.createProjectControl.valueChanges.pipe(
+      startWith(''),
+      map((myvalue: string) => {
+        console.log('96', myvalue);
+        if (myvalue === '' || myvalue === null) {
+          this.optionsTasksPublic = this.optionsTasksNamesBkPublic;
+        } else {
+          //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
+          //this.obs = of(this.optionsTasksBkPublic.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+          this.optionsTasksPublic = this._filterNewPublic(myvalue);
+          
+          //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
+        }
+      }
+      )).subscribe(
+        some => {
+
+        }
+      );
+
+
+    this.names = new FormGroup({
+
+      projectName: new FormControl(),
+      description: new FormControl(),
+      creationDate: new FormControl(firebase.firestore.Timestamp.fromDate(new Date())),
+      profileName: new FormControl(this.data.NewUid.displayName),
+      photoUrl: new FormControl(this.data.NewUid.photoURL),
+      projectUid: new FormControl(this.data.NewUid.uid),
+    });
+  }
+
+  private _filterNewPublic(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.optionsTasksPublic.filter(option => option.toLowerCase().indexOf(filterValue));
+  }
+
+  save() {
+
+    console.log(this.names.value);
+    this.dialogRef.close(this.names.value);
+  }
+
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  cancel() {
+    this.dialogRef.close();
+  }
+  openLink(event: MouseEvent): void {
+    this.dialogRef.close();
+    event.preventDefault();
+  }
+}
 
