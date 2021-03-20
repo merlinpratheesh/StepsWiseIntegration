@@ -97,7 +97,7 @@
                                         {{details.description}}
                                         {{userselectedProjectUid}}
 
-                                        <app-nested-tree class="mattree"  [loggedInUid]="undefined" [userselectedProjectUid]="userselectedProjectUid"
+                                        <app-nested-tree class="mattree"  [loggedInUid]="this.authDetails.displayName" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && keyRef !== undefined  && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>
@@ -157,7 +157,7 @@
 
                                         {{details.description}}
 
-                                        <button mat-raised-button (click)="DeleteProject()" > DeleteProject </button>
+                                       
 
                                         <app-nested-tree class="mattree" [allProjectDetails]="this.allProjectDetails" [loggedInUid]="this.authDetails.uid" [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "

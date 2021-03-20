@@ -125,7 +125,7 @@ export class LoggedinStartComponent implements OnInit {
         this.getPublicListBehaviourSub.next(undefined);
       } else {
 
-        if (val.public.length === 0) {
+        if (val.public?.length === 0) {
           this.getPublicListBehaviourSub.next(null);
         } else {
           this.localpublicList = val.public;
@@ -152,7 +152,7 @@ export class LoggedinStartComponent implements OnInit {
         this.getprivateListBehaviourSub.next(undefined);
       } else {
 
-        if (val.private.length === 0) {
+        if (val.private?.length === 0) {
           this.getprivateListBehaviourSub.next(null);
         } else {
           this.localprivateList = val.private;
@@ -302,20 +302,25 @@ export class LoggedinStartComponent implements OnInit {
             this.optionsTasksBkPublic = readrec.public;
       
             console.log(this.optionsTasksBkPublic);
-            this.firstProject = { firstProjectRef: this.optionsTasksBkPublic[0] };
-            console.log(this.firstProject);
-            if (this.firstProject != null) {
-            }
+         
             this.DATA = readrec.public;
             this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
             this.dataSource.paginator = this.paginator;
             this.obs = this.dataSource.connect();
             this.changeDetectorRef.detectChanges();
-            readrec.public.forEach(element => {
-              this.optionsTasksPublic.push(element.projectName);
-            });
-            this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
-            console.log(this.optionsTasksPublic);
+            if (this.optionsTasksBkPublic == undefined) {
+
+              console.log('no private projects')
+  
+            } 
+            else{
+              readrec.public.forEach(element => {
+                this.optionsTasksPublic.push(element.projectName);
+              });
+              this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
+              console.log(this.optionsTasksPublic);
+            }
+           
           });
           console.log(this.optionsTasksPublic);
       

@@ -327,8 +327,7 @@ export class UserdataService {
     await this.db.firestore.doc('/projectList/publicProject').update({ public: firebase.firestore.FieldValue.arrayRemove(userselection) });
     await this.db.firestore.doc('/projectList/' + loggedInUid).update({ private: firebase.firestore.FieldValue.arrayRemove(userselection) });
     await this.db.firestore.doc('projectKey/' + userselection.projectName).delete()
-    await this.db.firestore.doc('testcase/' + userselection.projectName).delete()
-    await this.db.firestore.doc('testcase/' + loggedInUid + '/' + userselection.projectName).delete()
+
 
 
   }
