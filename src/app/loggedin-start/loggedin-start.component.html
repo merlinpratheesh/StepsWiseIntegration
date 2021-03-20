@@ -52,7 +52,7 @@
 
     </mat-sidenav>
     <mat-sidenav-content [formGroup]="options">
-        <app-toolbar class="example-header"></app-toolbar>
+        <app-toolbar  class="example-header"></app-toolbar>
 
         <mat-grid-list cols="10" rowHeight="10vh">
             <mat-grid-tile colspan="5" rowspan='9' style="background: white ;">
@@ -183,9 +183,6 @@
                        
 
                     </mat-tab>
-
-                  
-
                 </mat-tab-group>
 
             </mat-grid-tile>
@@ -210,7 +207,7 @@
                             <button mat-button mat-icon-button disabled>
                                 <mat-icon>search</mat-icon>
                             </button>
-                            <input type="text" placeholder="Search Task Name" matInput [formControl]="publicSearchFormControl"
+                            <input style="width: 300px; height: 50px;" type="text" placeholder="Search Task Name" matInput [formControl]="publicSearchFormControl"
                                 [matAutocomplete]="auto1">
                             <button mat-button mat-icon-button (click)="searchClose()">
                                 <mat-icon>close</mat-icon>
@@ -226,7 +223,11 @@
 
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='8' style="background: white ; ">
+            <mat-grid-tile  colspan="5" rowspan='1'>
+
+                
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5" rowspan='7' style="background: white ; ">
 
                 <div style="background: rgb(242, 243, 245) ;     border: 3px solid #F2F3F5"
                     *ngIf="profileRef | async as profiledetails ; else landingpage  "

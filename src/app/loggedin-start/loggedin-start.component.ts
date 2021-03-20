@@ -89,6 +89,7 @@ export class LoggedinStartComponent implements OnInit {
 
   myprojectControls: projectControls = {
     subsectionkeysControl: new FormControl(null, Validators.required),
+    createNewFormControl: new FormControl(),
     testcaseInfoControl: new FormControl(),
     expansionPanelControl:new FormControl(),
     createTestcaseControl: new FormControl(),
@@ -273,6 +274,7 @@ export class LoggedinStartComponent implements OnInit {
             this.optionsTasksNamesBkPrivate = this.optionsTasksPrivate;
             console.log(this.optionsTasksPrivate);
 
+
           }
         });
 
@@ -338,7 +340,7 @@ export class LoggedinStartComponent implements OnInit {
                 this.changeDetectorRef.detectChanges();
               } else {
                 //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
-                this.obs = of(this.optionsTasksBkPublic.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
+                //this.obs = of(this.optionsTasksBkPublic.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
                 this.optionsTasksPublic = this._filterPublic(myvalue);
                 //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
                 this.changeDetectorRef.detectChanges();

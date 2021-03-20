@@ -53,6 +53,7 @@ export interface TestcaseInfo {
 }
 
 export interface projectControls {
+  createNewFormControl?:FormControl;
   subsectionkeysControl?: FormControl;//1-Keys come from db and user sub-sec selection will load a doc from demo or public proj
   testcaseInfoControl?: FormControl; //Displays the selected Testcase details
   createTestcaseControl?: FormControl;//User enters a test case name
@@ -318,7 +319,6 @@ export class UserdataService {
         this.db.firestore.doc('projectList/' + 'publicProjects').update({ public: firebase.firestore.FieldValue.arrayRemove(oldprojectName) }),
         this.db.firestore.doc('myProfile/' + uid).set(newprojectinfo, { merge: true }),
         this.db.firestore.doc('projectKey/' + oldprojectName).delete()
-
       ]);
       return promise;
     });
