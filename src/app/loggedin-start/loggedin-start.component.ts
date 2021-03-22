@@ -448,7 +448,7 @@ export class LoggedinStartComponent implements OnInit {
     this.dialogRef = this.dialog.open(AddNewProjectDialog, {
       data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
       height: '50%',
-      width: '80%',
+      width: '40%',
     });
 
     console.log(this.authDetails.uid);
@@ -496,10 +496,10 @@ export class LoggedinStartComponent implements OnInit {
   `],
   template: `
 
-  {{filteredOptions | async}}
-  <form  class="example-form" *ngIf="(filteredOptions | async) as myfilter"> 
-<div mat-dialog-content  >
-    <mat-form-field class="example-full-width">
+  <h2>Create New Project </h2>
+  <form   class="example-form" *ngIf="(filteredOptions | async) as myfilter"> 
+<div  mat-dialog-content  >
+    <mat-form-field  fxLayoutAlign="space-around center"  class="example-full-width">
       <input type="text"
              placeholder="Edit/Create"
              aria-label="Number"
@@ -512,7 +512,7 @@ export class LoggedinStartComponent implements OnInit {
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field class="example-full-width">
     <textarea
       matInput
       placeholder="Task Description"
@@ -522,7 +522,7 @@ export class LoggedinStartComponent implements OnInit {
 
   </div>
 
-  <div mat-dialog-actions>
+  <div fxLayoutAlign="space-around center"  mat-dialog-actions>
     <button mat-button color="warn" (click)="onNoClick()" style="position: relative;right: 15px;" cdkFocusInitial>
       No Thanks
     </button>
