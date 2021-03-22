@@ -108,8 +108,9 @@ export class NewNodeDialog {
   constructor(
     public dialogRef: MatDialogRef<NewNodeDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-      console.log('112',data);
+      console.log('112',data.filterValues);
     }
+
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -120,6 +121,7 @@ export class NewNodeDialog {
         startWith(''),
         map(value => this._filter(value))
       );
+      console.log(this.filteredOptions);
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

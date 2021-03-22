@@ -442,9 +442,19 @@ export class LoggedinStartComponent implements OnInit {
 
   newTaskforUser() {
 
-    this.dialogRef = this.dialog.open(AddNewProjectDialog, { data: { NewUid: this.authDetails } });
+
+
+
+    this.dialogRef = this.dialog.open(AddNewProjectDialog, {
+      data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
+      height: '50%',
+      width: '80%',
+    });
+
     console.log(this.authDetails.uid);
+    console.log(this.optionsTasksPublic);
     const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+
 
       console.log('390', values);
       if (values !== undefined) {
@@ -473,41 +483,65 @@ export class LoggedinStartComponent implements OnInit {
 
 @Component({
   selector: 'AddNewProjectDialog',
+  styles: [`
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  `],
   template: `
-  <h2 class="py-4" style="color: black; width:500px;" >ADD PROJECT DETAILS</h2>
-    <form  fxLayout="column" [formGroup]="names">
-      <mat-form-field>
-      <input  type="text" placeholder="Enter Unique Name"  matInput [formControl]="createProjectControl"
-      [matAutocomplete]="auto2">
-   
-        <mat-autocomplete #auto2="matAutocomplete" color="#216fdb">
-        <mat-option *ngFor="let option1 of optionsTasksPublic" [value]="option1">
 
-            <div mat-line>{{option1}}</div>
-
+  {{filteredOptions | async}}
+  <form  class="example-form" *ngIf="(filteredOptions | async) as myfilter"> 
+<div mat-dialog-content  >
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Edit/Create"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto"  >
+      <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn">
+        <mat-option *ngFor="let option of myfilter" [value]="option" >
+          {{option}}
         </mat-option>
-    </mat-autocomplete>
-      </mat-form-field>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field>
+    <textarea
+      matInput
+      placeholder="Task Description"
+      [formControl]="mydescription"
+    ></textarea>
+  </mat-form-field>
 
-      <mat-form-field>
-        <textarea
-          matInput
-          placeholder="Task Description"
-          formControlName="description"
-        ></textarea>
-      </mat-form-field>
+  </div>
 
-      <div class="form-group row">
-        <div class="col-sm-4 offset-sm-2">
-          <button type="submit" class="btn btn-primary mr-2" (click)="save()">Save</button>
-          <button type="reset" class="btn btn-outline-primary" (click)="cancel()">Cancel</button>
-        </div>
-      </div>
-    </form>
-
-
+  <div mat-dialog-actions>
+    <button mat-button color="warn" (click)="onNoClick()" style="position: relative;right: 15px;" cdkFocusInitial>
+      No Thanks
+    </button>
+    <button mat-stroked-button color="primary" 
+    [disabled]="!(myfilter.length === 0 )" style="position: relative;left: 20px;" (click)="save()" >
     
+      Add
+    </button>
+
+
+
+   
+    </div>
+ 
+</form>
+
+  
   `
+
 })
 export class AddNewProjectDialog {
 
@@ -523,78 +557,36 @@ export class AddNewProjectDialog {
   optionsTasksSubPublic: Subscription;
   filteredTasksOptions: Subscription;
 
-  
+  myControl = new FormControl();
+  mydescription = new FormControl();
+  filteredOptions: Observable<string[]>;
+  ProjectValues: FormGroup;
+
   constructor(public developmentservice: UserdataService, private db: AngularFirestore,
     public dialogRef: MatDialogRef<AddNewProjectDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(this.data);
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
 
-    console.log(this.data.NewUid);
-    this.optionsTasksSubPublic = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
-      this.optionsTasksPublic = [];
-      this.optionsTasksBkPublic = readrec.public;
-
-      console.log(this.optionsTasksBkPublic);
-
-      if (this.optionsTasksBkPublic == undefined) {
-
-        console.log('no private projects')
-
-      }
-      else {
-        readrec.public.forEach(element => {
-          this.optionsTasksPublic.push(element.projectName);
-        });
-        this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
-        console.log(this.optionsTasksPublic);
-      }
-
-    });
-    console.log(this.optionsTasksPublic);
-
-
-    this.filteredTasksOptions = this.createProjectControl.valueChanges.pipe(
-      startWith(''),
-      map((myvalue: string) => {
-        console.log('96', myvalue);
-        if (myvalue === '' || myvalue === null) {
-          this.optionsTasksPublic = this.optionsTasksNamesBkPublic;
-        } else {
-          //this.dataSource= new MatTableDataSource<projectDetails>(this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));      
-          //this.obs = of(this.optionsTasksBkPublic.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
-          this.optionsTasksPublic = this._filterNewPublic(myvalue);
-          
-          //return this.optionsTasksBk.filter(option => option.projectName.toLowerCase().indexOf(value) === 0);
-        }
-      }
-      )).subscribe(
-        some => {
-
-        }
       );
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
-
-    this.names = new FormGroup({
-
-      projectName: new FormControl(),
-      description: new FormControl(),
+    return this.data.mydata.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  save() {
+    this.ProjectValues = new FormGroup({
+      projectName: new FormControl(this.myControl.value),
+      description: new FormControl(this.mydescription.value),
       creationDate: new FormControl(firebase.firestore.Timestamp.fromDate(new Date())),
       profileName: new FormControl(this.data.NewUid.displayName),
       photoUrl: new FormControl(this.data.NewUid.photoURL),
       projectUid: new FormControl(this.data.NewUid.uid),
     });
+    this.dialogRef.close(this.ProjectValues.value);
   }
-
-  private _filterNewPublic(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.optionsTasksPublic.filter(option => option.toLowerCase().indexOf(filterValue));
-  }
-
-  save() {
-
-    console.log(this.names.value);
-    this.dialogRef.close(this.names.value);
-  }
-
 
   onNoClick(): void {
     this.dialogRef.close();
