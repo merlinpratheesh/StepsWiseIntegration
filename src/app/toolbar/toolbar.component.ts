@@ -94,7 +94,7 @@ export class ToolbarComponent implements OnInit {
               location: 'pleaseEnter',
               photoUrl: myauth.photoURL
             };
-
+            this.db.doc<any>('profile/' + myauth.uid).set(newItem);
             this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
             this.profileSuccessValues = this.profileRef;
            

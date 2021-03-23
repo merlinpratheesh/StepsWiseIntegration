@@ -12,6 +12,7 @@ import firebase from 'firebase/app';
 
 
 
+
 @Component({
   selector: 'app-main-screen2',
   templateUrl: './main-screen2.component.html',
@@ -311,6 +312,8 @@ export class MainScreen2Component {
     </mat-form-field>
     <mat-form-field appearance="fill" floatLabel="Edit Description" fxFlex="75vw">
       <mat-label>Give More Information</mat-label>
+
+      
       <textarea 
         matInput 
         placeholder="Explain More here" 

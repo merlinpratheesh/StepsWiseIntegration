@@ -7,6 +7,7 @@ import { OfflineScreenComponent } from './offline-screen/offline-screen.componen
 import { StarttestComponent } from './starttest/starttest.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainScreen2Component } from './main-screen2/main-screen2.component';
+import { BecomeMemberComponent } from './become-member/become-member.component';
 const routes: Routes = [
   { path: 'start', component: StartScreenComponent },
   { path: 'main', component: MainScreenComponent },
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'offline', component: OfflineScreenComponent },
   { path: 'starttest', component: StarttestComponent },
   {path:'main2',component:MainScreen2Component}  ,
+  {path:'becomeMember',component:BecomeMemberComponent}  ,
+
 
 
 

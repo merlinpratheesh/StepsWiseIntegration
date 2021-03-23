@@ -25,6 +25,7 @@ import { SingletaskComponent } from './singletask/singletask.component';
 import {  ToolbarComponent,ViewProfileDialog,BottomSheetOverviewExampleSheet  } from './toolbar/toolbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainScreen2Component,DialogEditTestcase } from './main-screen2/main-screen2.component';
+import { BecomeMemberComponent } from './become-member/become-member.component';
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -54,7 +55,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     LoggedinStartComponent,
     OfflineScreenComponent,BottomSheetOverviewExampleSheet,
     AddNewProjectDialog,EditNodeComponent,EditNodeDialog,NestedTreeComponent,ViewProfileDialog,
-    BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent, ShowmoreDirective, StarttestComponent, SingletaskComponent, ToolbarComponent, ProfileComponent, MainScreen2Component  ],
+    BottomSheetChangeOrder,AddNodeComponent,NewNodeDialog,DeleteNodeComponent, ShowmoreDirective, StarttestComponent, SingletaskComponent, ToolbarComponent, ProfileComponent, MainScreen2Component, BecomeMemberComponent  ],
   imports: [
 
     BrowserModule,

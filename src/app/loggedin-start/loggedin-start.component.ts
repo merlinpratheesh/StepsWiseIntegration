@@ -458,40 +458,53 @@ export class LoggedinStartComponent implements OnInit {
 
 
   newTaskforUser() {
+    console.log(this.optionsTasksPrivate.length);
+
+    if((this.optionsTasksPrivate)?.length <1){
+      this.dialogRef = this.dialog.open(AddNewProjectDialog, {
+        data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
+        height: '50%',
+        width: '40%',
+      });
+  
+      console.log(this.authDetails.uid);
+      console.log(this.optionsTasksPublic);
+      
+      const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+  
+  
+        console.log('390', values);
+        if (values !== undefined) {
+          this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
+            console.log('391', success);
+            if (success === undefined) {
+              const Newmydialog = values;
+              this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
+              return (null);
+            } else {
+              //get data- display/update
+              const mydialog = values;
+              this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+              return (null);
+            }
+          });
+        }
+      })).subscribe((mydata: any) => {
+      });
+      console.log('121', this.mydata);
+    
+
+    }
+else{
+
+  this.router.navigate(['/becomeMember']);
+
+
+}
+  
 
 
 
-
-    this.dialogRef = this.dialog.open(AddNewProjectDialog, {
-      data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
-      height: '50%',
-      width: '40%',
-    });
-
-    console.log(this.authDetails.uid);
-    console.log(this.optionsTasksPublic);
-    const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
-
-
-      console.log('390', values);
-      if (values !== undefined) {
-        this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
-          console.log('391', success);
-          if (success === undefined) {
-            const Newmydialog = values;
-            this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
-            return (null);
-          } else {
-            //get data- display/update
-            const mydialog = values;
-            this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
-            return (null);
-          }
-        });
-      }
-    })).subscribe((mydata: any) => {
-    });
-    console.log('121', this.mydata);
 
   }
 

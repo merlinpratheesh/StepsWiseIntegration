@@ -300,15 +300,7 @@ export class UserdataService {
   }
 
 
-  async editTestcasePublic(locationForeditPublic: string, deleteTestcase: projectDetails, updatedTestcase: projectDetails): Promise<void> {
-    await this.db.firestore.runTransaction(() => {
-      const promise = Promise.all([
-        this.db.firestore.doc(locationForeditPublic).update({ testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase) }),
-        this.db.firestore.doc(locationForeditPublic).update({ testcase: firebase.firestore.FieldValue.arrayUnion(updatedTestcase) })
-      ]);
-      return promise;
-    });
-  }
+
   async createDefKeys(projectname: string, MainSection: any): Promise<void> {
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([

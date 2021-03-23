@@ -1,0 +1,74 @@
+<mat-toolbar color="#0078d7">
+
+<mat-icon style="margin-right:20px;">
+    menu
+</mat-icon>
+<button style="width: 200px;" mat-raised-button color="warn" (click)="NavigateStart()">
+    <mat-icon class="mr-1">home</mat-icon>
+    Home
+</button>
+<h1>
+    StepsWise Tracking Tool
+</h1>
+
+<span fxFlex="grow"></span>
+
+<div fxHide.lt-sm>
+    Welcome!
+</div>
+
+</mat-toolbar>
+<div class="cPanelContainer">
+
+    <!--  Header  -->
+    <div class="cPanelHeader">
+      <h3>Steps Wise</h3>
+      <h5>Instructions</h5>
+    </div>
+  
+    <!--  Content  -->
+    <div class="cPanelContent">
+      
+    <!--  Section 01  -->
+    <div class="cPanelSection">
+      <div class="cPanelArrowPulse"></div>
+      <h5>Section 01</h5>
+      <p>Demo User Can Create Only One Task </p>
+    </div>
+  
+    <!--  Section 02  -->
+    <div class="cPanelSection">
+      <div class="cPanelArrowPulse"></div>
+      <h5>Section 02</h5>
+      <p>Member User Can Create Unlimited Tasks</p>
+    </div>
+      
+    <!--  Section 03  -->
+    <div class="cPanelSection">
+      <div class="cPanelArrowPulse"></div>
+      <h5>Section 03</h5>
+      <p>Log out user can view all Tasks</p>
+    </div>
+  
+    <!--  Section 04  -->
+    <div class="cPanelSection">
+      <h5>Section 04</h5>
+      <p>To Become Member Click Here!</p>
+      <button mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
+
+    </div>
+      
+    </div>
+  
+    <!--  Footer  -->
+    <div class="cPanelFooter">
+      <span>
+        Convert your work into tasks
+      </span>
+    </div>
+  
+  </div>
+
+
+    
+   
