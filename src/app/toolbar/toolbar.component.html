@@ -6,13 +6,7 @@
 
     <button mat-raised-button color="accent" fxFlexOffset="1%" fxFlex="100px">StepsWise</button>
     
-    <div  class="newTask" >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Create NewTask
-    </div>
+
     <span fxFlex="grow"> </span>
 
         <ul  fxLayout="rowrap" class="symbols">
@@ -106,6 +100,7 @@
                 Please Login
             </div>
         </mat-menu>
+        <button  style="margin-left: 20px; width:200px ; text-align:justify;"  mat-raised-button>Help Center</button>
 
         <div fxLayout="row"  *ngIf="this.authDetails  !== null && this.authDetails  !== undefined" >
             

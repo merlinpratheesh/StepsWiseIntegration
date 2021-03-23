@@ -57,7 +57,7 @@
         <app-toolbar class="example-header"></app-toolbar>
 
 
-        <mat-grid-list cols="10" rowHeight="10vh" style="background: #216fdb">
+        <mat-grid-list cols="10" rowHeight="10vh" style="background: white">
 
 
 
@@ -65,7 +65,7 @@
             <mat-grid-tile colspan="5" rowspan='9' style="background: white ;">
 
 
-                <mat-tab-group style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow">
+                <mat-tab-group style="  color:tomato ;background: rgb(242, 243, 245); height: 100%; " fxFlex="grow">
                     <mat-tab label="Tab 1" style="color:#216fdb; ">
                         <ng-template mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
@@ -73,7 +73,7 @@
                             <div *ngIf="(obs| async) as projectDetails; else waitingload ">
                                 <mat-accordion fxLayout="column">
 
-                                    <mat-paginator [length]="100" style="width:100%;" [pageSize]="5"
+                                    <mat-paginator [length]="100" style="width:100%; background-color:rgb(242, 243, 245) ;" [pageSize]="5"
                                         [pageSizeOptions]="[5,10,15,20]">
                                     </mat-paginator>
                                     <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
@@ -233,9 +233,27 @@
 
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='8' style="background: white ; ">
+            <mat-grid-tile colspan="5" rowspan='1'>
 
-                <div style="background: rgb(242, 243, 245) ;     border: 3px solid #F2F3F5"
+
+
+
+
+                <mat-card fxLayoutAlign="space-between center" class="newTask">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Create NewTask
+                </mat-card>
+
+
+
+
+            </mat-grid-tile>
+            <mat-grid-tile class="outer" colspan="5" rowspan='7'>
+
+                <div style="background: rgb(242, 243, 245)  ;      border: 3px solid rgb(242, 243, 245);"
                     *ngIf="profileRef | async as profiledetails ; else landingpage  "
                     fxLayoutAlign="space-between center" fxLayout="column">
 
@@ -270,8 +288,8 @@
                             <span>posts</span>
                         </li>
                         <li>
-                            <span class="card__info__stats">47</span>
-                            <span>followers</span>
+                            <span class="card__info__stats">{{profiledetails?.likes}}</span>
+                            <span>Likes</span>
                         </li>
                         <li>
                             <span class="card__info__stats">20</span>
@@ -286,7 +304,7 @@
                 </div>
                 <ng-template #landingpage style="background: white ; ">
 
-                    <div class="outer">
+                    
 
                         <div class="inner">
 
@@ -295,7 +313,7 @@
                                     class="prod-human-img" alt="prod" />
                             </div>
                         </div>
-                    </div>
+                   
 
                 </ng-template>
             </mat-grid-tile>

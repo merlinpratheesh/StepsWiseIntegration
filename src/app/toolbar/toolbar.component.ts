@@ -89,6 +89,7 @@ export class ToolbarComponent implements OnInit {
               gender: 'pleaseEnter',
               areaOfinterest: 'pleaseEnter',
               numberOfProjects: '0',
+              likes:'1',
               skills: 'pleaseEnter',
               location: 'pleaseEnter',
               photoUrl: myauth.photoURL

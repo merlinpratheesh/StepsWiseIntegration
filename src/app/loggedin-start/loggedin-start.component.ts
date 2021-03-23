@@ -66,6 +66,7 @@ export class LoggedinStartComponent implements OnInit {
     projectLocation: '',
     photoUrl: '',
     numberOfProjects: 0,
+    likes:1,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
   }
   myuserProfile: userProfile = {
@@ -206,6 +207,7 @@ export class LoggedinStartComponent implements OnInit {
     return this.getSectionsBehaviourSub;
   };
 
+
   myprivate: any;
   authDetails;
   publicProjectList: any;
@@ -234,6 +236,7 @@ export class LoggedinStartComponent implements OnInit {
   activeSelector: string;
   valueSelected: any;
 
+  btnDisabled = false;
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
     public fb: FormBuilder,
@@ -405,9 +408,21 @@ export class LoggedinStartComponent implements OnInit {
     this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
     console.log('218', this.keyRef);
 
-
   }
 
+  likes(like) {
+
+    like++;
+    console.log(like);
+    this.btnDisabled = true;
+    const likes = {
+      likes: like
+    }; 
+    this.developmentservice.updateLikes(this.authDetails.uid,likes);
+
+ 
+
+}
 
 
 
@@ -439,6 +454,8 @@ export class LoggedinStartComponent implements OnInit {
   newArray = [];
   mydata;
   updatedProject: any[] = [];
+
+
 
   newTaskforUser() {
 

@@ -1,9 +1,5 @@
 <div *ngIf="(Sections | async) as SectionsReady; else SectionsnotReady">
-  <!--  <p>
-    <a (click)="likes(SectionsReady.likes)" class="btn btn-counter" >
-        {{SectionsReady.likes}}
-  <span>&#x2764;</span>Like it</a>
-  </p>-->
+
   <div fxLayout="column" fxLayoutGap="5%"
     style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;">
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">
@@ -40,12 +36,14 @@
               <span style="margin-left:5%;margin-right:5%;">
                 {{node.Name}}
               </span>
+           
+            <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+              [currentNode]="node" [AlltheKeys]="AlltheKeys"
+              *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"></app-add-node>
+              <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node"></app-edit-node>
               <app-delete-node *ngIf="loggedInUid === userselectedProjectUid"  (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
-              <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
-              </app-edit-node>
-              <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
-                [currentNode]="node" [AlltheKeys]="AlltheKeys"
-                *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"></app-add-node>
+              
+             
              <!-- <mat-chip-list style="margin-right:30px;">
 
                 <mat-chip style="margin-right:5px; background-color:#18e92a">
@@ -108,6 +106,7 @@
           add_box
         </mat-icon>
       </button>
+      
 
 
 
@@ -115,6 +114,8 @@
     </mat-card>
   </div>
 </div>
+
+
 <ng-template #SectionsnotReady>
 
   <div>hi</div>
@@ -124,7 +125,7 @@
     </div>
   </div>
   <div *ngIf="(Sections | async) === undefined">
-    <mat-card class="list" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+    <mat-card  *ngIf="loggedInUid === userselectedProjectUid"  class="list" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
       <mat-card-content class="empty-label">
         Do You want to Add Default Keys?</mat-card-content>
       <mat-card-actions>

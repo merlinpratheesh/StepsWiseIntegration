@@ -77,6 +77,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   @Input() loggedInUid:firebase.User;
   @Input() userselectedProjectUid:firebase.User;
   @Input() allProjectDetails:projectDetails;
+ 
 
   nestedTreeControl: NestedTreeControl<TreeData>;
   nestedDataSource: MatTreeNestedDataSource<TreeData>;
@@ -218,9 +219,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
 
       console.log(this.navigationExtras.state.userselectedProjectUid);
 
-      console.log(this.latestProject);
-      console.log(this.latestProject);
-
+  
       console.log(this.navigationExtras.state.uidDetails);
 
       this.nestedDataSource.data=        [{
@@ -329,7 +328,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false }).then(success => {
     })
   }
-  
+
+
   DeleteProject(){
     
     let r = confirm("Confirm Tc Delete?");
@@ -344,7 +344,11 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       this.developmentservice.deleteprojectNew(this.loggedInUid,userselection).then(success => {
       });
     }
+    
   }
+
+
+
   
 }
 @Component({
@@ -367,6 +371,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       </button>
       <span style="margin-left:20%;">{{node.filename}} </span>
     </mat-tree-node>
+    <mat-divider></mat-divider>
   </mat-tree>
   `,
   styles:[`
@@ -374,7 +379,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   .example-list {
     width: 500px;
     max-width: 100%;
-    border: solid 10px green;
+    padding: 20px 20px;
+    border: solid 1px rgba(0, 0, 0, 0.87);
     min-height: 60px;
     display: block;
     background: white;
@@ -384,15 +390,15 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   
   .example-box {
     padding: 20px 10px;
-    border-bottom: solid 10px yellow;
+    border-bottom: solid 2px white;
     color: rgba(0, 0, 0, 0.87);
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: space-around;
     justify-content: space-around;
     box-sizing: border-box;
     cursor: move;
-    background: lightblue;
+    background: rgb(242, 243, 245);
     font-size: 20px;
   }
   

@@ -117,6 +117,7 @@ export interface usrinfoDetails {
   gender?: string,
   areaOfinterest?: string,
   numberOfProjects?: number,
+  likes?:number;
   skills?: string,
   location?: string,
   membershipEnd?: firebase.firestore.Timestamp;
@@ -173,17 +174,7 @@ export class UserdataService {
       return promise;
     });
   }
-  async updateLikes(value: any): Promise<void> {
-    console.log(value);
-    await this.db.firestore.runTransaction(() => {
-      const promise = Promise.all([
 
-        this.db.collection('projectList/').doc('publicProject').set(value, { merge: true })
-
-      ]);
-      return promise;
-    });
-  }
 
 
 
@@ -292,8 +283,24 @@ export class UserdataService {
       return promise;
     });
   }
+  async updateLikes( loggedInUid,likes): Promise<void> {
+    await this.db.firestore.runTransaction(() => {
+      const promise = Promise.all([
 
-  async editTestcasePublic(locationForeditPublic: string, deleteTestcase: TestcaseInfo, updatedTestcase: TestcaseInfo): Promise<void> {
+        this.db.collection('profile/').doc(loggedInUid).update(
+          {
+            likes: firebase.firestore.FieldValue.increment(1)
+
+          }),
+      
+        
+      ]);
+      return promise;
+    });
+  }
+
+
+  async editTestcasePublic(locationForeditPublic: string, deleteTestcase: projectDetails, updatedTestcase: projectDetails): Promise<void> {
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
         this.db.firestore.doc(locationForeditPublic).update({ testcase: firebase.firestore.FieldValue.arrayRemove(deleteTestcase) }),
