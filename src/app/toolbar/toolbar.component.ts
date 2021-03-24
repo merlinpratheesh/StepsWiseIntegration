@@ -81,8 +81,7 @@ export class ToolbarComponent implements OnInit {
 
               MembershipEnd: nextMonth.toDateString(),
               MembershipType: 'Demo',
-              projectLocation: '/projectList/DemoProjectKey',
-              projectOwner: true,
+              memberCheck: false,
               projectName: 'Demo',
               profileName: myauth.displayName,
               email: myauth.email,
@@ -123,7 +122,7 @@ export class ToolbarComponent implements OnInit {
 
     this.dialogRef = this.dialog.open(ViewProfileDialog, { data: { mydata: this.profileSuccessValues , NewUid: this.authDetails},      
     height: '650px',
-    width: '800px', });
+    width: '650px', });
 
     console.log('121', this.profileRef);
 
@@ -148,7 +147,7 @@ export class ToolbarComponent implements OnInit {
   *ngIf="this.profileRef |async as profiledetails ;"
    fxLayout="column">
 
-  <div style="height:40%;  float:inline-start;  " class="person">
+  <div  style="height:40%;  float:inline-start;  " class="person">
       <div id="main-card">
           <div class="cover-photo">
 
@@ -156,20 +155,24 @@ export class ToolbarComponent implements OnInit {
           <div class="photo">
               <img src="{{profiledetails?.photoUrl}}" alt="">
           </div>
-          <div class="content">
-              <h4 class="name">{{profiledetails?.profileName}}</h4>
-              <h4 class="name">{{profiledetails?.gender}}</h4>
-              <h4 class="card__text">{{profiledetails?.areaOfinterest}}</h4>
-              <h4 class="name">{{profiledetails?.skills}}</h4>
-              <h4 class="name">{{profiledetails?.location}}</h4>
-              <h4 class="name">{{profiledetails?.MembershipType}}</h4>
-              <h4 class="name">{{profiledetails?.MembershipEnd}}</h4>
-
-
-              <h6 class="email">
-                  <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+          <mat-card class="content">
+              <h4 class="name">ProfileName:{{profiledetails?.profileName}}</h4>
+              <h4 class="name">Gender:{{profiledetails?.gender}}</h4>
+              <h4 class="card__text">AreaOfinterest:{{profiledetails?.areaOfinterest}}</h4>
+              <h4 class="name">Skills:{{profiledetails?.skills}}</h4>
+              <h4 class="name">Location:{{profiledetails?.location}}</h4>
+              <h6 class="email">   <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
               </h6>
-          </div>
+              </mat-card>
+              <mat-card class="content"  fxLayout="column" fxLayoutAlign="space-around center">
+              <h4 class="name">MembershipType:{{profiledetails?.MembershipType}}</h4>
+              <h4 class="name">MembershipEnd:{{profiledetails?.MembershipEnd}}</h4>
+
+              </mat-card>
+              </div>
+             
+         
       </div>
   </div>
   <div class="">
@@ -237,18 +240,18 @@ export class ToolbarComponent implements OnInit {
     color: teal;
   }
   div#main-card {
-    width: 600px;
+    width: 550px;
   }
   
   .cover-photo {
     background: rgb(104, 175, 238);
-    width: 750px;
+    width: 600px;
     height: 100px;
   }
   .email{
     font-size: 16px;
     font-family: Comic Sans MS;
-    padding: 15px 0;
+    padding: 15px;
     display: -webkit-box;
     display: -ms-flexbox;
     -webkit-box-pack: center;
@@ -256,7 +259,6 @@ export class ToolbarComponent implements OnInit {
     justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center;
   
   }
   
@@ -281,12 +283,14 @@ export class ToolbarComponent implements OnInit {
   }
   .content {
     background: white;
-    width: auto;
+    font-size: 20px;
+    width: 300px;
     height: 220px;
     position: relative;
     top: -35px;
-    margin-left:20px;
+    margin-left:35px;
   }
+
   
   .contact {
     background: white;
@@ -343,6 +347,7 @@ export class ToolbarComponent implements OnInit {
     color: white;
   }
   .card__info {
+    text-align:center;
     margin: 1em 0;
     margin-top:200px;
     background: white;

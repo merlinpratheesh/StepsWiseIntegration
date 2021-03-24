@@ -20,13 +20,6 @@ import { FormControl, Validators } from '@angular/forms';
 export class AppComponent implements AfterViewInit {
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
-    myusrinfoFromDb: null,
-    keysReadFromDb: undefined,
-    mainsubsectionKeys: undefined,
-    subSectionKeys: undefined,
-    savedMainSectionKey: undefined,
-    savesubSectionKeys: undefined,
-    savedisabledval: undefined
   };
   myauth;
   loggedinstate:Observable<string>=new BehaviorSubject(undefined);

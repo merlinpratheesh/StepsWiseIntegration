@@ -26,6 +26,7 @@ import {  ToolbarComponent,ViewProfileDialog,BottomSheetOverviewExampleSheet  } 
 import { ProfileComponent } from './profile/profile.component';
 import { MainScreen2Component,DialogEditTestcase } from './main-screen2/main-screen2.component';
 import { BecomeMemberComponent } from './become-member/become-member.component';
+import { GooglePayButtonModule } from "@google-pay/button-angular";
 
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -59,6 +60,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   imports: [
 
     BrowserModule,
+    GooglePayButtonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AppSharedModule,

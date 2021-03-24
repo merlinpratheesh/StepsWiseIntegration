@@ -39,7 +39,7 @@ export class StartScreenComponent implements OnInit {
     skills: '',
     location: '',
     membershipType: '',
-    projectLocation: '',
+    memberCheck:false,
     photoUrl: '',
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
   }
@@ -56,13 +56,7 @@ export class StartScreenComponent implements OnInit {
   }
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
-    myusrinfoFromDb: null,
-    keysReadFromDb: undefined,
-    mainsubsectionKeys: undefined,
-    subSectionKeys: undefined,
-    savedMainSectionKey: undefined,
-    savesubSectionKeys: undefined,
-    savedisabledval: undefined
+
   };
   emailFormControl = new FormControl('', [
     Validators.required,

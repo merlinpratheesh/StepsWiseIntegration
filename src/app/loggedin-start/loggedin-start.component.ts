@@ -18,7 +18,7 @@ import { doc, docData } from 'rxfire/firestore';
 import { combineLatest } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
 import { NgAnalyzedFile } from '@angular/compiler';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -40,6 +40,14 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./loggedin-start.component.scss']
 })
 export class LoggedinStartComponent implements OnInit {
+  
+  navigationExtras: NavigationExtras = {
+    state: {
+
+      uidDetails:''
+      
+    }
+  };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -63,21 +71,14 @@ export class LoggedinStartComponent implements OnInit {
     skills: '',
     location: '',
     membershipType: '',
-    projectLocation: '',
     photoUrl: '',
     numberOfProjects: 0,
     likes:1,
+    memberCheck:false,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
   }
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
-    myusrinfoFromDb: null,
-    keysReadFromDb: undefined,
-    mainsubsectionKeys: undefined,
-    subSectionKeys: undefined,
-    savedMainSectionKey: undefined,
-    savesubSectionKeys: undefined,
-    savedisabledval: undefined
   };
   privateFormControl = new FormControl('', [
     Validators.required,
@@ -260,6 +261,8 @@ export class LoggedinStartComponent implements OnInit {
 
         this.authDetails = myauth;
         console.log('', this.authDetails.uid);
+        this.navigationExtras.state.uidDetails=this.authDetails;
+        console.log(this.navigationExtras.state.uidDetails);
 
         this.optionsTasksSubPrivate = docData(this.db.firestore.doc('projectList/' + this.authDetails.uid)).subscribe((readrec: any) => {
           this.optionsTasksPrivate = [];
@@ -496,8 +499,11 @@ export class LoggedinStartComponent implements OnInit {
 
     }
 else{
+  console.log(this.navigationExtras);
 
-  this.router.navigate(['/becomeMember']);
+ this.router.navigate(['/becomeMember'],this.navigationExtras.state);
+
+
 
 
 }

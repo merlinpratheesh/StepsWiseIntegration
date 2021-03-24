@@ -54,8 +54,8 @@ export class StarttestComponent implements OnInit, OnDestroy {
     skills: '',
     location: '',
     membershipType: '',
-    projectLocation: '',
     photoUrl: '',
+    memberCheck:false,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
   }
 
@@ -71,13 +71,6 @@ export class StarttestComponent implements OnInit, OnDestroy {
   }
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
-    myusrinfoFromDb: null,
-    keysReadFromDb: undefined,
-    mainsubsectionKeys: undefined,
-    subSectionKeys: undefined,
-    savedMainSectionKey: undefined,
-    savesubSectionKeys: undefined,
-    savedisabledval: undefined
   };
   emailFormControl = new FormControl('', [
     Validators.required,

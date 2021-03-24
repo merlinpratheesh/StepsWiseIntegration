@@ -19,22 +19,21 @@ export interface SubSection {
 }
 export interface userProfile {
   userAuthenObj: firebase.User,//Receive User obj after login success
-  myusrinfoFromDb: myusrinfo,
-  keysReadFromDb?: MainSectionGroup[];
-  selectedPublicProject?: string;
-  dupmainsubsectionKeys?: string[];
-  mainsubsectionKeys?: Observable<string[]>;
-  subSectionKeys?: string[];
-  savedMainSectionKey: string;
-  savesubSectionKeys?: string[];
-  savedisabledval?: boolean;
+}
+
+export interface memberUpdate{
+
+  MembershipEnd: Date;
+  MembershipType: string;
+  memberCheck: boolean;
+
 }
 export interface myusrinfo {
   MembershipEnd: Date;
   MembershipType: string;
   projectLocation: string;
   projectName: string;
-  projectOwner: boolean;
+  memberCheck: boolean;
 }
 export interface projectVariables {
   initialMainSection?: string;
@@ -122,8 +121,8 @@ export interface usrinfoDetails {
   location?: string,
   membershipEnd?: firebase.firestore.Timestamp;
   membershipType?: string,
-  projectLocation?: string,
   photoUrl: string,
+  memberCheck:boolean
 }
 export interface projectControls {
   editProfileGroup?: FormGroup;

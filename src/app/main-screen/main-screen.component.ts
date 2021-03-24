@@ -25,19 +25,6 @@ export class MainScreenComponent {
 
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
-    myusrinfoFromDb: {
-      MembershipEnd: new Date(),
-      MembershipType: '',
-      projectLocation: '',
-      projectName: '',
-      projectOwner: false
-    },
-    keysReadFromDb: undefined,
-    mainsubsectionKeys: undefined,
-    subSectionKeys: undefined,
-    savedMainSectionKey: undefined,
-    savesubSectionKeys: undefined,
-    savedisabledval: undefined
   };
 
   myprojectControls: projectControls = {
