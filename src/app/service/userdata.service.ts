@@ -304,7 +304,8 @@ export class UserdataService {
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
         this.db.firestore.doc('publicKey/' + projectname).set({ MainSection }, { merge: false }),
-        this.db.firestore.doc(projectname + '/MainSection/items/SubSection').delete()
+       // this.db.firestore.doc('publicKey/' +uid+'/'+ projectname + '/'+'status/' ).set({ tasks }, { merge: false }),
+
       ]);
       return promise;
     });

@@ -9,6 +9,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import firebase from 'firebase/app';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 
 
@@ -19,7 +20,6 @@ import firebase from 'firebase/app';
   styleUrls: ['./main-screen2.component.scss']
 })
 export class MainScreen2Component {
-
 
   myuserProfile: userProfile = {
     userAuthenObj: null,//Receive User obj after login success
@@ -124,6 +124,26 @@ export class MainScreen2Component {
     });
     return this.getSectionsBehaviourSub;
   };
+  status;
+  getStatus = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>) => {
+    if (this.getSectionsSubscription !== undefined) {
+      this.getSectionsSubscription.unsubscribe();
+    }
+    this.getSectionsSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getSectionsBehaviourSub.next(undefined);
+      } else {
+        if (val.MainSection?.length === 0) {
+          this.getSectionsBehaviourSub.next(null);
+        } else {
+          if (val.MainSection?.length !== 0) {
+            this.getSectionsBehaviourSub.next(val);
+          }
+        }
+      }
+    });
+    return this.getSectionsBehaviourSub;
+  };
   myprojectSub: projectSub = {
     openeditSub: undefined
   };
@@ -142,6 +162,7 @@ export class MainScreen2Component {
     public dialog: MatDialog
 
   ) {
+
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {
       selectedProject: string;
@@ -162,6 +183,12 @@ export class MainScreen2Component {
 
     }
 
+    this.status = this.getStatus(this.db.doc('/taskStatus/'+ this.userselectedProjectUid  +'/'+this.projectName+'/status'));
+if(this.status!== undefined){
+  console.log(this.status);
+
+}
+    
 
 
   }
@@ -174,7 +201,6 @@ export class MainScreen2Component {
       this.valueSelected = this.myprojectControls?.subsectionkeysControl.value;
       if (this.valueSelected !== null && this.valueSelected !== undefined) {
         this.SectionTc = this.getTestcases(this.db.doc('/testcase/' + this.projectName + '/' + this.valueSelected.groupValue + '/' + this.valueSelected.value));
-        console.log(this.SectionTc);
       }
       else {
         return of(false);
@@ -210,7 +236,12 @@ export class MainScreen2Component {
   exitTC() {
     this.myprojectFlags.firstTestcaseEdit = false;
   }
+  save(){
 
+  }
+  onNoClick(){
+    
+  }
   openedit() {
     let locationForEdit = '';
     let locationForEditPublic = '';
@@ -279,6 +310,25 @@ export class MainScreen2Component {
     this.myprojectFlags.showEditTcButton = true;
     this.myprojectVariables.viewSelectedTestcase = item;//`${item.subHeading}`;
     this.myprojectControls.testcaseInfoControl.setValue(`${item.description}`)
+
+  }
+  
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log(event.previousContainer);
+      console.log(event.container);
+
+
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+                        
+    }
+    console.log(event.previousContainer);
+    console.log(event.container);
 
   }
 }

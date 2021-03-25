@@ -216,6 +216,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       this.navigationExtras.state.mainSubSectionRef=data;
       this.navigationExtras.state.uidDetails=this.loggedInUid;
       this.navigationExtras.state.userselectedProjectUid=this.userselectedProjectUid;
+      
 
       console.log(this.navigationExtras.state.userselectedProjectUid);
 

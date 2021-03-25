@@ -19,6 +19,13 @@
             </div>
 
         </mat-toolbar>
+        <mat-tab-group>
+            <mat-tab label="TestCase">
+
+
+
+
+
         <div class="container-wrapper">
             <div fxLayout="row wrap" fxLayoutAlign="space-around center">
                 <div fxLayout="column" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;"
@@ -99,6 +106,79 @@
                 </div>
             </ng-template>
         </div>
+    </mat-tab>
+        <mat-tab label="Status"> 
+
+        
+            <div *ngIf="(this.status | async ) as SectionsReady;" >
+              <div *ngFor="let mysection of SectionsReady.tasks">
+                  {{mysection}}
+              </div>
+            </div>
+
+            
+            <div cdkDropListGroup>
+                <div class="example-container">
+                    <h2>Tasks</h2>
+                    <div
+                      cdkDropList
+                      [cdkDropListData]="StatusReady.tasks"
+                      class="example-list"
+                      (cdkDropListDropped)="drop($event)" *ngIf="(this.status | async ) as StatusReady;">
+                      <div class="example-box" *ngFor="let item of StatusReady.tasks" cdkDrag>{{item}}</div>
+                    </div>
+                  </div>
+
+                <div class="example-container">
+                  <h2>In Process</h2>
+              
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="StatusReady.inProcess"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)" *ngIf="(this.status | async ) as StatusReady;">
+                    <div class="example-box" *ngFor="let item of StatusReady.inProcess" cdkDrag>{{item}}</div>
+                  </div>
+                </div>
+              
+                <div class="example-container">
+                  <h2>Done</h2>
+              
+                  <div
+                    cdkDropList
+                    [cdkDropListData]="StatusReady.done"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)" *ngIf="(this.status | async ) as StatusReady;">
+                    <div class="example-box" *ngFor="let item of StatusReady.done" cdkDrag>{{item}}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div fxLayoutAlign="space-around center">
+                <button mat-button color="warn" (click)="onNoClick()" style="position: relative;right: 15px;" cdkFocusInitial>
+                  No Thanks
+                </button>
+                <button mat-stroked-button color="primary" 
+                 style="position: relative;left: 20px;" (click)="save()" >
+                
+                  Save
+                </button>
+            
+            
+            
+               
+                </div>
+             
+              
+              
+              <!-- Copyright 2020 Google LLC. All Rights Reserved.
+                  Use of this source code is governed by an MIT-style license that
+                  can be found in the LICENSE file at http://angular.io/license -->
+
+
+        </mat-tab>
+            
+    </mat-tab-group>
     </mat-sidenav-content>
     <mat-sidenav #drawer class="drawer" mode="side" opened="false" (opened)="draweropen()" fxFlex.lt-sm="100vw">
         <mat-toolbar class="header" color="warn">

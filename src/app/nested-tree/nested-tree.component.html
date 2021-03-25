@@ -39,7 +39,7 @@
            
             <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
               [currentNode]="node" [AlltheKeys]="AlltheKeys"
-              *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"></app-add-node>
+              *ngIf="(loggedInUid == userselectedProjectUid  )" ></app-add-node>
               <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node"></app-edit-node>
               <app-delete-node *ngIf="loggedInUid === userselectedProjectUid"  (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
               
