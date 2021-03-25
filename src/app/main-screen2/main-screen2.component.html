@@ -117,19 +117,19 @@
             </div>
 
             
-            <div cdkDropListGroup>
-                <div class="example-container">
+            <div cdkDropListGroup  >
+                <div class="example-container" >
                     <h2>Tasks</h2>
                     <div
                       cdkDropList
                       [cdkDropListData]="StatusReady.tasks"
                       class="example-list"
                       (cdkDropListDropped)="drop($event)" *ngIf="(this.status | async ) as StatusReady;">
-                      <div class="example-box" *ngFor="let item of StatusReady.tasks" cdkDrag>{{item}}</div>
+                      <div class="example-box"  *ngFor="let item of StatusReady.tasks" cdkDrag>{{item}}</div>
                     </div>
                   </div>
 
-                <div class="example-container">
+                <div class="example-container"  >
                   <h2>In Process</h2>
               
                   <div
@@ -141,7 +141,7 @@
                   </div>
                 </div>
               
-                <div class="example-container">
+                <div class="example-container" >
                   <h2>Done</h2>
               
                   <div

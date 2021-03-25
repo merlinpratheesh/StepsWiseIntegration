@@ -91,7 +91,7 @@
         </mat-nested-tree-node>
       </mat-tree>
       <app-add-node  *ngIf="loggedInUid === userselectedProjectUid" [masterdata]="nestedDataSource.data" [isTop]="true" [latestaddProject]="Project"
-        [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
+        [currentNode]="node" [AlltheKeys]="AlltheKeys" [uid]="loggedInUid"></app-add-node>
 
       <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="openBottomSheet()" style="margin:5%;">
 

@@ -326,8 +326,20 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       }]
     }];
     //delete the default testCase if any
-    this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false }).then(success => {
-    })
+
+    this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false });
+    const tasks =[
+      'MainSection'
+    ]
+
+    const res = this.db.doc('/taskStatus/'+ this.loggedInUid  +'/'+this.latestProject+'/status').set({tasks}, {merge:false});
+    const res1 = this.db.doc('/taskStatus/'+ this.loggedInUid  +'/'+this.latestProject+'/status').update(
+      {inProcess:firebase.firestore.FieldValue.arrayUnion()});
+    const res2 = this.db.doc('/taskStatus/'+ this.loggedInUid  +'/'+this.latestProject+'/status').update(
+      {done:firebase.firestore.FieldValue.arrayUnion()});
+
+
+
   }
 
 
@@ -647,8 +659,7 @@ export class BottomSheetChangeOrder implements AfterViewInit {
     
     });
     console.log('save',saveddata);
-    this.developmentservice.addMainSection(this.bottomdata.projectname, saveddata).then(success=>{
-    });
+    //this.developmentservice.addMainSection(this.bottomdata.projectname, saveddata).then(success=>{});
     saveddata=undefined;
     // rebuild tree with mutated data
     this.rebuildTreeForData(changedData);

@@ -184,10 +184,8 @@ export class MainScreen2Component {
     }
 
     this.status = this.getStatus(this.db.doc('/taskStatus/'+ this.userselectedProjectUid  +'/'+this.projectName+'/status'));
-if(this.status!== undefined){
   console.log(this.status);
 
-}
     
 
 
@@ -240,7 +238,7 @@ if(this.status!== undefined){
 
   }
   onNoClick(){
-    
+
   }
   openedit() {
     let locationForEdit = '';

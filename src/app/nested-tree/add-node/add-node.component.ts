@@ -5,6 +5,8 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { UserdataService,MainSectionGroup } from '../../service/userdata.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import firebase from 'firebase/app';
+
 
 @Component({
   selector: 'app-add-node',
@@ -17,6 +19,7 @@ export class AddNodeComponent implements AfterViewInit {
   @Input() currentNode: TreeData;
   @Input() AlltheKeys:any[];
   @Input() masterdata: any;
+  @Input() uid: firebase.User;
   @Output() changemyorder = new EventEmitter;
   name: string;
   description: string;
@@ -52,7 +55,7 @@ export class AddNodeComponent implements AfterViewInit {
             Children: []
           };
           this.AlltheKeys.push({name:result.nodeName, disabled: false, section:[] });
-          this.developmentservice.addMainSection(this.latestaddProject, this.AlltheKeys).then(success=>{
+          this.developmentservice.addMainSection(this.latestaddProject, this.AlltheKeys, this.uid, result.nodeName ).then(success=>{
           });
         } else {
           const node: TreeData = {

@@ -339,13 +339,22 @@ export class UserdataService {
       return promise;
     });
   }
-  async addMainSection(ProjectName: string, MainSection: any): Promise<void> {
+  async addMainSection(ProjectName: string, MainSection: any, uid:firebase.User, name:any): Promise<void> {
     await this.db.firestore.runTransaction(() => {
       console.log('reached', ProjectName);
       console.log('reached', ProjectName);
       const promise = Promise.all([
-        this.db.doc('/projectKey/' + ProjectName).set({ MainSection }, { merge: false })
+        this.db.doc('/projectKey/' + ProjectName).set({ MainSection }, { merge: false }),
+
+        this.db.doc('/taskStatus/'+ uid  +'/'+ProjectName+'/status').update(
+        {
+          tasks: firebase.firestore.FieldValue.arrayUnion(name),
+        }),
       ]);
+      
+    
+      
+
       return promise;
     });
   }
