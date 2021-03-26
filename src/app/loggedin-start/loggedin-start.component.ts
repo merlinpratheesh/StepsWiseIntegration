@@ -421,7 +421,7 @@ export class LoggedinStartComponent implements OnInit {
     const likes = {
       likes: like
     }; 
-    this.developmentservice.updateLikes(this.authDetails.uid,likes);
+    this.developmentservice.updateLikes(this.userselectedProjectUid ,likes);
 
  
 

@@ -344,12 +344,7 @@ export class UserdataService {
       console.log('reached', ProjectName);
       console.log('reached', ProjectName);
       const promise = Promise.all([
-        this.db.doc('/projectKey/' + ProjectName).set({ MainSection }, { merge: false }),
-
-        this.db.doc('/taskStatus/'+ uid  +'/'+ProjectName+'/status').update(
-        {
-          tasks: firebase.firestore.FieldValue.arrayUnion(name),
-        }),
+        this.db.doc('/projectKey/' + ProjectName).set({ MainSection }, { merge: false })
       ]);
       
     

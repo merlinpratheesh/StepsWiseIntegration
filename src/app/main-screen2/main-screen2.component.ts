@@ -178,13 +178,12 @@ export class MainScreen2Component {
       this.loggedInUid = state.uidDetails;
       this.userselectedProjectUid = state.userselectedProjectUid;
       console.log(this.loggedInUid);
-      console.log(this.userselectedProjectUid);
+      console.log(this.mainSubSections);
 
 
     }
 
-    this.status = this.getStatus(this.db.doc('/taskStatus/'+ this.userselectedProjectUid  +'/'+this.projectName+'/status'));
-  console.log(this.status);
+
 
     
 

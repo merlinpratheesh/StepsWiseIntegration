@@ -332,11 +332,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       'MainSection'
     ]
 
-    const res = this.db.doc('/taskStatus/'+ this.loggedInUid  +'/'+this.latestProject+'/status').set({tasks}, {merge:false});
-    const res1 = this.db.doc('/taskStatus/'+ this.loggedInUid  +'/'+this.latestProject+'/status').update(
-      {inProcess:firebase.firestore.FieldValue.arrayUnion()});
-    const res2 = this.db.doc('/taskStatus/'+ this.loggedInUid  +'/'+this.latestProject+'/status').update(
-      {done:firebase.firestore.FieldValue.arrayUnion()});
+
 
 
 
