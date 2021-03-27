@@ -328,9 +328,16 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     //delete the default testCase if any
 
     this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false });
-    const tasks =[
-      'MainSection'
-    ]
+
+    const taskstatus =[{
+      viewvalue: 'Drag and Drop',
+      disabled: true,
+    }]
+
+    this.db.doc<any>('taskStatus/'+ this.latestProject).set({ taskstatus }, { merge: false });
+    this.db.doc<any>('/taskStatus/'+ this.latestProject + '/doneList/' + this.userselectedProjectUid).set({ taskstatus }, { merge: false });
+
+
 
 
 
