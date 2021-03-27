@@ -114,49 +114,71 @@
             <mat-tab label="Status">
 
 
+                {{this.Process|async|json}}
+                {{this.Done|async|json}}
 
-                <div appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
+                <div appearance="fill">
 
-                    <div cdkDropListGroup *ngFor="let group of SectionsReady">
-                        <h2>{{group.name}} </h2><br>
-                        <div class="example-container">
-                            <h3>InProcess</h3>
-                            <div cdkDropList [cdkDropListData]="group.section" class="example-list"
-                                (cdkDropListDropped)="drop($event)">
-                                <div class="example-box" *ngFor="let item of group.section " cdkDrag>{{item.viewvalue}}</div>
+                    <div cdkDropListGroup>
+                        <h2>hi </h2><br>
+                        <div *ngIf="(this.Process |async ) as ProcessList; else ProcessListnotReady">
+                            <div class=" example-container">
+                                <h3>InProcess</h3>
+                                <div cdkDropList [cdkDropListData]="ProcessList" class="example-list"
+                                    (cdkDropListDropped)="drop($event)">
+                                    <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of ProcessList " cdkDrag>
+                                        {{item.viewvalue}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
+                        <div *ngIf="(this.Done |async ) as DoneList; else DoneListnotReady">
 
-                        <div class="example-container">
-                            <h3>Done</h3>
-
-                            <div cdkDropList [cdkDropListData]="group.section" class="example-list"
-                                (cdkDropListDropped)="drop($event)" >
-                                <div class="example-box" *ngFor="let item of group.section" cdkDrag>{{item.viewvalue}}</div>
+                            <div class="example-container">
+                                <h3>Done</h3>
+                                <div cdkDropList [cdkDropListData]="DoneList" class="example-list"
+                                    (cdkDropListDropped)="drop($event)">
+                                    <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of DoneList" cdkDrag>{{item.viewvalue}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <ng-template #ProcessListnotReady>
+                            <div *ngIf="(this.Process | async) === undefined">
+
+                                <p class="empty-label">
+                                    Empty list</p>
+                            </div>
+                        </ng-template>
+                        <ng-template #DoneListnotReady>
+                            <div *ngIf="(this.Done | async) === undefined">
+
+                                <p class="empty-label">
+                                    Empty list</p>
+                            </div>
+                        </ng-template>
+
+                        <div fxLayoutAlign="space-around center">
+                            <button mat-button color="warn" (click)="onNoClick()"
+                                style="position: relative;right: 15px;" cdkFocusInitial>
+                                No Thanks
+                            </button>
+                            <button mat-stroked-button color="primary" style="position: relative;left: 20px;"
+                                (click)="saveDone(this.Done)">
+
+                                Save
+                            </button>
+
+
+
+
+                        </div>
+
                     </div>
-
-                    <div fxLayoutAlign="space-around center">
-                        <button mat-button color="warn" (click)="onNoClick()" style="position: relative;right: 15px;"
-                            cdkFocusInitial>
-                            No Thanks
-                        </button>
-                        <button mat-stroked-button color="primary" style="position: relative;left: 20px;"
-                            (click)="save()">
-
-                            Save
-                        </button>
-
-
-
-
-                    </div>
-
                 </div>
 
-                <!-- Copyright 2020 Google LLC. All Rights Reserved.
+                    <!-- Copyright 2020 Google LLC. All Rights Reserved.
                   Use of this source code is governed by an MIT-style license that
                   can be found in the LICENSE file at http://angular.io/license -->
 

@@ -8,6 +8,7 @@ import { first, map } from 'rxjs/operators';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
+
 export interface TestcaseInfo {
   heading: string;//Heading in testcase list
   subHeading: string;//Sub-Heading in testcase list
@@ -206,9 +207,29 @@ export class UserdataService {
   }
 
 
+  async updatedProcessDone(updatedProcess, updatedDone, projectName: string,userselectedProjectUid ): Promise<void> {
+    console.log(updatedProcess);
+    console.log(updatedDone);
+
+    
+    await this.db.firestore.runTransaction(() => {
+      const promise = Promise.all([
+
+        this.db.firestore.doc('taskStatus/' + projectName).set(
+          { process: firebase.firestore.FieldValue.arrayUnion(...updatedProcess) }),
+
+        this.db.firestore.doc('/taskStatus/'+ projectName + '/doneList/' + userselectedProjectUid).set(
+          { done: firebase.firestore.FieldValue.arrayUnion(...updatedDone) })
+
+      ]);
+      return promise;
+    });
+  }
+
 
   async createnewprojectExistingId(updatedProject: any, uid: string): Promise<void> {
     console.log(updatedProject);
+
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
 

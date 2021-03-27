@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MainSectionGroup, projectControls, projectFlags, projectSub, projectVariables, TestcaseInfo, UserdataService, userProfile } from '../service/userdata.service';
+import { MainSectionGroup, projectControls, projectFlags, projectSub, projectVariables,TestcaseInfo, UserdataService, userProfile } from '../service/userdata.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
@@ -124,25 +124,52 @@ export class MainScreen2Component {
     });
     return this.getSectionsBehaviourSub;
   };
-  status;
-  getStatus = (MainAndSubSectionkeys: AngularFirestoreDocument<MainSectionGroup>) => {
-    if (this.getSectionsSubscription !== undefined) {
-      this.getSectionsSubscription.unsubscribe();
+  Process;
+  getProcessSubscription: Subscription;
+  getProcessBehaviourSub = new BehaviorSubject(undefined);
+  getProcess = (MainAndSubSectionkeys: AngularFirestoreDocument<any>) => {
+    if (this.getProcessSubscription !== undefined) {
+      this.getProcessSubscription.unsubscribe();
     }
-    this.getSectionsSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+    this.getProcessSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+      console.log(val);
       if (val === undefined) {
-        this.getSectionsBehaviourSub.next(undefined);
+        this.getProcessBehaviourSub.next(undefined);
       } else {
-        if (val.MainSection?.length === 0) {
-          this.getSectionsBehaviourSub.next(null);
+        if (val.process?.length === 0) {
+          this.getProcessBehaviourSub.next(null);
         } else {
-          if (val.MainSection?.length !== 0) {
-            this.getSectionsBehaviourSub.next(val);
+          if (val.process?.length !== 0) {
+            this.getProcessBehaviourSub.next(val.process);
           }
         }
       }
     });
-    return this.getSectionsBehaviourSub;
+    return this.getProcessBehaviourSub;
+  };
+  Done;
+  getDoneSubscription: Subscription;
+  getDoneBehaviourSub = new BehaviorSubject(undefined);
+  getDone = (MainAndSubSectionkeys: AngularFirestoreDocument<any>) => {
+    if (this.getDoneSubscription !== undefined) {
+      this.getDoneSubscription.unsubscribe();
+    }
+    this.getDoneSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+      console.log(val);
+
+      if (val === undefined) {
+        this.getDoneBehaviourSub.next(undefined);
+      } else {
+        if (val.done?.length === 0) {
+          this.getDoneBehaviourSub.next(null);
+        } else {
+          if (val.done?.length !== 0) {
+            this.getDoneBehaviourSub.next(val.done);
+          }
+        }
+      }
+    });
+    return this.getDoneBehaviourSub;
   };
   myprojectSub: projectSub = {
     openeditSub: undefined
@@ -155,6 +182,10 @@ export class MainScreen2Component {
   keysselection: any;
   loggedInUid: firebase.User;
   userselectedProjectUid: firebase.User;
+  removeProcess: any;
+  removeDone: any
+  updatedProcess: any;
+  updatedDone: any;
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore,
@@ -183,6 +214,13 @@ export class MainScreen2Component {
 
     }
 
+
+    this.Process= this.getProcess(this.db.doc('/taskStatus/' + this.projectName ));
+    this.Done= this.getDone(this.db.doc('/taskStatus/' + this.projectName  +'/doneList/' + this.userselectedProjectUid));
+
+
+console.log(this.Process);
+console.log(this.Done);
 
 
     
@@ -316,18 +354,36 @@ export class MainScreen2Component {
       console.log(event.previousContainer);
       console.log(event.container);
 
+console.log('if');
 
     } else {
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
                         event.currentIndex);
-                        
+                        console.log('else');
+
+                        this.updatedProcess=event.previousContainer.data
+                        this.updatedDone=event.container.data;
+                   
     }
-    console.log(event.previousContainer);
-    console.log(event.container);
+    console.log(this.updatedProcess);
+    console.log(this.updatedDone);
+
+
+
 
   }
+  saveDone(some)
+  {
+
+    this.developmentservice.updatedProcessDone(this.updatedProcess,this.updatedDone,this.projectName, this.userselectedProjectUid);
+
+    console.log(this.updatedProcess);
+    console.log(this.updatedDone);
+
+  }
+
 }
 
 
