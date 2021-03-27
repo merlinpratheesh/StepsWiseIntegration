@@ -382,12 +382,18 @@ export class UserdataService {
       return promise;
     });
   }
-  async addSubSection(ProjectName: string, MainSectionName: string, SubSectionName: string, MainSection: any): Promise<void> {
-    console.log('195', ProjectName);
+  async addSubSection(ProjectName: string, MainSectionName: string, SubSectionName: string, MainSection: any, process): Promise<void> {
+    console.log('195', MainSectionName);
+    console.log('195', SubSectionName);
+
+
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
         this.db.doc('projectKey/' + ProjectName).set({ MainSection }, { merge: false }),
-        this.db.doc(ProjectName + '/' + MainSectionName + '/items/' + SubSectionName).delete()
+       
+       this.db.firestore.doc('taskStatus/' + ProjectName).update(
+        { process: firebase.firestore.FieldValue.arrayUnion(...process) }),
+
       ]);
       return promise;
     });

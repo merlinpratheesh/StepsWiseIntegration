@@ -329,13 +329,17 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
 
     this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false });
 
-    const taskstatus =[{
+    const process =[{
+      viewvalue: 'Drag and Drop',
+      disabled: true,
+    }]
+    const done =[{
       viewvalue: 'Drag and Drop',
       disabled: true,
     }]
 
-    this.db.doc<any>('taskStatus/'+ this.latestProject).set({ taskstatus }, { merge: false });
-    this.db.doc<any>('/taskStatus/'+ this.latestProject + '/doneList/' + this.userselectedProjectUid).set({ taskstatus }, { merge: false });
+    this.db.doc<any>('taskStatus/'+ this.latestProject).set({ process }, { merge: false });
+    this.db.doc<any>('/taskStatus/'+ this.latestProject + '/doneList/' + this.userselectedProjectUid).set({ done }, { merge: false });
 
 
 

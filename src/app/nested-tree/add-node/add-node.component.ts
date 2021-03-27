@@ -69,7 +69,10 @@ export class AddNodeComponent implements AfterViewInit {
               mainsec.section.push({viewvalue:node.Name});
             }
           });
-          this.developmentservice.addSubSection(this.latestaddProject,this.currentNode.Name,node.Name,  this.AlltheKeys).then(success=>{
+          const process =[{
+            viewvalue:this.currentNode.Name + node.Name,
+          }]
+          this.developmentservice.addSubSection(this.latestaddProject,this.currentNode.Name,node.Name,this.AlltheKeys,process ).then(success=>{
           });
         }
       }
