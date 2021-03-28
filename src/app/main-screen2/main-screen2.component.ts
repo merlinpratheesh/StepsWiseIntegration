@@ -275,6 +275,10 @@ console.log(this.Done);
 
   }
   onNoClick(){
+    this.getProcessSubscription.unsubscribe();
+    this.getDoneSubscription.unsubscribe();
+
+
 
   }
   openedit() {

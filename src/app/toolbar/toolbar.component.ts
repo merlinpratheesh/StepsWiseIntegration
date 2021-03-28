@@ -126,7 +126,10 @@ export class ToolbarComponent implements OnInit {
 
     console.log('121', this.profileRef);
 
+  }
 
+  helpCenter(){
+    this.router.navigate(['/becomeMember']);
 
   }
   logout() {

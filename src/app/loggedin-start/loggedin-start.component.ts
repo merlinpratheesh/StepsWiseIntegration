@@ -463,7 +463,7 @@ export class LoggedinStartComponent implements OnInit {
   newTaskforUser() {
     console.log(this.optionsTasksPrivate.length);
 
-    if((this.optionsTasksPrivate)?.length <3){
+    if((this.optionsTasksPrivate)?.length <1){
       this.dialogRef = this.dialog.open(AddNewProjectDialog, {
         data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
         height: '50%',

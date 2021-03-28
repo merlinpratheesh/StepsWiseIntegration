@@ -114,13 +114,10 @@
             <mat-tab label="Status">
 
 
-                {{this.Process|async|json}}
-                {{this.Done|async|json}}
 
-                <div appearance="fill">
+                <div >
 
-                    <div cdkDropListGroup>
-                        <h2>hi </h2><br>
+                    <div cdkDropListGroup fxLayout="fxFlex">
                         <div *ngIf="(this.Process |async ) as ProcessList; else ProcessListnotReady">
                             <div class=" example-container">
                                 <h3>InProcess</h3>
@@ -165,7 +162,7 @@
                                 No Thanks
                             </button>
                             <button mat-stroked-button color="primary" style="position: relative;left: 20px;"
-                                (click)="saveDone(this.Done)">
+                            [disabled]="this.loggedInUid !== userselectedProjectUid"  (click)="saveDone(this.Done)">
 
                                 Save
                             </button>
