@@ -277,6 +277,7 @@ console.log(this.Done);
   onNoClick(){
     this.getProcessSubscription.unsubscribe();
     this.getDoneSubscription.unsubscribe();
+    this.router.navigate(['/loggedin']);
 
 
 
@@ -382,6 +383,7 @@ console.log('if');
   {
 
     this.developmentservice.updatedProcessDone(this.updatedProcess,this.updatedDone,this.projectName, this.userselectedProjectUid);
+    this.router.navigate(['/loggedin']);
 
     console.log(this.updatedProcess);
     console.log(this.updatedDone);

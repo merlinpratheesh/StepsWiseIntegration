@@ -24,14 +24,14 @@ export interface userProfile {
 
 export interface memberUpdate{
 
-  MembershipEnd: Date;
-  MembershipType: string;
+  membershipEnd: Date;
+  membershipType: string;
   memberCheck: boolean;
 
 }
 export interface myusrinfo {
-  MembershipEnd: Date;
-  MembershipType: string;
+  membershipEnd: Date;
+  membershipType: string;
   projectLocation: string;
   projectName: string;
   memberCheck: boolean;
@@ -360,9 +360,8 @@ export class UserdataService {
       return promise;
     });
   }
-  async addMainSection(ProjectName: string, MainSection: any, uid:firebase.User, name:any): Promise<void> {
+  async addMainSection(ProjectName: string, MainSection: any): Promise<void> {
     await this.db.firestore.runTransaction(() => {
-      console.log('reached', ProjectName);
       console.log('reached', ProjectName);
       const promise = Promise.all([
         this.db.doc('/projectKey/' + ProjectName).set({ MainSection }, { merge: false })

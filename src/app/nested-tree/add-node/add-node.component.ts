@@ -55,7 +55,7 @@ export class AddNodeComponent implements AfterViewInit {
             Children: []
           };
           this.AlltheKeys.push({name:result.nodeName, disabled: false, section:[] });
-          this.developmentservice.addMainSection(this.latestaddProject, this.AlltheKeys, this.uid, result.nodeName ).then(success=>{
+          this.developmentservice.addMainSection(this.latestaddProject, this.AlltheKeys ).then(success=>{
           });
         } else {
           const node: TreeData = {

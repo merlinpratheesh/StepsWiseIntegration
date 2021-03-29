@@ -1,106 +1,63 @@
-<mat-toolbar div div fxLayout="row" fxLayoutAlign="space-between center"   color="#0078d7">
+<mat-toolbar div div fxLayout="row" fxLayoutAlign="space-between center" color="#0078d7">
 
-<mat-icon style="margin-right:20px;">
-    menu
-</mat-icon>
-<button style="width: 200px;" mat-raised-button color="warn" (click)="NavigateStart()">
+  <button style="width: 200px;" mat-raised-button color="warn" (click)="NavigateStart()">
     <mat-icon class="mr-1">home</mat-icon>
     Home
-</button>
-<h1>
+  </button>
+  <h1>
     StepsWise Tracking Tool
-</h1>
+  </h1>
 
 
-<div fxHide.lt-sm>
+  <div fxHide.lt-sm>
     Welcome!
-</div>
+  </div>
 
 </mat-toolbar>
+
+
+<mat-card  fxLayout="row" fxLayoutAlign="space-around center">
+  <h2 *ngIf="this.memberUserCheck.membershipType !==undefined"  >membershipType:{{this.memberUserCheck.membershipType}}
+  </h2>
+  <h2 *ngIf="this.memberUserCheck.membershipEnd !==undefined"  >membershipEnd:{{this.memberUserCheck.membershipEnd}}
+  </h2>
+  </mat-card>
 <div class="cPanelContainer">
 
-    <!--  Header  -->
-    <div class="cPanelHeader">
-      <h3>Steps Wise</h3>
-      <h5>Instructions</h5>
-    </div>
-  
-    <!--  Content  -->
-    <div class="cPanelContent">
-      
+  <!--  Header  -->
+  <div class="cPanelHeader">
+    <h3>Steps Wise</h3>
+    <h5>Instructions</h5>
+  </div>
+
+  <!--  Content  -->
+  <div class="cPanelContent">
+
     <!--  Section 01  -->
     <div class="cPanelSection">
       <div class="cPanelArrowPulse"></div>
       <h5>Section 01</h5>
-      <p>Demo User Can Create Only One Task </p>
+      <p>  Log out user can view all Tasks </p>
     </div>
-  
+
     <!--  Section 02  -->
     <div class="cPanelSection">
       <div class="cPanelArrowPulse"></div>
       <h5>Section 02</h5>
       <p>Member User Can Create Unlimited Tasks</p>
     </div>
-      
+
     <!--  Section 03  -->
     <div class="cPanelSection">
-      <div class="cPanelArrowPulse"></div>
       <h5>Section 03</h5>
-      <p>Log out user can view all Tasks</p>
+      <p> Demo User Can Create Only One Task</p>
     </div>
-  
-    <!--  Section 04  -->
-    <div class="cPanelSection">
-      <h5>Section 04</h5>
-      <p>To Become Member Click Here!</p>
-      <button mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
-      <div class="content" role="main">
-
-      
-        <div class="examples">
-          <div class="example">
-            <div class="title">Basic Example</div>
-            <div class="demo">
-              <google-pay-button
-                environment="TEST"
-                [buttonType]="buttonType"
-                [buttonColor]="buttonColor"
-                [buttonLocale]="buttonLocale"
-                [existingPaymentMethodRequired]="existingPaymentMethodRequired"
-                [paymentRequest]="{
-                  apiVersion: paymentRequest.apiVersion,
-                  apiVersionMinor: paymentRequest.apiVersionMinor,
-                  allowedPaymentMethods: paymentRequest.allowedPaymentMethods,
-                  merchantInfo: paymentRequest.merchantInfo,
-                  transactionInfo: {
-                    totalPriceStatus: 'FINAL',
-                    totalPriceLabel: 'Total',
-                    totalPrice: amount,
-                    currencyCode: 'USD',
-                    countryCode: 'US'
-                  }
-                }"
-                (loadpaymentdata)="onLoadPaymentData($event)"
-                (error)="onError($event)"
-              ></google-pay-button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-      
-    </div>
-  
-    <!--  Footer  -->
-    <div class="cPanelFooter">
-      <span>
-        Convert your work into tasks
-      </span>
-    </div>
-  
-  </div>
 
 
-    
-   
+</div>
+
+<!--  Footer  -->
+<div class="cPanelFooter">
+  <button mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
+
+</div>

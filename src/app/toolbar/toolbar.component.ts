@@ -26,6 +26,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { style } from '@angular/animations';
+import { NavigationExtras } from '@angular/router';
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -33,6 +35,7 @@ import { style } from '@angular/animations';
 })
 
 export class ToolbarComponent implements OnInit {
+
 
   getProfilesSubscription: Subscription;
   getProfilesBehaviourSub = new BehaviorSubject(null);
@@ -79,8 +82,8 @@ export class ToolbarComponent implements OnInit {
 
             const newItem = {
 
-              MembershipEnd: nextMonth.toDateString(),
-              MembershipType: 'Demo',
+              membershipEnd: nextMonth.toDateString(),
+              membershipType: 'Demo',
               memberCheck: false,
               projectName: 'Demo',
               profileName: myauth.displayName,
@@ -102,12 +105,23 @@ export class ToolbarComponent implements OnInit {
             console.log(this.profileRef);
 
             this.profileSuccessValues = this.profileRef;
+
+
           }
+
+
         });
+
+
+
+
+
 
         //console.log('', this.authDetails.photoURL);
       }
     });
+
+
 
   }
 
@@ -169,8 +183,8 @@ export class ToolbarComponent implements OnInit {
               </h6>
               </mat-card>
               <mat-card class="content"  fxLayout="column" fxLayoutAlign="space-around center">
-              <h4 class="name">MembershipType:{{profiledetails?.MembershipType}}</h4>
-              <h4 class="name">MembershipEnd:{{profiledetails?.MembershipEnd}}</h4>
+              <h4 class="name">membershipType:{{profiledetails?.membershipType}}</h4>
+              <h4 class="name">membershipEnd:{{profiledetails?.membershipEnd}}</h4>
 
               </mat-card>
               </div>

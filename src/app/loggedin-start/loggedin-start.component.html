@@ -55,10 +55,10 @@
         <app-toolbar class="example-header"></app-toolbar>
 
         <mat-grid-list cols="10" rowHeight="10vh">
-            <mat-grid-tile colspan="5" rowspan='9' style="background: white ;">
+            <mat-grid-tile colspan="6" rowspan='9' style="background: rgb(242, 243, 245) ;">
 
 
-                <mat-tab-group style="  color:tomato ;background: #F2F3F5; height: 100%; " fxFlex="grow">
+                <mat-tab-group style="  color:tomato ;background:rgb(242, 243, 245); height: 100%; margin-left: 15px; margin-right: 15px;" fxFlex="grow">
                     <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
                         <ng-template mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
@@ -131,10 +131,10 @@
                         <ng-template mat-tab-label>Private</ng-template>
                         <ng-template matTabContent>
 
-                            <div *ngIf="(privateList| async) as projectDetails; else waitingload ">
+                            <div *ngIf="(privateList| async) as projectDetails; else waitingload " >
                                 <mat-accordion fxLayout="column">
                                     <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
-                                        class="panel" *ngFor="let details of projectDetails">
+                                        class="panel" *ngFor="let details of projectDetails" >
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
                                             (click)="profileKeyRef(details)" style="width:90%; ">
                                             <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
@@ -202,7 +202,7 @@
 
 
 
-            <mat-grid-tile colspan="5" rowspan='1'>
+            <mat-grid-tile colspan="4" rowspan='1'>
                 <div style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill cdkScrollable>
                     <div (click)="openSearch()" style="padding: 0 5px; ">
 
@@ -236,7 +236,7 @@
 
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="5" rowspan='1'>
+            <mat-grid-tile colspan="4" rowspan='1'>
 
 
 
@@ -255,7 +255,7 @@
 
 
             </mat-grid-tile>
-            <mat-grid-tile class="outer" colspan="5" rowspan='7'>
+            <mat-grid-tile class="outer" colspan="4" rowspan='7'>
 
                 <div style=  "background: rgb(242, 243, 245);
                 border: 3px solid rgb(242, 243, 245);" *ngIf="profileRef | async as profiledetails ; else landingpage  "

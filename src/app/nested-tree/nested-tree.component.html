@@ -37,7 +37,7 @@
                 {{node.Name}}
               </span>
            
-            <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+             <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
               [currentNode]="node" [AlltheKeys]="AlltheKeys"
               *ngIf="(loggedInUid == userselectedProjectUid  )" ></app-add-node>
               <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node"></app-edit-node>
