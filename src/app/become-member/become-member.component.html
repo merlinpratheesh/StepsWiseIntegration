@@ -58,6 +58,16 @@
 
 <!--  Footer  -->
 <div class="cPanelFooter">
+  <google-pay-button
+    environment="TEST"
+    buttonType="buy"
+    buttonColor="black"
+    [paymentRequest]="paymentRequest"
+    (loadpaymentdata)="onLoadPaymentData($event)"
+    (error)="onError($event)"
+    [paymentAuthorizedCallback]="onPaymentDataAuthorized"
+  >
+  </google-pay-button>
   <button mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
 
 </div>

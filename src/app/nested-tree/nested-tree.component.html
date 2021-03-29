@@ -37,9 +37,9 @@
                 {{node.Name}}
               </span>
            
-             <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+         <!--    <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
               [currentNode]="node" [AlltheKeys]="AlltheKeys"
-              *ngIf="(loggedInUid == userselectedProjectUid  )" ></app-add-node>
+              *ngIf="(loggedInUid == userselectedProjectUid  )" ></app-add-node> -->
               <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node"></app-edit-node>
               <app-delete-node *ngIf="loggedInUid === userselectedProjectUid"  (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
               
@@ -76,7 +76,7 @@
               [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
               <app-edit-node *ngIf="loggedInUid === userselectedProjectUid" (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
               </app-edit-node>
-              <app-delete-node *ngIf="loggedInUid === userselectedProjectUid" (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
+              <app-delete-node *ngIf="loggedInUid === userselectedProjectUid" (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node> 
               
           
             </div>
@@ -90,23 +90,35 @@
           </li>
         </mat-nested-tree-node>
       </mat-tree>
+
+
+<div fxLayout="row" fxLayoutAlign="center center" >
+  <button (click)="NavigateTestcase()" mat-raised-button color="warn" style="margin:2%;">
+    View Tasks
+    <mat-icon style="margin-left:5%;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 19h6v-7H3v7zm7 0h12v-7H10v7zM3 5v6h19V5H3z"/></svg>
+    </mat-icon>
+  </button> 
       <app-add-node  *ngIf="loggedInUid === userselectedProjectUid" [masterdata]="nestedDataSource.data" [isTop]="true" [latestaddProject]="Project"
         [currentNode]="node" [AlltheKeys]="AlltheKeys" [uid]="loggedInUid"></app-add-node>
 
-      <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="openBottomSheet()" style="margin:5%;">
+        
+
+      <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="openBottomSheet()" style="margin:2%;">
 
         Change Order<mat-icon style="margin-left:5%;">
-          add_box
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 15h18v-2H3v2zm0 4h18v-2H3v2zm0-8h18V9H3v2zm0-6v2h18V5H3z"/></svg>
         </mat-icon>
       </button>
 
-      <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="DeleteProject()" style="margin:5%;">
+      <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="DeleteProject()" style="margin:2%;">
 
-        DeleteProject<mat-icon style="margin-left:5%;">
-          add_box
+        DeleteProject<mat-icon style="margin-left:2%;">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"/></svg>
         </mat-icon>
       </button>
-      
+    </div>
 
 
 
