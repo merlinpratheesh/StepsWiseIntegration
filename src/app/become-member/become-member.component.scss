@@ -1,188 +1,199 @@
-.params {
-  padding: 5px;
-  background-color: #fff;
-  position: fixed;
+/* Light style color theme */
+
+/* Light theme color scheme  defination*/
+
+
+.card {
+  --card-bg-color: rgb(24 24 39/15%);
+}
+.emphasised {
+  --bg-color: hsl(239deg 58% 60%);
+  --text-color: #fff;
+}
+
+/* Dark theme styles */
+
+body.dark-theme {
+  --text-color: #fff;
+  --bg-color: #10101c;
+}
+
+body.dark-theme section.pricing .card {
+  --text-color: #fff;
+  --card-bg-color: rgb(24 24 39);
+}
+
+body.dark-theme section.pricing .card.emphasised {
+  --text-color: #fff;
+  --bg-color: #242586;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --text-color: #fff;
+    --bg-color: #10101c;
+  }
+
+  body > section.pricing > .card {
+    --card-bg-color: rgb(24 24 39);
+  }
+
+  body.light-theme {
+    --text-color: #181927;
+    --body-bg-color: #fff;
+  }
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--body-color);
+  color: var(--bg-color);
+}
+
+/*  */
+
+/* General gloabal elemnt style  */
+h1 {
+  font-size: 26px;
+}
+h2 {
+  font-size: 18px;
+}
+h3 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+span.pricing {
+text-align: center;  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.span-title-group {
+  text-align: center;
+  width: auto;
+  max-width: 420px;
+  padding-bottom: 46px;
+}
+
+h2.span-title {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.05%;
+}
+p.span-sub-title {
+  opacity: 0.8;
+}
+
+.deals-card-group {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  margin-left: 225px;
+}
+
+.card {
+  width: 180px;
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  position: relative;
+  text-align: center;
+
+}
+
+/* .emphasised {
+  background: var(--em-bg-color);
+} */
+
+.emphasised {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.highlight:before {
+  content: "Best price";
+  display: flex;
+  height: 24px;
+  width: fit-content;
+  background: #a0e0b2;
+  color: #10101c;
+  padding: 2px 16px;
+  border-radius: 16px;
+  align-items: center;
+  position: absolute;
+  margin: 0 auto;
+  top: -12px;
+  left: 25%;
+}
+
+h3.card-title {
+  font-size: 18px;
+  max-width: 80%;
+  line-height: 24px;
+  margin-bottom: 24px;
+  padding: 8px;
+  flex: 1;
+}
+
+p.price-tag {
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 16px;
+  padding: 8px;
+  flex: 2;
+}
+
+.price-tag span {
+  font-size: 12px;
+  display: block;
+  opacity: 0.6;
+}
+
+.card-footer {
+  margin-top: 8px;
+  display: flex;
   width: 100%;
-  bottom: 0;
-  left: 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-
-  & > label {
-    margin: 5px 10px;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-
-    & > * {
-      display: block;
-    }
-
-    & > span {
-      margin-bottom: 2px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    & > input,
-    & > select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      padding: 4px;
-      border: 1px solid #999;
-      background-color: #fff;
-      border-radius: 0;
-      color: #000;
-    }
-  }
+  flex: 1;
+  align-items: flex-end;
 }
 
-.example {
-  margin: 5px;
+.card-footer a {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  opacity: 0.6;
   display: flex;
-  flex-direction: row;
-
-  & > .title {
-    width: 250px;
-    align-items: center;
-    display: inherit;
-  }
-
-  & > .demo {
-    flex: 1 0 0;
-
-    & > * {
-      margin: 1px;
-    }
-  }
+  height: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 4px;
 }
-.cPanelContainer {
-    margin:auto;
-    padding:0;
-    margin-top: 5px;
-  }
-  
-  .cPanelHeader {
-    margin:auto;
-    padding:20px 20px;
-    background:#0078d7;
-    text-align:center;
-  }
-  
-  .cPanelHeader > h3, .cPanelHeader > h5 {
-    margin:auto;
-    color:#f0f0f0;
-    font-weight:100;
-  }
-  
-  .cPanelFooter {
-    margin:auto;
-    padding:50px;
-    background:#0078d7;
-    text-align:center;
-  }
-  
-  .cPanelFooter > span {
-    color:#f0f0f0;
-    font-size:15px;
-    font-weight:400;
-  }
-  
-  .cPanelContent {
-    margin:auto;
-    padding:0;
-    background:#2d93e4;
-    text-align:center;
-    display:flex;
-  }
-  
-  .cPanelSection {
-    position:relative;
-    flex:1;
-    transition:0.3s;
-    -moz-transition:0.3s;
-    -o-transition:0.3s;
-    -webkit-transition:0.3s;
-    padding:25px;
-    border-right:1px solid #2d93e4;
-    border-left:1px solid #2d93e4;
-  }
-  
-  .cPanelSection:hover {
-    background:#0078d7;
-    flex:2;
-    border-right:1px solid #f0f0f0;
-    border-left:1px solid #f0f0f0;
-  }
-  
-  .cPanelContent > div:first-child {
-    border-left:none;
-  }
-  
-  .cPanelContent > div:last-child {
-    border-right:none;
-  }
-  
-  .cPanelContent > div:last-child:after {
-    display:none;
-  }
-  
-  .cPanelContent > div:after {
-    position:absolute;
-    top:50%;
-    left:100%;
-    transform:translate(-50%, -50%);
-    z-index:1;
-    opacity:1;
-    padding:5px 13px;
-    border-radius:50%;
-    background:#2d93e4;
-    transition:0.3s;
-    -moz-transition:0.3s;
-    -o-transition:0.3s;
-    -webkit-transition:0.3s;
-    content: "\f061";
-      font-size:25px;
-    font-family: FontAwesome;
-    color:#f0f0f0;
-  }
-  
-  .cPanelContent h5 {
-    color:#f0f0f0;
-    font-weight:400;
-  }
-  
-  .cPanelContent p {
-    font-size:14px;
-    color:#f0f0f0;
-    padding:0 10%;
-  }
-  
-  .cPanelArrowPulse {
-    position:absolute;
-    width:0%;
-    padding-bottom:0%;
-    border-radius:50%;
-    top:50%;
-    left:100%;
-    transform:translate(-50%, -50%);
-    background:#f0f0f0;
-    opacity:0;
-    z-index:2;
-    
-    animation-name:cPanelArrowPulseAnimation;
-    animation-duration:2s;
-    animation-iteration-count:infinite;
-    animation-timing-function:ease-out;
-  }
-  
-  @keyframes cPanelArrowPulseAnimation {
-    0% { opacity:1; width:0%; padding-bottom:0%; }
-    50% { opacity:0; width:20%; padding-bottom:20%; }
-    100% { opacity:0; width:0%; padding-bottom:0%; }
-  }
+
+a.link-button:after {
+  content: "";
+  height: 24px;
+  width: 24px;
+  background: url(https://raw.githubusercontent.com/rahulkuulsingh/ui-components/main/assets/arrow-right.svg);
+  filter: invert(1);
+}
+
+a.link-button:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+}

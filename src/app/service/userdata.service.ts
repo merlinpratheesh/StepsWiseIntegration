@@ -24,9 +24,9 @@ export interface userProfile {
 
 export interface memberUpdate{
 
-  membershipEnd: Date;
-  membershipType: string;
-  memberCheck: boolean;
+  membershipEnd?: Date;
+  membershipType?: string;
+  memberCheck?: boolean;
 
 }
 export interface myusrinfo {

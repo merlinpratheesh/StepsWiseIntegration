@@ -263,7 +263,7 @@ export class LoggedinStartComponent implements OnInit {
         this.authDetails = myauth;
         console.log('', this.authDetails.uid);
         return docData(this.db.firestore.doc('profile/' + myauth.uid)).pipe(
-          map((val: any) => {
+          map((val: usrinfoDetails) => {
             if (val !== null && val !== undefined) {
               console.log(val);
 

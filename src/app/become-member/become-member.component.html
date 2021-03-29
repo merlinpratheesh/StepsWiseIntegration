@@ -17,47 +17,56 @@
 
 
 <mat-card  fxLayout="row" fxLayoutAlign="space-around center">
-  <h2 *ngIf="this.memberUserCheck.membershipType !==undefined"  >membershipType:{{this.memberUserCheck.membershipType}}
+  <h2  >membershipType:{{this.memberUserCheck?.membershipType}}
   </h2>
-  <h2 *ngIf="this.memberUserCheck.membershipEnd !==undefined"  >membershipEnd:{{this.memberUserCheck.membershipEnd}}
+  <h2 >membershipEnd:{{this.memberUserCheck?.membershipEnd}}
   </h2>
   </mat-card>
 <div class="cPanelContainer">
 
-  <!--  Header  -->
-  <div class="cPanelHeader">
-    <h3>Steps Wise</h3>
-    <h5>Instructions</h5>
+<!-- Pre styled web component desgined purely in html and css.     -->
+
+<span class="pricing">
+  <div class="section-title-group">
+    <h2 class="section-title">Explore current top deals</h2>
+    <p class="section-sub-title">
+     Convert your Work into Tasks
+    </p>
   </div>
-
-  <!--  Content  -->
-  <div class="cPanelContent">
-
-    <!--  Section 01  -->
-    <div class="cPanelSection">
-      <div class="cPanelArrowPulse"></div>
-      <h5>Section 01</h5>
-      <p>  Log out user can view all Tasks </p>
+  <div class="deals-card-group">
+    <div class="card emphasised">
+      <h3 class="card-title">Public Tasks Access</h3>
+      <p class="price-tag">
+        $0.0
+        <span></span>
+      </p>
+      <div class="card-footer">
+        <a href="#" class="link-button"></a>
+      </div>
     </div>
-
-    <!--  Section 02  -->
-    <div class="cPanelSection">
-      <div class="cPanelArrowPulse"></div>
-      <h5>Section 02</h5>
-      <p>Member User Can Create Unlimited Tasks</p>
+    <div class="card highlight">
+      <h3 class="card-title">Create Demo Task</h3>
+      <p class="price-tag">
+        $0/month
+        <span>instead of $10/month</span>
+      </p>
+      <div class="card-footer">
+        <a href="#" class="link-button"></a>
+      </div>
     </div>
-
-    <!--  Section 03  -->
-    <div class="cPanelSection">
-      <h5>Section 03</h5>
-      <p> Demo User Can Create Only One Task</p>
+    <div class="card">
+      <h3 class="card-title">UnLimitted Tasks</h3>
+      <p class="price-tag">
+        $20/yr
+        <span>instead of $50/yr</span>
+      </p>
+      <div class="card-footer">
+        <a href="#" class="link-button">Get offer</a>
+      </div>
     </div>
-
-
-</div>
-
-<!--  Footer  -->
-<div class="cPanelFooter">
+  </div>
+<!--   <button class="btn-toggle">Toggle Dark-Mode</button> -->
+</span>
   <google-pay-button
     environment="TEST"
     buttonType="buy"
@@ -70,4 +79,4 @@
   </google-pay-button>
   <button mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
 
-</div>
+
