@@ -30,22 +30,30 @@ export class EditNodeComponent {
         this.options.push(mykey.Name);
       });
     }
-    const dialogRef = this.dialog.open(EditNodeDialog, {
-      width: '250px',
-      data: {Name: this.currentNode.Name, Description: this.currentNode.Description, Component: 'Edit',filterValues:this.options}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result) {
-        const node: TreeData = {
-          Id: null,
-          Name: result.nodeName,
-          Description: this.currentNode.Description,
-          Children: this.currentNode.Children
-        };
-        this.edittedNode.emit({currentNode: this.currentNode, node: node});
-      }
-    });
+    if(this.currentNode.Name !== "Introduction"){
+      const dialogRef = this.dialog.open(EditNodeDialog, {
+        width: '250px',
+        data: {Name: this.currentNode.Name, Description: this.currentNode.Description, Component: 'Edit',filterValues:this.options}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+        if (result) {
+          const node: TreeData = {
+            Id: null,
+            Name: result.nodeName,
+            Description: this.currentNode.Description,
+            Children: this.currentNode.Children
+          };
+            this.edittedNode.emit({currentNode: this.currentNode, node: node});
+        }
+      });
+    }
+    else{
+      alert("One Section Must Be Present")
+
+    }
+
+
   }
   findFatherNode(id: number, data: TreeData[]) {
     for (let i = 0; i < data.length; i += 1) {

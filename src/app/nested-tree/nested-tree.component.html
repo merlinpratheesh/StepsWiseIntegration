@@ -3,10 +3,8 @@
   <div fxLayout="column" fxLayoutGap="5%"
     style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;">
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">
-      <mat-card-header style="padding:5px;   border: 1px solid black; background-color:#F2F3F5;">
-        <span style="margin-left:0%;margin-right:5%;">
-          <h3>{{latestProject}}</h3>
-        </span>
+      <mat-card-header fxLayoutAlign="center center"  style="padding:5px;   border: 1px solid black; background-color:#F2F3F5;">
+          <h2>{{latestProject}}</h2>
      <!--   <mat-chip-list style="margin-right:30px;">
 
           <mat-chip style="margin-right:5px; background-color:#18e92a">
@@ -76,7 +74,7 @@
               [currentNode]="node" [AlltheKeys]="AlltheKeys"></app-add-node>
               <app-edit-node *ngIf="loggedInUid === userselectedProjectUid" (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node">
               </app-edit-node>
-              <app-delete-node *ngIf="loggedInUid === userselectedProjectUid" (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node> 
+              <app-delete-node  *ngIf="loggedInUid === userselectedProjectUid && currentNode===MainSection" (deletedNode)="deleteNode($event)"  [currentNode]="node"></app-delete-node> 
               
           
             </div>
@@ -92,7 +90,7 @@
       </mat-tree>
 
 
-<div fxLayout="row" fxLayoutAlign="center center" >
+<div fxLayout="row" fxLayoutAlign="center center"  style="margin-top: 15px;">
   <button (click)="NavigateTestcase()" mat-raised-button color="warn" style="margin:2%;">
     View Tasks
     <mat-icon style="margin-left:5%;">

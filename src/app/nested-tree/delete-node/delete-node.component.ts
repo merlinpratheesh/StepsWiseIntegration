@@ -1,4 +1,4 @@
-import { TreeData} from '../nested-tree.component';
+import { TreeData } from '../nested-tree.component';
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
@@ -11,6 +11,11 @@ export class DeleteNodeComponent {
   @Output() deletedNode = new EventEmitter;
 
   deleteNode() {
-    this.deletedNode.emit({currentNode: this.currentNode});
-  }
-}
+    if (this.currentNode.Name !== "Introduction") {
+      this.deletedNode.emit({ currentNode: this.currentNode });
+
+    } else {
+      alert("One Section Must Be Present")
+    }
+
+  }}
