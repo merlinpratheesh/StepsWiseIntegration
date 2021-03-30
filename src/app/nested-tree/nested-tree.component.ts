@@ -5,13 +5,13 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { of as observableOf } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { UserdataService, MainSectionGroup, projectDetails } from '../service/userdata.service';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {MAT_BOTTOM_SHEET_DATA} from '@angular/material/bottom-sheet';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { NavigationExtras } from '@angular/router';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import { Injectable} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {CdkDragDrop} from '@angular/cdk/drag-drop';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { Injectable } from '@angular/core';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -26,7 +26,7 @@ export class FileNode {
   children: FileNode[];
   filename: string;
   type: any;
-  disabled:boolean;
+  disabled: boolean;
 }
 
 /** Flat node with expandable and level information */
@@ -34,11 +34,11 @@ export class FileFlatNode {
   constructor(
     public expandable: boolean,
     public filename: string,
-    private disabled:boolean,
+    private disabled: boolean,
     public level: number,
     public type: any,
     public id: string
-  ) {}
+  ) { }
 }
 
 
@@ -53,7 +53,7 @@ export interface DialogData {
   Name: string;
   Description: string;
   Component: string;
-  filterValues:string[]
+  filterValues: string[]
 }
 
 
@@ -67,17 +67,17 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   navigationExtras: NavigationExtras = {
     state: {
       selectedProject: '',
-      mainSubSectionRef:'',
-      uidDetails:''
-      
+      mainSubSectionRef: '',
+      uidDetails: ''
+
     }
   };
   @Input() Sections: Observable<any>;
   @Input() latestProject: string;
-  @Input() loggedInUid:firebase.User;
-  @Input() userselectedProjectUid:firebase.User;
-  @Input() allProjectDetails:projectDetails;
- 
+  @Input() loggedInUid: firebase.User;
+  @Input() userselectedProjectUid: firebase.User;
+  @Input() allProjectDetails: projectDetails;
+
 
   nestedTreeControl: NestedTreeControl<TreeData>;
   nestedDataSource: MatTreeNestedDataSource<TreeData>;
@@ -97,12 +97,12 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     public afAuth: AngularFireAuth,
     private router: Router,
     private db: AngularFirestore
-    ) {
+  ) {
     this.nestedTreeControl = new NestedTreeControl<TreeData>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
-    
+
     this._dataChange.subscribe(
-      data => (this.nestedDataSource.data = 
+      data => (this.nestedDataSource.data =
         [{
           Id: 1,
           Name: 'John Heart ',
@@ -128,54 +128,54 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     if (fatherElement[0]) {
       this.AlltheKeys.forEach((mainsec, myindex) => {
         if (mainsec.name === fatherElement[0].Name) {
-          this.AlltheKeys[myindex].section.forEach((subsec, mysubindex) =>{
+          this.AlltheKeys[myindex].section.forEach((subsec, mysubindex) => {
             if (subsec.viewvalue === nodeToBeEdited.currentNode.Name) {
-              this.AlltheKeys[myindex].section[mysubindex].viewvalue=nodeToBeEdited.node.Name;
+              this.AlltheKeys[myindex].section[mysubindex].viewvalue = nodeToBeEdited.node.Name;
             }
           });
         }
       });
       this.developmentservice.updateSubSection(this.latestProject, fatherElement[0].Name, nodeToBeEdited.currentNode.Name, this.AlltheKeys);
-    
+
     } else {
-        //parent
+      //parent
       this.AlltheKeys.forEach((mainsec, myindex) => {
-          if (mainsec.name === nodeToBeEdited.currentNode.Name) {
-            this.AlltheKeys[myindex].name = nodeToBeEdited.node.Name;
-          }          
-        });
-        this.developmentservice.UpdateMainSection(this.latestProject, this.AlltheKeys);
-    }    
+        if (mainsec.name === nodeToBeEdited.currentNode.Name) {
+          this.AlltheKeys[myindex].name = nodeToBeEdited.node.Name;
+        }
+      });
+      this.developmentservice.UpdateMainSection(this.latestProject, this.AlltheKeys);
+    }
     this.refreshTreeData();
-    this.AlltheKeys= this.AlltheKeysbk;
+    this.AlltheKeys = this.AlltheKeysbk;
   }
 
   deleteNode(nodeToBeDeleted: any) {
     let elementPosition: number;
     const deletedElement: TreeData = this.findFatherNode(nodeToBeDeleted.currentNode.Id, this.nestedDataSource.data);
     if (window.confirm('Are you sure you want to delete ' + nodeToBeDeleted.currentNode.Name + '?')) {
-      if(deletedElement[0]){
-      //child
-      //console.log(deletedElement[0]);
-      this.AlltheKeys.forEach((mainsec, myindex) => {
-        if (mainsec.name === deletedElement[0].Name) {
-          this.AlltheKeys[myindex].section = mainsec.section.filter(mysubkeys => mysubkeys.viewvalue !== nodeToBeDeleted.currentNode.Name);
-        }
-      });
-      this.developmentservice.deleteSubSection(this.latestProject, deletedElement[0].Name, nodeToBeDeleted.currentNode.Name, this.AlltheKeys);
-    
-      }else{
+      if (deletedElement[0]) {
+        //child
+        //console.log(deletedElement[0]);
+        this.AlltheKeys.forEach((mainsec, myindex) => {
+          if (mainsec.name === deletedElement[0].Name) {
+            this.AlltheKeys[myindex].section = mainsec.section.filter(mysubkeys => mysubkeys.viewvalue !== nodeToBeDeleted.currentNode.Name);
+          }
+        });
+        this.developmentservice.deleteSubSection(this.latestProject, deletedElement[0].Name, nodeToBeDeleted.currentNode.Name, this.AlltheKeys);
+
+      } else {
         //parent
         this.AlltheKeys.forEach((mainsec) => {
           if (mainsec.name === nodeToBeDeleted.currentNode.Name) {
             this.AlltheKeys = this.AlltheKeys.filter(myMainkey => myMainkey.name !== nodeToBeDeleted.currentNode.Name);
-          }         
+          }
         });
         this.developmentservice.deleteMainSection(this.latestProject, this.AlltheKeys);
-      }    
+      }
       this.refreshTreeData();
-      this.AlltheKeys= this.AlltheKeysbk;
-    }    
+      this.AlltheKeys = this.AlltheKeysbk;
+    }
   }
 
   flatJsonArray(flattenedAray: Array<TreeData>, node: TreeData[]) {
@@ -206,63 +206,64 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     }
   }
   initialize() {
-    if(this.Sections!==undefined){
+    if (this.Sections !== undefined) {
 
-    this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
-      console.log(data);
+      this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
+        console.log(data);
 
-      this.Project = this.latestProject;
-      this.navigationExtras.state.selectedProject=this.latestProject;
-      this.navigationExtras.state.mainSubSectionRef=data;
-      this.navigationExtras.state.uidDetails=this.loggedInUid;
-      this.navigationExtras.state.userselectedProjectUid=this.userselectedProjectUid;
-      
+        this.Project = this.latestProject;
+        this.navigationExtras.state.selectedProject = this.latestProject;
+        this.navigationExtras.state.mainSubSectionRef = data;
+        this.navigationExtras.state.uidDetails = this.loggedInUid;
+        this.navigationExtras.state.userselectedProjectUid = this.userselectedProjectUid;
 
-      console.log(this.navigationExtras.state.userselectedProjectUid);
 
-  
-      console.log(this.navigationExtras.state.uidDetails);
+        console.log(this.navigationExtras.state.userselectedProjectUid);
 
-      this.nestedDataSource.data=        [{
-        Id: 1,
-        Name: 'John Heart ',
-        Description: 'Father 1',
-        Children: []
-      }];
-      this.Project = this.latestProject;
-      this.AlltheKeys = data;
-      this.AlltheKeysbk=data;
-      data.forEach(element => {
+
+        console.log(this.navigationExtras.state.uidDetails);
+
+        this.nestedDataSource.data = [{
+          Id: 1,
+          Name: 'John Heart ',
+          Description: 'Father 1',
+          Children: []
+        }];
+        this.Project = this.latestProject;
+        this.AlltheKeys = data;
+        this.AlltheKeysbk = data;
+        data.forEach(element => {
+            const node: TreeData = {
+              Id: this.findNodeMaxId(this.nestedDataSource.data) + 1,
+              Name: element.name,
+              Description: 'Parent',
+              Children: []
+            };
+            this.addNode(node);
+            element.section.forEach(subelement => {
+              const childnode: TreeData = {
+                Id: null,
+                Name: subelement.viewvalue,
+                Description: 'Child',
+                Children: []
+              };
+              this.addChildNode({ currentNode: node, node: childnode });
+            });
+          
+        });
+      })).subscribe(_ => {
+        let elementPosition: number;
         const node: TreeData = {
-          Id: this.findNodeMaxId(this.nestedDataSource.data) + 1,
-          Name: element.name,
+          Id: 1,
+          Name: 'as',
           Description: 'Parent',
           Children: []
         };
-        this.addNode(node);
-        element.section.forEach(subelement=>{
-          const childnode: TreeData = {
-            Id: null,
-            Name: subelement.viewvalue,
-            Description: 'Child',
-            Children: []
-          };
-          this.addChildNode({currentNode:node, node: childnode});
-        });
+        elementPosition = this.findPosition(1, this.nestedDataSource.data);
+        this.nestedDataSource.data.splice(elementPosition, 1);
+        this.refreshTreeData();
       });
-    })).subscribe(_ => {
-      let elementPosition: number;
-      const node: TreeData = {
-        Id: 1,
-        Name:'as',
-        Description: 'Parent',
-        Children: []
-      };
-      elementPosition = this.findPosition(1, this.nestedDataSource.data);
-      this.nestedDataSource.data.splice(elementPosition, 1);
-      this.refreshTreeData();
-    });
-  }
+    }
   }
   ngAfterViewInit() {
     this.initialize();
@@ -287,7 +288,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     return false;
   }
 
-  
+
   addNode(node: TreeData) {
     node.Id = this.findNodeMaxId(this.nestedDataSource.data) + 1;
     this.nestedDataSource.data.push(node);
@@ -299,21 +300,21 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     childrenNodeData.currentNode.Children.push(childrenNodeData.node);
     this.refreshTreeData();
   }
-  openBottomSheet(){
+  openBottomSheet() {
     //console.log(this.AlltheKeys);
-    this._bottomSheet.open(BottomSheetChangeOrder, {data: {mydata: this.AlltheKeys , projectname: this.latestProject}});
+    this._bottomSheet.open(BottomSheetChangeOrder, { data: { mydata: this.AlltheKeys, projectname: this.latestProject } });
   }
-    NavigateTestcase(some){
+  NavigateTestcase(some) {
     console.log(some);
     console.log(this.loggedInUid);
-    if(this.loggedInUid==null){
-    this.router.navigate(['/main'], this.navigationExtras);
-  }else{
-    this.router.navigate(['/main2'], this.navigationExtras);
+    if (this.loggedInUid == null) {
+      this.router.navigate(['/main'], this.navigationExtras);
+    } else {
+      this.router.navigate(['/main2'], this.navigationExtras);
 
+    }
   }
-  }
-  SelectedMainSection(some){
+  SelectedMainSection(some) {
     console.log(some);
 
   }
@@ -329,17 +330,17 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
 
     this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false });
 
-    const process =[{
+    const process = [{
       viewvalue: 'Drag and Drop',
       disabled: true,
     }]
-    const done =[{
+    const done = [{
       viewvalue: 'Drag and Drop',
       disabled: true,
     }]
 
-    this.db.doc<any>('taskStatus/'+ this.latestProject).set({ process }, { merge: false });
-    this.db.doc<any>('/taskStatus/'+ this.latestProject + '/doneList/' + this.userselectedProjectUid).set({ done }, { merge: false });
+    this.db.doc<any>('taskStatus/' + this.latestProject).set({ process }, { merge: false });
+    this.db.doc<any>('/taskStatus/' + this.latestProject + '/doneList/' + this.userselectedProjectUid).set({ done }, { merge: false });
 
 
 
@@ -350,8 +351,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   }
 
 
-  DeleteProject(){
-    
+  DeleteProject() {
+
     let r = confirm("Confirm Tc Delete?");
     if (r == true) {
       //let locationForDelete = '';
@@ -361,19 +362,19 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
 
       //locationForDelete = this.projectName + '/' + userselection.groupValue + '/items/' + userselection.value;
 
-      this.developmentservice.deleteprojectNew(this.loggedInUid,userselection).then(success => {
+      this.developmentservice.deleteprojectNew(this.loggedInUid, userselection).then(success => {
       });
     }
-    
+
   }
 
 
 
-  
+
 }
 @Component({
   selector: 'bottom-sheet-changeorder',
-  template:`
+  template: `
   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-list"  cdkDropList (cdkDropListDropped)="drop($event)">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding class="example-box"  cdkDrag [cdkDragData]="node" (mouseenter)="dragHover(node)" (mouseleave)="dragHoverEnd()" (cdkDragStarted)="dragStart()" (cdkDragReleased)="dragEnd()">
     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
@@ -394,7 +395,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     <mat-divider></mat-divider>
   </mat-tree>
   `,
-  styles:[`
+  styles: [`
   
   .example-list {
     width: 500px;
@@ -453,7 +454,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
 })
 export class BottomSheetChangeOrder implements AfterViewInit {
   dataChange = new BehaviorSubject<FileNode[]>([]);
-//  get data(): FileNode[] { return this.dataChange.value; }
+  //  get data(): FileNode[] { return this.dataChange.value; }
   treeControl: FlatTreeControl<FileFlatNode>;
   treeFlattener: MatTreeFlattener<FileNode, FileFlatNode>;
   dataSource: MatTreeFlatDataSource<FileNode, FileFlatNode>;
@@ -463,8 +464,8 @@ export class BottomSheetChangeOrder implements AfterViewInit {
   expandTimeout: any;
   expandDelay = 1000;
   validateDrop = true;
-  end=0;
-  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetChangeOrder>, 
+  end = 0;
+  constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetChangeOrder>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public bottomdata: any,
     public developmentservice: UserdataService) {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
@@ -482,7 +483,7 @@ export class BottomSheetChangeOrder implements AfterViewInit {
   ngAfterViewInit() {
 
   }
-  
+
   initialize() {
     // Parse the string to json object.
     //console.log(this.bottomdata);
@@ -500,18 +501,18 @@ export class BottomSheetChangeOrder implements AfterViewInit {
    * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
    * The return value is the list of `FileNode`.
    */
-  buildFileTree(obj: {[key: string]: any}, level: number, parentId: string = '0'): FileNode[] {
+  buildFileTree(obj: { [key: string]: any }, level: number, parentId: string = '0'): FileNode[] {
     return Object.keys(obj).reduce<FileNode[]>((accumulator, key, idx) => {
       const value = obj[key];
       const node = new FileNode();
-      
-      if(obj[key].name !== undefined){
+
+      if (obj[key].name !== undefined) {
         node.filename = obj[key].name;
         node.disabled = obj[key].disabled;
-      }else{
+      } else {
         node.filename = obj[key].viewvalue;
       }
-      
+
       /**
        * Make sure your node has an id so we can properly rearrange the tree during drag'n'drop.
        * By passing parentId to buildFileTree, it constructs a path of indexes which make
@@ -532,9 +533,9 @@ export class BottomSheetChangeOrder implements AfterViewInit {
   }
 
 
-  
+
   transformer = (node: FileNode, level: number) => {
-    return new FileFlatNode(!!node.children, node.filename,node.disabled, level, node.type, node.id);
+    return new FileFlatNode(!!node.children, node.filename, node.disabled, level, node.type, node.id);
   }
   private _getLevel = (node: FileFlatNode) => node.level;
   private _isExpandable = (node: FileFlatNode) => node.expandable;
@@ -569,7 +570,7 @@ export class BottomSheetChangeOrder implements AfterViewInit {
    * */
   drop(event: CdkDragDrop<string[]>) {
     // console.log('origin/destination', event.previousIndex, event.currentIndex);
-  
+
     // ignore drops outside of the tree
     if (!event.isPointerOverContainer) return;
 
@@ -610,33 +611,33 @@ export class BottomSheetChangeOrder implements AfterViewInit {
     //console.log('474',nodeAtDest.id,nodeAtDest.id.slice(0, nodeAtDest.id.slice(nodeAtDest.id.indexOf("/") + 1).indexOf("/")),nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/"));
     //console.log(nodeAtDest.id,nodeToInsert.id);
     if (nodeAtDest.id === nodeToInsert.id) return;
-    const start=parseInt(nodeAtDest.id.slice(0, nodeAtDest.id.slice(nodeAtDest.id.indexOf("/") + 1).indexOf("/")) );
-    
+    const start = parseInt(nodeAtDest.id.slice(0, nodeAtDest.id.slice(nodeAtDest.id.indexOf("/") + 1).indexOf("/")));
+
     // ensure validity of drop - must be same level
-    console.log('487',nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/"));
-    
+    console.log('487', nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/"));
+
     //console.log('487',nodeToInsert.id, nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1));
-    
 
 
-    if(nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/") === -1){
-      this.end = parseInt(nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1) );
+
+    if (nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/") === -1) {
+      this.end = parseInt(nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1));
       //this.end = nodeToInsert.id.indexOf("/");
-    }else{
-      this.end =nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/");
+    } else {
+      this.end = nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/");
     }
-    console.log(nodeToInsert.id, start,this.end);
+    console.log(nodeToInsert.id, start, this.end);
     const nodeAtDestFlatNode = this.treeControl.dataNodes.find((n) => nodeAtDest.id === n.id);
     //console.log(nodeAtDestFlatNode.level,node.level,nodeAtDestFlatNode.level !== node.level);
     //console.log(nodeAtDestFlatNode.level,node.level, start,this.end);
-    if (nodeAtDestFlatNode.level !== node.level ) {
+    if (nodeAtDestFlatNode.level !== node.level) {
       alert('Items can only be moved within the same level.');
       return;
-    }else{
-      if( start !== this.end ){
-        if((nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/") === -1)){
+    } else {
+      if (start !== this.end) {
+        if ((nodeToInsert.id.slice(nodeToInsert.id.indexOf("/") + 1).indexOf("/") === -1)) {
 
-        }else{
+        } else {
           alert('Items can only be moved within the same level.');
           return;
         }
@@ -648,26 +649,26 @@ export class BottomSheetChangeOrder implements AfterViewInit {
     //console.log('490',insertIndex,nodeToInsert);
     newSiblings.splice(insertIndex, 0, nodeToInsert);
     console.log(changedData);
-    let saveddata:MainSectionGroup[]=[];
-    
-    changedData.forEach((element,myindex) => {
+    let saveddata: MainSectionGroup[] = [];
+
+    changedData.forEach((element, myindex) => {
       saveddata.push({
-        name:element.filename,
-        disabled:element.disabled,
-        section:[]
+        name: element.filename,
+        disabled: element.disabled,
+        section: []
       });
-      if(element.children !== undefined){
+      if (element.children !== undefined) {
         element.children.forEach(subelement => {
-          saveddata[myindex].section.push({viewvalue:subelement.filename })
+          saveddata[myindex].section.push({ viewvalue: subelement.filename })
         });
-      }else{
-        saveddata[myindex].section=[];
+      } else {
+        saveddata[myindex].section = [];
       }
-    
+
     });
-    console.log('save',saveddata);
-    this.developmentservice.addMainSection(this.bottomdata.projectname, saveddata).then(success=>{});
-    saveddata=undefined;
+    console.log('save', saveddata);
+    this.developmentservice.addMainSection(this.bottomdata.projectname, saveddata).then(success => { });
+    saveddata = undefined;
     // rebuild tree with mutated data
     this.rebuildTreeForData(changedData);
   }
@@ -703,9 +704,9 @@ export class BottomSheetChangeOrder implements AfterViewInit {
   rebuildTreeForData(data: any) {
     this.dataSource.data = data;
     this.expansionModel.selected.forEach((id) => {
-        const node = this.treeControl.dataNodes.find((n) => n.id === id);
-        this.treeControl.expand(node);
-      });
+      const node = this.treeControl.dataNodes.find((n) => n.id === id);
+      this.treeControl.expand(node);
+    });
   }
 
 }

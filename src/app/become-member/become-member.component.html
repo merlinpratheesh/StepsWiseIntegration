@@ -16,7 +16,7 @@
 </mat-toolbar>
 
 
-<mat-card  fxLayout="row" fxLayoutAlign="space-around center">
+<mat-card *ngIf="this.memberUserCheck !==undefined"  fxLayout="row" fxLayoutAlign="space-around center">
   <h2  >membershipType:{{this.memberUserCheck?.membershipType}}
   </h2>
   <h2 >membershipEnd:{{this.memberUserCheck?.membershipEnd}}
@@ -28,9 +28,10 @@
 
 <span class="pricing">
   <div class="section-title-group">
-    <h2 class="section-title">Explore current top deals</h2>
+    <h2 class="section-title">    StepsWise
+    </h2>
     <p class="section-sub-title">
-     Convert your Work into Tasks
+    Explore current top deals
     </p>
   </div>
   <div class="deals-card-group">
@@ -67,6 +68,7 @@
   </div>
 <!--   <button class="btn-toggle">Toggle Dark-Mode</button> -->
 </span>
+<div fxLayout="column"  fxLayoutAlign="center center" >
   <google-pay-button
     environment="TEST"
     buttonType="buy"
@@ -79,4 +81,4 @@
   </google-pay-button>
   <button mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
 
-
+</div>

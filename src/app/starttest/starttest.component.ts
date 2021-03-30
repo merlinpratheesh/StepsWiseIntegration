@@ -56,6 +56,8 @@ export class StarttestComponent implements OnInit, OnDestroy {
     membershipType: '',
     photoUrl: '',
     memberCheck:false,
+    numberOfProjects:1,
+    likes:1,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
   }
 

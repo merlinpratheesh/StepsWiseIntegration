@@ -58,16 +58,19 @@
             <mat-grid-tile colspan="6" rowspan='9' style="background: rgb(242, 243, 245) ;">
 
 
-                <mat-tab-group style="  color:tomato ;background:rgb(242, 243, 245); height: 100%; margin-left: 15px; margin-right: 15px;" fxFlex="grow">
+                <mat-tab-group
+                    style="  color:tomato ;background:rgb(242, 243, 245); height: 100%; margin-left: 15px; margin-right: 15px;"
+                    fxFlex="grow">
                     <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
                         <ng-template mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
 
                             <div *ngIf="(obs| async) as projectDetails; else waitingload ">
                                 <mat-accordion fxLayout="column">
-                                    <mat-paginator [length]="100" style="width:100%; background-color:rgb(242, 243, 245) ;" [pageSize]="5"
-                                    [pageSizeOptions]="[5,10,15,20]">
-                                </mat-paginator>
+                                    <mat-paginator [length]="100"
+                                        style="width:100%; background-color:rgb(242, 243, 245) ;" [pageSize]="5"
+                                        [pageSizeOptions]="[5,10,15,20]">
+                                    </mat-paginator>
                                     <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
                                         class="panel" *ngFor="let details of projectDetails">
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
@@ -92,23 +95,24 @@
                                             <mat-panel-description>
 
                                                 {{details.creationDate.toDate() | date:'dd-MM-yyyy'}}
-                                           
+
 
                                             </mat-panel-description>
 
                                         </mat-expansion-panel-header>
 
                                         {{details.description}}
-                                       
 
 
 
-                                        <app-nested-tree class="mattree" [allProjectDetails]="this.allProjectDetails" [loggedInUid]="this.authDetails.displayName"
+
+                                        <app-nested-tree class="mattree" [allProjectDetails]="this.allProjectDetails"
+                                            [loggedInUid]="this.authDetails.displayName"
                                             [userselectedProjectUid]="userselectedProjectUid"
                                             *ngIf="userselectedProject !== undefined && keyRef !== undefined  && details.projectName === userselectedProject "
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>
-                                       
+
 
                                     </mat-expansion-panel>
 
@@ -131,10 +135,10 @@
                         <ng-template mat-tab-label>Private</ng-template>
                         <ng-template matTabContent>
 
-                            <div *ngIf="(privateList| async) as projectDetails; else waitingload " >
+                            <div *ngIf="(privateList| async) as projectDetails; else waitingload ">
                                 <mat-accordion fxLayout="column">
                                     <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
-                                        class="panel" *ngFor="let details of projectDetails" >
+                                        class="panel" *ngFor="let details of projectDetails">
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
                                             (click)="profileKeyRef(details)" style="width:90%; ">
                                             <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
@@ -156,8 +160,8 @@
                                             </mat-panel-title>
                                             <mat-panel-description>
 
-                                                {{details.creationDate.toDate() | date:'dd-mm-yyyy'}}
-                                                
+                                                {{details.creationDate.toDate() | date:'dd-MM-yyyy'}}
+
 
                                             </mat-panel-description>
 
@@ -174,8 +178,8 @@
                                             fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
                                         </app-nested-tree>
 
-                                        
-                                        
+
+
 
 
                                     </mat-expansion-panel>
@@ -239,35 +243,48 @@
             <mat-grid-tile colspan="4" rowspan='1'>
 
 
-
-
-
-                <mat-card fxLayoutAlign="space-between center" (click)="newTaskforUser()" class="newTask">
+                <div *ngIf="this.memberCheck?.membershipType==='Member'" >
+                    <mat-card fxLayoutAlign="center center" (click)="newTaskforMemberUser()" class="newTask">
                    
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Create NewTask
-                </mat-card>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Create NewTask-Member
+                    </mat-card>
 
+                </div>
+                <div *ngIf="this.memberCheck?.membershipType==='Demo'" >
+                    <mat-card fxLayoutAlign="center center" (click)="newTaskforDemoUser()" class="newTask">
+                   
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Create NewTask-Demo
+                    </mat-card>
+
+                </div>
 
 
 
             </mat-grid-tile>
             <mat-grid-tile class="outer" colspan="4" rowspan='7'>
 
-                <div style=  "background: rgb(242, 243, 245);
-                border: 3px solid rgb(242, 243, 245);" *ngIf="profileRef | async as profiledetails ; else landingpage  "
+                <div style="background: rgb(242, 243, 245);
+                border: 3px solid rgb(242, 243, 245);"
+                    *ngIf="profileRef | async as profiledetails ; else landingpage  "
                     fxLayoutAlign="space-between center" fxLayout="column">
-                   
+
 
                     <div style="height:40%;  float:inline-start;  " class="person">
-                        
+
                         <div id="main-card">
-                            
+
                             <div class="cover-photo">
-                                <button mat-raised-button  style="margin-left: 120px; margin-top: 2px;" (click)="likes(profiledetails?.likes)" [disabled] = "btnDisabled"  class="btn btn-counter" >
+                                <button mat-raised-button style="margin-left: 120px; margin-top: 2px;"
+                                    (click)="likes(profiledetails?.likes)" [disabled]="btnDisabled"
+                                    class="btn btn-counter">
                                     <span>&#x2764;</span> <span>Like Me!</span></button>
 
 
@@ -289,22 +306,22 @@
                         </div>
 
                     </div>
-                  
+
                     <ul class="card__info">
-   
+
                         <li>
-                            <span class="card__info__stats"  >{{profiledetails?.numberOfProjects}} </span>
+                            <span class="card__info__stats">{{profiledetails?.numberOfProjects}} </span>
                             <span>posts</span>
                         </li>
                         <li>
                             <span class="card__info__stats">{{profiledetails?.likes}}</span>
-                            <a  class="btn btn-counter" >
-                            <span>&#x2764;</span> <span>Likes</span></a>
+                            <a class="btn btn-counter">
+                                <span>&#x2764;</span> <span>Likes</span></a>
                         </li>
-                      
 
 
-                       
+
+
                     </ul>
 
 
@@ -313,23 +330,24 @@
 
 
                 </div>
-              
+
                 <ng-template #landingpage style="background: white ; ">
 
-                    
 
-                        <div class="inner">
 
-                            <div class="prod-right">
-                                <img src="https://github.com/abhinanduN/codepen/blob/master/human-image.png?raw=true"
-                                    class="prod-human-img" alt="prod" />
-                            </div>
+                    <div class="inner">
 
+                        <div class="prod-right">
+                            <img src="https://github.com/abhinanduN/codepen/blob/master/human-image.png?raw=true"
+                                class="prod-human-img" alt="prod" />
                         </div>
-                  
+
+                    </div>
+
 
                 </ng-template>
             </mat-grid-tile>
+
         </mat-grid-list>
     </mat-sidenav-content>
 </mat-sidenav-container>

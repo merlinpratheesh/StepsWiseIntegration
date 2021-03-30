@@ -90,8 +90,8 @@ export class ToolbarComponent implements OnInit {
               email: myauth.email,
               gender: 'pleaseEnter',
               areaOfinterest: 'pleaseEnter',
-              numberOfProjects: '0',
-              likes:'1',
+              numberOfProjects: '1',
+              likes: '1',
               skills: 'pleaseEnter',
               location: 'pleaseEnter',
               photoUrl: myauth.photoURL
@@ -99,7 +99,7 @@ export class ToolbarComponent implements OnInit {
             this.db.doc<any>('profile/' + myauth.uid).set(newItem);
             this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
             this.profileSuccessValues = this.profileRef;
-           
+
           } else {
             this.profileRef = this.getProfiles((this.db.doc('profile/' + myauth.uid)));
             console.log(this.profileRef);
@@ -134,15 +134,17 @@ export class ToolbarComponent implements OnInit {
   viewProfile() {
 
 
-    this.dialogRef = this.dialog.open(ViewProfileDialog, { data: { mydata: this.profileSuccessValues , NewUid: this.authDetails},      
-    height: '650px',
-    width: '650px', });
+    this.dialogRef = this.dialog.open(ViewProfileDialog, {
+      data: { mydata: this.profileSuccessValues, NewUid: this.authDetails },
+      height: '580px',
+      width: '650px',
+    });
 
     console.log('121', this.profileRef);
 
   }
 
-  helpCenter(){
+  helpCenter() {
     this.router.navigate(['/becomeMember']);
 
   }
@@ -163,7 +165,6 @@ export class ToolbarComponent implements OnInit {
 <div  style="background: white ; height:550px;     border: 3px solid #F2F3F5"
   *ngIf="this.profileRef |async as profiledetails ;"
    fxLayout="column">
-
   <div  style="height:40%;  float:inline-start;  " class="person">
       <div id="main-card">
           <div class="cover-photo">
@@ -192,32 +193,28 @@ export class ToolbarComponent implements OnInit {
          
       </div>
   </div>
-  <div class="">
-      <h2>{{profiledetails?.membershipType}}</h2>
-  </div>
+
   <ul class="card__info">
-      <li>
-          <span class="card__info__stats">{{profiledetails?.numberOfProjects}}</span>
-          <span>posts</span>
-      </li>
-      <li>
-          <span class="card__info__stats">47</span>
-          <span>followers</span>
-      </li>
-      <li>
-          <span class="card__info__stats">20</span>
-          <span>following</span>
-      </li>
+  <li>
+  <span class="card__info__stats"  >{{profiledetails?.numberOfProjects}} </span>
+  <span>posts</span>
+</li>
+<li>
+  <span class="card__info__stats">{{profiledetails?.likes}}</span>
+  <a  class="btn btn-counter" >
+  <span>&#x2764;</span> <span>Likes</span></a>
+</li>
   </ul>
 
-  <br>
+
 
   <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="center center" >
   <button mat-raised-button color="primary" (click)="openBottomSheet()"
   >Edit</button>
   <button mat-raised-button color="primary" (click)="close()"
   >close</button>
-
+  </div>
   </div>
 
 
@@ -401,22 +398,20 @@ export class ViewProfileDialog {
 
   profileRef: any;
   userDetails: any;
-  constructor(public developmentservice: UserdataService, private db: AngularFirestore,private _bottomSheet: MatBottomSheet
-    , public dialogRef: MatDialogRef<ViewProfileDialog>, @Inject(MAT_DIALOG_DATA) public data: any) 
-    
-    {
+  constructor(public developmentservice: UserdataService, private db: AngularFirestore, private _bottomSheet: MatBottomSheet
+    , public dialogRef: MatDialogRef<ViewProfileDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
     console.log(this.data);
 
     console.log(this.data.mydata);
     this.profileRef = this.data.mydata;
-    this.userDetails=this.data.NewUid;
-    
+    this.userDetails = this.data.NewUid;
+
 
   }
 
   openBottomSheet(): void {
 
-    this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef,NewUid: this.userDetails } });
+    this._bottomSheet.open(BottomSheetOverviewExampleSheet, { data: { mydata: this.profileRef, NewUid: this.userDetails } });
   }
 
 
@@ -487,12 +482,12 @@ export class ViewProfileDialog {
 export class BottomSheetOverviewExampleSheet {
 
   names: FormGroup;
-  userDetails:any;
+  userDetails: any;
   constructor(public developmentservice: UserdataService, private db: AngularFirestore, private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
     console.log(this.data);
 
-    this.userDetails=data.NewUid;
+    this.userDetails = data.NewUid;
     console.log(this.userDetails);
 
     console.log('118', this.data.mydata.value);

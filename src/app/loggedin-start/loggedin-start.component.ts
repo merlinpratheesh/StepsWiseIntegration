@@ -73,7 +73,7 @@ export class LoggedinStartComponent implements OnInit {
     location: '',
     membershipType: '',
     photoUrl: '',
-    numberOfProjects: 0,
+    numberOfProjects: 1,
     likes: 1,
     memberCheck: false,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
@@ -173,7 +173,8 @@ export class LoggedinStartComponent implements OnInit {
     if (this.getProfilesSubscription !== undefined) {
       this.getProfilesSubscription.unsubscribe();
     }
-    this.getProfilesSubscription = profileDetails.valueChanges().subscribe((val: any) => {
+    this.getProfilesSubscription = profileDetails.valueChanges().subscribe((val: usrinfoDetails) => {
+      console.log(val);
       if (val === undefined) {
         this.getProfilesBehaviourSub.next(undefined);
       } else {
@@ -237,6 +238,7 @@ export class LoggedinStartComponent implements OnInit {
   userProfileView;
   activeSelector: string;
   valueSelected: any;
+  memberCheck:usrinfoDetails;
 
   btnDisabled = false;
 
@@ -266,6 +268,7 @@ export class LoggedinStartComponent implements OnInit {
           map((val: usrinfoDetails) => {
             if (val !== null && val !== undefined) {
               console.log(val);
+              this.memberCheck=val;
 
               this.navigationExtras.state.uid= myauth.uid;
               this.navigationExtras.state.memberUserCheck=val;
@@ -431,8 +434,6 @@ export class LoggedinStartComponent implements OnInit {
     this.profileRef = this.getProfiles((this.db.doc('profile/' + some.projectUid)));
 
     this.getSectionsSubscription?.unsubscribe();
-
-
     this.keyRef = this.getSections((this.db.doc('projectKey/' + some.projectName)));
     console.log('218', this.keyRef);
 
@@ -483,10 +484,9 @@ export class LoggedinStartComponent implements OnInit {
 
 
 
-  newTaskforUser() {
+  newTaskforMemberUser() {
     console.log(this.optionsTasksPrivate.length);
 
-    if ((this.optionsTasksPrivate)?.length < 1) {
       this.dialogRef = this.dialog.open(AddNewProjectDialog, {
         data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
         height: '50%',
@@ -520,14 +520,52 @@ export class LoggedinStartComponent implements OnInit {
       console.log('121', this.mydata);
 
 
+
+
+
+
+
+  }
+  newTaskforDemoUser() {
+    console.log(this.optionsTasksPrivate.length);
+    if ((this.optionsTasksPrivate)?.length < 1   ) {
+
+      this.dialogRef = this.dialog.open(AddNewProjectDialog, {
+        data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
+        height: '50%',
+        width: '40%',
+      });
+
+      console.log(this.authDetails.uid);
+      console.log(this.optionsTasksPublic);
+
+      const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+
+
+        console.log('390', values);
+        if (values !== undefined) {
+          this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
+            console.log('391', success);
+            if (success === undefined) {
+              const Newmydialog = values;
+              this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
+              return (null);
+            } else {
+              //get data- display/update
+              const mydialog = values;
+              this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+              return (null);
+            }
+          });
+        }
+      })).subscribe((mydata: any) => {
+      });
+      console.log('121', this.mydata);
+
     }
-    else {
-
+    else
+    {
       this.router.navigate(['/becomeMember'], this.navigationExtras);
-
-
-
-
     }
 
 

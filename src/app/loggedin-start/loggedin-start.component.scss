@@ -757,13 +757,13 @@ header{
 
   
 .newTask {
-	position: absolute;
 	display: inline-block;
 	padding: 5px 5px;
 	color: #031bf4;
-  margin-top: -15px;
+  margin-top: -25px;
   font-size: 15px;
 	text-decoration: none;
+  text-align: center;
 	text-transform: uppercase;
 	transition: 0.5s;
 	letter-spacing: 4px;

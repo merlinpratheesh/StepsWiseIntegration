@@ -3,11 +3,11 @@
   <div fxLayout="column" fxLayoutGap="5%"
     style="width: auto; height:auto;overflow-y:auto; margin-left: 0px;margin-top: 0px;">
     <mat-card *ngIf="SectionsReady !== undefined" style="height:auto;width: auto;">
-      <mat-card-header style="padding:5px; border:solid; border-color:black; background-color:#F2F3F5;">
+      <mat-card-header style="padding:5px;   border: 1px solid black; background-color:#F2F3F5;">
         <span style="margin-left:0%;margin-right:5%;">
           <h3>{{latestProject}}</h3>
         </span>
-        <mat-chip-list style="margin-right:30px;">
+     <!--   <mat-chip-list style="margin-right:30px;">
 
           <mat-chip style="margin-right:5px; background-color:#18e92a">
             <button class="button" (click)="NavigateTestcase()" style="color:primary; text-align: center;margin: 0px;"
@@ -16,7 +16,7 @@
               View Tasks
             </button>
           </mat-chip>
-        </mat-chip-list>
+        </mat-chip-list> -->
 
       </mat-card-header>
 
@@ -37,9 +37,9 @@
                 {{node.Name}}
               </span>
            
-         <!--    <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+            <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
               [currentNode]="node" [AlltheKeys]="AlltheKeys"
-              *ngIf="(loggedInUid == userselectedProjectUid  )" ></app-add-node> -->
+              *ngIf="(loggedInUid == userselectedProjectUid  )" ></app-add-node> 
               <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node"></app-edit-node>
               <app-delete-node *ngIf="loggedInUid === userselectedProjectUid"  (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
               
@@ -84,7 +84,7 @@
               <div *ngIf="nestedTreeControl.isExpanded(node)">
                 <ng-container matTreeNodeOutlet></ng-container>
               </div>
-              <div *ngIf="!nestedTreeControl.isExpanded(node)" style="border:none;">
+              <div *ngIf="!nestedTreeControl.isExpanded(node)" style="border: 1px solid black;">
               </div>
             </ul>
           </li>
@@ -96,7 +96,7 @@
   <button (click)="NavigateTestcase()" mat-raised-button color="warn" style="margin:2%;">
     View Tasks
     <mat-icon style="margin-left:5%;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 19h6v-7H3v7zm7 0h12v-7H10v7zM3 5v6h19V5H3z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24"><path d="M3 19h6v-7H3v7zm7 0h12v-7H10v7zM3 5v6h19V5H3z"/></svg>
     </mat-icon>
   </button> 
       <app-add-node  *ngIf="loggedInUid === userselectedProjectUid" [masterdata]="nestedDataSource.data" [isTop]="true" [latestaddProject]="Project"
@@ -137,7 +137,7 @@
     </div>
   </div>
   <div *ngIf="(Sections | async) === undefined">
-    <mat-card  *ngIf="loggedInUid === userselectedProjectUid"  class="list" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+    <mat-card   class="list" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
       <mat-card-content class="empty-label">
         Do You want to Add Default Keys?</mat-card-content>
       <mat-card-actions>

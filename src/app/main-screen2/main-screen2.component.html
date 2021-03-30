@@ -1,9 +1,9 @@
 <mat-sidenav-container fxFlex="100vw">
     <mat-sidenav-content fxLayout="column">
         <mat-toolbar color="primary">
-            <mat-icon style="margin-right:20px;" *ngIf="!drawer.opened" (click)="drawer.toggle()">
+         <!--   <mat-icon style="margin-right:20px;" *ngIf="!drawer.opened" (click)="drawer.toggle()">
                 menu
-            </mat-icon>
+            </mat-icon> -->
             <button style="width: 200px;" mat-raised-button color="warn" (click)="NavigateStart()">
                 <mat-icon class="mr-1">home</mat-icon>
                 Home
@@ -184,7 +184,7 @@
 
         </mat-tab-group>
     </mat-sidenav-content>
-    <mat-sidenav #drawer class="drawer" mode="side" opened="false" (opened)="draweropen()" fxFlex.lt-sm="100vw">
+ <!--    <mat-sidenav #drawer class="drawer" mode="side" opened="false" (opened)="draweropen()" fxFlex.lt-sm="100vw">
         <mat-toolbar class="header" color="warn">
             <div>Task keys Management</div>
             <span fxFlex="grow"></span>
@@ -216,5 +216,5 @@
                 </div>
             </div>
         </div>
-    </mat-sidenav>
+    </mat-sidenav>-->
 </mat-sidenav-container>
