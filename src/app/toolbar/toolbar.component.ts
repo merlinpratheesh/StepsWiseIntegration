@@ -162,19 +162,17 @@ export class ToolbarComponent implements OnInit {
   selector: 'ViewProfileDialog',
   template: `
 
-<div  style="background: white ; height:550px;     border: 3px solid #F2F3F5"
-  *ngIf="this.profileRef |async as profiledetails ;"
-   fxLayout="column">
-  <div  style="height:40%;  float:inline-start;  " class="person">
+<div  style="background: white ;     border: 3px solid #F2F3F5"
+  *ngIf="this.profileRef |async as profiledetails ;">
+  <div class="person">
       <div id="main-card">
           <div class="cover-photo">
-
           </div>
           <div class="photo">
               <img src="{{profiledetails?.photoUrl}}" alt="">
           </div>
           <div fxLayout="row" fxLayoutAlign="space-around center">
-          <mat-card class="content">
+          <div class="content">
               <h4 class="name">ProfileName:{{profiledetails?.profileName}}</h4>
               <h4 class="name">Gender:{{profiledetails?.gender}}</h4>
               <h4 class="card__text">AreaOfinterest:{{profiledetails?.areaOfinterest}}</h4>
@@ -182,8 +180,9 @@ export class ToolbarComponent implements OnInit {
               <h4 class="name">Location:{{profiledetails?.location}}</h4>
               <h6 class="email">   <a href="mailto:{{profiledetails?.email}}">{{profiledetails?.email}}</a>
               </h6>
-              </mat-card>
-              <mat-card class="content"  fxLayout="column" fxLayoutAlign="space-around center">
+              </div>
+             
+              <mat-card  fxLayout="column" fxLayoutAlign="space-around center">
               <h4 class="name">membershipType:{{profiledetails?.membershipType}}</h4>
               <h4 class="name">membershipEnd:{{profiledetails?.membershipEnd}}</h4>
 
@@ -259,20 +258,13 @@ export class ToolbarComponent implements OnInit {
   
   .cover-photo {
     background: rgb(104, 175, 238);
-    width: 600px;
-    height: 100px;
+    width: 597px;
+    height: 50px;
   }
   .email{
     font-size: 16px;
     font-family: Comic Sans MS;
-    padding: 15px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
+
   
   }
   
@@ -298,10 +290,10 @@ export class ToolbarComponent implements OnInit {
   .content {
     background: white;
     font-size: 20px;
-    width: 300px;
-    height: 220px;
+    width: 500px;
+    height: 100px;
     position: relative;
-    top: -35px;
+    top: -40px;
     margin-left:35px;
   }
 
@@ -363,10 +355,9 @@ export class ToolbarComponent implements OnInit {
   .card__info {
     text-align:center;
     margin: 1em 0;
-    margin-top:200px;
     background: white;
     list-style-type: none;
-
+margin-top:55px;
     padding: 0;
   }
   
@@ -472,8 +463,8 @@ export class ViewProfileDialog {
       </div>
       <div class="form-group row">
         <div class="col-sm-4 offset-sm-2">
-          <button type="submit" class="btn btn-primary mr-2" (click)="save()">Save</button>
-          <button type="reset" class="btn btn-outline-primary" (click)="cancel()">Cancel</button>
+          <button  mat-raised-button  (click)="save()">Save</button>
+          <button  mat-raised-button    (click)="cancel()">Cancel</button>
         </div>
       </div>
     </form>
