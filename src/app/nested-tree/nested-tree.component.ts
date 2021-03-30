@@ -217,12 +217,6 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
         this.navigationExtras.state.uidDetails = this.loggedInUid;
         this.navigationExtras.state.userselectedProjectUid = this.userselectedProjectUid;
 
-
-        console.log(this.navigationExtras.state.userselectedProjectUid);
-
-
-        console.log(this.navigationExtras.state.uidDetails);
-
         this.nestedDataSource.data = [{
           Id: 1,
           Name: 'John Heart ',
@@ -320,7 +314,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   }
   CreateDefaultKeys() {
     const MainSection = [{
-      name: 'MainSection',
+      name: 'Introduction',
       disabled: false,
       section: [{
         viewvalue: 'SubSection'
