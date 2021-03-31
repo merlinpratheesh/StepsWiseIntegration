@@ -243,7 +243,7 @@
             <mat-grid-tile colspan="4" rowspan='1'>
 
 
-                <div *ngIf="this.memberCheck?.membershipType==='Member'" >
+                <div *ngIf="this.memberCheck?.membershipType==='Member'"  >
                     <mat-card fxLayoutAlign="center center" (click)="newTaskforMemberUser()" class="newTask">
                    
                         <span></span>
@@ -254,7 +254,7 @@
                     </mat-card>
 
                 </div>
-                <div *ngIf="this.memberCheck?.membershipType==='Demo'" >
+                <div *ngIf="this.memberCheck?.membershipType==='Demo' ">
                     <mat-card fxLayoutAlign="center center" (click)="newTaskforDemoUser()" class="newTask">
                    
                         <span></span>

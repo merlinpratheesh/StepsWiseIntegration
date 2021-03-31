@@ -90,7 +90,7 @@ export class ToolbarComponent implements OnInit {
               email: myauth.email,
               gender: 'pleaseEnter',
               areaOfinterest: 'pleaseEnter',
-              numberOfProjects: '1',
+              numberOfProjects: '0',
               likes: '1',
               skills: 'pleaseEnter',
               location: 'pleaseEnter',

@@ -135,6 +135,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
           });
         }
       });
+      console.log()
       this.developmentservice.updateSubSection(this.latestProject, fatherElement[0].Name, nodeToBeEdited.currentNode.Name, this.AlltheKeys);
 
     } else {
@@ -317,7 +318,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       name: 'Introduction',
       disabled: false,
       section: [{
-        viewvalue: 'SubSection'
+        viewvalue: 'About'
       }]
     }];
     //delete the default testCase if any
@@ -325,11 +326,13 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
     this.db.doc<any>('projectKey/' + this.latestProject).set({ MainSection }, { merge: false });
 
     const process = [{
-      viewvalue: 'Drag and Drop',
+      viewvalue: 'Start',
       disabled: true,
+    },{
+      viewvalue: 'About'
     }]
     const done = [{
-      viewvalue: 'Drag and Drop',
+      viewvalue: 'End',
       disabled: true,
     }]
 
@@ -368,7 +371,7 @@ alert("no testcases")
       //locationForDelete = this.projectName + '/' + userselection.groupValue + '/items/' + userselection.value;
 
       this.developmentservice.deleteprojectNew(this.loggedInUid, userselection).then(success => {});
-      
+
     }
 
   }

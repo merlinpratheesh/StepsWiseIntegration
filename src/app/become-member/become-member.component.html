@@ -79,6 +79,6 @@
     [paymentAuthorizedCallback]="onPaymentDataAuthorized"
   >
   </google-pay-button>
-  <button mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
+  <button  *ngIf="this.memberUserCheck?.membershipType === 'Demo'" mat-raised-button color="accent" (click)="NewMember()">Become Member</button>
 
 </div>

@@ -386,10 +386,7 @@ export class UserdataService {
       const promise = Promise.all([
         this.db.doc('/projectKey/' + ProjectName).set({ MainSection }, { merge: false })
       ]);
-      
     
-      
-
       return promise;
     });
   }
@@ -427,8 +424,8 @@ export class UserdataService {
   }
   async updateSubSection(ProjectName: string, MainSectionName: string, SubSectionName: string, MainSection: any): Promise<void> {
     await this.db.firestore.runTransaction(() => {
+      console.log(MainSection);
       const promise = Promise.all([
-        this.db.doc(ProjectName + '/' + MainSectionName + '/items/' + SubSectionName + '/').delete(),
         this.db.doc('projectKey/' + ProjectName).set({ MainSection }),
       ]);
       return promise;

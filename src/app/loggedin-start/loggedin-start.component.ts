@@ -73,7 +73,7 @@ export class LoggedinStartComponent implements OnInit {
     location: '',
     membershipType: '',
     photoUrl: '',
-    numberOfProjects: 1,
+    numberOfProjects: 0,
     likes: 1,
     memberCheck: false,
     membershipEnd: firebase.firestore.Timestamp.fromDate(new Date())
@@ -526,7 +526,7 @@ export class LoggedinStartComponent implements OnInit {
   }
   newTaskforDemoUser() {
     console.log(this.optionsTasksPrivate.length);
-    if ((this.optionsTasksPrivate)?.length < 1   ) {
+    if ((this.optionsTasksPrivate)?.length < 1 && this.memberCheck?.numberOfProjects<1   ) {
 
       this.dialogRef = this.dialog.open(AddNewProjectDialog, {
         data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
