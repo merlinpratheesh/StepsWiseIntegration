@@ -422,53 +422,131 @@ export class ViewProfileDialog {
 @Component({
   selector: 'bottom-sheet-overview-example-sheet',
   template: `
-  <h2 class="py-4">HI {{ this.userDetails.displayName }}</h2>
-    <h2 class="py-4">Edit Profile</h2>
-    <form [formGroup]="names">
-      <div class="form-group row">
-        <label for="brand" class="col-sm-2 col-form-label">profileName</label>
-        <div class="col-sm-6">
+  <div class="container">
+  <h2 class="title">HI {{ this.userDetails.displayName }}</h2>
+    <h2 class="title">Edit Profile</h2>
+    <form  class="user-details" [formGroup]="names">
+      <div class="input-box">
+        <label class="details">profileName</label>
           <input type="text" class="form-control"  formControlName="profileName">
-        </div>
       </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">email</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="email">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">gender</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="gender">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">areaOfinterest</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="areaOfinterest">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">skills</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control" formControlName="skills">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="model" class="col-sm-2 col-form-label">location</label>
-        <div class="col-sm-6">
-          <input type="text" class="form-control"  formControlName="location">
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-4 offset-sm-2">
-          <button  mat-raised-button  (click)="save()">Save</button>
-          <button  mat-raised-button    (click)="cancel()">Cancel</button>
-        </div>
-      </div>
+      <div class="input-box">
+      <label class="details">Email</label>
+        <input type="text" class="form-control"  formControlName="email">
+    </div>
+    <div class="input-box">
+    <label class="details">Gender</label>
+      <input type="text" class="form-control"  formControlName="gender">
+  </div>
+
+  <div class="input-box">
+  <label class="details">areaOfinterest</label>
+    <input type="text" class="form-control"  formControlName="areaOfinterest">
+</div>
+
+<div class="input-box">
+<label class="details">skills</label>
+  <input type="text" class="form-control"  formControlName="skills">
+</div>
+<div class="input-box">
+<label class="details">location</label>
+  <input type="text" class="form-control"  formControlName="location">
+</div>
+
+
+<div >
+<button  mat-raised-button  (click)="save()">Save</button>
+<button  mat-raised-button    (click)="cancel()">Cancel</button>
+</div>
     </form>
-  `
+    </div>
+  `,
+  styles: [`
+  
+  .container {
+    width: 600px;
+    height:600px;
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 5px;
+  }
+  
+  .title {
+    font-size: 25px;
+    font-weight: 300;
+    position: relative;
+  }
+  
+  .input-box {
+    margin-bottom: 15px;
+    width: calc(100% / 2-20px);
+  }
+  
+  .container .title::before {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, #86e3ce, #d0e6a5);
+    left: 0;
+    bottom: 0;
+  }
+  
+   .user-details {
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+  }
+  
+  .input-box {
+    margin-bottom: 15px;
+    width: calc(100% / 2-20px);
+  }
+  
+  .user-details .input-box .details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+  
+  .user-details .input-box input {
+    height: 45px;
+    width: 250px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #aa1313;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+  .button {
+    height: 45px;
+    margin: 45px 0;
+  }
+  
+  .button input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #86e3ce, #d0e6a5);
+  }
+  
+  .button input:hover {
+    background: linear-gradient(-135deg, #86e3ce, #d0e6a5);
+  }
+  
+  
+  
+  `]
 })
 export class BottomSheetOverviewExampleSheet {
 
