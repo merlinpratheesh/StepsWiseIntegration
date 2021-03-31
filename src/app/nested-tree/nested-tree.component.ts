@@ -4,7 +4,7 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { of as observableOf } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
-import { UserdataService, MainSectionGroup, projectDetails } from '../service/userdata.service';
+import { UserdataService, MainSectionGroup, projectDetails, TestcaseInfo } from '../service/userdata.service';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { NavigationExtras } from '@angular/router';
@@ -333,8 +333,8 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       disabled: true,
     }]
 
-    this.db.doc<any>('taskStatus/' + this.latestProject).set({ process }, { merge: false });
-    this.db.doc<any>('/taskStatus/' + this.latestProject + '/doneList/' + this.userselectedProjectUid).set({ done }, { merge: false });
+    this.db.doc<any>('taskStatusProcess/' + this.latestProject).set({ process }, { merge: false });
+    this.db.doc<any>('/taskStatusDone/' + this.latestProject ).set({ done }, { merge: false });
 
 
 
@@ -353,11 +353,22 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
 
       const userselection = this.allProjectDetails;
       console.log(userselection);
+      
+      this.developmentservice.testCasefindOrCreate(this.latestProject).then((success: any) => {
+        console.log('391', success);
+        if (success === undefined) {
+alert("no testcases")
+          return (null);
+        } else {
+          alert(" testcases Available")
+          return (null);
+        }
+      });
 
       //locationForDelete = this.projectName + '/' + userselection.groupValue + '/items/' + userselection.value;
 
-      this.developmentservice.deleteprojectNew(this.loggedInUid, userselection).then(success => {
-      });
+      this.developmentservice.deleteprojectNew(this.loggedInUid, userselection).then(success => {});
+      
     }
 
   }

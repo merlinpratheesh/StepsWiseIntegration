@@ -206,22 +206,37 @@ export class UserdataService {
     }
   }
 
+  testCaseExists(latestProject: string): any {
+    return this.db.doc('testcase/' + latestProject).valueChanges().pipe(first()).toPromise();
+  }
+
+  async testCasefindOrCreate(latestProject: string): Promise<any> {
+    console.log(latestProject);
+    const project:any = await this.testCaseExists(latestProject);
+    console.log('110 returned', project);
+
+    if (project) {
+      console.log('110', latestProject);
+      return project;
+    } else {
+      return undefined;
+    }
+  }
+
+
  
 
 
 
   async updatedProcessDone(updatedProcess, updatedDone, projectName: string,userselectedProjectUid ): Promise<void> {
-    console.log(updatedProcess);
-    console.log(updatedDone);
 
-    
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
 
-        this.db.firestore.doc('taskStatus/' + projectName).set(
-          { process: firebase.firestore.FieldValue.arrayUnion(...updatedProcess) }),
+        this.db.firestore.doc('taskStatusProcess/' + projectName).set(
+          { process: firebase.firestore.FieldValue.arrayUnion(...updatedProcess)  }, ),
 
-        this.db.firestore.doc('/taskStatus/'+ projectName + '/doneList/' + userselectedProjectUid).set(
+        this.db.firestore.doc('/taskStatusDone/'+ projectName).set(
           { done: firebase.firestore.FieldValue.arrayUnion(...updatedDone) })
 
       ]);
@@ -349,7 +364,9 @@ export class UserdataService {
   async deleteprojectNew(loggedInUid, userselection:projectDetails): Promise<void> {
     await this.db.firestore.doc('/projectList/publicProject').update({ public: firebase.firestore.FieldValue.arrayRemove(userselection) });
     await this.db.firestore.doc('/projectList/' + loggedInUid).update({ private: firebase.firestore.FieldValue.arrayRemove(userselection) });
-    await this.db.firestore.doc('projectKey/' + userselection.projectName).delete()
+    await this.db.firestore.doc('projectKey/' + userselection.projectName).delete();
+    await this.db.firestore.doc('taskStatusProcess/' + userselection.projectName).delete();
+    await this.db.firestore.doc('taskStatusDone/' + userselection.projectName).delete();
 
 
 
@@ -388,12 +405,11 @@ export class UserdataService {
     console.log('195', MainSectionName);
     console.log('195', SubSectionName);
 
-
     await this.db.firestore.runTransaction(() => {
       const promise = Promise.all([
         this.db.doc('projectKey/' + ProjectName).set({ MainSection }, { merge: false }),
        
-       this.db.firestore.doc('taskStatus/' + ProjectName).update(
+       this.db.firestore.doc('taskStatusProcess/' + ProjectName).update(
         { process: firebase.firestore.FieldValue.arrayUnion(...process) }),
 
       ]);

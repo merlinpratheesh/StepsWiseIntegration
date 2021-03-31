@@ -9,7 +9,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import firebase from 'firebase/app';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 
 
@@ -132,7 +132,6 @@ export class MainScreen2Component {
       this.getProcessSubscription.unsubscribe();
     }
     this.getProcessSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
-      console.log(val);
       if (val === undefined) {
         this.getProcessBehaviourSub.next(undefined);
       } else {
@@ -186,6 +185,7 @@ export class MainScreen2Component {
   removeDone: any
   updatedProcess: any;
   updatedDone: any;
+
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore,
@@ -215,8 +215,8 @@ export class MainScreen2Component {
     }
 
 
-    this.Process= this.getProcess(this.db.doc('/taskStatus/' + this.projectName ));
-    this.Done= this.getDone(this.db.doc('/taskStatus/' + this.projectName  +'/doneList/' + this.userselectedProjectUid));
+    this.Process= this.getProcess(this.db.doc('/taskStatusProcess/' + this.projectName ));
+    this.Done= this.getDone(this.db.doc('/taskStatusDone/' + this.projectName));
 
 
 console.log(this.Process);
@@ -352,6 +352,16 @@ console.log(this.Done);
     this.myprojectControls.testcaseInfoControl.setValue(`${item.description}`)
 
   }
+  evenPredicate(item: CdkDrag<any>) {
+    return item.data  === 0;
+  }
+
+  /** Predicate function that doesn't allow items to be dropped into a list. */
+  noReturnPredicate() {
+    return false;
+  }
+
+
   
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -370,10 +380,17 @@ console.log('if');
 
                         this.updatedProcess=event.previousContainer.data
                         this.updatedDone=event.container.data;
+
                    
     }
     console.log(this.updatedProcess);
     console.log(this.updatedDone);
+    console.log(event.previousIndex);
+    console.log(event.currentIndex);
+
+    
+
+
 
 
 
@@ -382,10 +399,9 @@ console.log('if');
   saveDone(some)
   {
 
-    this.developmentservice.updatedProcessDone(this.updatedProcess,this.updatedDone,this.projectName, this.userselectedProjectUid);
+      this.developmentservice.updatedProcessDone(this.updatedProcess,this.updatedDone,this.projectName, this.userselectedProjectUid);
 
-    console.log(this.updatedProcess);
-    console.log(this.updatedDone);
+    
 
   }
 

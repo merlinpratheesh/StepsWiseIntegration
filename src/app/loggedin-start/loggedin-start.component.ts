@@ -288,7 +288,6 @@ export class LoggedinStartComponent implements OnInit {
                     this.optionsTasksPrivate.push(element.projectName);
                   });
                   this.optionsTasksNamesBkPrivate = this.optionsTasksPrivate;
-                  console.log(this.optionsTasksPrivate);
       
       
                 }
@@ -336,7 +335,6 @@ export class LoggedinStartComponent implements OnInit {
                     this.optionsTasksPublic.push(element.projectName);
                   });
                   this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
-                  console.log(this.optionsTasksPublic);
                 }
       
               });

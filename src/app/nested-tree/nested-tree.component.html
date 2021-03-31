@@ -35,9 +35,9 @@
                 {{node.Name}}
               </span>
            
-            <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
-              [currentNode]="node" [AlltheKeys]="AlltheKeys"
-              *ngIf="(loggedInUid == userselectedProjectUid  )" ></app-add-node> 
+           <app-add-node  [masterdata]="nestedDataSource.data" [isTop]="false" [latestaddProject]="Project"
+              [currentNode]="node" [AlltheKeys]="AlltheKeys" *ngIf="!(node.Description === 'Child' && node.Children.length === 0)"
+               ></app-add-node> 
               <app-edit-node *ngIf="loggedInUid === userselectedProjectUid"   (edittedNode)="editNode($event)" [masterdata]="nestedDataSource.data" [currentNode]="node"></app-edit-node>
               <app-delete-node *ngIf="loggedInUid === userselectedProjectUid"  (deletedNode)="deleteNode($event)" [currentNode]="node"></app-delete-node>
               
@@ -99,9 +99,6 @@
   </button> 
       <app-add-node  *ngIf="loggedInUid === userselectedProjectUid" [masterdata]="nestedDataSource.data" [isTop]="true" [latestaddProject]="Project"
         [currentNode]="node" [AlltheKeys]="AlltheKeys" [uid]="loggedInUid"></app-add-node>
-
-        
-
       <button  *ngIf="loggedInUid === userselectedProjectUid" mat-raised-button color="warn" (click)="openBottomSheet()" style="margin:2%;">
 
         Change Order<mat-icon style="margin-left:5%;">

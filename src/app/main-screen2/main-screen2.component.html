@@ -122,8 +122,10 @@
                             <div class=" example-container">
                                 <h3>InProcess</h3>
                                 <div cdkDropList [cdkDropListData]="ProcessList" class="example-list"
-                                    (cdkDropListDropped)="drop($event)">
-                                    <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of ProcessList " cdkDrag>
+                                    (cdkDropListDropped)="drop($event)"
+                                    [cdkDropListEnterPredicate]="evenPredicate">
+                                    
+                                    <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of ProcessList " cdkDrag >
                                         {{item.viewvalue}}
                                     </div>
                                 </div>
@@ -132,7 +134,8 @@
 
                         <div *ngIf="(this.Done |async ) as DoneList; else DoneListnotReady">
 
-                            <div class="example-container">
+                            <div class="example-container"
+                            [cdkDropListEnterPredicate]="noReturnPredicate">
                                 <h3>Done</h3>
                                 <div cdkDropList [cdkDropListData]="DoneList" class="example-list"
                                     (cdkDropListDropped)="drop($event)">
