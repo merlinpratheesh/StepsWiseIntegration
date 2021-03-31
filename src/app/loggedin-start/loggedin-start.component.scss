@@ -461,11 +461,11 @@
 
 .imageHeader{
   position: relative;
-  margin-left: 0%;
-  margin-top: 35px;
+  margin-left: 2px;
   font-size: 20px;
-  height: 150px;
-  width: 300px;
+  height: 180px;
+  width: 220px;
+  margin-top: 80px;
   color: rgba(0,0,0,0);
   font-weight: lighter;
   border-radius: 20px;
@@ -478,10 +478,10 @@ font-family: 'IBM Plex Sans Condensed', sans-serif;
 */
 
 .card{
-  height: 250px;
-  width: 290px;
+  height: 200px;
+  width: 270px;
   display: grid;
-  margin-top:5px;
+  margin-top:25px;
   margin-left:5px;
   background-color: white;
   grid-template-columns: .2fr 1fr;
