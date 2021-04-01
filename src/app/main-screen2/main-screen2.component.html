@@ -30,7 +30,7 @@
                     <div fxLayout="row wrap" fxLayoutAlign="space-around center">
                         <div fxLayout="column" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;"
                             fxLayoutGap="10px">
-                            <h4>{{projectName}}</h4>
+                            <h2>{{projectName}}</h2>
                             <mat-form-field appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
                                 <mat-label>Please Select Section Here</mat-label>
                                 <mat-select (openedChange)="loadTc($event)"
@@ -80,8 +80,14 @@
                             <mat-form-field appearance="fill">
                                 <mat-label>{{myprojectVariables.viewSelectedTestcase?.subHeading}}</mat-label>
                                 <mat-label *ngIf="myprojectVariables.viewSelectedTestcase === undefined"
-                                    style="font-size: 24px;">
-                                    Select Task Now!
+                                    style="font-size: 20px;">
+                                    
+                                    Hi ,For Create Testcase Choose Tasks From Add/Edit/Delete-Private <br>
+                                    Tasks&TestCases Tab .<br>
+                                    Step1:Select Section<br>
+                                    Step2:Click Add. Give Name For Testcase and save.<br>
+                                    Step3:Click on Created matcard for  Edit and Update.<br>
+                                    Step4:Click on Red Card for visit updated link.
                                 </mat-label>
                                 <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="15" cdkAutosizeMaxRows="50"
                                     fxFlex="grow" style="overflow-x: hidden;"
@@ -121,6 +127,7 @@
                         <div *ngIf="(this.Process |async ) as ProcessList; else ProcessListnotReady">
                             <div class=" example-container">
                                 <h3>InProcess</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
                                 <div cdkDropList [cdkDropListData]="ProcessList" class="example-list"
                                     (cdkDropListDropped)="drop($event)"
                                     [cdkDropListEnterPredicate]="evenPredicate">
@@ -137,6 +144,7 @@
                             <div class="example-container"
                             [cdkDropListEnterPredicate]="noReturnPredicate">
                                 <h3>Done</h3>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
                                 <div cdkDropList [cdkDropListData]="DoneList" class="example-list"
                                     (cdkDropListDropped)="drop($event)">
                                     <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of DoneList" cdkDrag>{{item.viewvalue}}

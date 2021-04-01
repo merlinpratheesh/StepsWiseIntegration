@@ -225,8 +225,7 @@ export class StarttestComponent implements OnInit, OnDestroy {
           });
           console.log(this.optionsTasks);
           this.optionsTasksNamesBk = this.optionsTasks;
-          console.log(this.optionsTasks);
-          console.log(this.optionsTasksNamesBk);
+
 
         });
 

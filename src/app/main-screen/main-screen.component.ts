@@ -8,6 +8,7 @@ import { map, startWith, withLatestFrom } from 'rxjs/operators';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
+import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 
 
@@ -103,6 +104,52 @@ export class MainScreenComponent {
 
     return this.getTestcasesBehaviourSub;
   };
+  Process;
+  getProcessSubscription: Subscription;
+  getProcessBehaviourSub = new BehaviorSubject(undefined);
+  getProcess = (MainAndSubSectionkeys: AngularFirestoreDocument<any>) => {
+    if (this.getProcessSubscription !== undefined) {
+      this.getProcessSubscription.unsubscribe();
+    }
+    this.getProcessSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+      if (val === undefined) {
+        this.getProcessBehaviourSub.next(undefined);
+      } else {
+        if (val.process?.length === 0) {
+          this.getProcessBehaviourSub.next(null);
+        } else {
+          if (val.process?.length !== 0) {
+            this.getProcessBehaviourSub.next(val.process);
+          }
+        }
+      }
+    });
+    return this.getProcessBehaviourSub;
+  };
+  Done;
+  getDoneSubscription: Subscription;
+  getDoneBehaviourSub = new BehaviorSubject(undefined);
+  getDone = (MainAndSubSectionkeys: AngularFirestoreDocument<any>) => {
+    if (this.getDoneSubscription !== undefined) {
+      this.getDoneSubscription.unsubscribe();
+    }
+    this.getDoneSubscription = MainAndSubSectionkeys.valueChanges().subscribe((val: any) => {
+      console.log(val);
+
+      if (val === undefined) {
+        this.getDoneBehaviourSub.next(undefined);
+      } else {
+        if (val.done?.length === 0) {
+          this.getDoneBehaviourSub.next(null);
+        } else {
+          if (val.done?.length !== 0) {
+            this.getDoneBehaviourSub.next(val.done);
+          }
+        }
+      }
+    });
+    return this.getDoneBehaviourSub;
+  };
   Sections;
   getSectionsSubscription: Subscription;
   getSectionsBehaviourSub = new BehaviorSubject(undefined);
@@ -158,6 +205,8 @@ export class MainScreenComponent {
       console.log(this.userselectedProjectUid);
 
     }
+    this.Process= this.getProcess(this.db.doc('/taskStatusProcess/' + this.projectName ));
+    this.Done= this.getDone(this.db.doc('/taskStatusDone/' + this.projectName));
     
   }
 
@@ -200,6 +249,40 @@ export class MainScreenComponent {
     this.myprojectVariables.viewSelectedTestcase = item;//`${item.subHeading}`;
     this.myprojectControls.testcaseInfoControl.setValue(`${item.description}`)
     this.myprojectFlags.showEditTcButton = true;
+
+  }
+  evenPredicate(item: CdkDrag<any>) {
+    return item.data  === 0;
+  }
+
+  /** Predicate function that doesn't allow items to be dropped into a list. */
+  noReturnPredicate() {
+    return false;
+  }
+
+
+  
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log(event.previousContainer);
+      console.log(event.container);
+
+console.log('if');
+
+    } else {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+                        console.log('else');
+
+
+
+                   
+    }
+
+  
 
   }
 }

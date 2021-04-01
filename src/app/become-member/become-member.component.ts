@@ -43,7 +43,13 @@ export class BecomeMemberComponent implements OnInit {
 
 
 NavigateStart(){
+  console.log(this.uid);
+if(this.uid===null || this.uid===undefined ){
+  this.router.navigate(['/starttest']);
+}else{
   this.router.navigate(['/loggedin']);
+
+}
 
   }
 

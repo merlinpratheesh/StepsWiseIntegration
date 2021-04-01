@@ -208,15 +208,22 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
   }
   initialize() {
     if (this.Sections !== undefined) {
+console.log(this.Sections);
 
-      this.Sections.pipe(filter(myobj => myobj !== undefined), map((data: any) => {
+this.Project = this.latestProject;
+this.navigationExtras.state.selectedProject = this.latestProject;
+this.navigationExtras.state.uidDetails = this.loggedInUid;
+this.navigationExtras.state.userselectedProjectUid = this.userselectedProjectUid;
+
+console.log(this.Project);
+console.log(this.latestProject);
+if(this.Project=this.latestProject){
+
+  this.Sections.pipe(filter(myobj => myobj !== undefined),map((data: any) => {
         console.log(data);
-
-        this.Project = this.latestProject;
-        this.navigationExtras.state.selectedProject = this.latestProject;
         this.navigationExtras.state.mainSubSectionRef = data;
-        this.navigationExtras.state.uidDetails = this.loggedInUid;
-        this.navigationExtras.state.userselectedProjectUid = this.userselectedProjectUid;
+
+
 
         this.nestedDataSource.data = [{
           Id: 1,
@@ -260,6 +267,7 @@ export class NestedTreeComponent implements OnInit, AfterViewInit {
       });
     }
   }
+}
   ngAfterViewInit() {
     this.initialize();
   }
@@ -718,3 +726,4 @@ export class BottomSheetChangeOrder implements AfterViewInit {
   }
 
 }
+

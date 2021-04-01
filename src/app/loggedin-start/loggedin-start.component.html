@@ -129,7 +129,7 @@
 
                     </mat-tab>
                     <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
-                        <ng-template mat-tab-label>Private</ng-template>
+                        <ng-template mat-tab-label>Add/Edit/Delete-Private Tasks&TestCases</ng-template>
                         <ng-template matTabContent>
 
                             <div *ngIf="(privateList| async) as projectDetails; else waitingload ">
