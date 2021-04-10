@@ -1,6 +1,7 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav fxShow.sm="false" #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
-        [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom" fxFlex.lt-sm="100vw">
+    <mat-sidenav  #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
+        [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom" #drawer fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
 
@@ -61,7 +62,7 @@
 
 
 
-            <mat-grid-tile colspan="6" rowspan='9' style="background:rgb(242, 243, 245);" fxFlex.lt-sm="100vw">
+            <mat-grid-tile  colspan="6" rowspan='9' style="background:rgb(242, 243, 245);" fxFlex.lt-sm="100vw">
 
 
                 <mat-tab-group style="  color:tomato ;background: rgb(242, 243, 245); height: 100%;margin-left: 15px; margin-right: 15px; " fxFlex="grow">

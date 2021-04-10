@@ -23,6 +23,11 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -44,6 +49,9 @@ export class StarttestComponent implements OnInit, OnDestroy {
   customCollapsedHeight: string = '50px';
 
 
+  public isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map((result: BreakpointState) => result.matches));
 
   myusrinfoDetails: usrinfoDetails = {
     projectName: '',
@@ -167,6 +175,7 @@ export class StarttestComponent implements OnInit, OnDestroy {
   activeSelector: string;
   showSelected: boolean;
   userselectedProjectUid: any;
+  
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
     public fb: FormBuilder,
@@ -176,7 +185,8 @@ export class StarttestComponent implements OnInit, OnDestroy {
     private db: AngularFirestore,
     private _bottomSheet: MatBottomSheet,
     private changeDetectorRef: ChangeDetectorRef,
-    private resolver: ComponentFactoryResolver
+    private resolver: ComponentFactoryResolver,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.showSelected = false;
 
@@ -203,7 +213,7 @@ export class StarttestComponent implements OnInit, OnDestroy {
           this.changeDetectorRef.detectChanges();
           this.firstProject = { firstProjectRef: this.optionsTasksBk[0] };
           console.log(this.firstProject);
-          if (this.firstProject != null) {
+          if (this.firstProject != null && this.firstProject != undefined ) {
             //this.userselectedProject=this.firstProject.firstProjectRef.projectName;
 
             console.log(this.userselectedProject);
