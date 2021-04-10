@@ -3,12 +3,12 @@
     "verifytesttool": {
       "hosting": {
         "Goldenfile": [
-          "projectdevelopmenttool"
+          "taskmanagementproject"
         ]
       }
     }
   },
   "projects": {
-    "default": "projectdevelopmenttool"
+    "default": "taskmanagementproject"
   }
 }

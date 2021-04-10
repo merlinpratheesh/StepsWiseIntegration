@@ -1,6 +1,6 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
-        [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
+        [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom" fxFlex="30vw" fxFlex.lt-sm="100vw" style="height:100vh;">
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
 
@@ -52,7 +52,7 @@
         <app-toolbar class="example-header"></app-toolbar>
 
         <mat-grid-list cols="10" rowHeight="10vh">
-            <mat-grid-tile colspan="6" rowspan='9' style="background: rgb(242, 243, 245) ;">
+            <mat-grid-tile colspan="6" rowspan='9' style="background: rgb(242, 243, 245) ;" fxFlex="30vw" fxFlex.lt-sm="100vw" style="height:100vh;">
 
 
                 <mat-tab-group
@@ -204,7 +204,7 @@
 
 
             <mat-grid-tile colspan="4" rowspan='1'>
-                <div style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill cdkScrollable>
+                <div style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill cdkScrollable fxFlex="30vw" fxFlex.lt-sm="100vw" style="height:100vh;">
                     <div (click)="openSearch()" style="padding: 0 5px; ">
 
                         <div [class.active]="toggleSearch">
