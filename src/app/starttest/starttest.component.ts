@@ -23,11 +23,7 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState,
-} from '@angular/cdk/layout';
+
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -48,10 +44,6 @@ export class StarttestComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<projectDetails>;
   customCollapsedHeight: string = '50px';
 
-
-  public isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(map((result: BreakpointState) => result.matches));
 
   myusrinfoDetails: usrinfoDetails = {
     projectName: '',
@@ -186,7 +178,6 @@ export class StarttestComponent implements OnInit, OnDestroy {
     private _bottomSheet: MatBottomSheet,
     private changeDetectorRef: ChangeDetectorRef,
     private resolver: ComponentFactoryResolver,
-    private breakpointObserver: BreakpointObserver
   ) {
     this.showSelected = false;
 

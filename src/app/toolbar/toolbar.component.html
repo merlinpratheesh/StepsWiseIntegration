@@ -1,4 +1,4 @@
-<mat-toolbar fxflex="grow" style="background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);"
+<mat-toolbar   fxflex="grow" style="background: #bddbfa linear-gradient(to bottom, #bddbfa 5%, #80b5ea 100%);"
     fxLayout="fxFlex" fxflexalign="center">
 
     <img src="https://freeiconshop.com/wp-content/uploads/edd/task-done-flat.png" class="header">
@@ -7,12 +7,12 @@
     <button mat-raised-button color="accent" fxFlexOffset="1%" fxFlex="100px">StepsWise</button>
     </span>
 
-    <span fxFlex="grow">
+    <span fxShow="true" fxHide.lt-md  fxFlex="grow">
     <button  [fxShow]= "this.authDetails  !== null && this.authDetails  !== undefined"   (click)="viewProfile()"  style="margin-left: 20px; width:100px ; text-align:justify;"  mat-raised-button>MyProfile</button>
     <button [fxShow]= "this.authDetails == null && this.authDetails== undefined"   style="margin-left: 20px; width:100px ; text-align:justify;" (click)="helpCenter()"  mat-raised-button>HelpCenter</button>
     </span>
     <span fxFlex="grow">
-    <ul fxLayout="rowrap" class="symbols">
+    <ul fxShow="true" fxHide.lt-md fxLayout="rowrap" class="symbols">
 
 
         <!--  <li>

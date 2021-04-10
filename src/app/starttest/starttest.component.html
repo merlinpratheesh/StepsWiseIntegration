@@ -1,7 +1,6 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav  #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
-        [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom" #drawer fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-sidenav fxShow="true" fxHide.lt-md   #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
+        [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom" >
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
 
