@@ -1,13 +1,4 @@
 {
-  "targets": {
-    "verifytesttool": {
-      "hosting": {
-        "Goldenfile": [
-          "taskmanagementproject"
-        ]
-      }
-    }
-  },
   "projects": {
     "default": "taskmanagementproject"
   }

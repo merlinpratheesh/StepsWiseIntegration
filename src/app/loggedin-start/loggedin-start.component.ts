@@ -25,7 +25,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {MediaObserver,MediaChange} from '@angular/flex-layout'
+import { MediaObserver, MediaChange } from '@angular/flex-layout'
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -51,7 +51,7 @@ export class LoggedinStartComponent implements OnInit {
   navigationExtras: NavigationExtras = {
     state: {
       uid: '',
-      memberUserCheck:''
+      memberUserCheck: ''
     }
   };
 
@@ -239,7 +239,7 @@ export class LoggedinStartComponent implements OnInit {
   userProfileView;
   activeSelector: string;
   valueSelected: any;
-  memberCheck:usrinfoDetails;
+  memberCheck: usrinfoDetails;
 
   btnDisabled = false;
   mediaSub: Subscription;
@@ -254,8 +254,8 @@ export class LoggedinStartComponent implements OnInit {
     private db: AngularFirestore,
     private changeDetectorRef: ChangeDetectorRef,
     private _bottomSheet: MatBottomSheet,
-    public mediaObserver:MediaObserver
-    ) {
+    public mediaObserver: MediaObserver
+  ) {
     this.showSelected = false;
 
 
@@ -273,10 +273,10 @@ export class LoggedinStartComponent implements OnInit {
           map((val: usrinfoDetails) => {
             if (val !== null && val !== undefined) {
               console.log(val);
-              this.memberCheck=val;
+              this.memberCheck = val;
 
-              this.navigationExtras.state.uid= myauth.uid;
-              this.navigationExtras.state.memberUserCheck=val;
+              this.navigationExtras.state.uid = myauth.uid;
+              this.navigationExtras.state.memberUserCheck = val;
 
 
               this.optionsTasksSubPrivate = docData(this.db.firestore.doc('projectList/' + this.authDetails.uid)).subscribe((readrec: any) => {
@@ -284,29 +284,29 @@ export class LoggedinStartComponent implements OnInit {
                 this.optionsTasksBkPrivate = readrec.private;
                 console.log('280', this.optionsTasksBkPrivate, readrec.private);
                 if (this.optionsTasksBkPrivate == undefined) {
-      
+
                   console.log('no private projects')
-      
+
                 }
                 else {
                   readrec.private.forEach(element => {
                     this.optionsTasksPrivate.push(element.projectName);
                   });
                   this.optionsTasksNamesBkPrivate = this.optionsTasksPrivate;
-      
-      
+
+
                 }
               });
-      
+
               this.filteredTasksOptions = this.privateFormControl.valueChanges.pipe(
                 startWith(''),
                 map((myvalue: string) => {
                   console.log('96', myvalue);
                   if (myvalue === '' || myvalue === null) {
                     console.log(this.authDetails.uid);
-      
+
                     this.privateList = this.getPrivateList(this.db.doc('projectList/' + this.authDetails.uid));
-      
+
                     this.optionsTasksPrivate = this.optionsTasksNamesBkPrivate;
                   } else {
                     this.privateList = of(this.optionsTasksBkPrivate.filter(option => option.projectName.toLowerCase().indexOf(myvalue.toLowerCase()) === 0));
@@ -316,24 +316,24 @@ export class LoggedinStartComponent implements OnInit {
                 }
                 )).subscribe(
                   some => {
-      
+
                   }
                 );
               this.optionsTasksSubPublic = docData(this.db.firestore.doc('projectList/publicProject')).subscribe((readrec: any) => {
                 this.optionsTasksPublic = [];
                 this.optionsTasksBkPublic = readrec.public;
-      
+
                 console.log(this.optionsTasksBkPublic);
-      
+
                 this.DATA = readrec.public;
                 this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
                 this.dataSource.paginator = this.paginator;
                 this.obs = this.dataSource.connect();
                 this.changeDetectorRef.detectChanges();
                 if (this.optionsTasksBkPublic == undefined) {
-      
+
                   console.log('no private projects')
-      
+
                 }
                 else {
                   readrec.public.forEach(element => {
@@ -341,11 +341,11 @@ export class LoggedinStartComponent implements OnInit {
                   });
                   this.optionsTasksNamesBkPublic = this.optionsTasksPublic;
                 }
-      
+
               });
               console.log(this.optionsTasksPublic);
-      
-      
+
+
               this.filteredTasksOptions = this.publicSearchFormControl.valueChanges.pipe(
                 startWith(''),
                 map((myvalue: string) => {
@@ -367,15 +367,15 @@ export class LoggedinStartComponent implements OnInit {
                 }
                 )).subscribe(
                   some => {
-      
+
                   }
-      
+
                 );
-              
+
             }
             else {
               console.log(val);
-              
+
 
             }
           }
@@ -389,10 +389,11 @@ export class LoggedinStartComponent implements OnInit {
 
 
 
- 
+
 
       }
-  })}
+    })
+  }
 
 
 
@@ -475,9 +476,9 @@ export class LoggedinStartComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.mediaSub=this.mediaObserver.media$.subscribe((result:MediaChange)=>{
+    this.mediaSub = this.mediaObserver.media$.subscribe((result: MediaChange) => {
       console.log(result.mqAlias);
-      this.deviceXs=result.mqAlias==='xs'?true :false;
+      this.deviceXs = result.mqAlias === 'xs' ? true : false;
     });
   }
   addNewOpenDialog(): void {
@@ -493,37 +494,37 @@ export class LoggedinStartComponent implements OnInit {
   newTaskforMemberUser() {
     console.log(this.optionsTasksPrivate.length);
 
-      this.dialogRef = this.dialog.open(AddNewProjectDialog, {
-        data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
-        height: '50%',
-        width: '40%',
-      });
+    this.dialogRef = this.dialog.open(AddNewProjectDialog, {
+      data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
+      height: '80vh',
+      width: '80vw',
+    });
 
-      console.log(this.authDetails.uid);
-      console.log(this.optionsTasksPublic);
+    console.log(this.authDetails.uid);
+    console.log(this.optionsTasksPublic);
 
-      const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
+    const createProject = this.dialogRef.afterClosed().pipe(map((values: any) => {
 
 
-        console.log('390', values);
-        if (values !== undefined) {
-          this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
-            console.log('391', success);
-            if (success === undefined) {
-              const Newmydialog = values;
-              this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
-              return (null);
-            } else {
-              //get data- display/update
-              const mydialog = values;
-              this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
-              return (null);
-            }
-          });
-        }
-      })).subscribe((mydata: any) => {
-      });
-      console.log('121', this.mydata);
+      console.log('390', values);
+      if (values !== undefined) {
+        this.developmentservice.privateProjectfindOrCreate(this.authDetails.uid).then((success: projectDetails) => {
+          console.log('391', success);
+          if (success === undefined) {
+            const Newmydialog = values;
+            this.developmentservice.createnewproject(Newmydialog, this.authDetails.uid);
+            return (null);
+          } else {
+            //get data- display/update
+            const mydialog = values;
+            this.developmentservice.createnewprojectExistingId(mydialog, this.authDetails.uid);
+            return (null);
+          }
+        });
+      }
+    })).subscribe((mydata: any) => {
+    });
+    console.log('121', this.mydata);
 
 
 
@@ -534,7 +535,7 @@ export class LoggedinStartComponent implements OnInit {
   }
   newTaskforDemoUser() {
     console.log(this.optionsTasksPrivate.length);
-    if ((this.optionsTasksPrivate)?.length < 1 && this.memberCheck?.numberOfProjects<1   ) {
+    if ((this.optionsTasksPrivate)?.length < 1 && this.memberCheck?.numberOfProjects < 1) {
 
       this.dialogRef = this.dialog.open(AddNewProjectDialog, {
         data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
@@ -569,8 +570,7 @@ export class LoggedinStartComponent implements OnInit {
       console.log('121', this.mydata);
 
     }
-    else
-    {
+    else {
       this.router.navigate(['/becomeMember'], this.navigationExtras);
     }
 
@@ -600,7 +600,7 @@ export class LoggedinStartComponent implements OnInit {
 
   <h2>Create New Project </h2>
   <form   class="example-form" *ngIf="(filteredOptions | async) as myfilter"> 
-<div  mat-dialog-content  >
+<div  fxLayout="fxFlex" mat-dialog-content  >
     <mat-form-field  fxLayoutAlign="space-around center"  class="example-full-width">
       <input type="text"
              placeholder="Edit/Create"
