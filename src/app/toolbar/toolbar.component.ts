@@ -35,7 +35,7 @@ import { NavigationExtras } from '@angular/router';
 })
 
 export class ToolbarComponent implements OnInit {
-
+@Input() deviceXs:boolean;
 
   getProfilesSubscription: Subscription;
   getProfilesBehaviourSub = new BehaviorSubject(null);

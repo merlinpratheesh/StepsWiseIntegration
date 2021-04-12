@@ -23,6 +23,7 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ErrorStateMatcher } from '@angular/material/core';
+import {MediaObserver,MediaChange} from '@angular/flex-layout'
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -44,7 +45,8 @@ export class StarttestComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<projectDetails>;
   customCollapsedHeight: string = '50px';
 
-
+mediaSub:Subscription
+deviceXs:boolean;
   myusrinfoDetails: usrinfoDetails = {
     projectName: '',
     profileName: '',
@@ -178,6 +180,7 @@ export class StarttestComponent implements OnInit, OnDestroy {
     private _bottomSheet: MatBottomSheet,
     private changeDetectorRef: ChangeDetectorRef,
     private resolver: ComponentFactoryResolver,
+    public mediaObserver:MediaObserver
   ) {
     this.showSelected = false;
 
@@ -274,8 +277,10 @@ searchClose() {
   this.emailFormControl.reset()
 }
 ngOnInit() {
-
-
+  this.mediaSub=this.mediaObserver.media$.subscribe((result:MediaChange)=>{
+    console.log(result.mqAlias);
+    this.deviceXs=result.mqAlias==='xs'?true :false;
+  });
 }
 firstDefaultProject(some) {
 
@@ -317,6 +322,7 @@ NavigateTC(){
 
 
 ngOnDestroy() {
+  this.mediaSub.unsubscribe();
 
 
   if (this.dataSource) {
