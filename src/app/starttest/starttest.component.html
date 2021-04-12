@@ -318,9 +318,9 @@
                 </ng-template>
             </mat-grid-tile>
         </mat-grid-list>
-        <mat-grid-list cols="10" rowHeight="10vh" style="background: white ; margin-top: 50px;" >
+        <mat-grid-list *ngIf="deviceXs" cols="10" rowHeight="10vh" style="background: white ; margin-top: 50px;" >
 
-            <mat-grid-tile  colspan="5" rowspan='1' style="background: white ;  ">
+            <mat-grid-tile   colspan="5" rowspan='1' style="background: white ;  ">
                 <div   style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill
                     cdkScrollable>
                     <div (click)="openSearch()" style="padding: 0 5px; ">
