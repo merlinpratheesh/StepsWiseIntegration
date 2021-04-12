@@ -25,8 +25,9 @@
 
 
 
-          <div class="container-wrapper">
-              <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+          <div class="container-wrapper" >
+              <div   fxLayout="row" 
+              fxLayout.xs="column" fxLayout="row wrap" fxLayoutAlign="space-around center">
                   <div fxLayout="column" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;"
                       fxLayoutGap="10px">
                       <h2>{{projectName}}</h2>
@@ -71,9 +72,9 @@
                       </mat-form-field>
                   </div>
               </div>
-              <div fxLayout="column" *ngIf="(SectionTc |async ) as SectionTcReady; else SectionTcnotReady">
+              <div fxLayout="column"   *ngIf="(SectionTc |async ) as SectionTcReady; else SectionTcnotReady">
                   <h2>Services and Directives</h2>
-                  <mat-card class="list" fxFlex="95vw" fxFlex="15vh" fxLayout="row wrap" fxLayout.lt-sm="column"
+                  <mat-card class="list" fxFlex="95vw" fxFlex="auto" fxLayout="row wrap" fxLayout.lt-sm="column"
                       fxLayoutAlign="space-around center">
                       <app-singletask ngStyle.lt-sm="width:60vw;" fxLayoutAlign.lt-sm="space-between center"
                           fxLayoutAlign="space-between center" fxLayoutGap="10px"
@@ -92,13 +93,14 @@
               </ng-template>
           </div>
       </mat-tab>
-      <mat-tab label="Status">
+      <mat-tab label="Status" >
 
 
 
-          <div >
+     
 
-              <div cdkDropListGroup fxLayout="fxFlex">
+              <div cdkDropListGroup fxLayout="fxFlex"  fxLayout="row" 
+              fxLayout.xs="column" >
                   <div *ngIf="(this.Process |async ) as ProcessList; else ProcessListnotReady">
                       <div class=" example-container">
                           <h3>InProcess</h3>
@@ -146,7 +148,7 @@
 
 
               </div>
-          </div>
+     
 
               <!-- Copyright 2020 Google LLC. All Rights Reserved.
             Use of this source code is governed by an MIT-style license that
