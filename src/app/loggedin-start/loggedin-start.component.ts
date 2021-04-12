@@ -25,6 +25,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import {MediaObserver,MediaChange} from '@angular/flex-layout'
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -241,6 +242,8 @@ export class LoggedinStartComponent implements OnInit {
   memberCheck:usrinfoDetails;
 
   btnDisabled = false;
+  mediaSub: Subscription;
+  deviceXs: boolean;
 
   constructor(public firebaseuiAngularLibraryService: FirebaseuiAngularLibraryService,
     private router: Router,
@@ -250,7 +253,9 @@ export class LoggedinStartComponent implements OnInit {
     public developmentservice: UserdataService,
     private db: AngularFirestore,
     private changeDetectorRef: ChangeDetectorRef,
-    private _bottomSheet: MatBottomSheet) {
+    private _bottomSheet: MatBottomSheet,
+    public mediaObserver:MediaObserver
+    ) {
     this.showSelected = false;
 
 
@@ -469,9 +474,12 @@ export class LoggedinStartComponent implements OnInit {
   InitDBNext() {
 
   }
-  ngOnInit(): void {
+  ngOnInit() {
+    this.mediaSub=this.mediaObserver.media$.subscribe((result:MediaChange)=>{
+      console.log(result.mqAlias);
+      this.deviceXs=result.mqAlias==='xs'?true :false;
+    });
   }
-
   addNewOpenDialog(): void {
 
 

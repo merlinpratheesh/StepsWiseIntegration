@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav  #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
+    <!--<mat-sidenav  #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="options.value.fixed"
         [fixedTopGap]="options.value.top" [fixedBottomGap]="options.value.bottom">
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
@@ -47,11 +47,11 @@
         </div>
 
 
-    </mat-sidenav>
+    </mat-sidenav> -->
     <mat-sidenav-content [formGroup]="options">
-        <app-toolbar class="example-header"></app-toolbar>
+        <app-toolbar [deviceXs]="deviceXs" class="example-header"></app-toolbar>
 
-        <mat-grid-list cols="10" rowHeight="10vh">
+        <mat-grid-list *ngIf="!deviceXs" cols="10" rowHeight="10vh" style="background: white">
             <mat-grid-tile colspan="6" rowspan='9' style="background: rgb(242, 243, 245) ;">
 
 
@@ -68,7 +68,7 @@
                                         style="width:100%; background-color:rgb(242, 243, 245) ;" [pageSize]="5"
                                         [pageSizeOptions]="[5,10,15,20]">
                                     </mat-paginator>
-                                    <mat-expansion-panel (click)="sidenav.toggle(false)" fxLayoutGap="10px"
+                                    <mat-expansion-panel  fxLayoutGap="10px"
                                         class="panel" *ngFor="let details of projectDetails">
                                         <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
                                             (click)="profileKeyRef(details)" style="width:90%; ">
@@ -344,6 +344,220 @@
 
                 </ng-template>
             </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <mat-grid-list *ngIf="deviceXs" cols="10" rowHeight="10vh" style="background: white ; margin-top: 50px;">
+            <mat-grid-tile colspan="5" rowspan='1' >
+                <div style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill cdkScrollable >
+                    <div (click)="openSearch()" style="padding: 0 5px; ">
+
+                        <div [class.active]="toggleSearch">
+                            <div style="text-align: center; font-size: 20px; margin-top: 6px;">
+                                <button (click)="openSearch()" mat-icon-button>
+                                    <mat-icon style="text-align: center;">search</mat-icon>
+                                </button>
+                                Search Tasks
+                            </div>
+                        </div>
+                    </div>
+                    <span fxLayout="row" fxLayoutAlign="space-between center" class="search-block mat-elevation-z4"
+                        [class.active]="toggleSearch">
+                        <button mat-button mat-icon-button disabled>
+                            <mat-icon>search</mat-icon>
+                        </button>
+                        <input style="width: 300px; height: 50px;" type="text" placeholder="Search Task Name" matInput
+                            [formControl]="publicSearchFormControl" [matAutocomplete]="auto1">
+                        <button mat-button mat-icon-button (click)="searchClose()">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                        <mat-autocomplete #auto1="matAutocomplete" color="#216fdb">
+                            <mat-option *ngFor="let option1 of optionsTasksPublic" [value]="option1">
+
+                                <div mat-line>{{option1}}</div>
+
+                            </mat-option>
+                        </mat-autocomplete>
+                    </span>
+
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5" rowspan='1'>
+
+
+                <div *ngIf="this.memberCheck?.membershipType==='Member'"  >
+                    <mat-card fxLayoutAlign="center center" (click)="newTaskforMemberUser()" class="newTask">
+                   
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Create NewTask-Member
+                    </mat-card>
+
+                </div>
+                <div *ngIf="this.memberCheck?.membershipType==='Demo' ">
+                    <mat-card fxLayoutAlign="center center" (click)="newTaskforDemoUser()" class="newTask">
+                   
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Create NewTask-Demo
+                    </mat-card>
+
+                </div>
+
+
+
+            </mat-grid-tile>
+            <mat-grid-tile colspan="10" rowspan='20' style="background: rgb(242, 243, 245) ;">
+                <mat-tab-group
+                    style="  color:tomato ;background:rgb(242, 243, 245); height: 100%; margin-left: 15px; margin-right: 15px;"
+                    fxFlex="grow">
+                    <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
+                        <ng-template mat-tab-label>Public</ng-template>
+                        <ng-template matTabContent>
+
+                            <div *ngIf="(obs| async) as projectDetails; else waitingload ">
+                                <mat-accordion fxLayout="column">
+                                    <mat-paginator [length]="100"
+                                        style="width:100%; background-color:rgb(242, 243, 245) ;" [pageSize]="5"
+                                        [pageSizeOptions]="[5,10,15,20]">
+                                    </mat-paginator>
+                                    <mat-expansion-panel  fxLayoutGap="10px"
+                                        class="panel" *ngFor="let details of projectDetails">
+                                        <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
+                                            (click)="profileKeyRef(details)" style="width:90%; ">
+                                            <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
+
+                                                <div fxLayout="row">
+                                                    <span mat-card-avatar
+                                                        [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
+
+                                                </div>
+
+                                                <button class="activebutton">
+                                                    <mat-icon mat-list-avatar style="width:auto ;">dashboard</mat-icon>
+
+                                                    {{details.projectName}}
+                                                </button>
+
+
+
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+
+                                                {{details.creationDate.toDate() | date:'dd-MM-yyyy'}}
+
+
+                                            </mat-panel-description>
+
+                                        </mat-expansion-panel-header>
+
+                                        {{details.description}}
+
+
+
+
+                                        <app-nested-tree class="mattree" [allProjectDetails]="this.allProjectDetails"
+                                            [loggedInUid]="this.authDetails.displayName"
+                                            [userselectedProjectUid]="userselectedProjectUid"
+                                            *ngIf="userselectedProject !== undefined && keyRef !== undefined  && details.projectName === userselectedProject "
+                                            fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
+                                        </app-nested-tree>
+
+
+                                    </mat-expansion-panel>
+
+                                </mat-accordion>
+
+                            </div>
+
+
+                            <ng-template #waitingload>
+                                <mat-spinner>
+
+                                </mat-spinner>
+                            </ng-template>
+
+                        </ng-template>
+
+
+                    </mat-tab>
+                    <mat-tab label="Tab 2" class="header" style="color:#216fdb ;" *ngIf="this.authDetails!==null">
+                        <ng-template mat-tab-label>Add/Edit/Delete-Private Tasks&TestCases</ng-template>
+                        <ng-template matTabContent>
+
+                            <div *ngIf="(privateList| async) as projectDetails; else waitingload ">
+                                <mat-accordion fxLayout="column">
+                                    <mat-expansion-panel  fxLayoutGap="10px"
+                                        class="panel" *ngFor="let details of projectDetails">
+                                        <mat-expansion-panel-header [collapsedHeight]="customCollapsedHeight"
+                                            (click)="profileKeyRef(details)" style="width:90%; ">
+                                            <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
+
+                                                <div fxLayout="row">
+                                                    <span mat-card-avatar
+                                                        [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
+
+                                                </div>
+
+                                                <button class="activebutton">
+                                                    <mat-icon mat-list-avatar style="width:auto ;">dashboard</mat-icon>
+
+                                                    {{details.projectName}}
+                                                </button>
+
+
+
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+
+                                                {{details.creationDate.toDate() | date:'dd-MM-yyyy'}}
+
+
+                                            </mat-panel-description>
+
+                                        </mat-expansion-panel-header>
+
+                                        {{details.description}}
+
+
+
+                                        <app-nested-tree class="mattree" [allProjectDetails]="this.allProjectDetails"
+                                            [loggedInUid]="this.authDetails.uid"
+                                            [userselectedProjectUid]="userselectedProjectUid"
+                                            *ngIf="userselectedProject !== undefined && details.projectName === userselectedProject "
+                                            fxLayout="column" [Sections]="keyRef" [latestProject]="userselectedProject">
+                                        </app-nested-tree>
+
+
+
+
+
+                                    </mat-expansion-panel>
+
+                                </mat-accordion>
+
+                            </div>
+
+
+                            <ng-template #waitingload>
+                                No Private Projects
+
+                                <mat-spinner>
+                                </mat-spinner>
+                            </ng-template>
+
+                        </ng-template>
+
+
+                    </mat-tab>
+                </mat-tab-group>
+
+            </mat-grid-tile>
+
 
         </mat-grid-list>
     </mat-sidenav-content>
