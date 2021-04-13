@@ -496,7 +496,7 @@ export class LoggedinStartComponent implements OnInit {
 
     this.dialogRef = this.dialog.open(AddNewProjectDialog, {
       data: { mydata: this.optionsTasksPublic, NewUid: this.authDetails },
-      height: '80vh',
+      height: '70vh',
       width: '80vw',
     });
 
