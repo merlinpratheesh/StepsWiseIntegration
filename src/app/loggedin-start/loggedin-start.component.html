@@ -349,24 +349,13 @@
 
         <mat-grid-list *ngIf="deviceXs" cols="10" rowHeight="10vh" style="background: white ; margin-top: 50px;">
             <mat-grid-tile colspan="5" rowspan='1' >
-                <div style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill cdkScrollable >
-                    <div (click)="openSearch()" style="padding: 0 5px; ">
-
-                        <div [class.active]="toggleSearch">
-                            <div style="text-align: center; font-size: 20px; margin-top: 6px;">
-                                <button (click)="openSearch()" mat-icon-button>
-                                    <mat-icon style="text-align: center;">search</mat-icon>
-                                </button>
-                                Search Tasks
-                            </div>
-                        </div>
-                    </div>
-                    <span fxLayout="row" fxLayoutAlign="space-between center" class="search-block mat-elevation-z4"
-                        [class.active]="toggleSearch">
-                        <button mat-button mat-icon-button disabled>
+                <div style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill  >
+                   
+                    <span fxLayout="row" fxLayoutAlign="space-between center">
+                        <button mat-button mat-icon-button disabled >
                             <mat-icon>search</mat-icon>
                         </button>
-                        <input style="width: 300px; height: 50px;" type="text" placeholder="Search Task Name" matInput
+                        <input  type="text" placeholder="Search Task Name" matInput
                             [formControl]="publicSearchFormControl" [matAutocomplete]="auto1">
                         <button mat-button mat-icon-button (click)="searchClose()">
                             <mat-icon>close</mat-icon>
@@ -379,6 +368,8 @@
                             </mat-option>
                         </mat-autocomplete>
                     </span>
+                    
+                
 
                 </div>
             </mat-grid-tile>
@@ -431,13 +422,13 @@
                                             (click)="profileKeyRef(details)" style="width:90%; ">
                                             <mat-panel-title fxLayout="row" fxFlexAlign="center" fxLayoutGap="30px">
 
-                                                <div fxLayout="row">
+                                                <button fxLayout="row">
                                                     <span mat-card-avatar
                                                         [ngStyle]="{'background-image': 'url(' + details.photoUrl + ')', 'background-size': 'cover' }"></span>
 
-                                                </div>
+                                                </button>
 
-                                                <button class="activebutton">
+                                                <button >
                                                     <mat-icon mat-list-avatar style="width:auto ;">dashboard</mat-icon>
 
                                                     {{details.projectName}}

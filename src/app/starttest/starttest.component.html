@@ -321,25 +321,11 @@
         <mat-grid-list *ngIf="deviceXs" cols="10" rowHeight="10vh" style="background: white ; margin-top: 50px;" >
 
             <mat-grid-tile   colspan="5" rowspan='1' style="background: white ;  ">
-                <div   style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill
-                    cdkScrollable>
-                    <div (click)="openSearch()" style="padding: 0 5px; ">
+                <div   style=" color:tomato ;background: #F2F3F5; height: 100%; " fxFlexFill>
+                  
 
-                        <div [class.active]="toggleSearch">
-                            <div style="text-align: center; font-size: 10px; margin-top: 6px;">
-                                <button (click)="openSearch()" mat-icon-button>
-                                    <mat-icon style="text-align: center;">search</mat-icon>
-                                </button>
-                                Search Tasks
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <span fxLayout="row" fxLayoutAlign="space-between center" class="search-block mat-elevation-z4" [class.active]="toggleSearch">
-                            <button mat-button mat-icon-button disabled>
+                    <span fxLayout="row" fxLayoutAlign="space-between center">
+                            <button mat-button mat-icon-button disabled >
                                 <mat-icon>search</mat-icon>
                             </button>
                             <input type="text" placeholder="Search Task Name" matInput [formControl]="emailFormControl"
@@ -403,11 +389,11 @@
 
                                                 </div>
 
-                                                <div class="activebutton">
+                                                <button >
                                                     <mat-icon mat-list-avatar style="width:auto ;">dashboard</mat-icon>
 
                                                     {{details.projectName}}
-                                                </div>
+                                                </button>
 
 
 
