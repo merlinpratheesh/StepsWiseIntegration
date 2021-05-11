@@ -74,7 +74,7 @@
               <div fxLayout="column"   *ngIf="(SectionTc |async ) as SectionTcReady; else SectionTcnotReady">
                   <h2>Services and Directives</h2>
                   <mat-card class="list" fxFlex="95vw" fxFlex="auto" fxLayout="row wrap" fxLayout.lt-sm="column"
-                      fxLayoutAlign="start center">
+                      fxLayoutAlign="start center"  fxLayoutGap="10px">
                       <app-singletask ngStyle.lt-sm="width:60vw;" fxLayoutAlign.lt-sm="space-between center"
                           fxLayoutAlign="space-between center" fxLayoutGap="10px"
                           *ngFor="let task of SectionTcReady " [task]="task" (toshow)="refreshList($event)">
