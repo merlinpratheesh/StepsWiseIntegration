@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'starttest', component: StarttestComponent },
   {path:'main2',component:MainScreen2Component}  ,
   {path:'becomeMember',component:BecomeMemberComponent}  ,
+  { path: '**', redirectTo: 'starttest', pathMatch: 'full'},
 
 
 
