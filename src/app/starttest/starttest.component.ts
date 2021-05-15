@@ -219,6 +219,7 @@ deviceXs:boolean;
 
           }
           this.DATA = readrec.public;
+          console.log(this.DATA);
           this.dataSource = new MatTableDataSource<projectDetails>(this.DATA);
           this.dataSource.paginator = this.paginator;
           this.obs = this.dataSource.connect();

@@ -35,7 +35,7 @@ import { NavigationExtras } from '@angular/router';
 })
 
 export class ToolbarComponent implements OnInit {
-@Input() deviceXs:boolean;
+  @Input() deviceXs: boolean;
 
   getProfilesSubscription: Subscription;
   getProfilesBehaviourSub = new BehaviorSubject(null);
@@ -423,7 +423,7 @@ export class ViewProfileDialog {
   selector: 'bottom-sheet-overview-example-sheet',
   template: `
   <div class="container">
-  <h2 class="title">HI {{ this.userDetails.displayName }}</h2>
+    <h2 class="title">HI {{ this.userDetails.displayName }}</h2>
     <h2 class="title">Edit Profile</h2>
     <form  class="user-details" [formGroup]="names">
       <div class="input-box">
@@ -433,25 +433,25 @@ export class ViewProfileDialog {
       <div class="input-box">
       <label class="details">Email</label>
         <input type="text" class="form-control"  formControlName="email">
+      </div>
+      <div class="input-box">
+      <label class="details">Gender</label>
+      <input type="text" class="form-control"  formControlName="gender">
+      </div>
+
+       <div class="input-box">
+       <label class="details">areaOfinterest</label>
+       <input type="text" class="form-control"  formControlName="areaOfinterest">
+       </div>
+
+    <div class="input-box">
+    <label class="details">skills</label>
+    <input type="text" class="form-control"  formControlName="skills">
     </div>
     <div class="input-box">
-    <label class="details">Gender</label>
-      <input type="text" class="form-control"  formControlName="gender">
+    <label class="details">location</label>
+    <input type="text" class="form-control"  formControlName="location">
   </div>
-
-  <div class="input-box">
-  <label class="details">areaOfinterest</label>
-    <input type="text" class="form-control"  formControlName="areaOfinterest">
-</div>
-
-<div class="input-box">
-<label class="details">skills</label>
-  <input type="text" class="form-control"  formControlName="skills">
-</div>
-<div class="input-box">
-<label class="details">location</label>
-  <input type="text" class="form-control"  formControlName="location">
-</div>
 
 
 <div >

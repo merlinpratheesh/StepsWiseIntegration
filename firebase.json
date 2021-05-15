@@ -4,13 +4,12 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "public",
+    "public": "public\\Goldenfile",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
+    ],    "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"

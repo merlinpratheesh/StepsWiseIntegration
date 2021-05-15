@@ -69,7 +69,7 @@
                         <ng-template mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
 
-                            <div *ngIf="(obs| async) as projectDetails; else waitingload ">
+                            <div *ngIf="(this.DATA) as projectDetails; else waitingload ">
                                 <mat-accordion fxLayout="column">
 
                                     <mat-paginator [length]="100" style="width:100%; background-color:rgb(242, 243, 245) ;" [pageSize]="5"
@@ -370,7 +370,7 @@
                         <ng-template mat-tab-label>Public</ng-template>
                         <ng-template matTabContent>
 
-                            <div *ngIf="(obs| async) as projectDetails; else waitingload ">
+                            <div *ngIf="(this.DATA) as projectDetails; else waitingload ">
                                 <mat-accordion fxLayout="column">
 
                                     <mat-paginator [length]="100" style="width:100vw; background-color:rgb(242, 243, 245) ;" [pageSize]="10"
