@@ -1,161 +1,330 @@
-<mat-sidenav-container fxFlex="100vw">
-  <mat-sidenav-content fxLayout="column">
-    <mat-toolbar  fxLayoutAlign="space-between center"  style="background: linear-gradient(rgb(189, 219, 250) 5%, rgb(128, 181, 234) 100%) rgb(189, 219, 250);">
+<mat-sidenav-container *ngIf="!deviceXs" fxFlex="100vw">
+    <mat-sidenav-content fxLayout="column">
+        <mat-toolbar fxLayoutAlign="space-between center"
+            style="background: linear-gradient(rgb(189, 219, 250) 5%, rgb(128, 181, 234) 100%) rgb(189, 219, 250);">
 
-      <button  mat-raised-button color="warn" (click)="NavigateStart()">
-        <mat-icon class="mr-1">home</mat-icon>
-      </button>
-      <h1>
-        StepsWise Tracking Tool
-      </h1>
+            <button mat-raised-button color="warn" (click)="NavigateStart()">
+                <mat-icon class="mr-1">home</mat-icon>
+            </button>
+            <h1>
+                StepsWise Tracking Tool
+            </h1>
 
-      <span fxFlex="grow"></span>
+            <span fxFlex="grow"></span>
 
-      <div fxHide.lt-sm>
-        Welcome {{myuserProfile.userAuthenObj?.displayName}}!
-      </div>
+            <div fxHide.lt-sm>
+                Welcome {{myuserProfile.userAuthenObj?.displayName}}!
+            </div>
 
-    </mat-toolbar>
+        </mat-toolbar>
 
-    <mat-tab-group>
-      <mat-tab label="TestCase">
-
-
-
-
-
-          <div class="container-wrapper" >
-              <div   fxLayout="row" 
-              fxLayout.xs="column" fxLayout="row wrap" fxLayoutAlign="space-around center">
-                  <div fxLayout="column" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;"
-                      fxLayoutGap="10px">
-                      <h2>{{projectName}}</h2>
-                      <mat-form-field appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
-                          <mat-label>Please Select Section Here</mat-label>
-                          <mat-select (openedChange)="loadTc($event)"
-                              [formControl]="myprojectControls?.subsectionkeysControl">
-                              <mat-optgroup *ngFor="let group of SectionsReady" [label]="group.name"
-                                  [disabled]="group.disabled">
-                                  <mat-option *ngFor="let mysection of group.section"
-                                      [value]="{value: mysection.viewvalue, groupValue: group.name}">
-                                      {{mysection.viewvalue}}
-                                  </mat-option>
-                              </mat-optgroup>
-                          </mat-select>
-                      </mat-form-field>
+        <mat-tab-group>
+            <mat-tab label="TestCase">
+                <div class="container-wrapper">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout="row wrap" fxLayoutAlign="space-around center">
+                        <div fxLayout="column" fxFlex="20vw" fxFlex.lt-sm="60vw" Style="padding-bottom:10vh;"
+                            fxLayoutGap="10px">
+                            <h2>{{projectName}}</h2>
+                            <mat-form-field appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
+                                <mat-label>Please Select Section Here</mat-label>
+                                <mat-select (openedChange)="loadTc($event)"
+                                    [formControl]="myprojectControls?.subsectionkeysControl">
+                                    <mat-optgroup *ngFor="let group of SectionsReady" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let mysection of group.section"
+                                            [value]="{value: mysection.viewvalue, groupValue: group.name}">
+                                            {{mysection.viewvalue}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
 
 
-                  </div>
+                        </div>
 
 
-                  <div fxLayout="column" fxFlex="60vw" fxFlex.lt-sm="80vw" Style="padding-bottom:50px;">
+                        <div fxLayout="column" fxFlex="60vw" fxFlex.lt-sm="80vw" Style="padding-bottom:50px;">
 
-                      <h1 *ngIf="myprojectVariables.viewSelectedTestcase === undefined ">Task Steps</h1>
-                      <h1 *ngIf="myprojectVariables.viewSelectedTestcase !== undefined">
-                          {{myprojectVariables.viewSelectedTestcase?.heading}} </h1>
-                      <mat-form-field appearance="fill">
-                          <mat-label>{{myprojectVariables.viewSelectedTestcase?.subHeading}}</mat-label>
-                          <mat-label *ngIf="myprojectVariables.viewSelectedTestcase === undefined"
-                              style="font-size: 20px;">
-                              Hi ,For Create Testcase Choose Tasks From Add/Edit/Delete-Private <br>
-                              Tasks&TestCases Tab .<br>
-                              Step1:Select Section<br>
-                              Step2:Click Add. Give Name For Testcase and save.<br>
-                              Step3:Click on Created matcard for  Edit and Update.<br>
-                              Step4:Click on Red Card for visit updated link.
-                          </mat-label>
-                          <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="15" cdkAutosizeMaxRows="50"
-                              fxFlex="grow" style="overflow-x: hidden;"
-                              [formControl]="myprojectControls?.testcaseInfoControl" readonly>
+                            <h1 *ngIf="myprojectVariables.viewSelectedTestcase === undefined ">Task Steps</h1>
+                            <h1 *ngIf="myprojectVariables.viewSelectedTestcase !== undefined">
+                                {{myprojectVariables.viewSelectedTestcase?.heading}} </h1>
+                            <mat-form-field appearance="fill">
+                                <mat-label>{{myprojectVariables.viewSelectedTestcase?.subHeading}}</mat-label>
+                                <mat-label *ngIf="myprojectVariables.viewSelectedTestcase === undefined"
+                                    style="font-size: 20px;">
+                                    Hi ,For Create Testcase Choose Tasks From Add/Edit/Delete-Private <br>
+                                    Tasks&TestCases Tab .<br>
+                                    Step1:Select Section<br>
+                                    Step2:Click Add. Give Name For Testcase and save.<br>
+                                    Step3:Click on Created matcard for Edit and Update.<br>
+                                    Step4:Click on Red Card for visit updated link.
+                                </mat-label>
+                                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="15" cdkAutosizeMaxRows="50"
+                                    fxFlex="grow" style="overflow-x: hidden;"
+                                    [formControl]="myprojectControls?.testcaseInfoControl" readonly>
           </textarea>
-                      </mat-form-field>
-                  </div>
-              </div>
-              <div fxLayout="column"   *ngIf="(SectionTc |async ) as SectionTcReady; else SectionTcnotReady">
-                  <h2>Services and Directives</h2>
-                  <mat-card class="list" fxFlex="95vw" fxFlex="auto" fxLayout="row wrap" fxLayout.lt-sm="column"
-                      fxLayoutAlign="start center"  fxLayoutGap="10px">
-                      <app-singletask ngStyle.lt-sm="width:60vw;" fxLayoutAlign.lt-sm="space-between center"
-                          fxLayoutAlign="space-between center" fxLayoutGap="10px"
-                          *ngFor="let task of SectionTcReady " [task]="task" (toshow)="refreshList($event)">
-                      </app-singletask>
-                  </mat-card>
-              </div>
-              <ng-template #SectionTcnotReady>
-                  <div *ngIf="(SectionTc | async) === undefined">
-                      <mat-card class="list" style="max-width:95vw;" fxLayout="row wrap" fxLayout.lt-sm="column"
-                          fxLayoutAlign="space-around center">
-                          <p class="empty-label">
-                              Empty list</p>
-                      </mat-card>
-                  </div>
-              </ng-template>
-          </div>
-      </mat-tab>
-      <mat-tab label="Status" >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxLayoutGap="10px"
+                        *ngIf="(SectionTc |async ) as SectionTcReady; else SectionTcnotReady">
+                        <h2>Services and Directives</h2>
+                        <mat-card class="list" fxFlex="95vw" fxFlex="auto" fxLayout="row wrap" fxLayout.lt-sm="column"
+                            fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <app-singletask ngStyle.lt-sm="width:60vw;" fxLayoutAlign.lt-sm="space-between center"
+                                fxLayoutAlign="space-between center" fxLayoutGap="10px"
+                                *ngFor="let task of SectionTcReady " [task]="task" (toshow)="refreshList($event)">
+                            </app-singletask>
+                        </mat-card>
+                    </div>
+                    <ng-template #SectionTcnotReady>
+                        <div *ngIf="(SectionTc | async) === undefined">
+                            <mat-card class="list" style="max-width:95vw;" fxLayout="row wrap" fxLayout.lt-sm="column"
+                                fxLayoutAlign="space-around center">
+                                <p class="empty-label">
+                                    Empty list</p>
+                            </mat-card>
+                        </div>
+                    </ng-template>
+                </div>
+            </mat-tab>
+            <mat-tab label="Status">
 
 
 
-     
-
-              <div cdkDropListGroup fxLayout="fxFlex"  fxLayout="row" 
-              fxLayout.xs="column" >
-                  <div *ngIf="(this.Process |async ) as ProcessList; else ProcessListnotReady">
-                      <div class=" example-container">
-                          <h3>InProcess</h3>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
-
-                          <div cdkDropList [cdkDropListData]="ProcessList" class="example-list"
-                              (cdkDropListDropped)="drop($event)"
-                              [cdkDropListEnterPredicate]="evenPredicate">
-                              
-                              <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of ProcessList " cdkDrag >
-                                  {{item.viewvalue}}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div *ngIf="(this.Done |async ) as DoneList; else DoneListnotReady">
-
-                      <div class="example-container"
-                      [cdkDropListEnterPredicate]="noReturnPredicate">
-                          <h3>Done</h3>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
-
-                          <div cdkDropList [cdkDropListData]="DoneList" class="example-list"
-                              (cdkDropListDropped)="drop($event)">
-                              <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of DoneList" cdkDrag>{{item.viewvalue}}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <ng-template #ProcessListnotReady>
-                      <div *ngIf="(this.Process | async) === undefined">
-
-                          <p class="empty-label">
-                              Empty list</p>
-                      </div>
-                  </ng-template>
-                  <ng-template #DoneListnotReady>
-                      <div *ngIf="(this.Done | async) === undefined">
-
-                          <p class="empty-label">
-                              Empty list</p>
-                      </div>
-                  </ng-template>
 
 
-              </div>
-     
+                <div cdkDropListGroup fxLayout="fxFlex" fxLayout="row" fxLayout.xs="column">
+                    <div *ngIf="(this.Process |async ) as ProcessList; else ProcessListnotReady">
+                        <div class=" example-container">
+                            <h3>InProcess</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
+                                </path>
+                            </svg>
 
-              <!-- Copyright 2020 Google LLC. All Rights Reserved.
+                            <div cdkDropList [cdkDropListData]="ProcessList" class="example-list"
+                                (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
+
+                                <div class="example-box" [cdkDragDisabled]="item.disabled"
+                                    *ngFor="let item of ProcessList " cdkDrag>
+                                    {{item.viewvalue}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="(this.Done |async ) as DoneList; else DoneListnotReady">
+
+                        <div class="example-container" [cdkDropListEnterPredicate]="noReturnPredicate">
+                            <h3>Done</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                </path>
+                            </svg>
+
+                            <div cdkDropList [cdkDropListData]="DoneList" class="example-list"
+                                (cdkDropListDropped)="drop($event)">
+                                <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of DoneList"
+                                    cdkDrag>{{item.viewvalue}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #ProcessListnotReady>
+                        <div *ngIf="(this.Process | async) === undefined">
+
+                            <p class="empty-label">
+                                Empty list</p>
+                        </div>
+                    </ng-template>
+                    <ng-template #DoneListnotReady>
+                        <div *ngIf="(this.Done | async) === undefined">
+
+                            <p class="empty-label">
+                                Empty list</p>
+                        </div>
+                    </ng-template>
+
+
+                </div>
+
+
+                <!-- Copyright 2020 Google LLC. All Rights Reserved.
             Use of this source code is governed by an MIT-style license that
             can be found in the LICENSE file at http://angular.io/license -->
 
 
-      </mat-tab>
+            </mat-tab>
 
-  </mat-tab-group>
-</mat-sidenav-content>
+        </mat-tab-group>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-sidenav-container *ngIf="deviceXs" fxFlex="100vw">
+    <mat-sidenav-content fxLayout="column">
+        <mat-toolbar fxLayoutAlign="space-between center"
+            style="background: linear-gradient(rgb(189, 219, 250) 5%, rgb(128, 181, 234) 100%) rgb(189, 219, 250);">
+
+            <button mat-raised-button color="warn" (click)="NavigateStart()">
+                <mat-icon class="mr-1">home</mat-icon>
+            </button>
+            <h1>
+                StepsWise Tracking Tool
+            </h1>
+
+            <span fxFlex="grow"></span>
+
+            <div fxHide.lt-sm>
+                Welcome {{myuserProfile.userAuthenObj?.displayName}}!
+            </div>
+
+        </mat-toolbar>
+
+        <mat-tab-group>
+            <mat-tab label="TestCase">
+                <div class="container-wrapper">
+                    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-around center">
+                            <h2>{{projectName}}</h2>
+                            <mat-form-field style="width: 250px;" appearance="fill" *ngIf="(mainSubSections) as SectionsReady;">
+                                <mat-label>Please Select Section Here</mat-label>
+                                <mat-select (openedChange)="loadTc($event)"
+                                    [formControl]="myprojectControls?.subsectionkeysControl">
+                                    <mat-optgroup *ngFor="let group of SectionsReady" [label]="group.name"
+                                        [disabled]="group.disabled">
+                                        <mat-option *ngFor="let mysection of group.section"
+                                            [value]="{value: mysection.viewvalue, groupValue: group.name}">
+                                            {{mysection.viewvalue}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+
+                        <div fxLayout="column"  Style="padding-bottom:50px; width: 300px;">
+
+                            <h1 *ngIf="myprojectVariables.viewSelectedTestcase === undefined ">Task Steps</h1>
+                            <h1 *ngIf="myprojectVariables.viewSelectedTestcase !== undefined">
+                                {{myprojectVariables.viewSelectedTestcase?.heading}} </h1>
+                            <mat-form-field appearance="fill">
+                                <mat-label>{{myprojectVariables.viewSelectedTestcase?.subHeading}}</mat-label>
+                                <mat-label *ngIf="myprojectVariables.viewSelectedTestcase === undefined"
+                                    style="font-size: 15px; width: 150px;">
+                                    Hi ,For Create Testcase Choose Tasks From Add/Edit/Delete-Private <br>
+                                    Tasks&TestCases Tab .<br>
+                                    Step1:Select Section<br>
+                                    Step2:Click Add. Give Name For Testcase and save.<br>
+                                    Step3:Click on Created matcard for Edit and Update.<br>
+                                    Step4:Click on Red Card for visit updated link.
+                                </mat-label>
+                                <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="50"
+                                    fxFlex="grow" style="overflow-x: hidden;"
+                                    [formControl]="myprojectControls?.testcaseInfoControl" readonly>
+            </textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxLayout="column" 
+                        *ngIf="(SectionTc |async ) as SectionTcReady; else SectionTcnotReady">
+                        <h2>Services and Directives</h2>
+                        <mat-card class="list" fxFlex="95vw" fxFlex="auto" fxLayout="row wrap" fxLayout.lt-sm="column"
+                            fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <app-singletask ngStyle.lt-sm="width:60vw;" fxLayoutAlign.lt-sm="space-between center"
+                                fxLayoutAlign="space-between center" fxLayoutGap="10px"
+                                *ngFor="let task of SectionTcReady " [task]="task" (toshow)="refreshList($event)">
+                            </app-singletask>
+                        </mat-card>
+                    </div>
+                    <ng-template #SectionTcnotReady>
+                        <div *ngIf="(SectionTc | async) === undefined">
+                            <mat-card class="list" style="max-width:95vw;" fxLayout="row wrap" fxLayout.lt-sm="column"
+                                fxLayoutAlign="space-around center">
+                                <p class="empty-label">
+                                    Empty list</p>
+                            </mat-card>
+                        </div>
+                    </ng-template>
+                </div>
+            </mat-tab>
+            <mat-tab label="Status">
+
+
+
+
+
+                <div cdkDropListGroup style="width: 300px;" fxLayout="fxFlex" fxLayout="row" fxLayout.xs="column">
+                    <div *ngIf="(this.Process |async ) as ProcessList; else ProcessListnotReady">
+                        <div class=" example-container">
+                            <h3>InProcess</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
+                                </path>
+                            </svg>
+
+                            <div cdkDropList [cdkDropListData]="ProcessList" class="example-list"
+                                (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="evenPredicate">
+
+                                <div class="example-box" [cdkDragDisabled]="item.disabled"
+                                    *ngFor="let item of ProcessList " cdkDrag>
+                                    {{item.viewvalue}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="(this.Done |async ) as DoneList; else DoneListnotReady">
+
+                        <div class="example-container" [cdkDropListEnterPredicate]="noReturnPredicate">
+                            <h3>Done</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
+                                </path>
+                            </svg>
+
+                            <div cdkDropList [cdkDropListData]="DoneList" class="example-list"
+                                (cdkDropListDropped)="drop($event)">
+                                <div class="example-box" [cdkDragDisabled]="item.disabled" *ngFor="let item of DoneList"
+                                    cdkDrag>{{item.viewvalue}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #ProcessListnotReady>
+                        <div *ngIf="(this.Process | async) === undefined">
+
+                            <p class="empty-label">
+                                Empty list</p>
+                        </div>
+                    </ng-template>
+                    <ng-template #DoneListnotReady>
+                        <div *ngIf="(this.Done | async) === undefined">
+
+                            <p class="empty-label">
+                                Empty list</p>
+                        </div>
+                    </ng-template>
+
+
+                </div>
+
+
+                <!-- Copyright 2020 Google LLC. All Rights Reserved.
+              Use of this source code is governed by an MIT-style license that
+              can be found in the LICENSE file at http://angular.io/license -->
+
+
+            </mat-tab>
+
+        </mat-tab-group>
+    </mat-sidenav-content>
 </mat-sidenav-container>

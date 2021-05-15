@@ -9,6 +9,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 
 
 
@@ -180,8 +181,10 @@ export class MainScreenComponent {
   keysselection: any;
   loggedInUid: string;
   userselectedProjectUid: firebase.User;
+  deviceXs: boolean;
+  mediaSub: Subscription;
   constructor(public developmentservice: UserdataService, private router: Router,
-    public fb: FormBuilder,
+    public fb: FormBuilder,public mediaObserver: MediaObserver, 
     private db: AngularFirestore, public afAuth: AngularFireAuth
 
   ) {
@@ -240,6 +243,10 @@ export class MainScreenComponent {
 
 
   ngOnInit(): void {
+    this.mediaSub=this.mediaObserver.media$.subscribe((result:MediaChange)=>{
+      console.log(result.mqAlias);
+      this.deviceXs=result.mqAlias==='xs'?true :false;
+    });
   }
   NavigateStart() {
       this.router.navigate(['/starttest']);

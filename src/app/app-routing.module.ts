@@ -9,6 +9,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { MainScreen2Component } from './main-screen2/main-screen2.component';
 import { BecomeMemberComponent } from './become-member/become-member.component';
 const routes: Routes = [
+
+
   { path: 'start', component: StartScreenComponent },
   { path: 'main', component: MainScreenComponent },
   { path: 'loggedin', component: LoggedinStartComponent },
@@ -16,14 +18,10 @@ const routes: Routes = [
   { path: 'starttest', component: StarttestComponent },
   {path:'main2',component:MainScreen2Component}  ,
   {path:'becomeMember',component:BecomeMemberComponent}  ,
+
+  { path: '',   redirectTo: '/starttest', pathMatch: 'full' },
+
   { path: '**', redirectTo: 'starttest', pathMatch: 'full'},
-
-
-
-
-  { path: '',   redirectTo: '/starttest', pathMatch: 'full' }
-
-
 ];
 
 

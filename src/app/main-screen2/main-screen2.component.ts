@@ -10,7 +10,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import firebase from 'firebase/app';
 import {CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
 
 
 
@@ -185,11 +185,13 @@ export class MainScreen2Component {
   removeDone: any
   updatedProcess: any;
   updatedDone: any;
+  deviceXs: boolean;
+  mediaSub: Subscription;
 
   constructor(public developmentservice: UserdataService, private router: Router,
     public fb: FormBuilder,
     private db: AngularFirestore,
-    public afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,public mediaObserver: MediaObserver,
     public dialog: MatDialog
 
   ) {
@@ -336,10 +338,6 @@ console.log(this.Done);
   }
 
 
-  ngOnInit(): void {
-
-  }
-
   NavigateStart() {
     this.router.navigate(['/loggedin']);
 
@@ -398,13 +396,18 @@ console.log('if');
   }
   saveDone(some)
   {
-
+if(this.updatedProcess!==undefined && this.updatedDone!==undefined){
       this.developmentservice.updatedProcessDone(this.updatedProcess,this.updatedDone,this.projectName, this.userselectedProjectUid);
 
     
-
+}
   }
-
+  ngOnInit(): void {
+    this.mediaSub=this.mediaObserver.media$.subscribe((result:MediaChange)=>{
+      console.log(result.mqAlias);
+      this.deviceXs=result.mqAlias==='xs'?true :false;
+    });
+  }
 }
 
 
@@ -460,5 +463,7 @@ export class DialogEditTestcase implements OnInit {
       description: [this.data.description],
       linktoTest: [this.data.linktoTest]
     });
+
+
   }
 }

@@ -310,7 +310,9 @@ if(this.Project=this.latestProject){
   NavigateTestcase(some) {
     console.log(some);
     console.log(this.loggedInUid);
-    if (this.loggedInUid == null) {
+    if (this.loggedInUid === null || this.loggedInUid===undefined) {
+      console.log('clicked');
+
       this.router.navigate(['/main'], this.navigationExtras);
     } else {
       this.router.navigate(['/main2'], this.navigationExtras);
